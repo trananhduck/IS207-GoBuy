@@ -148,3 +148,135 @@ foreach ($result as $row) {
     </div>
 </div>
 <?php endif; ?>
+
+
+<?php if ($home_featured_product_on_off == 1): ?>
+<div class="product pt_70 pb_70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headline">
+                    <h2><?php echo $featured_product_title; ?></h2>
+                    <h3><?php echo $featured_product_subtitle; ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="product-carousel">
+
+                    <?php
+                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
+                        $statement->execute(array(1, 1));
+                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($result as $row) {
+                        ?>
+                    <div class="item">
+                        <div class="thumb">
+                            <div class="photo"
+                                style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+                        <div class="text">
+                            <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
+                            </h3>
+                            <h4>
+                                <?php echo number_format($row['p_current_price'], 0, ',', '.') . ' VND'; ?>
+                                <?php if (!empty($row['p_old_price'])): ?>
+                                <del>
+                                    <?php echo number_format($row['p_old_price'], 0, ',', '.') . ' VND'; ?>
+                                </del>
+                                <?php endif; ?>
+                            </h4>
+
+
+                            <?php if ($row['p_qty'] == 0): ?>
+                            <div class="out-of-stock">
+                                <div class="inner">
+                                    Hết hàng
+                                </div>
+                            </div>
+                            <?php else: ?>
+                            <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i class="fa fa-shopping-cart"></i>
+                                    Thêm vào giỏ hàng</a></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                        ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+
+<?php if ($home_latest_product_on_off == 1): ?>
+<div class="product bg-gray pt_70 pb_30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headline">
+                    <h2><?php echo $latest_product_title; ?></h2>
+                    <h3><?php echo $latest_product_subtitle; ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="product-carousel">
+
+                    <?php
+                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
+                        $statement->execute(array(1));
+                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($result as $row) {
+                        ?>
+                    <div class="item">
+                        <div class="thumb">
+                            <div class="photo"
+                                style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                            </div>
+                            <div class="overlay"></div>
+                        </div>
+                        <div class="text">
+                            <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
+                            </h3>
+                            <h4>
+                                $<?php echo $row['p_current_price']; ?>
+                                <?php if ($row['p_old_price'] != ''): ?>
+                                <del>
+                                    $<?php echo $row['p_old_price']; ?>
+                                </del>
+                                <?php endif; ?>
+                            </h4>
+
+                            <?php if ($row['p_qty'] == 0): ?>
+                            <div class="out-of-stock">
+                                <div class="inner">
+                                    Hết hàng
+                                </div>
+                            </div>
+                            <?php else: ?>
+                            <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i class="fa fa-shopping-cart"></i>
+                                    Thêm vào giỏ hàng</a></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                        ?>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
