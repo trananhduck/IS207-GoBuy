@@ -4,6 +4,10 @@
 $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
 $querry->execute();
 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+
 foreach ($result as $row) {
     $cta_title = $row['cta_title'];
     $cta_content = $row['cta_content'];
@@ -43,6 +47,7 @@ foreach ($result as $row) {
         <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {
                                                                                             echo 'class="active"';
                                                                                         } ?>></li>
+
         <?php
             $i++;
         }
@@ -100,6 +105,7 @@ foreach ($result as $row) {
                 </div>
             </div>
         </div>
+
         <?php
             $i++;
         }
@@ -119,7 +125,6 @@ foreach ($result as $row) {
     </a>
 
 </div>
-
 
 <?php if ($home_service_on_off == 1): ?>
 <div class="service bg-gray">
@@ -167,9 +172,9 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
-                        $statement->execute(array(1, 1));
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
+                        $querry->execute(array(1, 1));
+                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                     <div class="item">
@@ -232,9 +237,9 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
-                        $statement->execute(array(1));
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
+                        $querry->execute(array(1));
+                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                     <div class="item">
