@@ -1,9 +1,9 @@
 <?php require_once('header.php'); ?>
 
 <?php
-$statement = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$statement->execute();
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $cta_title = $row['cta_title'];
     $cta_content = $row['cta_content'];
@@ -34,14 +34,16 @@ foreach ($result as $row) {
     <!-- Chuyển các slider -->
     <ol class="carousel-indicators">
         <?php
-        $i=0;
-        $statement = $pdo->prepare("SELECT * FROM table_slider");
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);                            
-        foreach ($result as $row) {            
-            ?>
-        <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>"
-            <?php if($i==0) {echo 'class="active"';} ?>></li>
+        $i = 0;
+        $querry = $pdo->prepare("SELECT * FROM table_slider");
+        $querry->execute();
+        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+        ?>
+            <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>"
+                <?php if ($i == 0) {
+                    echo 'class="active"';
+                } ?>></li>
         <?php
             $i++;
         }
@@ -52,31 +54,57 @@ foreach ($result as $row) {
     <div class="carousel-inner" role="listbox">
 
         <?php
-        $i=0;
-        $statement = $pdo->prepare("SELECT * FROM table_slider");
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);                            
-        foreach ($result as $row) {            
-            ?>
-        <div class="item <?php if($i==0) {echo 'active';} ?>"
-            style="background-image:url(assets/uploads/<?php echo $row['photo']; ?>);">
-            <div class="bs-slider-overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div
-                        class="slide-text <?php if($row['position'] == 'Left') {echo 'slide_style_left';} elseif($row['position'] == 'Center') {echo 'slide_style_center';} elseif($row['position'] == 'Right') {echo 'slide_style_right';} ?>">
-                        <h1
-                            data-animation="animated <?php if($row['position'] == 'Left') {echo 'zoomInLeft';} elseif($row['position'] == 'Center') {echo 'flipInX';} elseif($row['position'] == 'Right') {echo 'zoomInRight';} ?>">
-                            <?php echo $row['heading']; ?></h1>
-                        <p
-                            data-animation="animated <?php if($row['position'] == 'Left') {echo 'fadeInLeft';} elseif($row['position'] == 'Center') {echo 'fadeInDown';} elseif($row['position'] == 'Right') {echo 'fadeInRight';} ?>">
-                            <?php echo nl2br($row['content']); ?></p>
-                        <a href="<?php echo $row['button_url']; ?>" target="_blank" class="btn btn-primary"
-                            data-animation="animated <?php if($row['position'] == 'Left') {echo 'fadeInLeft';} elseif($row['position'] == 'Center') {echo 'fadeInDown';} elseif($row['position'] == 'Right') {echo 'fadeInRight';} ?>"><?php echo $row['button_text']; ?></a>
+        $i = 0;
+        $querry = $pdo->prepare("SELECT * FROM table_slider");
+        $querry->execute();
+        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $row) {
+        ?>
+            <div class="item <?php if ($i == 0) {
+                                    echo 'active';
+                                } ?>"
+                style="background-image:url(assets/uploads/<?php echo $row['photo']; ?>);">
+                <div class="bs-slider-overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div
+                            class="slide-text <?php if ($row['position'] == 'Left') {
+                                                    echo 'slide_style_left';
+                                                } elseif ($row['position'] == 'Center') {
+                                                    echo 'slide_style_center';
+                                                } elseif ($row['position'] == 'Right') {
+                                                    echo 'slide_style_right';
+                                                } ?>">
+                            <h1
+                                data-animation="animated <?php if ($row['position'] == 'Left') {
+                                                                echo 'zoomInLeft';
+                                                            } elseif ($row['position'] == 'Center') {
+                                                                echo 'flipInX';
+                                                            } elseif ($row['position'] == 'Right') {
+                                                                echo 'zoomInRight';
+                                                            } ?>">
+                                <?php echo $row['heading']; ?></h1>
+                            <p
+                                data-animation="animated <?php if ($row['position'] == 'Left') {
+                                                                echo 'fadeInLeft';
+                                                            } elseif ($row['position'] == 'Center') {
+                                                                echo 'fadeInDown';
+                                                            } elseif ($row['position'] == 'Right') {
+                                                                echo 'fadeInRight';
+                                                            } ?>">
+                                <?php echo nl2br($row['content']); ?></p>
+                            <a href="<?php echo $row['button_url']; ?>" target="_blank" class="btn btn-primary"
+                                data-animation="animated <?php if ($row['position'] == 'Left') {
+                                                                echo 'fadeInLeft';
+                                                            } elseif ($row['position'] == 'Center') {
+                                                                echo 'fadeInDown';
+                                                            } elseif ($row['position'] == 'Right') {
+                                                                echo 'fadeInRight';
+                                                            } ?>"><?php echo $row['button_text']; ?></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <?php
             $i++;
         }
@@ -98,30 +126,30 @@ foreach ($result as $row) {
 </div>
 
 
-<?php if($home_service_on_off == 1): ?>
-<div class="service bg-gray">
-    <div class="container">
-        <div class="row">
-            <?php
-                $statement = $pdo->prepare("SELECT * FROM table_service");
-                $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);                            
+<?php if ($home_service_on_off == 1): ?>
+    <div class="service bg-gray">
+        <div class="container">
+            <div class="row">
+                <?php
+                $querry = $pdo->prepare("SELECT * FROM table_service");
+                $querry->execute();
+                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
-                    ?>
-            <div class="col-md-4">
-                <div class="item">
-                    <div class="photo"><img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
-                            alt="<?php echo $row['title']; ?>"></div>
-                    <h3><?php echo $row['title']; ?></h3>
-                    <p>
-                        <?php echo nl2br($row['content']); ?>
-                    </p>
-                </div>
-            </div>
-            <?php
+                ?>
+                    <div class="col-md-4">
+                        <div class="item">
+                            <div class="photo"><img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
+                                    alt="<?php echo $row['title']; ?>"></div>
+                            <h3><?php echo $row['title']; ?></h3>
+                            <p>
+                                <?php echo nl2br($row['content']); ?>
+                            </p>
+                        </div>
+                    </div>
+                <?php
                 }
-            ?>
+                ?>
+            </div>
         </div>
     </div>
-</div>
 <?php endif; ?>
