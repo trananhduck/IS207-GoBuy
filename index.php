@@ -4,6 +4,7 @@
 $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
 $querry->execute();
 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+
 foreach ($result as $row) {
     $cta_title = $row['cta_title'];
     $cta_content = $row['cta_content'];
@@ -43,6 +44,7 @@ foreach ($result as $row) {
             <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {
                                                                                             echo 'class="active"';
                                                                                         } ?>></li>
+
         <?php
             $i++;
         }
@@ -100,6 +102,7 @@ foreach ($result as $row) {
                     </div>
                 </div>
             </div>
+
         <?php
             $i++;
         }
@@ -119,7 +122,6 @@ foreach ($result as $row) {
     </a>
 
 </div>
-
 
 <?php if ($home_service_on_off == 1): ?>
     <div class="service bg-gray">
