@@ -7,6 +7,11 @@ include("admin/inc/functions.php");
 include("admin/inc/CSRF_Protect.php");
 $csrf = new CSRF_Protect();
 
+$error_message = '';
+$success_message = '';
+$error_message1 = '';
+$success_message1 = '';
+
 $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
 $querry->execute();
 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
