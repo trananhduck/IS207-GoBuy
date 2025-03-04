@@ -532,3 +532,10 @@ a:hover {
 .product .item-product-cat:nth-of-type(3n + 1) {
   clear: both;
 }
+
+.bs-slider .item {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  height: 500px;
+}
