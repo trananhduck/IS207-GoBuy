@@ -1,8 +1,9 @@
-/* File css cho menu dạng cây*/
+/* MENU-LEFT
+-------------------------- */
 /* layout */
 #left ul.nav {
     margin-bottom: 2px;
-    font-size: 12px; 
+    font-size: 12px; /* to change font-size, please change instead .lbl */
 }
 #left ul.nav ul li {
 
@@ -29,6 +30,9 @@
     text-decoration: none;
 }
 
+/*#left ul.nav li a:hover .lbl {
+    color: #999!important;
+}*/
 
 #left ul.nav li.current>a .lbl {
     background-color: #999;
