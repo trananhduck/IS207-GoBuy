@@ -167,9 +167,9 @@ foreach ($result as $row) {
                     <div class="product-carousel">
 
                         <?php
-                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
-                        $statement->execute(array(1, 1));
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
+                        $querry->execute(array(1, 1));
+                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                             <div class="item">
@@ -232,9 +232,9 @@ foreach ($result as $row) {
                     <div class="product-carousel">
 
                         <?php
-                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
-                        $statement->execute(array(1));
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
+                        $querry->execute(array(1));
+                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                             <div class="item">
