@@ -40,10 +40,9 @@ foreach ($result as $row) {
         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
         ?>
-            <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>"
-                <?php if ($i == 0) {
-                    echo 'class="active"';
-                } ?>></li>
+        <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {
+                                                                                            echo 'class="active"';
+                                                                                        } ?>></li>
         <?php
             $i++;
         }
@@ -60,51 +59,47 @@ foreach ($result as $row) {
         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
         ?>
-            <div class="item <?php if ($i == 0) {
+        <div class="item <?php if ($i == 0) {
                                     echo 'active';
-                                } ?>"
-                style="background-image:url(assets/uploads/<?php echo $row['photo']; ?>);">
-                <div class="bs-slider-overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div
-                            class="slide-text <?php if ($row['position'] == 'Left') {
+                                } ?>" style="background-image:url(assets/uploads/<?php echo $row['photo']; ?>);">
+            <div class="bs-slider-overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="slide-text <?php if ($row['position'] == 'Left') {
                                                     echo 'slide_style_left';
                                                 } elseif ($row['position'] == 'Center') {
                                                     echo 'slide_style_center';
                                                 } elseif ($row['position'] == 'Right') {
                                                     echo 'slide_style_right';
                                                 } ?>">
-                            <h1
-                                data-animation="animated <?php if ($row['position'] == 'Left') {
+                        <h1 data-animation="animated <?php if ($row['position'] == 'Left') {
                                                                 echo 'zoomInLeft';
                                                             } elseif ($row['position'] == 'Center') {
                                                                 echo 'flipInX';
                                                             } elseif ($row['position'] == 'Right') {
                                                                 echo 'zoomInRight';
                                                             } ?>">
-                                <?php echo $row['heading']; ?></h1>
-                            <p
-                                data-animation="animated <?php if ($row['position'] == 'Left') {
-                                                                echo 'fadeInLeft';
-                                                            } elseif ($row['position'] == 'Center') {
-                                                                echo 'fadeInDown';
-                                                            } elseif ($row['position'] == 'Right') {
-                                                                echo 'fadeInRight';
-                                                            } ?>">
-                                <?php echo nl2br($row['content']); ?></p>
-                            <a href="<?php echo $row['button_url']; ?>" target="_blank" class="btn btn-primary"
-                                data-animation="animated <?php if ($row['position'] == 'Left') {
+                            <?php echo $row['heading']; ?></h1>
+                        <p data-animation="animated <?php if ($row['position'] == 'Left') {
+                                                            echo 'fadeInLeft';
+                                                        } elseif ($row['position'] == 'Center') {
+                                                            echo 'fadeInDown';
+                                                        } elseif ($row['position'] == 'Right') {
+                                                            echo 'fadeInRight';
+                                                        } ?>">
+                            <?php echo nl2br($row['content']); ?></p>
+                        <a href="<?php echo $row['button_url']; ?>" target="_blank" class="btn btn-primary"
+                            data-animation="animated <?php if ($row['position'] == 'Left') {
                                                                 echo 'fadeInLeft';
                                                             } elseif ($row['position'] == 'Center') {
                                                                 echo 'fadeInDown';
                                                             } elseif ($row['position'] == 'Right') {
                                                                 echo 'fadeInRight';
                                                             } ?>"><?php echo $row['button_text']; ?></a>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         <?php
             $i++;
         }
@@ -127,29 +122,29 @@ foreach ($result as $row) {
 
 
 <?php if ($home_service_on_off == 1): ?>
-    <div class="service bg-gray">
-        <div class="container">
-            <div class="row">
-                <?php
+<div class="service bg-gray">
+    <div class="container">
+        <div class="row">
+            <?php
                 $querry = $pdo->prepare("SELECT * FROM table_service");
                 $querry->execute();
                 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                 ?>
-                    <div class="col-md-4">
-                        <div class="item">
-                            <div class="photo"><img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
-                                    alt="<?php echo $row['title']; ?>"></div>
-                            <h3><?php echo $row['title']; ?></h3>
-                            <p>
-                                <?php echo nl2br($row['content']); ?>
-                            </p>
-                        </div>
-                    </div>
-                <?php
+            <div class="col-md-4">
+                <div class="item">
+                    <div class="photo"><img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
+                            alt="<?php echo $row['title']; ?>"></div>
+                    <h3><?php echo $row['title']; ?></h3>
+                    <p>
+                        <?php echo nl2br($row['content']); ?>
+                    </p>
+                </div>
+            </div>
+            <?php
                 }
                 ?>
-            </div>
         </div>
     </div>
+</div>
 <?php endif; ?>
