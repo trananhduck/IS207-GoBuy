@@ -1,55 +1,54 @@
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+07:00";
 SET NAMES utf8mb4;
 
--- Database: `gobuy`
+-- Database: gobuy
 
 -- Lần lượt tạo các bảng và thêm dữ liệu mẫu
-CREATE TABLE `table_color` (
-  `color_id` int(11) NOT NULL,
-  `color_name` TEXT NOT NULL
+CREATE TABLE table_color (
+  color_id int(11) NOT NULL,
+  color_name TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
-CREATE TABLE `table_country` (
-  `country_id` int(11) NOT NULL,
-  `country_name` varchar(100) NOT NULL DEFAULT ''
+CREATE TABLE table_country (
+  country_id int(11) NOT NULL,
+  country_name varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE `table_customer` (
-  `cust_id` int(11) NOT NULL,
-  `cust_name` varchar(100) NOT NULL,
-  `cust_cname` varchar(100) NOT NULL,
-  `cust_email` varchar(100) NOT NULL,
-  `cust_phone` varchar(50) NOT NULL,
-  `cust_country` int(11) NOT NULL,
-  `cust_address` text NOT NULL,
-  `cust_city` varchar(100) NOT NULL,
-  `cust_zip` varchar(30) NOT NULL,
-  `cust_b_name` varchar(100) NOT NULL,
-  `cust_b_cname` varchar(100) NOT NULL,
-  `cust_b_phone` varchar(50) NOT NULL,
-  `cust_b_country` int(11) NOT NULL,
-  `cust_b_address` text NOT NULL,
-  `cust_b_city` varchar(100) NOT NULL,
-  `cust_b_zip` varchar(30) NOT NULL,
-  `cust_s_name` varchar(100) NOT NULL,
-  `cust_s_cname` varchar(100) NOT NULL,
-  `cust_s_phone` varchar(50) NOT NULL,
-  `cust_s_country` int(11) NOT NULL,
-  `cust_s_address` text NOT NULL,
-  `cust_s_city` varchar(100) NOT NULL,
-  `cust_s_zip` varchar(30) NOT NULL,
-  `cust_password` varchar(100) NOT NULL,
-  `cust_token` TEXT NOT NULL,
-  `cust_datetime` varchar(100) NOT NULL,
-  `cust_timestamp` varchar(100) NOT NULL,
-  `cust_status` int(1) NOT NULL
+CREATE TABLE table_customer (
+  cust_id int(11) NOT NULL,
+  cust_name varchar(100) NOT NULL,
+  cust_cname varchar(100) NOT NULL,
+  cust_email varchar(100) NOT NULL,
+  cust_phone varchar(50) NOT NULL,
+  cust_country int(11) NOT NULL,
+  cust_address text NOT NULL,
+  cust_city varchar(100) NOT NULL,
+  cust_zip varchar(30) NOT NULL,
+  cust_b_name varchar(100) NOT NULL,
+  cust_b_cname varchar(100) NOT NULL,
+  cust_b_phone varchar(50) NOT NULL,
+  cust_b_country int(11) NOT NULL,
+  cust_b_address text NOT NULL,
+  cust_b_city varchar(100) NOT NULL,
+  cust_b_zip varchar(30) NOT NULL,
+  cust_s_name varchar(100) NOT NULL,
+  cust_s_cname varchar(100) NOT NULL,
+  cust_s_phone varchar(50) NOT NULL,
+  cust_s_country int(11) NOT NULL,
+  cust_s_address text NOT NULL,
+  cust_s_city varchar(100) NOT NULL,
+  cust_s_zip varchar(30) NOT NULL,
+  cust_password varchar(100) NOT NULL,
+  cust_token TEXT NOT NULL,
+  cust_datetime varchar(100) NOT NULL,
+  cust_timestamp varchar(100) NOT NULL,
+  cust_status int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_cname`, `cust_email`, `cust_phone`, `cust_country`, `cust_address`, `cust_city`, `cust_zip`, `cust_b_name`, `cust_b_cname`, `cust_b_phone`, `cust_b_country`, `cust_b_address`, `cust_b_city`, `cust_b_zip`, `cust_s_name`, `cust_s_cname`, `cust_s_phone`, `cust_s_country`, `cust_s_address`, `cust_s_city`, `cust_s_zip`, `cust_password`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
+INSERT INTO table_customer (cust_id, cust_name, cust_cname, cust_email, cust_phone, cust_country, cust_address, cust_city, cust_zip, cust_b_name, cust_b_cname, cust_b_phone, cust_b_country, cust_b_address, cust_b_city, cust_b_zip, cust_s_name, cust_s_cname, cust_s_phone, cust_s_country, cust_s_address, cust_s_city, cust_s_zip, cust_password, cust_token, cust_datetime, cust_timestamp, cust_status) VALUES
 (1, 'Nguyễn Văn A', 'Công ty ABC', 'vana@gmail.com', '0905123456', 84, '123 Đường Lê Lợi', 'Hà Nội', '100000', 'Nguyễn Văn A', 'Công ty ABC', '0905123456', 84, '123 Đường Lê Lợi', 'Hà Nội', '100000', 'Nguyễn Văn A', 'Công ty ABC', '0905123456', 84, '123 Đường Lê Lợi', 'Hà Nội', '100000', '5f4dcc3b5aa765d61d8327deb882cf99', 'abc123token1', '2025-02-28 10:00:00', '1746031200', 1),
 (2, 'Trần Thị B', 'Công ty XYZ', 'thib@gmail.com', '0914345678', 84, '456 Đường Trần Hưng Đạo', 'TP. Hồ Chí Minh', '700000', '', '', '', 0, '', '', '', '', '', '', 0, '', '', '', '5f4dcc3b5aa765d61d8327deb882cf99', 'xyz456token2', '2025-02-28 10:10:00', '1746031800', 1),
 (3, 'Lê Văn C', 'none', 'levan@gmail.com', '0923456789', 84, '789 Đường Nguyễn Huệ', 'Đà Nẵng', '550000', 'Lê Văn C', 'none', '0923456789', 84, '789 Đường Nguyễn Huệ', 'Đà Nẵng', '550000', 'Lê Văn C', 'none', '0923456789', 84, '789 Đường Nguyễn Huệ', 'Đà Nẵng', '550000', '5f4dcc3b5aa765d61d8327deb882cf99', 'token789', '2025-02-28 10:20:00', '1746032400', 1),
@@ -63,25 +62,25 @@ INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_cname`, `cust_email`
 
 
 
-CREATE TABLE `table_customer_message` (
-  `customer_message_id` int(11) NOT NULL,
-  `subject` TEXT NOT NULL,
-  `message` text NOT NULL,
-  `order_detail` text NOT NULL,
-  `cust_id` int(11) NOT NULL
+CREATE TABLE table_customer_message (
+  customer_message_id int(11) NOT NULL,
+  subject TEXT NOT NULL,
+  message text NOT NULL,
+  order_detail text NOT NULL,
+  cust_id int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 
-CREATE TABLE `table_end_category` (
-  `ecat_id` int(11) NOT NULL,
-  `ecat_name` TEXT NOT NULL,
-  `mcat_id` int(11) NOT NULL
+CREATE TABLE table_end_category (
+  ecat_id int(11) NOT NULL,
+  ecat_name TEXT NOT NULL,
+  mcat_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
+INSERT INTO table_end_category (ecat_id, ecat_name, mcat_id) VALUES
 (1, 'Mũ & Phụ kiện đầu', 1),
 (2, 'Kính râm', 1),
 (3, 'Đồng hồ', 1),
@@ -96,10 +95,10 @@ INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
 (13, 'Giày bệt', 6),
 (14, 'Áo hoodie', 7),
 (15, 'Áo khoác & Áo choàng', 7),
-(16, 'Quần', 8),
-(17, 'Quần jeans', 8),
-(18, 'Quần jogger', 8),
-(19, 'Quần short', 8),
+(16, 'Quần', 😎,
+(17, 'Quần jeans', 😎,
+(18, 'Quần jogger', 😎,
+(19, 'Quần short', 😎,
 (20, 'Áo thun', 9),
 (21, 'Áo sơ mi thường', 9),
 (22, 'Áo sơ mi công sở', 9),
@@ -164,23 +163,23 @@ INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
 
 
 
-CREATE TABLE `table_faq` (
-  `faq_id` int(11) NOT NULL,
-  `faq_title` TEXT NOT NULL,
-  `faq_content` text NOT NULL
+CREATE TABLE table_faq (
+  faq_id int(11) NOT NULL,
+  faq_title TEXT NOT NULL,
+  faq_content text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-CREATE TABLE `table_mid_category` (
-  `mcat_id` int(11) NOT NULL,
-  `mcat_name` TEXT NOT NULL,
-  `tcat_id` int(11) NOT NULL
+CREATE TABLE table_mid_category (
+  mcat_id int(11) NOT NULL,
+  mcat_name TEXT NOT NULL,
+  tcat_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
+INSERT INTO table_mid_category (mcat_id, mcat_name, tcat_id) VALUES
 (1, 'Phụ kiện nam', 1),
 (2, 'Giày nam', 1),
 (3, 'Sản phẩm làm đẹp', 2),
@@ -200,86 +199,88 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 
 
 
-CREATE TABLE `table_order` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `product_name` TEXT NOT NULL,
-  `size` varchar(100) NOT NULL,
-  `color` varchar(100) NOT NULL,
-  `quantity` varchar(50) NOT NULL,
-  `unit_price` varchar(50) NOT NULL,
-  `payment_id` TEXT NOT NULL
+CREATE TABLE table_order (
+  id int(11) NOT NULL,
+  product_id int(11) NOT NULL,
+  product_name TEXT NOT NULL,
+  size varchar(100) NOT NULL,
+  color varchar(100) NOT NULL,
+  quantity varchar(50) NOT NULL,
+  unit_price varchar(50) NOT NULL,
+  payment_id TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
 
-CREATE TABLE `table_page` (
-  `id` int(11) NOT NULL,
-  `about_title` TEXT NOT NULL,
-  `about_content` text NOT NULL,
-  `about_banner` TEXT NOT NULL,
-  `about_meta_title` TEXT NOT NULL,
-  `about_meta_keyword` text NOT NULL,
-  `about_meta_description` text NOT NULL,
-  `faq_title` TEXT NOT NULL,
-  `faq_banner` TEXT NOT NULL,
-  `faq_meta_title` TEXT NOT NULL,
-  `faq_meta_keyword` text NOT NULL,
-  `faq_meta_description` text NOT NULL,
-  `blog_title` TEXT NOT NULL,
-  `blog_banner` TEXT NOT NULL,
-  `blog_meta_title` TEXT NOT NULL,
-  `blog_meta_keyword` text NOT NULL,
-  `blog_meta_description` text NOT NULL,
-  `contact_title` TEXT NOT NULL,
-  `contact_banner` TEXT NOT NULL,
-  `contact_meta_title` TEXT NOT NULL,
-  `contact_meta_keyword` text NOT NULL,
-  `contact_meta_description` text NOT NULL,
-  `pgallery_title` TEXT NOT NULL,
-  `pgallery_banner` TEXT NOT NULL,
-  `pgallery_meta_title` TEXT NOT NULL,
-  `pgallery_meta_keyword` text NOT NULL,
-  `pgallery_meta_description` text NOT NULL,
-  `vgallery_title` TEXT NOT NULL,
-  `vgallery_banner` TEXT NOT NULL,
-  `vgallery_meta_title` TEXT NOT NULL,
-  `vgallery_meta_keyword` text NOT NULL,
-  `vgallery_meta_description` text NOT NULL
+CREATE TABLE table_page (
+  id int(11) NOT NULL,
+  about_title TEXT NOT NULL,
+  about_content text NOT NULL,
+  about_banner TEXT NOT NULL,
+  about_meta_title TEXT NOT NULL,
+  about_meta_keyword text NOT NULL,
+  about_meta_description text NOT NULL,
+  faq_title TEXT NOT NULL,
+  faq_banner TEXT NOT NULL,
+  faq_meta_title TEXT NOT NULL,
+  faq_meta_keyword text NOT NULL,
+  faq_meta_description text NOT NULL,
+  blog_title TEXT NOT NULL,
+  blog_banner TEXT NOT NULL,
+  blog_meta_title TEXT NOT NULL,
+  blog_meta_keyword text NOT NULL,
+  blog_meta_description text NOT NULL,
+  contact_title TEXT NOT NULL,
+  contact_banner TEXT NOT NULL,
+  contact_meta_title TEXT NOT NULL,
+  contact_meta_keyword text NOT NULL,
+  contact_meta_description text NOT NULL,
+  pgallery_title TEXT NOT NULL,
+  pgallery_banner TEXT NOT NULL,
+  pgallery_meta_title TEXT NOT NULL,
+  pgallery_meta_keyword text NOT NULL,
+  pgallery_meta_description text NOT NULL,
+  vgallery_title TEXT NOT NULL,
+  vgallery_banner TEXT NOT NULL,
+  vgallery_meta_title TEXT NOT NULL,
+  vgallery_meta_keyword text NOT NULL,
+  vgallery_meta_description text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+INSERT INTO table_page (id, about_title, about_content, about_banner, about_meta_title, about_meta_keyword, about_meta_description, faq_title, faq_banner, faq_meta_title, faq_meta_keyword, faq_meta_description, blog_title, blog_banner, blog_meta_title, blog_meta_keyword, blog_meta_description, contact_title, contact_banner, contact_meta_title, contact_meta_keyword, contact_meta_description, pgallery_title, pgallery_banner, pgallery_meta_title, pgallery_meta_keyword, pgallery_meta_description, vgallery_title, vgallery_banner, vgallery_meta_title, vgallery_meta_keyword, vgallery_meta_description) VALUES
+(1, 'About Us', 'abcdefghiklm', '', '', '','','','','','','','', '', '', '','','','','','','','','', '', '','','','','','','');
 
 
-CREATE TABLE `table_payment` (
-  `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `customer_name` TEXT NOT NULL,
-  `customer_email` TEXT NOT NULL,
-  `payment_date` varchar(50) NOT NULL,
-  `txnid` TEXT NOT NULL,
-  `paid_amount` int(11) NOT NULL,
-  `card_number` varchar(50) NOT NULL,
-  `card_cvv` varchar(10) NOT NULL,
-  `card_month` varchar(10) NOT NULL,
-  `card_year` varchar(10) NOT NULL,
-  `bank_transaction_info` text NOT NULL,
-  `payment_method` varchar(20) NOT NULL,
-  `payment_status` varchar(25) NOT NULL,
-  `shipping_status` varchar(20) NOT NULL,
-  `payment_id` TEXT NOT NULL
+CREATE TABLE table_payment (
+  id int(11) NOT NULL,
+  customer_id int(11) NOT NULL,
+  customer_name TEXT NOT NULL,
+  customer_email TEXT NOT NULL,
+  payment_date varchar(50) NOT NULL,
+  txnid TEXT NOT NULL,
+  paid_amount int(11) NOT NULL,
+  card_number varchar(50) NOT NULL,
+  card_cvv varchar(10) NOT NULL,
+  card_month varchar(10) NOT NULL,
+  card_year varchar(10) NOT NULL,
+  bank_transaction_info text NOT NULL,
+  payment_method varchar(20) NOT NULL,
+  payment_status varchar(25) NOT NULL,
+  shipping_status varchar(20) NOT NULL,
+  payment_id TEXT NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE `table_photo` (
-  `id` int(11) NOT NULL,
-  `caption` TEXT NOT NULL,
-  `photo` TEXT NOT NULL
+CREATE TABLE table_photo (
+  id int(11) NOT NULL,
+  caption TEXT NOT NULL,
+  photo TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
+INSERT INTO table_photo (id, caption, photo) VALUES
 (1, 'Photo 1', 'photo-1.jpg'),
 (2, 'Photo 2', 'photo-2.jpg'),
 (3, 'Photo 3', 'photo-3.jpg'),
@@ -288,25 +289,25 @@ INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
 (6, 'Photo 6', 'photo-6.jpg');
 
 
-CREATE TABLE `table_product` (
-  `p_id` int(11) NOT NULL,
-  `p_name` TEXT NOT NULL,
-  `p_old_price` varchar(10) NOT NULL,
-  `p_current_price` varchar(10) NOT NULL,
-  `p_qty` int(10) NOT NULL,
-  `p_featured_photo` TEXT NOT NULL,
-  `p_description` text NOT NULL,
-  `p_short_description` text NOT NULL,
-  `p_feature` text NOT NULL,
-  `p_return_policy` text NOT NULL,
-  `p_total_view` int(11) NOT NULL,
-  `p_is_featured` int(1) NOT NULL,
-  `p_is_active` int(1) NOT NULL,
-  `ecat_id` int(11) NOT NULL
+CREATE TABLE table_product (
+  p_id int(11) NOT NULL,
+  p_name TEXT NOT NULL,
+  p_old_price varchar(10) NOT NULL,
+  p_current_price varchar(10) NOT NULL,
+  p_qty int(10) NOT NULL,
+  p_featured_photo TEXT NOT NULL,
+  p_description text NOT NULL,
+  p_short_description text NOT NULL,
+  p_feature text NOT NULL,
+  p_return_policy text NOT NULL,
+  p_total_view int(11) NOT NULL,
+  p_is_featured int(1) NOT NULL,
+  p_is_active int(1) NOT NULL,
+  ecat_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_view`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
+INSERT INTO table_product (p_id, p_name, p_old_price, p_current_price, p_qty, p_featured_photo, p_description, p_short_description, p_feature, p_return_policy, p_total_view, p_is_featured, p_is_active, ecat_id) VALUES
 (1, 'Item1','20','10', 100,'product-featured-1.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
 (2, 'Item2','20','10', 100,'product-featured-2.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32),
 (3, 'Item3','20','10', 100,'product-featured-3.jpg','description','short description','features-list','Return policy', 5, 0, 1, 25),
@@ -331,22 +332,22 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 
 
 
-CREATE TABLE `table_product_color` (
-  `id` int(11) NOT NULL,
-  `color_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL
+CREATE TABLE table_product_color (
+  id int(11) NOT NULL,
+  color_id int(11) NOT NULL,
+  p_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
 
-CREATE TABLE `table_product_photo` (
-  `pp_id` int(11) NOT NULL,
-  `photo` TEXT NOT NULL,
-  `p_id` int(11) NOT NULL
+CREATE TABLE table_product_photo (
+  pp_id int(11) NOT NULL,
+  photo TEXT NOT NULL,
+  p_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
-INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
+INSERT INTO table_product_photo (pp_id, photo, p_id) VALUES
 (1, '1.jpg', 1),
 (2, '2.jpg', 1),
 (3, '3.jpg', 2),
@@ -361,7 +362,7 @@ INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
 (12, '12.jpg', 6),
 (13, '13.jpg', 7),
 (14, '14.jpg', 7),
-(15, '15.jpg', 8),
+(15, '15.jpg', 😎,
 (16, '16.jpg', 9),
 (17, '17.jpg', 10),
 (18, '18.jpg', 10),
@@ -376,32 +377,32 @@ INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
 (27, '27.jpg', 20);
 
 
-CREATE TABLE `table_product_size` (
-  `id` int(11) NOT NULL,
-  `size_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL
+CREATE TABLE table_product_size (
+  id int(11) NOT NULL,
+  size_id int(11) NOT NULL,
+  p_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-CREATE TABLE `table_rating` (
-  `rt_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL,
-  `cust_id` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  `rating` int(11) NOT NULL
+CREATE TABLE table_rating (
+  rt_id int(11) NOT NULL,
+  p_id int(11) NOT NULL,
+  cust_id int(11) NOT NULL,
+  comment text NOT NULL,
+  rating int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-CREATE TABLE `table_service` (
-  `id` int(11) NOT NULL,
-  `title` TEXT NOT NULL,
-  `content` text NOT NULL,
-  `photo` TEXT NOT NULL
+CREATE TABLE table_service (
+  id int(11) NOT NULL,
+  title TEXT NOT NULL,
+  content text NOT NULL,
+  photo TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
+INSERT INTO table_service (id, title, content, photo) VALUES
 (1, 'Hàng chọn giá hời', '', 'service-1.png'),
 (2, 'Mã giảm giá', '', 'service-2.png'),
 (3, 'Miễn phí ship', '', 'service-3.png'),
@@ -412,77 +413,77 @@ INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
 (8, 'Nạp thẻ, Dịch vụ & Vé tàu hỏa', '', 'service-8.png');
 
 
-CREATE TABLE `table_settings` (
-  `id` int(11) NOT NULL,
-  `logo` TEXT NOT NULL,
-  `favicon` TEXT NOT NULL,
-  `footer_about` text NOT NULL,
-  `footer_copyright` text NOT NULL,
-  `contact_address` text NOT NULL,
-  `contact_email` TEXT NOT NULL,
-  `contact_phone` TEXT NOT NULL,
-  `contact_fax` TEXT NOT NULL,
-  `contact_map_iframe` text NOT NULL,
-  `receive_email` TEXT NOT NULL,
-  `receive_email_subject` TEXT NOT NULL,
-  `receive_email_thank_you_message` text NOT NULL,
-  `forget_password_message` text NOT NULL,
-  `total_recent_post_footer` int(10) NOT NULL,
-  `total_popular_post_footer` int(10) NOT NULL,
-  `total_recent_post_sidebar` int(11) NOT NULL,
-  `total_popular_post_sidebar` int(11) NOT NULL,
-  `total_featured_product_home` int(11) NOT NULL,
-  `total_latest_product_home` int(11) NOT NULL,
-  `total_popular_product_home` int(11) NOT NULL,
-  `meta_title_home` text NOT NULL,
-  `meta_keyword_home` text NOT NULL,
-  `meta_description_home` text NOT NULL,
-  `banner_login` TEXT NOT NULL,
-  `banner_registration` TEXT NOT NULL,
-  `banner_forget_password` TEXT NOT NULL,
-  `banner_reset_password` TEXT NOT NULL,
-  `banner_search` TEXT NOT NULL,
-  `banner_cart` TEXT NOT NULL,
-  `banner_checkout` TEXT NOT NULL,
-  `banner_product_category` TEXT NOT NULL,
-  `banner_blog` TEXT NOT NULL,
-  `cta_title` TEXT NOT NULL,
-  `cta_content` text NOT NULL,
-  `cta_read_more_text` TEXT NOT NULL,
-  `cta_read_more_url` TEXT NOT NULL,
-  `cta_photo` TEXT NOT NULL,
-  `featured_product_title` TEXT NOT NULL,
-  `featured_product_subtitle` TEXT NOT NULL,
-  `latest_product_title` TEXT NOT NULL,
-  `latest_product_subtitle` TEXT NOT NULL,
-  `popular_product_title` TEXT NOT NULL,
-  `popular_product_subtitle` TEXT NOT NULL,
-  `testimonial_title` TEXT NOT NULL,
-  `testimonial_subtitle` TEXT NOT NULL,
-  `testimonial_photo` TEXT NOT NULL,
-  `blog_title` TEXT NOT NULL,
-  `blog_subtitle` TEXT NOT NULL,
-  `newsletter_text` text NOT NULL,
-  `bank_public_key` TEXT NOT NULL,
-  `bank_secret_key` TEXT NOT NULL,
-  `bank_detail` text NOT NULL,
-  `before_head` text NOT NULL,
-  `after_body` text NOT NULL,
-  `before_body` text NOT NULL,
-  `home_service_on_off` int(11) NOT NULL,
-  `home_welcome_on_off` int(11) NOT NULL,
-  `home_featured_product_on_off` int(11) NOT NULL,
-  `home_latest_product_on_off` int(11) NOT NULL,
-  `home_popular_product_on_off` int(11) NOT NULL,
-  `home_testimonial_on_off` int(11) NOT NULL,
-  `home_blog_on_off` int(11) NOT NULL,
-  `newsletter_on_off` int(11) NOT NULL,
-  `ads_above_welcome_on_off` int(1) NOT NULL,
-  `ads_above_featured_product_on_off` int(1) NOT NULL,
-  `ads_above_latest_product_on_off` int(1) NOT NULL,
-  `ads_above_popular_product_on_off` int(1) NOT NULL,
-  `ads_above_testimonial_on_off` int(1) NOT NULL,
-  `ads_category_sidebar_on_off` int(1) NOT NULL
+CREATE TABLE table_settings (
+  id int(11) NOT NULL,
+  logo TEXT NOT NULL,
+  favicon TEXT NOT NULL,
+  footer_about text NOT NULL,
+  footer_copyright text NOT NULL,
+  contact_address text NOT NULL,
+  contact_email TEXT NOT NULL,
+  contact_phone TEXT NOT NULL,
+  contact_fax TEXT NOT NULL,
+  contact_map_iframe text NOT NULL,
+  receive_email TEXT NOT NULL,
+  receive_email_subject TEXT NOT NULL,
+  receive_email_thank_you_message text NOT NULL,
+  forget_password_message text NOT NULL,
+  total_recent_post_footer int(10) NOT NULL,
+  total_popular_post_footer int(10) NOT NULL,
+  total_recent_post_sidebar int(11) NOT NULL,
+  total_popular_post_sidebar int(11) NOT NULL,
+  total_featured_product_home int(11) NOT NULL,
+  total_latest_product_home int(11) NOT NULL,
+  total_popular_product_home int(11) NOT NULL,
+  meta_title_home text NOT NULL,
+  meta_keyword_home text NOT NULL,
+  meta_description_home text NOT NULL,
+  banner_login TEXT NOT NULL,
+  banner_registration TEXT NOT NULL,
+  banner_forget_password TEXT NOT NULL,
+  banner_reset_password TEXT NOT NULL,
+  banner_search TEXT NOT NULL,
+  banner_cart TEXT NOT NULL,
+  banner_checkout TEXT NOT NULL,
+  banner_product_category TEXT NOT NULL,
+  banner_blog TEXT NOT NULL,
+  cta_title TEXT NOT NULL,
+  cta_content text NOT NULL,
+  cta_read_more_text TEXT NOT NULL,
+  cta_read_more_url TEXT NOT NULL,
+  cta_photo TEXT NOT NULL,
+  featured_product_title TEXT NOT NULL,
+  featured_product_subtitle TEXT NOT NULL,
+  latest_product_title TEXT NOT NULL,
+  latest_product_subtitle TEXT NOT NULL,
+  popular_product_title TEXT NOT NULL,
+  popular_product_subtitle TEXT NOT NULL,
+  testimonial_title TEXT NOT NULL,
+  testimonial_subtitle TEXT NOT NULL,
+  testimonial_photo TEXT NOT NULL,
+  blog_title TEXT NOT NULL,
+  blog_subtitle TEXT NOT NULL,
+  newsletter_text text NOT NULL,
+  bank_public_key TEXT NOT NULL,
+  bank_secret_key TEXT NOT NULL,
+  bank_detail text NOT NULL,
+  before_head text NOT NULL,
+  after_body text NOT NULL,
+  before_body text NOT NULL,
+  home_service_on_off int(11) NOT NULL,
+  home_welcome_on_off int(11) NOT NULL,
+  home_featured_product_on_off int(11) NOT NULL,
+  home_latest_product_on_off int(11) NOT NULL,
+  home_popular_product_on_off int(11) NOT NULL,
+  home_testimonial_on_off int(11) NOT NULL,
+  home_blog_on_off int(11) NOT NULL,
+  newsletter_on_off int(11) NOT NULL,
+  ads_above_welcome_on_off int(1) NOT NULL,
+  ads_above_featured_product_on_off int(1) NOT NULL,
+  ads_above_latest_product_on_off int(1) NOT NULL,
+  ads_above_popular_product_on_off int(1) NOT NULL,
+  ads_above_testimonial_on_off int(1) NOT NULL,
+  ads_category_sidebar_on_off int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
@@ -526,61 +527,61 @@ VALUES
 
 
 
-CREATE TABLE `table_shipping_cost` (
-  `shipping_cost_id` int(11) NOT NULL,
-  `country_id` int(11) NOT NULL,
-  `amount` varchar(20) NOT NULL
+CREATE TABLE table_shipping_cost (
+  shipping_cost_id int(11) NOT NULL,
+  country_id int(11) NOT NULL,
+  amount varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
 
 
-CREATE TABLE `table_shipping_cost_all` (
-  `sca_id` int(11) NOT NULL,
-  `amount` varchar(20) NOT NULL
+CREATE TABLE table_shipping_cost_all (
+  sca_id int(11) NOT NULL,
+  amount varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
-INSERT INTO `table_shipping_cost_all` (`sca_id`, `amount`) VALUES
+INSERT INTO table_shipping_cost_all (sca_id, amount) VALUES
 (1, '100');
 
 
 
-CREATE TABLE `table_size` (
-  `size_id` int(11) NOT NULL,
-  `size_name` TEXT NOT NULL
+CREATE TABLE table_size (
+  size_id int(11) NOT NULL,
+  size_name TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-CREATE TABLE `table_slider` (
-  `id` int(11) NOT NULL,
-  `photo` TEXT NOT NULL,
-  `heading` TEXT NOT NULL,
-  `content` text NOT NULL,
-  `button_text` TEXT NOT NULL,
-  `button_url` TEXT NOT NULL,
-  `position` TEXT NOT NULL
+CREATE TABLE table_slider (
+  id int(11) NOT NULL,
+  photo TEXT NOT NULL,
+  heading TEXT NOT NULL,
+  content text NOT NULL,
+  button_text TEXT NOT NULL,
+  button_url TEXT NOT NULL,
+  position TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, `button_url`, `position`) VALUES
+INSERT INTO table_slider (id, photo, heading, content, button_text, button_url, position) VALUES
 (1, 'slider-1.png', 'Welcome to Shọppe', 'Cửa hàng phụ kiện mới nhất cho nam', 'Xem phụ kiện cho nam', '#', 'Center'),
 (2, 'slider-2.jpg', 'Giảm giá 50% cho tất cả sản phẩm', 'Mua nhanh đi không hết bây giờ.', 'Read More', '#', 'Center'),
 (3, 'slider-3.png', 'Hỗ trợ 24/7', 'Đội ngũ nhân viên cam kết phục vụ tận tình.', 'Read More', '#', 'Right');
 
 
 
-CREATE TABLE `table_social` (
-  `social_id` int(11) NOT NULL,
-  `social_name` varchar(30) NOT NULL,
-  `social_url` TEXT NOT NULL,
-  `social_icon` varchar(30) NOT NULL
+CREATE TABLE table_social (
+  social_id int(11) NOT NULL,
+  social_name varchar(30) NOT NULL,
+  social_url TEXT NOT NULL,
+  social_icon varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_icon`) VALUES
+INSERT INTO table_social (social_id, social_name, social_url, social_icon) VALUES
 (1, 'Facebook', 'https://www.facebook.com/#', 'fa fa-facebook'),
 (2, 'Twitter', 'https://www.twitter.com/#', 'fa fa-twitter'),
 (3, 'YouTube', 'https://www.youtube.com/#', 'fa fa-youtube'),
@@ -588,15 +589,15 @@ INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_ic
 
 
 
-CREATE TABLE `table_top_category` (
-  `tcat_id` int(11) NOT NULL,
-  `tcat_name` TEXT NOT NULL,
-  `show_on_menu` int(1) NOT NULL
+CREATE TABLE table_top_category (
+  tcat_id int(11) NOT NULL,
+  tcat_name TEXT NOT NULL,
+  show_on_menu int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
+INSERT INTO table_top_category (tcat_id, tcat_name, show_on_menu) VALUES
 (1, 'Nam', 1),
 (2, 'Nữ', 1),
 (3, 'Trẻ em', 1),
@@ -605,197 +606,196 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 
 
 
-CREATE TABLE `table_admin` (
-  `id` int(10) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `email` TEXT NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `password` TEXT NOT NULL,
-  `photo` TEXT NOT NULL,
-  `role` varchar(30) NOT NULL,
-  `status` varchar(10) NOT NULL
+CREATE TABLE table_admin (
+  id int(10) NOT NULL,
+  full_name varchar(100) NOT NULL,
+  email TEXT NOT NULL,
+  phone varchar(100) NOT NULL,
+  password TEXT NOT NULL,
+  photo TEXT NOT NULL,
+  role varchar(30) NOT NULL,
+  status varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
 
-INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `role`, `status`) VALUES
+INSERT INTO table_admin (id, full_name, email, phone, password, photo, role, status) VALUES
 (1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'Admin', 'Active');
 
 
-CREATE TABLE `table_video` (
-  `id` int(11) NOT NULL,
-  `title` TEXT NOT NULL,
-  `iframe_code` text NOT NULL
+CREATE TABLE table_video (
+  id int(11) NOT NULL,
+  title TEXT NOT NULL,
+  iframe_code text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_video` (`id`, `title`, `iframe_code`) VALUES
+INSERT INTO table_video (id, title, iframe_code) VALUES
 (1, 'Video 1', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/watch?v=xWj-adZemk4" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>');
 
 -- Thêm các khóa chính
 
-ALTER TABLE `table_color`
-  ADD PRIMARY KEY (`color_id`);
+ALTER TABLE table_color
+  ADD PRIMARY KEY (color_id);
 
-ALTER TABLE `table_country`
-  ADD PRIMARY KEY (`country_id`);
-
-
-ALTER TABLE `table_customer`
-  ADD PRIMARY KEY (`cust_id`);
+ALTER TABLE table_country
+  ADD PRIMARY KEY (country_id);
 
 
-ALTER TABLE `table_customer_message`
-  ADD PRIMARY KEY (`customer_message_id`);
+ALTER TABLE table_customer
+  ADD PRIMARY KEY (cust_id);
 
 
-ALTER TABLE `table_end_category`
-  ADD PRIMARY KEY (`ecat_id`);
+ALTER TABLE table_customer_message
+  ADD PRIMARY KEY (customer_message_id);
 
 
-ALTER TABLE `table_faq`
-  ADD PRIMARY KEY (`faq_id`);
-
-ALTER TABLE `table_mid_category`
-  ADD PRIMARY KEY (`mcat_id`);
-
-ALTER TABLE `table_order`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `table_page`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `table_payment`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `table_photo`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `table_product`
-  ADD PRIMARY KEY (`p_id`);
-
-ALTER TABLE `table_product_color`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_end_category
+  ADD PRIMARY KEY (ecat_id);
 
 
-ALTER TABLE `table_product_photo`
-  ADD PRIMARY KEY (`pp_id`);
+ALTER TABLE table_faq
+  ADD PRIMARY KEY (faq_id);
+
+ALTER TABLE table_mid_category
+  ADD PRIMARY KEY (mcat_id);
+
+ALTER TABLE table_order
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE table_page
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE table_payment
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE table_photo
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE table_product
+  ADD PRIMARY KEY (p_id);
+
+ALTER TABLE table_product_color
+  ADD PRIMARY KEY (id);
 
 
-ALTER TABLE `table_product_size`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_product_photo
+  ADD PRIMARY KEY (pp_id);
 
-ALTER TABLE `table_rating`
-  ADD PRIMARY KEY (`rt_id`);
 
-ALTER TABLE `table_service`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_product_size
+  ADD PRIMARY KEY (id);
 
-ALTER TABLE `table_settings`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_rating
+  ADD PRIMARY KEY (rt_id);
 
-ALTER TABLE `table_shipping_cost`
-  ADD PRIMARY KEY (`shipping_cost_id`);
+ALTER TABLE table_service
+  ADD PRIMARY KEY (id);
 
-ALTER TABLE `table_shipping_cost_all`
-  ADD PRIMARY KEY (`sca_id`);
+ALTER TABLE table_settings
+  ADD PRIMARY KEY (id);
 
-ALTER TABLE `table_size`
-  ADD PRIMARY KEY (`size_id`);
+ALTER TABLE table_shipping_cost
+  ADD PRIMARY KEY (shipping_cost_id);
 
-ALTER TABLE `table_slider`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_shipping_cost_all
+  ADD PRIMARY KEY (sca_id);
 
-ALTER TABLE `table_social`
-  ADD PRIMARY KEY (`social_id`);
+ALTER TABLE table_size
+  ADD PRIMARY KEY (size_id);
 
-ALTER TABLE `table_top_category`
-  ADD PRIMARY KEY (`tcat_id`);
+ALTER TABLE table_slider
+  ADD PRIMARY KEY (id);
 
-ALTER TABLE `table_admin`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_social
+  ADD PRIMARY KEY (social_id);
 
-ALTER TABLE `table_video`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE table_top_category
+  ADD PRIMARY KEY (tcat_id);
+
+ALTER TABLE table_admin
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE table_video
+  ADD PRIMARY KEY (id);
 
 -- Tự động tăng ID (AUTO_INCREMENT) cho các bảng khi thêm các đối tượng
 
 
-ALTER TABLE `table_color`
-  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+ALTER TABLE table_color
+  MODIFY color_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 
-ALTER TABLE `table_customer`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE table_customer
+  MODIFY cust_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
-ALTER TABLE `table_customer_message`
-  MODIFY `customer_message_id` int(11) NOT NULL;
+ALTER TABLE table_customer_message
+  MODIFY customer_message_id int(11) NOT NULL;
 
-ALTER TABLE `table_end_category`
-  MODIFY `ecat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+ALTER TABLE table_end_category
+  MODIFY ecat_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
-ALTER TABLE `table_faq`
-  MODIFY `faq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
-
-ALTER TABLE `table_mid_category`
-  MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
-ALTER TABLE `table_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
-ALTER TABLE `table_page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-ALTER TABLE `table_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
-ALTER TABLE `table_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE table_faq
+  MODIFY faq_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 
-ALTER TABLE `table_product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE table_mid_category
+  MODIFY mcat_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
-ALTER TABLE `table_product_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ALTER TABLE table_order
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
-ALTER TABLE `table_product_photo`
-  MODIFY `pp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+ALTER TABLE table_page
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
-ALTER TABLE `table_product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+ALTER TABLE table_payment
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
-ALTER TABLE `table_rating`
-  MODIFY `rt_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE table_photo
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
-ALTER TABLE `table_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
-ALTER TABLE `table_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE table_product
+  MODIFY p_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
-ALTER TABLE `table_shipping_cost`
-  MODIFY `shipping_cost_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE table_product_color
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
-ALTER TABLE `table_shipping_cost_all`
-  MODIFY `sca_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE table_product_photo
+  MODIFY pp_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
-ALTER TABLE `table_size`
-  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE table_product_size
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
-ALTER TABLE `table_slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE table_rating
+  MODIFY rt_id int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `table_social`
-  MODIFY `social_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE table_service
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
-ALTER TABLE `table_top_category`
-  MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE table_settings
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
-ALTER TABLE `table_admin`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE table_shipping_cost
+  MODIFY shipping_cost_id int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `table_video`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE table_shipping_cost_all
+  MODIFY sca_id int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE table_size
+  MODIFY size_id int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE table_slider
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE table_social
+  MODIFY social_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE table_top_category
+  MODIFY tcat_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE table_admin
+  MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE table_video
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
