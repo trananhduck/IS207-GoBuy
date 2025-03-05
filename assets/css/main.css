@@ -869,3 +869,46 @@ ul.nav-tabs {
   background-size: cover;
   height: 500px;
 }
+
+/* CSS cho pagination */
+div.pagination {
+  padding: 3px;
+  margin: 3px;
+  z-index: 1000;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+div.pagination a {
+  padding: 5px 7px;
+  margin: 2px;
+  border: 1px solid #cf0d42;
+  text-decoration: none; /* no underline */
+  background-color: #0d1452;
+  color: #fff;
+  font-weight: bold;
+}
+
+div.pagination a:hover,
+div.pagination a:active {
+  border: 1px solid #cf0d42;
+  color: #fff;
+  background-color: #b20b39;
+}
+
+div.pagination span.current {
+  padding: 5px 7px;
+  margin: 2px;
+  border: 1px solid #cf0d42;
+  font-weight: bold;
+  background-color: #b20b39;
+  color: #fff;
+  font-weight: bold;
+}
+
+div.pagination span.disabled {
+  padding: 5px 7px;
+  margin: 2px;
+  border: 1px solid #929693;
+  color: #929693;
+}
