@@ -237,7 +237,7 @@ foreach ($result as $row) {
                         <?php
                         if (isset($_SESSION['customer'])) {
                         ?>
-                        <li><i class="fa fa-user"></i> <?php echo 'Đăng nhập với tài khoản' ?>
+                        <li><i class="fa fa-user"></i>
                             <?php echo $_SESSION['customer']['cust_name']; ?></li>
                         <li><a href="dashboard.php"><i class="fa fa-home"></i> <?php echo 'Trang chủ' ?></a></li>
                         <?php
@@ -251,28 +251,28 @@ foreach ($result as $row) {
                         ?>
 
                         <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> <?php echo 'Giỏ hàng' ?>
-                                (<?php echo 'Đơn vị' ?><?php
-                                                        if (isset($_SESSION['cart_p_id'])) {
-                                                            $table_total_price = 0;
-                                                            $i = 0;
-                                                            foreach ($_SESSION['cart_p_qty'] as $key => $value) {
-                                                                $i++;
-                                                                $arr_cart_p_qty[$i] = $value;
-                                                            }
-                                                            $i = 0;
-                                                            foreach ($_SESSION['cart_p_current_price'] as $key => $value) {
-                                                                $i++;
-                                                                $arr_cart_p_current_price[$i] = $value;
-                                                            }
-                                                            for ($i = 1; $i <= count($arr_cart_p_qty); $i++) {
-                                                                $row_total_price = $arr_cart_p_current_price[$i] * $arr_cart_p_qty[$i];
-                                                                $table_total_price = $table_total_price + $row_total_price;
-                                                            }
-                                                            echo $table_total_price;
-                                                        } else {
-                                                            echo '0.00';
-                                                        }
-                                                        ?>)</a></li>
+                                (<?php
+                                    if (isset($_SESSION['cart_p_id'])) {
+                                        $table_total_price = 0;
+                                        $i = 0;
+                                        foreach ($_SESSION['cart_p_qty'] as $key => $value) {
+                                            $i++;
+                                            $arr_cart_p_qty[$i] = $value;
+                                        }
+                                        $i = 0;
+                                        foreach ($_SESSION['cart_p_current_price'] as $key => $value) {
+                                            $i++;
+                                            $arr_cart_p_current_price[$i] = $value;
+                                        }
+                                        for ($i = 1; $i <= count($arr_cart_p_qty); $i++) {
+                                            $row_total_price = $arr_cart_p_current_price[$i] * $arr_cart_p_qty[$i];
+                                            $table_total_price = $table_total_price + $row_total_price;
+                                        }
+                                        echo $table_total_price;
+                                    } else {
+                                        echo '0.00';
+                                    }
+                                    ?><?php echo ' VND' ?>)</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 search-area">
