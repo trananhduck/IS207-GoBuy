@@ -188,12 +188,12 @@ foreach ($result as $row) {
                                     <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                                     </h3>
                                     <h4>
-                                        <?php echo number_format($row['p_current_price'], 0, ',', '.') . ' VND'; ?>
                                         <?php if (!empty($row['p_old_price'])): ?>
                                             <del>
-                                                <?php echo number_format($row['p_old_price'], 0, ',', '.') . ' VND'; ?>
+                                                <?php echo number_format($row['p_old_price']) ?><?php echo ' VND' ?>
                                             </del>
                                         <?php endif; ?>
+                                        <?php echo number_format($row['p_current_price']) ?><?php echo ' VND' ?>
                                     </h4>
 
 
@@ -253,12 +253,12 @@ foreach ($result as $row) {
                                     <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                                     </h3>
                                     <h4>
-                                        <?php echo number_format($row['p_current_price'], 0, ',', '.') . ' VND'; ?>
                                         <?php if (!empty($row['p_old_price'])): ?>
                                             <del>
-                                                <?php echo number_format($row['p_old_price'], 0, ',', '.') . ' VND'; ?>
+                                                <?php echo number_format($row['p_old_price']) ?><?php echo ' VND' ?>
                                             </del>
                                         <?php endif; ?>
+                                        <?php echo number_format($row['p_current_price']) ?><?php echo ' VND' ?>
                                     </h4>
 
 
