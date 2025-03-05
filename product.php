@@ -122,9 +122,9 @@ if (isset($_POST['form_add_to_cart'])) {
         $temp_msg = 'Xin lỗi, chỉ có' . $current_p_qty . 'sản phẩm trong kho';
 ?>
 
-        <script type="text/javascript">
-            alert('<?php echo $temp_msg; ?>');
-        </script>
+<script type="text/javascript">
+alert('<?php echo $temp_msg; ?>');
+</script>
 <?php
     else:
         if (isset($_SESSION['cart_p_id'])) {
@@ -472,12 +472,12 @@ if ($success_message1 != '') {
                                 <div class="p-price">
                                     <span style="font-size:14px;"><?php echo 'Giá sản phẩm' ?></span><br>
                                     <span>
+                                        <!--Gia cu-->
                                         <?php if ($p_old_price != ''): ?>
-
-                                        <del><?php echo 'VND' ?><?php echo $p_old_price; ?></del>
-
+                                        <del><?php echo $p_old_price; ?><?php echo 'VND' ?></del>
                                         <?php endif; ?>
-                                        <?php echo 'VND' ?><?php echo $p_current_price; ?>
+                                        <!--Gia moi-->
+                                        <?php echo $p_current_price; ?><?php echo 'VND' ?>
                                     </span>
                                 </div>
                                 <input type="hidden" name="p_current_price" value="<?php echo $p_current_price; ?>">
@@ -584,7 +584,8 @@ if ($success_message1 != '') {
                                                 $j++;
                                         ?>
 
-                                        <div class="mb_10"><b><u><?php echo 'Nhận xét' ?> <?php echo $j; ?></u></b>
+                                        <div class="mb_10"><b><u><?php echo 'Nhận xét' ?>
+                                                    <?php echo $j; ?></u></b>
                                         </div>
                                         <table class="table table-bordered">
                                             <tr>
