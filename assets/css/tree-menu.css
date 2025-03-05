@@ -1,63 +1,63 @@
-/* MENU-LEFT
--------------------------- */
-/* layout */
+/* MENU DẠNG CÂY */
+
+/* ======= CẤU TRÚC BỐ CỤC (LAYOUT) ======= */
 #left ul.nav {
     margin-bottom: 2px;
-    font-size: 12px; /* to change font-size, please change instead .lbl */
+    font-size: 12px; /* Cỡ chữ cho menu */
 }
-#left ul.nav ul li {
 
-}
 #left ul.nav ul,
 #left ul.nav ul li {
-    list-style: none!important;
+    list-style: none!important; /* Loại bỏ dấu chấm/dấu gạch đầu dòng */
     list-style-type: none!important;
     margin-top: 1px;
     margin-bottom: 1px;
 }
+
 #left ul.nav ul {
-    padding-left: 0;
+    padding-left: 0; /* Căn chỉnh khoảng cách bên trái */
     width: auto;
 }
+
 #left ul.nav ul.children {
-    padding-left: 12px;
+    padding-left: 12px; /* Căn lề cho menu con */
     width: auto;
 }
-#left ul.nav ul.children li{
+
+#left ul.nav ul.children li {
     margin-left: 0px;
 }
+
 #left ul.nav li a:hover {
-    text-decoration: none;
+    text-decoration: none; /* Loại bỏ gạch chân khi rê chuột */
 }
 
-/*#left ul.nav li a:hover .lbl {
-    color: #999!important;
-}*/
-
-#left ul.nav li.current>a .lbl {
+/* Mục menu đang được chọn */
+#left ul.nav li.current > a .lbl {
     background-color: #999;
     color: #fff!important;
 }
 
-/* parent item */
+/* ======= PHẦN TỬ CHA (PARENT ITEM) ======= */
 #left ul.nav li.parent a {
     padding: 0px;
-    color: #ccc;
+    color: #ccc; /* Màu chữ cho mục cha */
 }
-#left ul.nav>li.parent>a {
-    border: solid 1px #999;
-    text-transform: uppercase;
+
+#left ul.nav > li.parent > a {
+    border: solid 1px #999; /* Viền của mục cha */
+    text-transform: uppercase; /* Viết hoa chữ */
 }    
 
-/* link tag (a)*/
+/* ======= ĐƯỜNG DẪN (LINK) ======= */
 #left ul.nav li.parent ul li a {
-    color: #222;
+    color: #222; /* Màu chữ */
     border: none;
-    display:block;
+    display: block;
     padding-left: 5px;    
 }
 
-/* sign for parent item */
+/* ======= BIỂU TƯỢNG (SIGN) CHO MỤC CHA ======= */
 #left ul.nav li .sign {
     display: inline-block;
     width: 14px;
@@ -65,100 +65,118 @@
     background-color: transparent;
     color: #fff;
 }
-#left ul.nav li.parent>a>.sign{
+
+#left ul.nav li.parent > a > .sign {
     margin-left: 0px;
     background-color: #999;
 }
 
-/* label */
+/* ======= NHÃN (LABEL) ======= */
 #left ul.nav li .lbl {
     padding: 5px 12px;
     display: inline-block;
 }
-#left ul.nav li.current>a>.lbl {
+
+#left ul.nav li.current > a > .lbl {
     color: #fff;
 }
-#left ul.nav  li a .lbl{
+
+#left ul.nav li a .lbl {
     font-size: 16px;
 }
 
-/* THEMATIQUE
-------------------------- */
-/* theme 1 */
-#left ul.nav>li.item-1.parent>a {
+/* ======= CÁC CHỦ ĐỀ (THEMATIQUE) ======= */
+
+/* CHỦ ĐỀ 1 - MÀU CAM */
+#left ul.nav > li.item-1.parent > a {
     border: solid 1px #ff6307;
 }
-#left ul.nav>li.item-1.parent>a>.sign,
-#left ul.nav>li.item-1 li.parent>a>.sign{
+
+#left ul.nav > li.item-1.parent > a > .sign,
+#left ul.nav > li.item-1 li.parent > a > .sign {
     margin-left: 0px;
     background-color: #ff6307;
 }
-#left ul.nav>li.item-1 .lbl {
+
+#left ul.nav > li.item-1 .lbl {
     color: #ff6307;
 }
-#left ul.nav>li.item-1 li.current>a .lbl {
+
+#left ul.nav > li.item-1 li.current > a .lbl {
     background-color: #ff6307;
     color: #fff!important;
 }
 
-/* theme 2 */
+/* CHỦ ĐỀ 2 - MÀU ĐỎ */
 #left ul.nav {
     background: #fff;
 }
-#left ul.nav>li.cat-level-1 {
+
+#left ul.nav > li.cat-level-1 {
     margin-bottom: 10px;
 }
-#left ul.nav>li.cat-level-1.parent>a {
+
+#left ul.nav > li.cat-level-1.parent > a {
     border: solid 1px #e4144d;
     background: #e4144d;
     color: #fff;
 }
-#left ul.nav>li.cat-level-1.parent>a>.sign,
-#left ul.nav>li.cat-level-1 li.parent>a>.sign{
+
+#left ul.nav > li.cat-level-1.parent > a > .sign,
+#left ul.nav > li.cat-level-1 li.parent > a > .sign {
     margin-left: 0px;
     background-color: #e4144d;
 }
-#left ul.nav>li.cat-level-1 .lbl {
+
+#left ul.nav > li.cat-level-1 .lbl {
     color: #fff;
 }
-#left ul.nav>li.cat-level-1 .lbl1 {
+
+#left ul.nav > li.cat-level-1 .lbl1 {
     color: #e4144d;
 }
-#left ul.nav>li.cat-level-1 li.current>a .lbl {
+
+#left ul.nav > li.cat-level-1 li.current > a .lbl {
     background-color: #e4144d;
     color: #fff!important;
 }
 
-/* theme 3 */
-#left ul.nav>li.item-15.parent>a {
+/* CHỦ ĐỀ 3 - MÀU XANH LÁ */
+#left ul.nav > li.item-15.parent > a {
     border: solid 1px #94cf00;
 }
-#left ul.nav>li.item-15.parent>a>.sign,
-#left ul.nav>li.item-15 li.parent>a>.sign{
+
+#left ul.nav > li.item-15.parent > a > .sign,
+#left ul.nav > li.item-15 li.parent > a > .sign {
     margin-left: 0px;
     background-color: #94cf00;
 }
-#left ul.nav>li.item-15 .lbl {
+
+#left ul.nav > li.item-15 .lbl {
     color: #94cf00;
 }
-#left ul.nav>li.item-15 li.current>a .lbl {
+
+#left ul.nav > li.item-15 li.current > a .lbl {
     background-color: #94cf00;
     color: #fff!important;
 }
 
-/* theme 4 */
-#left ul.nav>li.item-22.parent>a {
+/* CHỦ ĐỀ 4 - MÀU HỒNG */
+#left ul.nav > li.item-22.parent > a {
     border: solid 1px #ef409c;
 }
-#left ul.nav>li.item-22.parent>a>.sign,
-#left ul.nav>li.item-22 li.parent>a>.sign{
+
+#left ul.nav > li.item-22.parent > a > .sign,
+#left ul.nav > li.item-22 li.parent > a > .sign {
     margin-left: 0px;
     background-color: #ef409c;
 }
-#left ul.nav>li.item-22 .lbl {
+
+#left ul.nav > li.item-22 .lbl {
     color: #ef409c;
 }
-#left ul.nav>li.item-22 li.current>a .lbl {
+
+#left ul.nav > li.item-22 li.current > a .lbl {
     background-color: #ef409c;
     color: #fff!important;
 }

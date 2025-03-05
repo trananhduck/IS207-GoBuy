@@ -85,31 +85,31 @@ foreach ($result as $row) {
 
     if ($cur_page == 'index.php' || $cur_page == 'login.php' || $cur_page == 'registration.php' || $cur_page == 'cart.php' || $cur_page == 'checkout.php' || $cur_page == 'forget-password.php' || $cur_page == 'reset-password.php' || $cur_page == 'product-category.php' || $cur_page == 'product.php') {
     ?>
-    <title><?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
+        <title><?php echo $meta_title_home; ?></title>
+        <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
+        <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
 
     if ($cur_page == 'about.php') {
     ?>
-    <title><?php echo $about_meta_title; ?></title>
-    <meta name="keywords" content="<?php echo $about_meta_keyword; ?>">
-    <meta name="description" content="<?php echo $about_meta_description; ?>">
+        <title><?php echo $about_meta_title; ?></title>
+        <meta name="keywords" content="<?php echo $about_meta_keyword; ?>">
+        <meta name="description" content="<?php echo $about_meta_description; ?>">
     <?php
     }
     if ($cur_page == 'faq.php') {
     ?>
-    <title><?php echo $faq_meta_title; ?></title>
-    <meta name="keywords" content="<?php echo $faq_meta_keyword; ?>">
-    <meta name="description" content="<?php echo $faq_meta_description; ?>">
+        <title><?php echo $faq_meta_title; ?></title>
+        <meta name="keywords" content="<?php echo $faq_meta_keyword; ?>">
+        <meta name="description" content="<?php echo $faq_meta_description; ?>">
     <?php
     }
     if ($cur_page == 'contact.php') {
     ?>
-    <title><?php echo $contact_meta_title; ?></title>
-    <meta name="keywords" content="<?php echo $contact_meta_keyword; ?>">
-    <meta name="description" content="<?php echo $contact_meta_description; ?>">
+        <title><?php echo $contact_meta_title; ?></title>
+        <meta name="keywords" content="<?php echo $contact_meta_keyword; ?>">
+        <meta name="description" content="<?php echo $contact_meta_description; ?>">
     <?php
     }
     if ($cur_page == 'product.php') {
@@ -126,55 +126,55 @@ foreach ($result as $row) {
 
     if ($cur_page == 'dashboard.php') {
     ?>
-    <title>Dashboard - <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
+        <title>Dashboard - <?php echo $meta_title_home; ?></title>
+        <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
+        <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($cur_page == 'customer-profile-update.php') {
     ?>
-    <title>Cập nhật hồ sơ <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
+        <title>Cập nhật hồ sơ <?php echo $meta_title_home; ?></title>
+        <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
+        <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($cur_page == 'customer-billing-shipping-update.php') {
     ?>
-    <title>Cập nhật thông tin giao hàng <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
+        <title>Cập nhật thông tin giao hàng <?php echo $meta_title_home; ?></title>
+        <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
+        <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($cur_page == 'customer-password-update.php') {
     ?>
-    <title>Cập nhật mật khẩu - <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
+        <title>Cập nhật mật khẩu - <?php echo $meta_title_home; ?></title>
+        <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
+        <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($cur_page == 'customer-order.php') {
     ?>
-    <title>Hàng đã đặt - <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
+        <title>Hàng đã đặt - <?php echo $meta_title_home; ?></title>
+        <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
+        <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     ?>
 
     <?php if ($cur_page == 'blog-single.php'): ?>
-    <meta property="og:title" content="<?php echo $og_title; ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
-    <meta property="og:description" content="<?php echo $og_description; ?>">
-    <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
+        <meta property="og:title" content="<?php echo $og_title; ?>">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
+        <meta property="og:description" content="<?php echo $og_description; ?>">
+        <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
     <?php endif; ?>
 
     <?php if ($cur_page == 'product.php'): ?>
-    <meta property="og:title" content="<?php echo $og_title; ?>">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
-    <meta property="og:description" content="<?php echo $og_description; ?>">
-    <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
+        <meta property="og:title" content="<?php echo $og_title; ?>">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
+        <meta property="og:description" content="<?php echo $og_description; ?>">
+        <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
     <?php endif; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
@@ -209,10 +209,10 @@ foreach ($result as $row) {
                             $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($result as $row) {
                             ?>
-                            <?php if ($row['social_url'] != ''): ?>
-                            <li><a href="<?php echo $row['social_url']; ?>"><i
-                                        class="<?php echo $row['social_icon']; ?>"></i></a></li>
-                            <?php endif; ?>
+                                <?php if ($row['social_url'] != ''): ?>
+                                    <li><a href="<?php echo $row['social_url']; ?>"><i
+                                                class="<?php echo $row['social_icon']; ?>"></i></a></li>
+                                <?php endif; ?>
                             <?php
                             }
                             ?>
@@ -237,41 +237,50 @@ foreach ($result as $row) {
                         <?php
                         if (isset($_SESSION['customer'])) {
                         ?>
-                        <li><i class="fa fa-user"></i>
-                            <?php echo $_SESSION['customer']['cust_name']; ?></li>
-                        <li><a href="dashboard.php"><i class="fa fa-home"></i> <?php echo 'Trang chủ' ?></a></li>
+                            <li><i class="fa fa-user"></i>
+                                <?php echo $_SESSION['customer']['cust_name']; ?></li>
+                            <li><a href="dashboard.php"><i class="fa fa-home"></i> <?php echo 'Trang chủ' ?></a></li>
                         <?php
                         } else {
                         ?>
-                        <li><a href="login.php"><i class="fa fa-sign-in"></i> <?php echo 'Đăng nhập' ?></a></li>
-                        <li><a href="registration.php"><i class="fa fa-user-plus"></i> <?php echo 'Đăng ký' ?></a>
-                        </li>
+                            <li><a href="login.php"><i class="fa fa-sign-in"></i> <?php echo 'Đăng nhập' ?></a></li>
+                            <li><a href="registration.php"><i class="fa fa-user-plus"></i> <?php echo 'Đăng ký' ?></a>
+                            </li>
                         <?php
                         }
                         ?>
 
                         <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> <?php echo 'Giỏ hàng' ?>
                                 (<?php
+                                    $arr_cart_p_id = [];
+
                                     if (isset($_SESSION['cart_p_id'])) {
                                         $table_total_price = 0;
+                                        $arr_cart_p_qty = []; // Khởi tạo mảng
+                                        $arr_cart_p_current_price = []; // Khởi tạo mảng
                                         $i = 0;
+
                                         foreach ($_SESSION['cart_p_qty'] as $key => $value) {
-                                            $i++;
                                             $arr_cart_p_qty[$i] = $value;
+                                            $i++;
                                         }
+
                                         $i = 0;
                                         foreach ($_SESSION['cart_p_current_price'] as $key => $value) {
-                                            $i++;
                                             $arr_cart_p_current_price[$i] = $value;
+                                            $i++;
                                         }
-                                        for ($i = 1; $i <= count($arr_cart_p_qty); $i++) {
+
+                                        for ($i = 0; $i < count($arr_cart_p_qty); $i++) {
                                             $row_total_price = $arr_cart_p_current_price[$i] * $arr_cart_p_qty[$i];
-                                            $table_total_price = $table_total_price + $row_total_price;
+                                            $table_total_price += $row_total_price;
                                         }
+
                                         echo $table_total_price;
                                     } else {
                                         echo '0.00';
                                     }
+
                                     ?><?php echo ' VND' ?>)</a></li>
                     </ul>
                 </div>
@@ -303,37 +312,37 @@ foreach ($result as $row) {
                                 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
-                                <li><a
-                                        href="product-category.php?id=<?php echo $row['tcat_id']; ?>&type=top-category"><?php echo $row['tcat_name']; ?></a>
-                                    <ul>
-                                        <?php
+                                    <li><a
+                                            href="product-category.php?id=<?php echo $row['tcat_id']; ?>&type=top-category"><?php echo $row['tcat_name']; ?></a>
+                                        <ul>
+                                            <?php
                                             $querry1 = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id=?");
                                             $querry1->execute(array($row['tcat_id']));
                                             $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
                                             ?>
-                                        <li><a
-                                                href="product-category.php?id=<?php echo $row1['mcat_id']; ?>&type=mid-category"><?php echo $row1['mcat_name']; ?></a>
-                                            <ul>
-                                                <?php
+                                                <li><a
+                                                        href="product-category.php?id=<?php echo $row1['mcat_id']; ?>&type=mid-category"><?php echo $row1['mcat_name']; ?></a>
+                                                    <ul>
+                                                        <?php
                                                         $querry2 = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id=?");
                                                         $querry2->execute(array($row1['mcat_id']));
                                                         $result2 = $querry2->fetchAll(PDO::FETCH_ASSOC);
                                                         foreach ($result2 as $row2) {
                                                         ?>
-                                                <li><a
-                                                        href="product-category.php?id=<?php echo $row2['ecat_id']; ?>&type=end-category"><?php echo $row2['ecat_name']; ?></a>
-                                                </li>
-                                                <?php
+                                                            <li><a
+                                                                    href="product-category.php?id=<?php echo $row2['ecat_id']; ?>&type=end-category"><?php echo $row2['ecat_name']; ?></a>
+                                                            </li>
+                                                        <?php
                                                         }
                                                         ?>
-                                            </ul>
-                                        </li>
-                                        <?php
+                                                    </ul>
+                                                </li>
+                                            <?php
                                             }
                                             ?>
-                                    </ul>
-                                </li>
+                                        </ul>
+                                    </li>
                                 <?php
                                 }
                                 ?>
