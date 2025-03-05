@@ -689,6 +689,77 @@ ul.nav-tabs {
 }
 
 
+.cart {
+  width: 100%;
+  height: auto;
+}
+
+.cart table img {
+  width: 100px;
+}
+
+.cart table tr td {
+  vertical-align: middle;
+}
+
+.cart input[type="number"] {
+  height: 30px;
+  width: 70px;
+  border: 2px solid #c7c7c7;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.cart table tr td .trash {
+  color: #0d1452;
+  font-size: 18px;
+}
+
+.cart table tr td.total-text,
+.cart table tr th.total-text {
+  text-align: right;
+  font-size: 14px;
+}
+
+.cart table tr td.total-amount,
+.cart table tr th.total-amount {
+  text-align: right;
+  font-size: 14px;
+}
+
+.cart-buttons {
+  width: 100%;
+  float: right;
+  margin-top: 40px;
+}
+
+.cart-buttons ul {
+  float: right;
+}
+
+.cart-buttons li {
+  float: left;
+  list-style-type: none;
+  margin-left: 14px;
+}
+
+.cart-buttons li input[type="submit"],
+.cart-buttons li a {
+  background: #0d1452;
+  border: 0;
+  border-radius: 0;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+.cart-buttons li input[type="submit"]:hover,
+.cart-buttons li a:hover {
+  background: #333;
+  color: #fff;
+}
 
 .tab-nav > li > a::after {
   background: #21527d none repeat scroll 0% 0%;
@@ -697,6 +768,7 @@ ul.nav-tabs {
 .tab-pane {
   padding: 14px 0;
 }
+
 
 .review-form h2 {
   font-size: 24px;
@@ -797,4 +869,3 @@ ul.nav-tabs {
   background-size: cover;
   height: 500px;
 }
-
