@@ -121,9 +121,10 @@ if (isset($_POST['form_add_to_cart'])) {
     if ($_POST['p_qty'] > $current_p_qty):
         $temp_msg = 'Xin lỗi, chỉ có' . $current_p_qty . 'sản phẩm trong kho';
 ?>
-<script type="text/javascript">
-alert('<?php echo $temp_msg; ?>');
-</script>
+
+        <script type="text/javascript">
+            alert('<?php echo $temp_msg; ?>');
+        </script>
 <?php
     else:
         if (isset($_SESSION['cart_p_id'])) {
@@ -316,11 +317,13 @@ if ($success_message1 != '') {
                                 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
+
                                 <li
                                     style="background-image: url(assets/uploads/product_photos/<?php echo $row['photo']; ?>);">
                                     <a class="popup"
                                         href="assets/uploads/product_photos/<?php echo $row['photo']; ?>"></a>
                                 </li>
+
                                 <?php
                                 }
                                 ?>
@@ -338,11 +341,13 @@ if ($success_message1 != '') {
                                 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
+
                                 <a data-slide-index="<?php echo $i; ?>" href="">
                                     <div class="prod-pager-thumb"
                                         style="background-image: url(assets/uploads/product_photos/<?php echo $row['photo']; ?>">
                                     </div>
                                 </a>
+
                                 <?php
                                     $i++;
                                 }
@@ -393,11 +398,13 @@ if ($success_message1 != '') {
                                     } else {
                                         for ($i = 1; $i <= 5; $i++) {
                                     ?>
+
                                     <?php if ($i > $avg_rating): ?>
                                     <i class="fa fa-star-o"></i>
                                     <?php else: ?>
                                     <i class="fa fa-star"></i>
                                     <?php endif; ?>
+
                                     <?php
                                         }
                                     }
@@ -413,10 +420,12 @@ if ($success_message1 != '') {
                                 <div class="p-quantity">
                                     <div class="row">
                                         <?php if (isset($size)): ?>
+
                                         <div class="col-md-12 mb_20">
                                             <?php echo 'Chọn kích thước' ?> <br>
                                             <select name="size_id" class="form-control select2" style="width:auto;">
                                                 <?php
+
                                                     $querry = $pdo->prepare("SELECT * FROM table_size");
                                                     $querry->execute();
                                                     $result = $querry->fetchAll(PDO::FETCH_ASSOC);
@@ -438,12 +447,14 @@ if ($success_message1 != '') {
                                             <?php echo 'Chọn màu' ?> <br>
                                             <select name="color_id" class="form-control select2" style="width:auto;">
                                                 <?php
+
                                                     $querry = $pdo->prepare("SELECT * FROM table_color");
                                                     $querry->execute();
                                                     $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                                     foreach ($result as $row) {
                                                         if (in_array($row['color_id'], $color)) {
                                                     ?>
+
                                                 <option value="<?php echo $row['color_id']; ?>">
                                                     <?php echo $row['color_name']; ?></option>
                                                 <?php
@@ -452,6 +463,7 @@ if ($success_message1 != '') {
                                                     ?>
                                             </select>
                                         </div>
+
                                         <?php endif; ?>
 
                                     </div>
@@ -461,7 +473,9 @@ if ($success_message1 != '') {
                                     <span style="font-size:14px;"><?php echo 'Giá sản phẩm' ?></span><br>
                                     <span>
                                         <?php if ($p_old_price != ''): ?>
+
                                         <del><?php echo 'VND' ?><?php echo $p_old_price; ?></del>
+
                                         <?php endif; ?>
                                         <?php echo 'VND' ?><?php echo $p_current_price; ?>
                                     </span>
@@ -569,6 +583,7 @@ if ($success_message1 != '') {
                                             foreach ($result as $row) {
                                                 $j++;
                                         ?>
+
                                         <div class="mb_10"><b><u><?php echo 'Nhận xét' ?> <?php echo $j; ?></u></b>
                                         </div>
                                         <table class="table table-bordered">
@@ -599,6 +614,7 @@ if ($success_message1 != '') {
                                                 </td>
                                             </tr>
                                         </table>
+
                                         <?php
                                             }
                                         } else {
@@ -618,12 +634,15 @@ if ($success_message1 != '') {
                                         <?php if (isset($_SESSION['customer'])): ?>
 
                                         <?php
+
+
                                             $querry = $pdo->prepare("SELECT * 
                                                                 FROM table_rating
                                                                 WHERE p_id=? AND cust_id=?");
                                             $querry->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
                                             $total = $querry->rowCount();
                                             ?>
+
                                         <?php if ($total == 0): ?>
                                         <form action="" method="post">
                                             <div class="rating-section">
@@ -650,6 +669,7 @@ if ($success_message1 != '') {
                                             <a href="login.php"
                                                 style="color:red;text-decoration: underline;"><?php echo 'Đăng nhập' ?></a>
                                         </p>
+
                                         <?php endif; ?>
                                     </div>
 
@@ -684,6 +704,7 @@ if ($success_message1 != '') {
                     $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                     ?>
+
                     <div class="item">
                         <div class="thumb">
                             <div class="photo"
@@ -704,6 +725,7 @@ if ($success_message1 != '') {
                             </h4>
                             <div class="rating">
                                 <?php
+
                                     $t_rating = 0;
                                     $querry1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
                                     $querry1->execute(array($row['p_id']));
@@ -718,6 +740,7 @@ if ($success_message1 != '') {
                                         $avg_rating = $t_rating / $tot_rating;
                                     }
                                     ?>
+
                                 <?php
                                     if ($avg_rating == 0) {
                                         echo '';
@@ -771,6 +794,7 @@ if ($success_message1 != '') {
                             </p>
                         </div>
                     </div>
+
                     <?php
                     }
                     ?>
