@@ -688,6 +688,9 @@ ul.nav-tabs {
   padding-top: 20px;
 }
 
+.tab-content {
+  padding: 20px;
+}
 
 .cart {
   width: 100%;

@@ -511,11 +511,8 @@ if ($success_message1 != '') {
                                         data-toggle="tab"><?php echo 'Mô tả sản phẩm' ?></a></li>
                                 <li role="presentation"><a href="#feature" aria-controls="feature" role="tab"
                                         data-toggle="tab"><?php echo 'Đặc điểm' ?></a></li>
-                                <li role="presentation"><a href="#condition" aria-controls="condition" role="tab"
-                                        data-toggle="tab"><?php echo 'Điều kiện' ?></a></li>
                                 <li role="presentation"><a href="#return_policy" aria-controls="return_policy"
                                         role="tab" data-toggle="tab"><?php echo 'Chính sách đổi trả' ?></a></li>
-                                <!-- <li role="presentation"><a href="#review" aria-controls="review" role="tab" data-toggle="tab"><?php echo 'Nhận xét' ?></a></li> -->
                             </ul>
 
                             <!-- Tab panes -->
@@ -539,17 +536,6 @@ if ($success_message1 != '') {
                                             echo 'Không tìm thấy đặc điểm';
                                         } else {
                                             echo $p_feature;
-                                        }
-                                        ?>
-                                    </p>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="condition" style="margin-top: -30px;">
-                                    <p>
-                                        <?php
-                                        if ($p_condition == '') {
-                                            echo 'Không tìm thấy điều kiện';
-                                        } else {
-                                            echo $p_condition;
                                         }
                                         ?>
                                     </p>
