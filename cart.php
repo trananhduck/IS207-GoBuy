@@ -205,7 +205,7 @@ if (isset($_POST['form1'])) { // Kiểm tra nếu biểu mẫu đã được g�
                                         </td>
                                         <td class="text-center">
                                             <a onclick="return confirmDelete();"
-                                                href="cart-item-delete.php?id=<?php echo $arr_cart_p_id[$i]; ?>&size=<?php echo $arr_cart_size_id[$i]; ?>&color=<?php echo $arr_cart_color_id[$i]; ?>"
+                                                href="cart-delete-item.php?id=<?php echo $arr_cart_p_id[$i]; ?>&size=<?php echo $arr_cart_size_id[$i]; ?>&color=<?php echo $arr_cart_color_id[$i]; ?>"
                                                 class="trash"><i class="fa fa-trash" style="color:red;"></i></a>
                                         </td>
                                     </tr>
