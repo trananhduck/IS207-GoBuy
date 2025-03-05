@@ -298,7 +298,6 @@ CREATE TABLE `table_product` (
   `p_description` text NOT NULL,
   `p_short_description` text NOT NULL,
   `p_feature` text NOT NULL,
-  `p_condition` text NOT NULL,
   `p_return_policy` text NOT NULL,
   `p_total_view` int(11) NOT NULL,
   `p_is_featured` int(1) NOT NULL,
@@ -307,27 +306,27 @@ CREATE TABLE `table_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_condition`, `p_return_policy`, `p_total_view`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
-(1, 'Item1','20','10', 100,'product-featured-1.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 21),
-(2, 'Item2','20','10', 100,'product-featured-2.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 32),
-(3, 'Item3','20','10', 100,'product-featured-3.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 25),
-(4, 'Item4','20','10', 100,'product-featured-4.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 3),
-(5, 'Item5','20','10', 100,'product-featured-5.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 26),
-(6, 'Item6','20','10', 100,'product-featured-6.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 21),
-(7, 'Item7','20','10', 100,'product-featured-77.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 18),
-(8, 'Item8','20','10', 100,'product-featured-8.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 14),
-(9, 'Item9','20','10', 100,'product-featured-9.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 14),
-(10, 'Item10','20','10', 100,'product-featured-10.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 60),
-(11, 'Item11','20','10', 100,'product-featured-11.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 42),
-(12, 'Item12','20','10', 100,'product-featured-12.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 71),
-(13, 'Item13','20','10', 100,'product-featured-13.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 62),
-(14, 'Item14','20','10', 100,'product-featured-14.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 20),
-(15, 'Item15','20','10', 100,'product-featured-15.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 32),
-(16, 'Item16','20','10', 100,'product-featured-16.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 15),
-(17, 'Item17','20','10', 100,'product-featured-17.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 61),
-(18, 'Item18','20','10', 100,'product-featured-1818.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 73),
-(19, 'Item19','20','10', 100,'product-featured-19.jpg','description','short description','features-list', 'condition','Return policy', 5, 0, 1, 21),
-(20, 'Item20','20','10', 100,'product-featured-20.jpg','description','short description','features-list', 'condition','Return policy', 5, 1, 1, 32);
+INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_view`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
+(1, 'Item1','20','10', 100,'product-featured-1.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
+(2, 'Item2','20','10', 100,'product-featured-2.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32),
+(3, 'Item3','20','10', 100,'product-featured-3.jpg','description','short description','features-list','Return policy', 5, 0, 1, 25),
+(4, 'Item4','20','10', 100,'product-featured-4.jpg','description','short description','features-list','Return policy', 5, 1, 1, 3),
+(5, 'Item5','20','10', 100,'product-featured-5.jpg','description','short description','features-list','Return policy', 5, 0, 1, 26),
+(6, 'Item6','20','10', 100,'product-featured-6.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
+(7, 'Item7','20','10', 100,'product-featured-77.jpg','description','short description','features-list','Return policy', 5, 0, 1, 18),
+(8, 'Item8','20','10', 100,'product-featured-8.jpg','description','short description','features-list','Return policy', 5, 0, 1, 14),
+(9, 'Item9','20','10', 100,'product-featured-9.jpg','description','short description','features-list','Return policy', 5, 0, 1, 14),
+(10, 'Item10','20','10', 100,'product-featured-10.jpg','description','short description','features-list','Return policy', 5, 0, 1, 60),
+(11, 'Item11','20','10', 100,'product-featured-11.jpg','description','short description','features-list','Return policy', 5, 0, 1, 42),
+(12, 'Item12','20','10', 100,'product-featured-12.jpg','description','short description','features-list','Return policy', 5, 0, 1, 71),
+(13, 'Item13','20','10', 100,'product-featured-13.jpg','description','short description','features-list','Return policy', 5, 1, 1, 62),
+(14, 'Item14','20','10', 100,'product-featured-14.jpg','description','short description','features-list','Return policy', 5, 1, 1, 20),
+(15, 'Item15','20','10', 100,'product-featured-15.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32),
+(16, 'Item16','20','10', 100,'product-featured-16.jpg','description','short description','features-list','Return policy', 5, 1, 1, 15),
+(17, 'Item17','20','10', 100,'product-featured-17.jpg','description','short description','features-list','Return policy', 5, 1, 1, 61),
+(18, 'Item18','20','10', 100,'product-featured-1818.jpg','description','short description','features-list','Return policy', 5, 1, 1, 73),
+(19, 'Item19','20','10', 100,'product-featured-19.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
+(20, 'Item20','20','10', 100,'product-featured-20.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32);
 
 
 
