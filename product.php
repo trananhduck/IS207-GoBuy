@@ -25,7 +25,6 @@ foreach ($result as $row) {
     $p_description = $row['p_description'];
     $p_short_description = $row['p_short_description'];
     $p_feature = $row['p_feature'];
-    $p_condition = $row['p_condition'];
     $p_return_policy = $row['p_return_policy'];
     $p_total_view = $row['p_total_view'];
     $p_is_featured = $row['p_is_featured'];
@@ -794,3 +793,5 @@ if ($success_message1 != '') {
         </div>
     </div>
 </div>
+
+<?php require_once('footer.php'); ?>

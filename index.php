@@ -286,3 +286,4 @@ foreach ($result as $row) {
         </div>
     </div>
 <?php endif; ?>
+<?php require_once('footer.php'); ?>
