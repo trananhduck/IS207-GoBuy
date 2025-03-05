@@ -76,7 +76,6 @@ a:hover {
 .top {
   width: 100%;
   height: 40px;
-  /* background: #ececec; */
   background: #131921;
 }
 
@@ -92,12 +91,10 @@ a:hover {
   list-style-type: none;
   float: left;
   margin-right: 14px;
-  /* color: #0d1452; */
   color: white;
 }
 
 .top .left ul li i {
-  /* color: #0d1452; */
   color: white;
 }
 
@@ -116,7 +113,6 @@ a:hover {
 }
 
 .top .right ul li a {
-  /* color: #0d1452; */
   color: white;
   width: 24px;
   height: 24px;
@@ -204,38 +200,13 @@ a:hover {
 }
 
 .nav {
-  /* background: #0d1452; */
   background: #232f3e;
 }
 
 .menu-container {
   width: 100%;
   margin: 0 auto;
-  /* background: #0d1452; */
   background: #232f3e;
-}
-
-.menu-mobile {
-  display: none;
-  padding: 20px;
-  color: #fff;
-}
-
-.menu-mobile:hover {
-  color: #fff;
-}
-
-.menu-mobile:after {
-  content: "\f067";
-  font-family: "FontAwesome";
-  font-size: 2.5rem;
-  padding: 0;
-  float: right;
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-25%);
-  -ms-transform: translateY(-25%);
-  transform: translateY(-25%);
 }
 
 .menu-dropdown-icon:before {
@@ -271,7 +242,6 @@ a:hover {
 
 .menu > ul > li {
   float: left;
-  /*background: #76767e;*/
   padding: 0;
   margin: 0;
 }
@@ -373,6 +343,7 @@ a:hover {
   border: 0;
   padding: 1em 0;
 }
+
 
 .bx-wrapper {
   position: relative;
@@ -493,7 +464,6 @@ a:hover {
 }
 
 .product .text p a {
-  /* background: #0d1452; */
   background: #e7a340;
   color: #fff;
   font-size: 14px;
@@ -633,6 +603,8 @@ ul.prod-slider li a {
 ul.nav-tabs {
   margin-top: 50px;
 }
+
+
 .product .p-title h2 {
   color: #0d1452;
   margin-top: 0;
@@ -687,7 +659,6 @@ ul.nav-tabs {
 
 .product .btn-cart a {
   padding: 10px 14px;
-  /* background: #0d1452; */
   background: #f19000;
   color: #fff;
 }
@@ -695,7 +666,6 @@ ul.nav-tabs {
 .product .btn-cart1 input[type="submit"] {
   border: 0;
   padding: 10px 14px;
-  /* background: #0d1452; */
   background: #f19000;
   color: #fff;
 }
@@ -719,6 +689,7 @@ ul.nav-tabs {
 }
 
 
+
 .tab-nav > li > a::after {
   background: #21527d none repeat scroll 0% 0%;
   color: #fff;
@@ -726,8 +697,78 @@ ul.nav-tabs {
 .tab-pane {
   padding: 14px 0;
 }
-.tab-content {
-  padding: 20px;
+
+.review-form h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.review-form .btn-default {
+  background: #0d1452;
+  color: #fff;
+  border-radius: 0;
+  border: 0;
+  padding: 10px 14px;
+}
+.rating-section {
+  margin-bottom: 14px;
+}
+
+.page-banner {
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow: hidden;
+}
+
+.page-banner .overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  background: #131921;
+}
+
+.page-banner h1 {
+  color: #fff;
+  text-align: center;
+  z-index: 999;
+  position: relative;
+}
+
+.page {
+  width: 100%;
+  height: auto;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.page h3.special {
+  font-size: 22px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 14px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #b9b9b9;
+  position: relative;
+}
+
+.page h3.special:after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  background: #0d1452;
+  left: 0;
+  bottom: -2px;
+  height: 4px;
+
 }
 
 
