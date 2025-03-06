@@ -1,0 +1,98 @@
+<?php require_once('header.php'); ?>
+
+<?php
+// Kiểm tra xem khách hàng đã đăng nhập chưa
+if (!isset($_SESSION['customer'])) {
+    header('location: ' . BASE_URL . 'logout.php');
+    exit;
+} else {
+    // Kiểm tra xem khách hàng có bị admin vô hiệu hóa hay không
+    $statement = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
+    $statement->execute([$_SESSION['customer']['cust_id'], 0]);
+
+    if ($statement->rowCount() > 0) {
+        header('location: ' . BASE_URL . 'logout.php');
+        exit;
+    }
+}
+
+// Xử lý cập nhật mật khẩu
+if (isset($_POST['form1'])) {
+    $valid = true;
+    $errorMsg = '';
+    $successMsg = '';
+
+    $password = $_POST['cust_password'] ?? '';
+    $rePassword = $_POST['cust_re_password'] ?? '';
+
+    // Kiểm tra mật khẩu có trống không
+    if (empty($password) || empty($rePassword)) {
+        $valid = false;
+        $errorMsg .= 'Mật khẩu không được để trống.<br>';
+    }
+
+    // Kiểm tra mật khẩu có khớp nhau không
+    if ($password !== $rePassword) {
+        $valid = false;
+        $errorMsg .= 'Mật khẩu không khớp.<br>';
+    }
+
+    if ($valid) {
+        // Cập nhật mật khẩu trong cơ sở dữ liệu
+        $hashedPassword = md5(strip_tags($password));
+        $statement = $pdo->prepare("UPDATE table_customer SET cust_password=? WHERE cust_id=?");
+        $statement->execute([$hashedPassword, $_SESSION['customer']['cust_id']]);
+
+        // Cập nhật lại mật khẩu trong session
+        $_SESSION['customer']['cust_password'] = $hashedPassword;
+        $successMsg = 'Mật khẩu được cập nhật thành công.';
+    }
+}
+?>
+
+<div class="page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php require_once('customer-sidebar.php'); ?>
+            </div>
+            <div class="col-md-12">
+                <div class="user-content">
+                    <h3 class="text-center">
+                        <?php echo 'Cập nhật mật khẩu' ?>
+                    </h3>
+                    <form action="" method="post">
+                        <?php $csrf->echoInputField(); ?>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <?php
+                                if ($errorMsg != '') {
+                                    echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
+                                }
+                                if ($successMsg != '') {
+                                    echo "<div class='success' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $successMsg . "</div>";
+                                }
+                                ?>
+                                <div class="form-group">
+                                    <label for=""><?php echo 'Mật khẩu mới' ?> *</label>
+                                    <input type="password" class="form-control" name="cust_password">
+                                </div>
+                                <div class="form-group">
+                                    <label for=""><?php echo 'Nhập lại mật khẩu mới' ?> *</label>
+                                    <input type="password" class="form-control" name="cust_re_password">
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="<?php echo 'Cập nhật' ?>"
+                                    name="form1">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php require_once('footer.php'); ?>
