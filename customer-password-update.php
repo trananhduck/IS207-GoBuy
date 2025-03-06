@@ -82,11 +82,12 @@ if (isset($_POST['form1'])) {
                                     <label for=""><?php echo 'Nhập lại mật khẩu mới' ?> *</label>
                                     <input type="password" class="form-control" name="cust_re_password">
                                 </div>
-                                <input type="submit" class="btn btn-primary" value="<?php echo 'Cập nhật' ?>"
-                                    name="form1">
+                                <div class="form-group text-right">
+                                    <input type="submit" class="btn btn-primary" value="<?php echo 'Cập nhật' ?>"
+                                        name="form1">
+                                </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

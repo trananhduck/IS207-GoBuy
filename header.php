@@ -238,8 +238,9 @@ foreach ($result as $row) {
                         if (isset($_SESSION['customer'])) {
                         ?>
                             <li><i class="fa fa-user"></i>
-                                <?php echo $_SESSION['customer']['cust_name']; ?></li>
-                            <li><a href="index.php"><i class="fa fa-home"></i> <?php echo 'Trang chủ' ?></a></li>
+                                <a href="customer-profile.php"><?php echo $_SESSION['customer']['cust_name']; ?>
+                            </li>
+                            <li><a href="logout.php"><i class="fa fa-home"></i> <?php echo 'Đăng xuất' ?></a></li>
                         <?php
                         } else {
                         ?>
