@@ -915,3 +915,26 @@ div.pagination span.disabled {
   border: 1px solid #929693;
   color: #929693;
 }
+
+
+.user-sidebar ul {
+  text-align: center;
+}
+
+.user-sidebar ul li {
+  list-style-type: none;
+  border-bottom: 1px solid #fff;
+  display: inline-block;
+}
+
+.user-sidebar ul li a {
+  padding: 7px 20px;
+  min-height: 40px;
+  line-height: 40px;
+  background: #444;
+  color: #fff;
+}
+
+.user-content h3 {
+  margin-bottom: 20px;
+}
