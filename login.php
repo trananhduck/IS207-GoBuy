@@ -38,7 +38,7 @@ if (isset($_POST['form1'])) {
                     $errorMsg .= 'Xin lỗi! Tài khoản của bạn không hoạt động. Vui lòng liên hệ với quản trị viên.' . '<br>';
                 } else {
                     $_SESSION['customer'] = $row;
-                    header("location: " . BASE_URL . "dashboard.php");
+                    header("location: " . BASE_URL . "index.php");
                 }
             }
         }
@@ -84,8 +84,7 @@ if (isset($_POST['form1'])) {
                                     <input type="submit" class="btn btn-success" value="<?php echo 'Submit' ?>"
                                         name="form1">
                                 </div>
-                                <a href="forget-password.php"
-                                    style="color:#e4144d;"><?php echo 'Quên mật khẩu' ?>?</a>
+                                <a href="forget-password.php" style="color:#e4144d;"><?php echo 'Quên mật khẩu' ?>?</a>
                             </div>
                         </div>
                     </form>
@@ -96,5 +95,3 @@ if (isset($_POST['form1'])) {
 </div>
 
 <?php require_once('footer.php'); ?>
-
-
