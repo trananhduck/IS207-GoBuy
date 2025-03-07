@@ -255,6 +255,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                                     <option value="Momo"><?php echo 'Momo' ?></option>
                                     <option value="Bank Deposit"><?php echo 'Tài khoản ngân hàng' ?></option>
                                 </select>
+
                             </div>
 
                             <form class="Momo" action="<?php echo BASE_URL; ?>payment/Momo/payment_process.php"
