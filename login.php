@@ -1,8 +1,8 @@
 <?php require_once('header.php'); ?>
 <?php
-$statement = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$statement->execute();
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_login = $row['banner_login'];
 }
@@ -18,10 +18,10 @@ if (isset($_POST['form1'])) {
         $cust_email = strip_tags($_POST['cust_email']);
         $cust_password = strip_tags($_POST['cust_password']);
 
-        $statement = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
-        $statement->execute(array($cust_email));
-        $total = $statement->rowCount();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
+        $querry->execute(array($cust_email));
+        $total = $querry->rowCount();
+        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $cust_status = $row['cust_status'];
             $row_password = $row['cust_password'];

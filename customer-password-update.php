@@ -7,10 +7,10 @@ if (!isset($_SESSION['customer'])) {
     exit;
 } else {
     // Kiểm tra xem khách hàng có bị admin vô hiệu hóa hay không
-    $statement = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
-    $statement->execute([$_SESSION['customer']['cust_id'], 0]);
+    $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
+    $querry->execute([$_SESSION['customer']['cust_id'], 0]);
 
-    if ($statement->rowCount() > 0) {
+    if ($querry->rowCount() > 0) {
         header('location: ' . BASE_URL . 'logout.php');
         exit;
     }
@@ -40,8 +40,8 @@ if (isset($_POST['form1'])) {
     if ($valid) {
         // Cập nhật mật khẩu trong cơ sở dữ liệu
         $hashedPassword = md5(strip_tags($password));
-        $statement = $pdo->prepare("UPDATE table_customer SET cust_password=? WHERE cust_id=?");
-        $statement->execute([$hashedPassword, $_SESSION['customer']['cust_id']]);
+        $querry = $pdo->prepare("UPDATE table_customer SET cust_password=? WHERE cust_id=?");
+        $querry->execute([$hashedPassword, $_SESSION['customer']['cust_id']]);
 
         // Cập nhật lại mật khẩu trong session
         $_SESSION['customer']['cust_password'] = $hashedPassword;

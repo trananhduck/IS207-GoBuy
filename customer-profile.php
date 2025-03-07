@@ -7,9 +7,9 @@ if (!isset($_SESSION['customer'])) {
     exit;
 } else {
     // Kiểm tra nếu tài khoản bị vô hiệu hóa
-    $statement = $pdo->prepare("SELECT cust_status FROM table_customer WHERE cust_id=?");
-    $statement->execute(array($_SESSION['customer']['cust_id']));
-    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    $querry = $pdo->prepare("SELECT cust_status FROM table_customer WHERE cust_id=?");
+    $querry->execute(array($_SESSION['customer']['cust_id']));
+    $result = $querry->fetch(PDO::FETCH_ASSOC);
     if ($result && $result['cust_status'] == 0) {
         header('location: ' . BASE_URL . 'logout.php');
         exit;
@@ -42,8 +42,8 @@ if (isset($_POST['form1'])) {
     }
     if ($valid == 1) {
         // Cập nhật dữ liệu vào database
-        $statement = $pdo->prepare("UPDATE table_customer SET cust_name=?, cust_phone=?, cust_province=?, cust_district=?, cust_address=? WHERE cust_id=?");
-        $statement->execute(array(
+        $querry = $pdo->prepare("UPDATE table_customer SET cust_name=?, cust_phone=?, cust_province=?, cust_district=?, cust_address=? WHERE cust_id=?");
+        $querry->execute(array(
             strip_tags($_POST['cust_name']),
             strip_tags($_POST['cust_phone']),
             strip_tags($_POST['cust_province']),
@@ -107,9 +107,9 @@ if (isset($_POST['form1'])) {
                                 <label for=""><?php echo 'Tỉnh/thành phố' ?> *</label>
                                 <select name="cust_province" class="form-control">
                                     <?php
-                                    $statement = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                    $statement->execute();
-                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                    $querry = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
+                                    $querry->execute();
+                                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
                                         <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_province']) {

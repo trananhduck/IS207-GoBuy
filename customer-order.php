@@ -25,7 +25,7 @@ if (!isset($_SESSION['customer'])) {
             </div>
             <div class="col-md-12">
                 <div class="user-content">
-                    <h3><?php echo 'Lịch sử đạt hàng' ?></h3>
+                    <h3><?php echo 'Lịch sử đăt hàng' ?></h3>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
@@ -135,10 +135,10 @@ if (!isset($_SESSION['customer'])) {
                                 foreach ($result as $row) {
                                     $tip++;
                                 ?>
-                                    <tr>
-                                        <td><?php echo $tip; ?></td>
-                                        <td>
-                                            <?php
+                                <tr>
+                                    <td><?php echo $tip; ?></td>
+                                    <td>
+                                        <?php
                                             $querry1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
                                             $querry1->execute(array($row['payment_id']));
                                             $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
@@ -151,14 +151,14 @@ if (!isset($_SESSION['customer'])) {
                                                 echo '<br><br>';
                                             }
                                             ?>
-                                        </td>
-                                        <td><?php echo $row['payment_date']; ?></td>
-                                        <td><?php echo $row['txnid']; ?></td>
-                                        <td><?php echo '$' . $row['paid_amount']; ?></td>
-                                        <td><?php echo $row['payment_status']; ?></td>
-                                        <td><?php echo $row['payment_method']; ?></td>
-                                        <td><?php echo $row['payment_id']; ?></td>
-                                    </tr>
+                                    </td>
+                                    <td><?php echo $row['payment_date']; ?></td>
+                                    <td><?php echo $row['txnid']; ?></td>
+                                    <td><?php echo '$' . $row['paid_amount']; ?></td>
+                                    <td><?php echo $row['payment_status']; ?></td>
+                                    <td><?php echo $row['payment_method']; ?></td>
+                                    <td><?php echo $row['payment_id']; ?></td>
+                                </tr>
                                 <?php
                                 }
                                 ?>

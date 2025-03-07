@@ -667,20 +667,19 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 
 CREATE TABLE `table_admin` (
   `id` int(10) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `email` TEXT NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `password` TEXT NOT NULL,
-  `photo` TEXT NOT NULL,
+  `admin_name` varchar(100) NOT NULL,
+  `admin_email` TEXT NOT NULL,
+  `admin_phone` varchar(100) NOT NULL,
+  `admin_password` TEXT NOT NULL,
+  `admin_photo` TEXT NOT NULL,
   `role` varchar(30) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `admin_status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-
-INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `role`, `status`) VALUES
+INSERT INTO `table_admin` (`id`, `admin_name`, `admin_email`, `admin_phone`, `admin_password`, `admin_photo`, `role`, `admin_status`) 
+VALUES
 (1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'Admin', 'Active');
-
 
 CREATE TABLE `table_video` (
   `id` int(11) NOT NULL,

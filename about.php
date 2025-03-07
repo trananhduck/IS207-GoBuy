@@ -1,9 +1,9 @@
 <?php require_once('header.php'); ?>
 
 <?php
-$statement = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-$statement->execute();
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $about_title = $row['about_title'];
     $about_content = $row['about_content'];
