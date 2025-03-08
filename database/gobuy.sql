@@ -593,9 +593,6 @@ CREATE TABLE `table_shipping_cost` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-
-
-
 CREATE TABLE `table_shipping_cost_all` (
   `sca_id` int(11) NOT NULL,
   `amount` varchar(20) NOT NULL
