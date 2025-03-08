@@ -5,7 +5,7 @@
         <h1>View Services</h1>
     </div>
     <div class="content-header-right">
-        <a href="service-add.php" class="btn btn-primary btn-sm">Add Service</a>
+        <a href="service-add.php" class="btn btn-primary btn-sm">Thêm dịch vụ</a>
     </div>
 </section>
 
@@ -18,10 +18,10 @@
                         <thead>
                             <tr>
                                 <th width="30">#</th>
-                                <th>Photo</th>
-                                <th width="100">Title</th>
-                                <th>Content</th>
-                                <th width="80">Action</th>
+                                <th>Ảnh</th>
+                                <th width="100">Tiêu đề</th>
+                                <th>Nội dung</th>
+                                <th width="80">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,20 +33,20 @@
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                            <tr>
-                                <td><?php echo $i; ?></td>
-                                <td style="width:130px;"><img src="../assets/uploads/<?php echo $row['photo']; ?>"
-                                        alt="<?php echo $row['title']; ?>" style="width:120px;"></td>
-                                <td><?php echo $row['title']; ?></td>
-                                <td><?php echo $row['content']; ?></td>
-                                <td>
-                                    <a href="service-edit.php?id=<?php echo $row['id']; ?>"
-                                        class="btn btn-primary btn-xs">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-xs"
-                                        data-href="service-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
-                                        data-target="#confirm-delete">Delete</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $i; ?></td>
+                                    <td style="width:130px;"><img src="../assets/uploads/<?php echo $row['photo']; ?>"
+                                            alt="<?php echo $row['title']; ?>" style="width:120px;"></td>
+                                    <td><?php echo $row['title']; ?></td>
+                                    <td><?php echo $row['content']; ?></td>
+                                    <td>
+                                        <a href="service-edit.php?id=<?php echo $row['id']; ?>"
+                                            class="btn btn-primary btn-xs">Sửa</a>
+                                        <a href="#" class="btn btn-danger btn-xs"
+                                            data-href="service-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
+                                            data-target="#confirm-delete">Xóa</a>
+                                    </td>
+                                </tr>
                             <?php
                             }
                             ?>
