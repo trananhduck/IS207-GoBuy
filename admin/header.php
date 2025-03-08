@@ -5,12 +5,12 @@ include("inc/config.php");
 include("inc/functions.php");
 include("inc/CSRF_Protect.php");
 $csrf = new CSRF_Protect();
-$error_message = '';
-$success_message = '';
-$error_message1 = '';
-$success_message1 = '';
+$errorMsg = '';
+$successMsg = '';
+$errorMsg1 = '';
+$successMsg1 = '';
 
-// Check if the user is logged in or not
+// Kiểm tra xem người dùng đã đăng nhập chưa
 if (!isset($_SESSION['admin'])) {
 	header('location: ../login-admin.php');
 	exit;
@@ -50,18 +50,18 @@ if (!isset($_SESSION['admin'])) {
         <header class="main-header">
 
             <a href="index.php" class="logo">
-                <span class="logo-lg">eCommerce PHP</span>
+                <span class="logo-lg">GoBuy</span>
             </a>
 
             <nav class="navbar navbar-static-top">
 
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
+                    <span class="sr-only">Chuyển hướng</span>
                 </a>
 
                 <span style="float:left;line-height:50px;color:#fff;padding-left:15px;font-size:18px;">Admin
                     Panel</span>
-                <!-- Top Bar ... admin Inforamtion .. Login/Log out Area -->
+                <!-- Top Bar ... thông tin admin.. Đăng nhập/xuất -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
