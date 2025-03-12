@@ -157,7 +157,8 @@ if (!isset($_SESSION['admin'])) {
                             <i class="fa fa-picture-o"></i> <span>Quản lý sliders</span>
                         </a>
                     </li>
-                    <!-- Những icon được thể hiện trong Shop-->
+
+                    <!-- Những icon được diss play trong Shops-->
                     <li class="treeview <?php if (($current_page == 'service.php')) {
                                             echo 'active';
                                         } ?>">

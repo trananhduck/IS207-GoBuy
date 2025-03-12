@@ -1,20 +1,57 @@
 <?php
-function get_ext($fname)
+// Hàm lấy phần mở rộng của tệp tin được tải lên
+function get_ext($pdo, $fname)
 {
-    return strtolower(strrchr($_FILES[$fname]["name"], '.')); // Lấy phần mở rộng và chuyển thành chữ thường
+	// Lấy tên tệp tin gốc
+	$up_filename = $_FILES[$fname]["name"];
+
+	// Tách phần tên tệp tin (loại bỏ phần mở rộng)
+	$file_basename = substr($up_filename, 0, strripos($up_filename, '.'));
+
+	// Tách phần mở rộng của tệp tin
+	$file_ext = substr($up_filename, strripos($up_filename, '.'));
+
+	return $file_ext;
 }
 
-function ext_check($allowed_ext, $my_ext)
+// Hàm kiểm tra phần mở rộng của tệp tin có hợp lệ không
+function ext_check($pdo, $allowed_ext, $my_ext)
 {
-    $allowed_ext_arr = array_map(fn($ext) => '.' . strtolower($ext), explode("|", $allowed_ext)); // Chuyển danh sách thành mảng có dấu '.'
-    return in_array($my_ext, $allowed_ext_arr); // Kiểm tra phần mở rộng
+	// Tạo một mảng chứa danh sách phần mở rộng được phép
+	$arr1 = array();
+	$arr1 = explode("|", $allowed_ext);
+	$count_arr1 = count($arr1);
+
+	// Thêm dấu chấm (.) trước mỗi phần mở rộng để so sánh
+	for ($i = 0; $i < $count_arr1; $i++) {
+		$arr1[$i] = '.' . $arr1[$i];
+	}
+
+	// Kiểm tra xem phần mở rộng của tệp có nằm trong danh sách cho phép không
+	$stat = 0;
+	for ($i = 0; $i < $count_arr1; $i++) {
+		if ($my_ext == $arr1[$i]) {
+			$stat = 1;
+			break;
+		}
+	}
+
+	// Trả về kết quả kiểm tra
+	return $stat == 1 ? true : false;
 }
 
+// Hàm lấy ID tự động tăng tiếp theo của một bảng trong database
 function get_ai_id($pdo, $tbl_name)
 {
-    $statement = $pdo->prepare("SHOW TABLE STATUS LIKE ? LIMIT 1");
-    $statement->execute([$tbl_name]);
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+	// Truy vấn để lấy thông tin về trạng thái của bảng
+	$statement = $pdo->prepare("SHOW TABLE STATUS LIKE '$tbl_name'");
+	$statement->execute();
+	$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    return $row ? $row['Auto_increment'] : null;
+	// Lấy giá trị Auto Increment tiếp theo
+	foreach ($result as $row) {
+		$next_id = $row['Auto_increment'];
+	}
+
+	return $next_id;
 }
