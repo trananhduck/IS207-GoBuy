@@ -2,7 +2,7 @@
 // Bật hiển thị lỗi
 ini_set('error_reporting', E_ALL);
 
-// Thiết lập múi giờ
+// Thiết lập múi giờ Việt Nam
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 // Tên máy chủ
@@ -20,12 +20,14 @@ $dbpass = '';
 // Định nghĩa đường dẫn gốc
 define("BASE_URL", "");
 
-// Lấy đường dẫn đến trang admin
+// Định nghĩa đường dẫn quản trị
 define("ADMIN_URL", BASE_URL . "admin" . "/");
 
 try {
-    $pdo = new PDO("mysql:host={$dbhost};dbname={$dbname}", $dbuser, $dbpass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	// Kết nối cơ sở dữ liệu bằng PDO
+	$pdo = new PDO("mysql:host={$dbhost};dbname={$dbname}", $dbuser, $dbpass);
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $exception) {
-    echo "Lỗi kết nối: " . $exception->getMessage();
+	// Xử lý lỗi kết nối
+	echo "Lỗi kết nối: " . $exception->getMessage();
 }

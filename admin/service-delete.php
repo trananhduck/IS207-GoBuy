@@ -2,6 +2,7 @@
 
 <?php
 if (!isset($_REQUEST['id'])) {
+
     // Nếu không có ID, chuyển hướng đến trang đăng xuất
     header('location: logout.php');
     exit;
@@ -19,7 +20,9 @@ if (!isset($_REQUEST['id'])) {
 
 <?php
 
+
 // Lấy ảnh liên quan đến ID để xóa khỏi thư mục
+
 $querry = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
 $querry->execute(array($_REQUEST['id']));
 $result = $querry->fetchAll(PDO::FETCH_ASSOC);
@@ -27,10 +30,12 @@ foreach ($result as $row) {
     $photo = $row['photo'];
 }
 
+
 // Xóa ảnh nếu tồn tại
 if ($photo != '') {
     unlink('../assets/uploads/' . $photo);
 }
+
 
 // Xóa dữ liệu khỏi bảng table_service
 $querry = $pdo->prepare("DELETE FROM table_service WHERE id=?");
