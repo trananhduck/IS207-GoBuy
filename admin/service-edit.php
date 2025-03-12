@@ -6,14 +6,13 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['title'])) {
         $valid = 0;
-        $errorMsg .= 'Title can not be empty<br>';
+        $errorMsg .= 'Tiêu đề không được để trống<br>';
     }
 
     if (empty($_POST['content'])) {
         $valid = 0;
-        $errorMsg .= 'Content can not be empty<br>';
+        $errorMsg .= 'Nội dung không được để trống<br>';
     }
-
 
     $path = $_FILES['photo']['name'];
     $path_tmp = $_FILES['photo']['tmp_name'];
@@ -23,7 +22,7 @@ if (isset($_POST['form1'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'You must have to upload jpg, jpeg, gif or png file<br>';
+            $errorMsg .= 'Bạn phải tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>';
         }
     }
 
@@ -43,7 +42,7 @@ if (isset($_POST['form1'])) {
             $querry->execute(array($_POST['title'], $_POST['content'], $final_name, $_REQUEST['id']));
         }
 
-        $successMsg = 'Service is updated successfully!';
+        $successMsg = 'Dịch vụ đã được cập nhật thành công!';
     }
 }
 ?>
@@ -53,7 +52,6 @@ if (!isset($_REQUEST['id'])) {
     header('location: logout.php');
     exit;
 } else {
-    // Check the id is valid or not
     $querry = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
     $querry->execute(array($_REQUEST['id']));
     $total = $querry->rowCount();
@@ -67,10 +65,10 @@ if (!isset($_REQUEST['id'])) {
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Edit Service</h1>
+        <h1>Chỉnh sửa dịch vụ</h1>
     </div>
     <div class="content-header-right">
-        <a href="service.php" class="btn btn-primary btn-sm">View All</a>
+        <a href="service.php" class="btn btn-primary btn-sm">Xem tất cả</a>
     </div>
 </section>
 
@@ -86,10 +84,8 @@ foreach ($result as $row) {
 ?>
 
 <section class="content">
-
     <div class="row">
         <div class="col-md-12">
-
             <?php if ($errorMsg): ?>
                 <div class="callout callout-danger">
                     <p>
@@ -109,36 +105,36 @@ foreach ($result as $row) {
                 <div class="box box-info">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Title <span>*</span></label>
+                            <label for="" class="col-sm-2 control-label">Tiêu đề <span>*</span></label>
                             <div class="col-sm-6">
                                 <input type="text" autocomplete="off" class="form-control" name="title"
                                     value="<?php echo $title; ?>">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Content <span>*</span></label>
+                            <label for="" class="col-sm-2 control-label">Nội dung <span>*</span></label>
                             <div class="col-sm-6">
                                 <textarea class="form-control" name="content"
                                     style="height:140px;"><?php echo $content; ?></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Existing Photo</label>
+                            <label for="" class="col-sm-2 control-label">Ảnh hiện tại</label>
                             <div class="col-sm-9" style="padding-top:5px">
-                                <img src="../assets/uploads/<?php echo $photo; ?>" alt="Service Photo"
+                                <img src="../assets/uploads/<?php echo $photo; ?>" alt="Ảnh dịch vụ"
                                     style="width:180px;">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-2 control-label">Photo </label>
+                            <label for="" class="col-sm-2 control-label">Ảnh mới </label>
                             <div class="col-sm-6" style="padding-top:5px">
-                                <input type="file" name="photo">(Only jpg, jpeg, gif and png are allowed)
+                                <input type="file" name="photo">(Chỉ cho phép tệp jpg, jpeg, gif và png)
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label"></label>
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success pull-left" name="form1">Submit</button>
+                                <button type="submit" class="btn btn-success pull-left" name="form1">Cập nhật</button>
                             </div>
                         </div>
                     </div>
@@ -146,5 +142,4 @@ foreach ($result as $row) {
             </form>
         </div>
     </div>
-
 </section>
