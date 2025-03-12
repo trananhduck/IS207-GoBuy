@@ -25,7 +25,7 @@ if (!isset($_SESSION['admin'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin Panel</title>
 
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, admin-scalable=no" name="viewport">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -59,9 +59,9 @@ if (!isset($_SESSION['admin'])) {
                     <span class="sr-only">Chuyển hướng</span>
                 </a>
 
-                <span style="float:left;line-height:50px;color:#fff;padding-left:15px;font-size:18px;">Bảng điều
-                    khiển</span>
-                <!-- Top Bar ... thông tin admin.. Đăng nhập/xuất -->
+                <span style="float:left;line-height:50px;color:#fff;padding-left:15px;font-size:18px;">Admin
+                    Panel</span>
+                <!-- Top bar, thông tin admin, đăng nhập/đăng ký-->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
@@ -83,9 +83,9 @@ if (!isset($_SESSION['admin'])) {
                         </li>
                     </ul>
                 </div>
+
             </nav>
         </header>
-
         <?php $current_page = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1); ?>
         <!-- Side Bar quản lý hoạt động cửa hàng -->
         <aside class="main-sidebar">
@@ -157,6 +157,7 @@ if (!isset($_SESSION['admin'])) {
                             <i class="fa fa-picture-o"></i> <span>Quản lý sliders</span>
                         </a>
                     </li>
+
                     <!-- Những icon được diss play trong Shops-->
                     <li class="treeview <?php if (($current_page == 'service.php')) {
                                             echo 'active';
@@ -178,7 +179,7 @@ if (!isset($_SESSION['admin'])) {
                                             echo 'active';
                                         } ?>">
                         <a href="customer.php">
-                            <i class="fa fa-user-plus"></i> <span>Khách hàng đã đăng ký</span>
+                            <i class="fa fa-admin-plus"></i> <span>Khách hàng đã đăng ký</span>
                         </a>
                     </li>
 
