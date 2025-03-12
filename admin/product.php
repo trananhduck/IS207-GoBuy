@@ -74,3 +74,25 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Xác Nhận Xóa</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa sản phẩm này?</p>
+                <p style="color:red;">Lưu ý! Sản phẩm sẽ bị xóa khỏi tất cả đơn hàng, thanh toán, bảng kích cỡ, bảng màu
+                    và bảng đánh giá.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                <a class="btn btn-danger btn-ok">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require_once('footer.php'); ?>
