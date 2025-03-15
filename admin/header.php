@@ -11,7 +11,7 @@ $errorMsg1 = '';
 $successMsg1 = '';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
-if (!isset($_SESSION['admin'])) {
+if (!isset($_SESSION['user'])) {
     header('location: ../login-admin.php');
     exit;
 }
@@ -61,14 +61,14 @@ if (!isset($_SESSION['admin'])) {
 
                 <span style="float:left;line-height:50px;color:#fff;padding-left:15px;font-size:18px;">Admin
                     Panel</span>
-                <!-- Top bar, thông tin admin, đăng nhập/đăng ký-->
+                <!-- Top Bar, thông tin người dùng, đăng nhập/đăng ký -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../assets/uploads/<?php echo $_SESSION['admin']['admin_photo']; ?>"
+                                <img src="../assets/uploads/<?php echo $_SESSION['user']['photo']; ?>"
                                     class="admin-image" alt="admin Image">
-                                <span class="hidden-xs"><?php echo $_SESSION['admin']['admin_name']; ?></span>
+                                <span class="hidden-xs"><?php echo $_SESSION['user']['full_name']; ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="admin-footer">
@@ -97,7 +97,7 @@ if (!isset($_SESSION['admin'])) {
                                             echo 'active';
                                         } ?>">
                         <a href="index.php">
-                            <i class="fa fa-dashboard"></i> <span>Thông tin</span>
+                            <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
                         </a>
                     </li>
 
@@ -132,14 +132,6 @@ if (!isset($_SESSION['admin'])) {
                     </li>
 
 
-                    <li class="treeview <?php if (($current_page == 'product.php') || ($current_page == 'product-add.php') || ($current_page == 'product-edit.php')) {
-                                            echo 'active';
-                                        } ?>">
-                        <a href="product.php">
-                            <i class="fa fa-shopping-bag"></i> <span>Quản lý sản phẩm</span>
-                        </a>
-                    </li>
-
 
                     <li class="treeview <?php if (($current_page == 'order.php')) {
                                             echo 'active';
@@ -150,14 +142,13 @@ if (!isset($_SESSION['admin'])) {
                     </li>
 
 
-                    <li class="treeview <?php if (($current_page == 'slider.php')) {
+                    <li class="treeview <?php if (($current_page == 'product.php') || ($current_page == 'product-add.php') || ($current_page == 'product-edit.php')) {
                                             echo 'active';
                                         } ?>">
-                        <a href="slider.php">
-                            <i class="fa fa-picture-o"></i> <span>Quản lý sliders</span>
+                        <a href="product.php">
+                            <i class="fa fa-shopping-bag"></i> <span>Quản lý sản phẩm</span>
                         </a>
                     </li>
-
                     <!-- Những icon được diss play trong Shops-->
                     <li class="treeview <?php if (($current_page == 'service.php')) {
                                             echo 'active';
@@ -166,12 +157,20 @@ if (!isset($_SESSION['admin'])) {
                             <i class="fa fa-list-ol"></i> <span>Dịch vụ</span>
                         </a>
                     </li>
-
-                    <li class="treeview <?php if (($current_page == 'faq.php')) {
+                    <li class="treeview <?php if (($current_page == 'slider.php')) {
                                             echo 'active';
                                         } ?>">
-                        <a href="faq.php">
-                            <i class="fa fa-question-circle"></i> <span>FAQ</span>
+                        <a href="slider.php">
+                            <i class="fa fa-picture-o"></i> <span>Quản lý sliders</span>
+                        </a>
+                    </li>
+
+
+                    <li class="treeview <?php if (($current_page == 'page.php')) {
+                                            echo 'active';
+                                        } ?>">
+                        <a href="page.php">
+                            <i class="fa fa-tasks"></i> <span>Cài đặt page</span>
                         </a>
                     </li>
 
@@ -183,11 +182,11 @@ if (!isset($_SESSION['admin'])) {
                         </a>
                     </li>
 
-                    <li class="treeview <?php if (($current_page == 'page.php')) {
+                    <li class="treeview <?php if (($current_page == 'faq.php')) {
                                             echo 'active';
                                         } ?>">
-                        <a href="page.php">
-                            <i class="fa fa-tasks"></i> <span>Cài đặt page</span>
+                        <a href="faq.php">
+                            <i class="fa fa-question-circle"></i> <span>FAQ</span>
                         </a>
                     </li>
 

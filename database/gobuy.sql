@@ -710,19 +710,19 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 
 
 
-CREATE TABLE `table_admin` (
+CREATE TABLE `table_user` (
   `id` int(10) NOT NULL,
-  `admin_name` varchar(100) NOT NULL,
-  `admin_email` TEXT NOT NULL,
-  `admin_phone` varchar(100) NOT NULL,
-  `admin_password` TEXT NOT NULL,
-  `admin_photo` TEXT NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `email` TEXT NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `password` TEXT NOT NULL,
+  `photo` TEXT NOT NULL,
   `role` varchar(30) NOT NULL,
-  `admin_status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_admin` (`id`, `admin_name`, `admin_email`, `admin_phone`, `admin_password`, `admin_photo`, `role`, `admin_status`) 
+INSERT INTO `table_user` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `role`, `status`) 
 VALUES
 (1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'Admin', 'Active');
 
@@ -816,7 +816,7 @@ ALTER TABLE `table_social`
 ALTER TABLE `table_top_category`
   ADD PRIMARY KEY (`tcat_id`);
 
-ALTER TABLE `table_admin`
+ALTER TABLE `table_user`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `table_video`
@@ -897,7 +897,7 @@ ALTER TABLE `table_social`
 ALTER TABLE `table_top_category`
   MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
-ALTER TABLE `table_admin`
+ALTER TABLE `table_user`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 ALTER TABLE `table_video`
