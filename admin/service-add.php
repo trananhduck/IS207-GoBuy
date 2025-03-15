@@ -71,17 +71,17 @@ if (isset($_POST['form1'])) {
         <div class="col-md-12">
 
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
-                    <p>
-                        <?php echo $errorMsg; ?>
-                    </p>
-                </div>
+            <div class="callout callout-danger">
+                <p>
+                    <?php echo $errorMsg; ?>
+                </p>
+            </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+            <div class="callout callout-success">
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -120,5 +120,4 @@ if (isset($_POST['form1'])) {
             </form>
         </div>
     </div>
-
 </section>
