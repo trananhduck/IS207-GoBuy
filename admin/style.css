@@ -177,16 +177,7 @@ h4.modal-title {
 }
 .content-header .content-header-right a {
   position: relative;
-  /*padding-left: 24px;*/
   font-size: 14px;
-}
-.content-header .content-header-right a:before {
-  /*position: absolute;
-    top: 4px;
-    left: 5px;
-    font-family: 'FontAwesome', sans-serif;
-    font-size: 16px;
-    content: '\f067';*/
 }
 
 .checkbox-inline {
@@ -299,10 +290,6 @@ img.existing-photo {
 .login-button {
   background-color: #333333;
   border-color: #333333;
-}
-
-iframe {
-  /* width: 300px!important; */
 }
 
 .sidebar-menu .treeview-menu > li > a {
