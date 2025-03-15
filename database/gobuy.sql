@@ -111,12 +111,12 @@ INSERT INTO `table_customer` (
     `cust_password`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`
 ) VALUES
 (1, 'Nguyễn Văn A', 'vana@gmail.com', '0905123456', 
-    84, 'Hà Nội', '123 Đường Lê Lợi', 
+    1, 'ABC', '123 Đường Lê Lợi', 
     'Nguyễn Văn A', '0905123456', 29, 'ABC', '123 Đường Lê Lợi', 
     '5f4dcc3b5aa765d61d8327deb882cf99', 'abc123token1', '2025-02-28 10:00:00', '1746031200', 1),
 
 (2, 'Trần Thị B', 'thib@gmail.com', '0914345678', 
-    84, 'ABC', '456 Đường Trần Hưng Đạo', 
+    2, 'XYZ', '456 Đường Trần Hưng Đạo', 
     'Trần Thị B', '1234', 11, 'XYZ', 'DEF', 
     '5f4dcc3b5aa765d61d8327deb882cf99', 'xyz456token2', '2025-02-28 10:10:00', '1746031800', 1);
 
@@ -256,8 +256,6 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 (17, 'Đồ gia dụng', 5);
 
 
-
-
 CREATE TABLE `table_order` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -268,6 +266,11 @@ CREATE TABLE `table_order` (
   `unit_price` varchar(50) NOT NULL,
   `payment_id` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `table_order` (`id`, `product_id`, `product_name`, `size`, `color`, `quantity`, `unit_price`, `payment_id`) VALUES
+(1, 1, 'Item 1', 'XL', 'Gray','19', '20', 'xxxx'),
+(2, 2, 'Item 2', 'XL', 'Gray','19', '20', 'xxxx'),
+(3, 3, 'Item 3', 'XL', 'Gray','19', '20', 'xxxx');
 
 
 
@@ -373,7 +376,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (4, 'Item4','20','10', 100,'product-featured-4.jpg','description','short description','features-list','Return policy', 5, 1, 1, 3),
 (5, 'Item5','20','10', 100,'product-featured-5.jpg','description','short description','features-list','Return policy', 5, 0, 1, 26),
 (6, 'Item6','20','10', 100,'product-featured-6.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
-(7, 'Item7','20','10', 100,'product-featured-77.jpg','description','short description','features-list','Return policy', 5, 0, 1, 18),
+(7, 'Item7','20','10', 100,'product-featured-7.jpg','description','short description','features-list','Return policy', 5, 0, 1, 18),
 (8, 'Item8','20','10', 100,'product-featured-8.jpg','description','short description','features-list','Return policy', 5, 0, 1, 14),
 (9, 'Item9','20','10', 100,'product-featured-9.jpg','description','short description','features-list','Return policy', 5, 0, 1, 14),
 (10, 'Item10','20','10', 100,'product-featured-10.jpg','description','short description','features-list','Return policy', 5, 0, 1, 60),
@@ -384,21 +387,14 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (15, 'Item15','20','10', 100,'product-featured-15.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32),
 (16, 'Item16','20','10', 100,'product-featured-16.jpg','description','short description','features-list','Return policy', 5, 1, 1, 15),
 (17, 'Item17','20','10', 100,'product-featured-17.jpg','description','short description','features-list','Return policy', 5, 1, 1, 61),
-(18, 'Item18','20','10', 100,'product-featured-1818.jpg','description','short description','features-list','Return policy', 5, 1, 1, 73),
+(18, 'Item18','20','10', 100,'product-featured-18.jpg','description','short description','features-list','Return policy', 5, 1, 1, 73),
 (19, 'Item19','20','10', 100,'product-featured-19.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
 (20, 'Item20','20','10', 100,'product-featured-20.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32);
-
-
-
-
 CREATE TABLE `table_product_color` (
   `id` int(11) NOT NULL,
   `color_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
-
-
 
 CREATE TABLE `table_product_photo` (
   `pp_id` int(11) NOT NULL,
@@ -636,19 +632,19 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 (24, '47'),
 (25, '48'),
 (26, 'Free Size'),
-(27, 'One Size for All'),
+(27, '1 size cho tất cả'),
 (28, '10'),
-(29, '12 Months'),
+(29, '12 tháng'),
 (30, '2T'),
 (31, '3T'),
 (32, '4T'),
 (33, '5T'),
-(34, '6 Years'),
-(35, '7 Years'),
-(36, '8 Years'),
-(37, '10 Years'),
-(38, '12 Years'),
-(39, '14 Years'),
+(34, '6 Năm'),
+(35, '7 Năm'),
+(36, '8 Năm'),
+(37, '10 Năm'),
+(38, '12 Năm'),
+(39, '14 Năm'),
 (40, '256 GB'),
 (41, '128 GB'),
 (42, '14 Plus'),
@@ -846,7 +842,7 @@ ALTER TABLE `table_mid_category`
   MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 ALTER TABLE `table_page`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
