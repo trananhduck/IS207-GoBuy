@@ -256,8 +256,6 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 (17, 'Đồ gia dụng', 5);
 
 
-
-
 CREATE TABLE `table_order` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -268,6 +266,11 @@ CREATE TABLE `table_order` (
   `unit_price` varchar(50) NOT NULL,
   `payment_id` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `table_order` (`id`, `product_id`, `product_name`, `size`, `color`, `quantity`, `unit_price`, `payment_id`) VALUES
+(1, 1, 'Item 1', 'XL', 'Gray','19', '20', 'xxxx'),
+(2, 2, 'Item 2', 'XL', 'Gray','19', '20', 'xxxx'),
+(3, 3, 'Item 3', 'XL', 'Gray','19', '20', 'xxxx');
 
 
 
@@ -636,19 +639,19 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 (24, '47'),
 (25, '48'),
 (26, 'Free Size'),
-(27, 'One Size for All'),
+(27, '1 size cho tất cả'),
 (28, '10'),
-(29, '12 Months'),
+(29, '12 tháng'),
 (30, '2T'),
 (31, '3T'),
 (32, '4T'),
 (33, '5T'),
-(34, '6 Years'),
-(35, '7 Years'),
-(36, '8 Years'),
-(37, '10 Years'),
-(38, '12 Years'),
-(39, '14 Years'),
+(34, '6 Năm'),
+(35, '7 Năm'),
+(36, '8 Năm'),
+(37, '10 Năm'),
+(38, '12 Năm'),
+(39, '14 Năm'),
 (40, '256 GB'),
 (41, '128 GB'),
 (42, '14 Plus'),
@@ -846,7 +849,7 @@ ALTER TABLE `table_mid_category`
   MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 ALTER TABLE `table_page`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
