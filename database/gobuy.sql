@@ -111,12 +111,12 @@ INSERT INTO `table_customer` (
     `cust_password`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`
 ) VALUES
 (1, 'Nguyễn Văn A', 'vana@gmail.com', '0905123456', 
-    84, 'Hà Nội', '123 Đường Lê Lợi', 
+    1, 'ABC', '123 Đường Lê Lợi', 
     'Nguyễn Văn A', '0905123456', 29, 'ABC', '123 Đường Lê Lợi', 
     '5f4dcc3b5aa765d61d8327deb882cf99', 'abc123token1', '2025-02-28 10:00:00', '1746031200', 1),
 
 (2, 'Trần Thị B', 'thib@gmail.com', '0914345678', 
-    84, 'ABC', '456 Đường Trần Hưng Đạo', 
+    2, 'XYZ', '456 Đường Trần Hưng Đạo', 
     'Trần Thị B', '1234', 11, 'XYZ', 'DEF', 
     '5f4dcc3b5aa765d61d8327deb882cf99', 'xyz456token2', '2025-02-28 10:10:00', '1746031800', 1);
 
@@ -228,6 +228,12 @@ CREATE TABLE `table_faq` (
   `faq_content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
+(1, 'Làm thế nào để tìm một sản phẩm?', '<h3 class=\"checkout-complete-box font-bold txt16\" style=\"box-sizing: inherit; text-rendering: optimizeLegibility; margin: 0.2rem 0px 0.5rem; padding: 0px; line-height: 1.4; background-color: rgb(250, 250, 250);\"><font color=\"#222222\" face=\"opensans, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif\"><span style=\"font-size: 15.7143px;\">Chúng tôi có rất nhiều sản phẩm tuyệt vời để bạn lựa chọn.</span></font></h3><h3 class=\"checkout-complete-box font-bold txt16\" style=\"box-sizing: inherit; text-rendering: optimizeLegibility; margin: 0.2rem 0px 0.5rem; padding: 0px; line-height: 1.4; background-color: rgb(250, 250, 250);\"><span style=\"font-size: 15.7143px; color: rgb(34, 34, 34); font-family: opensans, \"Helvetica Neue\", Helvetica, Helvetica, Arial, sans-serif;\">Mẹo 1: Nếu bạn đang tìm kiếm một sản phẩm cụ thể, hãy sử dụng hộp tìm kiếm từ khóa nằm ở đầu trang web. Chỉ cần nhập sản phẩm bạn đang tìm và chuẩn bị để ngạc nhiên!</span></h3><h3 class=\"checkout-complete-box font-bold txt16\" style=\"box-sizing: inherit; text-rendering: optimizeLegibility; margin: 0.2rem 0px 0.5rem; padding: 0px; line-height: 1.4; background-color: rgb(250, 250, 250);\"><font color=\"#222222\" face=\"opensans, Helvetica Neue, Helvetica, Helvetica, Arial, sans-serif\"><span style=\"font-size: 15.7143px;\">Mẹo 2: Nếu bạn muốn khám phá danh mục sản phẩm, hãy sử dụng Danh mục cửa hàng trong menu trên cùng và duyệt qua các danh mục yêu thích của bạn, nơi chúng tôi sẽ giới thiệu những sản phẩm tốt nhất trong từng danh mục.</span></font><br><br></h3>\r\n'),
+(2, 'Chính sách hoàn trả của bạn là gì?', '<p><span style=\"color: rgb(10, 10, 10); font-family: opensans, &quot;Helvetica Neue&quot;, Helvetica, Helvetica, Arial, sans-serif; font-size: 14px; text-align: center;\">Bạn có 15 ngày để yêu cầu hoàn tiền sau khi đơn hàng của bạn được giao.</span><br></p>\r\n'),
+(3, 'Tôi nhận được sản phẩm bị lỗi/hư hỏng, tôi có thể hoàn tiền không?', '<p>Nếu sản phẩm bạn nhận được bị lỗi hoặc hư hỏng, bạn có thể trả lại sản phẩm trong cùng điều kiện như khi bạn nhận được, với hộp và/hoặc bao bì gốc còn nguyên vẹn. Sau khi chúng tôi nhận được sản phẩm trả lại, chúng tôi sẽ kiểm tra và nếu sản phẩm được xác nhận là bị lỗi hoặc hư hỏng, chúng tôi sẽ xử lý hoàn tiền cùng với bất kỳ khoản phí vận chuyển nào phát sinh.<br></p>\r\n'),
+(4, 'Khi nào không thể hoàn trả?', '<p class=\"a  \" style=\"box-sizing: inherit; text-rendering: optimizeLegibility; line-height: 1.6; margin-bottom: 0.714286rem; padding: 0px; font-size: 14px; color: rgb(10, 10, 10); font-family: opensans, &quot;Helvetica Neue&quot;, Helvetica, Helvetica, Arial, sans-serif; background-color: rgb(250, 250, 250);\">Có một số trường hợp nhất định mà chúng tôi không thể hỗ trợ hoàn trả:</p><ol style=\"box-sizing: inherit; line-height: 1.6; margin-right: 0px; margin-bottom: 0px; margin-left: 1.25rem; padding: 0px; list-style-position: outside; color: rgb(10, 10, 10); font-family: opensans, &quot;Helvetica Neue&quot;, Helvetica, Helvetica, Arial, sans-serif; font-size: 14px; background-color: rgb(250, 250, 250);\"><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Yêu cầu hoàn trả được thực hiện sau thời gian quy định là 15 ngày kể từ khi giao hàng.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Sản phẩm đã qua sử dụng, bị hư hỏng hoặc không còn nguyên trạng như khi nhận được.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Các danh mục sản phẩm cụ thể như đồ lót, nội y, tất và các sản phẩm quà tặng kèm.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Sản phẩm bị lỗi nhưng thuộc phạm vi bảo hành của nhà sản xuất.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Các sản phẩm tiêu hao đã được sử dụng hoặc lắp đặt.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Sản phẩm có số sê-ri bị tẩy xóa hoặc mất.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Bất kỳ mặt hàng nào bị thiếu phụ kiện đi kèm như nhãn giá, tem mác, bao bì gốc, quà tặng kèm.</li><li style=\"box-sizing: inherit; margin: 0px; padding: 0px; font-size: inherit;\">Các sản phẩm dễ vỡ, liên quan đến vệ sinh.</li></ol>\r\n'),
+(5, 'Những sản phẩm nào không thể hoàn trả?', '<p>Những sản phẩm không thể hoàn trả bao gồm:</p><p>Các sản phẩm xả kho có ghi rõ chính sách không hoàn trả<br></p><p>Khi trong điều kiện ưu đãi có ghi rõ rằng sản phẩm đó không thể hoàn trả.</p><p>Các sản phẩm thuộc các loại sau:</p><ul><li>Đồ lót</li><li>Nội y</li><li>Tất</li><li>Phần mềm</li><li>Album nhạc</li><li>Sách</li><li>Đồ bơi</li><li>Sản phẩm làm đẹp &amp; nước hoa</li><li>Vớ</li></ul><p>Ngoài ra, các sản phẩm tiêu hao đã sử dụng hoặc lắp đặt cũng không thể hoàn trả. Điều này phù hợp với Luật bảo vệ người tiêu dùng về các sản phẩm không được hoàn trả.<br></p>');
 
 
 CREATE TABLE `table_mid_category` (
@@ -256,8 +262,6 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 (17, 'Đồ gia dụng', 5);
 
 
-
-
 CREATE TABLE `table_order` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -268,6 +272,11 @@ CREATE TABLE `table_order` (
   `unit_price` varchar(50) NOT NULL,
   `payment_id` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `table_order` (`id`, `product_id`, `product_name`, `size`, `color`, `quantity`, `unit_price`, `payment_id`) VALUES
+(1, 1, 'Item 1', 'XL', 'Gray','19', '20', 'xxxx'),
+(2, 2, 'Item 2', 'XL', 'Gray','19', '20', 'xxxx'),
+(3, 3, 'Item 3', 'XL', 'Gray','19', '20', 'xxxx');
 
 
 
@@ -373,7 +382,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (4, 'Item4','20','10', 100,'product-featured-4.jpg','description','short description','features-list','Return policy', 5, 1, 1, 3),
 (5, 'Item5','20','10', 100,'product-featured-5.jpg','description','short description','features-list','Return policy', 5, 0, 1, 26),
 (6, 'Item6','20','10', 100,'product-featured-6.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
-(7, 'Item7','20','10', 100,'product-featured-77.jpg','description','short description','features-list','Return policy', 5, 0, 1, 18),
+(7, 'Item7','20','10', 100,'product-featured-7.jpg','description','short description','features-list','Return policy', 5, 0, 1, 18),
 (8, 'Item8','20','10', 100,'product-featured-8.jpg','description','short description','features-list','Return policy', 5, 0, 1, 14),
 (9, 'Item9','20','10', 100,'product-featured-9.jpg','description','short description','features-list','Return policy', 5, 0, 1, 14),
 (10, 'Item10','20','10', 100,'product-featured-10.jpg','description','short description','features-list','Return policy', 5, 0, 1, 60),
@@ -384,21 +393,14 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (15, 'Item15','20','10', 100,'product-featured-15.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32),
 (16, 'Item16','20','10', 100,'product-featured-16.jpg','description','short description','features-list','Return policy', 5, 1, 1, 15),
 (17, 'Item17','20','10', 100,'product-featured-17.jpg','description','short description','features-list','Return policy', 5, 1, 1, 61),
-(18, 'Item18','20','10', 100,'product-featured-1818.jpg','description','short description','features-list','Return policy', 5, 1, 1, 73),
+(18, 'Item18','20','10', 100,'product-featured-18.jpg','description','short description','features-list','Return policy', 5, 1, 1, 73),
 (19, 'Item19','20','10', 100,'product-featured-19.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
 (20, 'Item20','20','10', 100,'product-featured-20.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32);
-
-
-
-
 CREATE TABLE `table_product_color` (
   `id` int(11) NOT NULL,
   `color_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
-
-
 
 CREATE TABLE `table_product_photo` (
   `pp_id` int(11) NOT NULL,
@@ -636,19 +638,19 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 (24, '47'),
 (25, '48'),
 (26, 'Free Size'),
-(27, 'One Size for All'),
+(27, '1 size cho tất cả'),
 (28, '10'),
-(29, '12 Months'),
+(29, '12 tháng'),
 (30, '2T'),
 (31, '3T'),
 (32, '4T'),
 (33, '5T'),
-(34, '6 Years'),
-(35, '7 Years'),
-(36, '8 Years'),
-(37, '10 Years'),
-(38, '12 Years'),
-(39, '14 Years'),
+(34, '6 Năm'),
+(35, '7 Năm'),
+(36, '8 Năm'),
+(37, '10 Năm'),
+(38, '12 Năm'),
+(39, '14 Năm'),
 (40, '256 GB'),
 (41, '128 GB'),
 (42, '14 Plus'),
@@ -846,7 +848,7 @@ ALTER TABLE `table_mid_category`
   MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 ALTER TABLE `table_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 ALTER TABLE `table_page`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
