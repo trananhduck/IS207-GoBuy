@@ -93,11 +93,6 @@ if (isset($_POST['form1'])) {
                                         cust_province,
                                         cust_district,
                                         cust_address,
-                                        cust_b_name,
-                                        cust_b_phone,
-                                        cust_b_province,
-                                        cust_b_district,
-                                        cust_b_address,
                                         cust_s_name,
                                         cust_s_phone,
                                         cust_s_province,
@@ -108,7 +103,7 @@ if (isset($_POST['form1'])) {
                                         cust_datetime,
                                         cust_timestamp,
                                         cust_status
-                                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $querry->execute(array(
             // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
             strip_tags($_POST['cust_name']),      // Tên khách hàng
@@ -117,11 +112,6 @@ if (isset($_POST['form1'])) {
             strip_tags($_POST['cust_province']),   // Tỉnh/thành phố
             strip_tags($_POST['cust_district']),   //quận/huyện
             strip_tags($_POST['cust_address']),   // địa chỉ nhà
-            '',
-            '',
-            '',
-            '',
-            '',
             '',
             '',
             '',
@@ -152,7 +142,7 @@ if (isset($_POST['form1'])) {
         // Gửi email xác nhận tài khoản
         $to = $_POST['cust_email'];
 
-        $subject = 'Registration Email Confirmation for GoBuy';
+        $subject = 'GoBuy - Registration Email Confirmation';
         $verify_link = $base_url . 'verify.php?email=' . urlencode($to) . '&token=' . urlencode($token);
         $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br>
     <a href="' . $verify_link . '">' . $verify_link . '</a>';
@@ -176,7 +166,7 @@ if (isset($_POST['form1'])) {
 
             // Nội dung email
             $mail->isHTML(true);
-            $mail->Subject = 'Email xác nhận đăng ký cho GoBuy';
+            $mail->Subject = 'GoBuy - Registration Email Confirmation';
             $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br><a href="' . $verify_link . '">' . $verify_link . '</a>';
 
             $mail->send();
@@ -256,8 +246,8 @@ if (isset($_POST['form1'])) {
                                         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
-                                        <option value="<?php echo $row['province_id']; ?>">
-                                            <?php echo $row['province_name']; ?></option>
+                                            <option value="<?php echo $row['province_id']; ?>">
+                                                <?php echo $row['province_name']; ?></option>
                                         <?php
                                         }
                                         ?>

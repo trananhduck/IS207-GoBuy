@@ -1,6 +1,4 @@
 <?php require_once('header.php');
-require_once('admin/inc/config.php');
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 ?>
