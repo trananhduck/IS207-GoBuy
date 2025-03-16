@@ -555,12 +555,12 @@ VALUES
 '<p>Đây là một website bán hàng, đồ án môn học IS207 tại UIT</p>', 
 'GoBuy - Duck123', 
 'Thu Duc, TP.HCM', 
-'abc123@gmail.com', '0123456789', '', 
+'taduc0508@gmail.com', '0123456789', '', 
 
 '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>', 
 
-'abc123@gmail.com', 
-'Tin nhắn email từ khách truy cập GoBuy', 
+'taduc0508@gmail.com', 
+'Email messages from GoBuy visitors', 
 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 
 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 
 
