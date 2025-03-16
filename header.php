@@ -359,9 +359,9 @@ foreach ($result as $row) {
                                 }
                                 ?>
 
-                                <li><a href="about.php"><?php echo $about_title; ?></a></li>
+                                <li><a href="about.php"><?php echo 'About' ?></a></li>
                                 <li><a href="faq.php"><?php echo 'FAQ' ?></a></li>
-                                <li><a href="contact.php"><?php echo $contact_title; ?></a></li>
+                                <li><a href="contact.php"><?php echo 'Liên hệ'; ?></a></li>
                             </ul>
                         </div>
                     </div>
