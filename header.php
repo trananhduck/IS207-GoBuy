@@ -358,10 +358,9 @@ foreach ($result as $row) {
                                     $vgallery_title = $row['vgallery_title'];
                                 }
                                 ?>
-
-                                <li><a href="about.php"><?php echo 'About' ?></a></li>
-                                <li><a href="faq.php"><?php echo 'FAQ' ?></a></li>
-                                <li><a href="contact.php"><?php echo 'Liên hệ'; ?></a></li>
+                                <li><a href="about.php"><?php echo $about_title; ?></a></li>
+                                <li><a href="faq.php"><?php echo $faq_title; ?></a></li>
+                                <li><a href="contact.php"><?php echo $contact_title; ?></a></li>
                             </ul>
                         </div>
                     </div>

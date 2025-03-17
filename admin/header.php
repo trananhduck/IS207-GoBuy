@@ -26,8 +26,12 @@ if (!isset($_SESSION['user'])) {
     <title>Admin Panel</title>
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, admin-scalable=no" name="viewport">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery và Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
     <link rel="stylesheet" href="css/datepicker3.css">
@@ -164,8 +168,6 @@ if (!isset($_SESSION['user'])) {
                             <i class="fa fa-picture-o"></i> <span>Quản lý sliders</span>
                         </a>
                     </li>
-
-
                     <li class="treeview <?php if (($current_page == 'page.php')) {
                                             echo 'active';
                                         } ?>">
