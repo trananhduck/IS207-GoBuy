@@ -180,6 +180,7 @@ h4.modal-title {
   font-size: 14px;
 }
 
+
 .checkbox-inline {
   padding-top: 0 !important;
 }
@@ -245,7 +246,6 @@ img.existing-photo {
 .skin-blue .main-header .logo:hover,
 .skin-blue .main-header .navbar,
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
-  /* background-color: #333333; */
   background-color: #131921;
 }
 
@@ -292,6 +292,7 @@ img.existing-photo {
   border-color: #333333;
 }
 
+
 .sidebar-menu .treeview-menu > li > a {
   font-size: 12px;
 }
@@ -308,4 +309,11 @@ select {
 
 .bg-r {
   background: #f9cccc !important;
+}
+
+.sidebar-menu .treeview-menu {
+  display: none;
+}
+.sidebar-menu .treeview.menu-open .treeview-menu {
+  display: block;
 }
