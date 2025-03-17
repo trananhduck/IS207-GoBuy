@@ -110,7 +110,7 @@ if (!isset($_SESSION['user'])) {
                                             echo 'active';
                                         } ?>">
                         <a href="settings.php">
-                            <i class="fa fa-sliders"></i> <span>Cài đặt</span>
+                            <i class="fa fa-sliders"></i> <span>Cài đặt Website</span>
                         </a>
                     </li>
 

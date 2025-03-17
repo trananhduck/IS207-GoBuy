@@ -115,7 +115,7 @@ INSERT INTO `table_customer` (
     'Nguyễn Văn A', '0905123456', 29, 'ABC', '123 Đường Lê Lợi', 
     '5f4dcc3b5aa765d61d8327deb882cf99', 'abc123token1', '2025-02-28 10:00:00', '1746031200', 1),
 
-(2, 'Trần Thị B', 'thib@gmail.com', '0914345678', 
+(2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '0914345678', 
     2, 'XYZ', '456 Đường Trần Hưng Đạo', 
     'Trần Thị B', '1234', 11, 'XYZ', 'DEF', 
     '5f4dcc3b5aa765d61d8327deb882cf99', 'xyz456token2', '2025-02-28 10:10:00', '1746031800', 1);
@@ -274,10 +274,8 @@ CREATE TABLE `table_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 INSERT INTO `table_order` (`id`, `product_id`, `product_name`, `size`, `color`, `quantity`, `unit_price`, `payment_id`) VALUES
-(1, 1, 'Item 1', 'XL', 'Gray','19', '20', 'xxxx'),
-(2, 2, 'Item 2', 'XL', 'Gray','19', '20', 'xxxx'),
-(3, 3, 'Item 3', 'XL', 'Gray','19', '20', 'xxxx');
-
+(1, 1, 'Item 1', 'XL', 'Gray','19', '20', '1'),
+(2, 2, 'Item 2', 'XL', 'Gray','19', '20', '2');
 
 
 
@@ -318,26 +316,38 @@ CREATE TABLE `table_page` (
 
 INSERT INTO `table_page` (`id`, `about_title`, `about_content`, `about_banner`, `about_meta_title`, `about_meta_keyword`, `about_meta_description`, `faq_title`, `faq_banner`, `faq_meta_title`, `faq_meta_keyword`, `faq_meta_description`, `blog_title`, `blog_banner`, `blog_meta_title`, `blog_meta_keyword`, `blog_meta_description`, `contact_title`, `contact_banner`, `contact_meta_title`, `contact_meta_keyword`, `contact_meta_description`, `pgallery_title`, `pgallery_banner`, `pgallery_meta_title`, `pgallery_meta_keyword`, `pgallery_meta_description`, `vgallery_title`, `vgallery_banner`, `vgallery_meta_title`, `vgallery_meta_keyword`, `vgallery_meta_description`) VALUES  
 (1, 'About Us', 'abcdefghiklm', '', '', '', '', 'FAQ', '', '', '', '', '', '', '', '', '', 'Contact', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-
-
 CREATE TABLE `table_payment` (
-  `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `customer_name` TEXT NOT NULL,
-  `customer_email` TEXT NOT NULL,
-  `payment_date` varchar(50) NOT NULL,
-  `txnid` TEXT NOT NULL,
-  `paid_amount` int(11) NOT NULL,
-  `card_number` varchar(50) NOT NULL,
-  `card_cvv` varchar(10) NOT NULL,
-  `card_month` varchar(10) NOT NULL,
-  `card_year` varchar(10) NOT NULL,
-  `bank_transaction_info` text NOT NULL,
-  `payment_method` varchar(20) NOT NULL,
-  `payment_status` varchar(25) NOT NULL,
-  `shipping_status` varchar(20) NOT NULL,
-  `payment_id` TEXT NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` INT(11) NOT NULL,
+  `customer_name` VARCHAR(255) NOT NULL,
+  `customer_email` VARCHAR(255) NOT NULL,
+  `payment_date` DATETIME NOT NULL,
+  `txnid` VARCHAR(255) NOT NULL,
+  `paid_amount` DECIMAL(10,2) NOT NULL,
+  `card_number` VARCHAR(50) NOT NULL,
+  `card_cvv` VARCHAR(10) NOT NULL,
+  `card_month` VARCHAR(10) NOT NULL,
+  `card_year` VARCHAR(10) NOT NULL,
+  `bank_transaction_info` TEXT NOT NULL,
+  `payment_method` VARCHAR(20) NOT NULL,
+  `payment_status` VARCHAR(25) NOT NULL COLLATE utf8mb4_general_ci,
+  `shipping_status` VARCHAR(20) NOT NULL COLLATE utf8mb4_general_ci,
+  `payment_id` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `table_payment` (
+    `customer_id`, `customer_name`, `customer_email`, `payment_date`, `txnid`, 
+    `paid_amount`, `card_number`, `card_cvv`, `card_month`, `card_year`, 
+    `bank_transaction_info`, `payment_method`, `payment_status`, `shipping_status`, `payment_id`
+) VALUES
+(1, 'Nguyễn Văn A', 'vana@gmail.com', '2025-02-28 11:00:00', 'TXN123456A', 
+    500000.00, '4111111111111111', '123', '02', '2028', 
+    'Bank XYZ - Successful', 'Bank Deposit', 'Completed', 'Pending', 'PAYID123A'),
+
+(2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 
+    750000.00, '5555555555554444', '456', '05', '2029', 
+    'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B');
 
 
 CREATE TABLE `table_photo` (
@@ -769,9 +779,6 @@ ALTER TABLE `table_order`
 ALTER TABLE `table_page`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `table_payment`
-  ADD PRIMARY KEY (`id`);
-
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
@@ -833,7 +840,7 @@ ALTER TABLE `table_customer`
   MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 ALTER TABLE `table_customer_message`
-  MODIFY `customer_message_id` int(11) NOT NULL;
+  MODIFY `customer_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `table_end_category`
   MODIFY `ecat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
