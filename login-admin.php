@@ -37,7 +37,7 @@ if (isset($_POST['form1'])) {
                 if ($status == 0) {
                     $errorMsg .= 'Xin lỗi! Tài khoản của bạn không hoạt động.' . '<br>';
                 } else {
-                    $_SESSION['admin'] = $row;
+                    $_SESSION['user'] = $row;
                     header("location: " . BASE_URL . "admin/service.php");
                 }
             }
@@ -93,7 +93,7 @@ if (isset($_POST['form1'])) {
             <div class="col-md-12">
                 <div class="user-sidebar">
                     <ul>
-                        <a href="login-customer.php"><button
+                        <a href="login-admin.php"><button
                                 class="btn btn-danger"><?php echo 'Đăng nhập với tư cách khách hàng' ?></button></a>
                     </ul>
                 </div>

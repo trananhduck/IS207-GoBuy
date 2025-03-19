@@ -142,8 +142,8 @@ if (isset($_POST['form1'])) {
         // Gửi email xác nhận tài khoản
         $to = $_POST['cust_email'];
 
-        $subject = 'GoBuy - Registration Email Confirmation';
-        $verify_link = $base_url . 'verify.php?email=' . urlencode($to) . '&token=' . urlencode($token);
+        $subject = 'GoBuy - Customer Registration Email Confirmation';
+        $verify_link = $base_url . 'verify-customer.php?email=' . urlencode($to) . '&token=' . urlencode($token);
         $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br>
     <a href="' . $verify_link . '">' . $verify_link . '</a>';
 
@@ -174,15 +174,12 @@ if (isset($_POST['form1'])) {
         } catch (Exception $e) {
             echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
         }
-
-
         unset($_POST['cust_name']);
         unset($_POST['cust_email']);
         unset($_POST['cust_phone']);
         unset($_POST['cust_province']);
         unset($_POST['cust_district']);
         unset($_POST['cust_address']);
-
         $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra địa chỉ email của bạn để làm theo quy trình xác nhận đăng ký của bạn.';
     }
 }
@@ -200,9 +197,6 @@ if (isset($_POST['form1'])) {
         <div class="row">
             <div class="col-md-12">
                 <div class="user-content">
-
-
-
                     <form action="" method="post">
                         <?php $csrf->echoInputField(); ?>
                         <div class="row">
@@ -280,14 +274,20 @@ if (isset($_POST['form1'])) {
                                         name="form1">
                                 </div>
                             </div>
-
-
-                        </div>
+                    </form>
                 </div>
-                </form>
+            </div>
+            <div class="col-md-12">
+                <div class="user-sidebar">
+                    <ul>
+                        <a href="registration-admin.php"><button
+                                class="btn btn-danger"><?php echo 'Đăng ký tài khoản admin' ?></button></a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 
