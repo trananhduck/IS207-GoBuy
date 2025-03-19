@@ -2,9 +2,9 @@
 
 <?php
 // Lấy banner cho trang đặt lại mật khẩu từ bảng table_settings
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_reset_password = $row['banner_reset_password'];
 }
@@ -19,10 +19,10 @@ if (!isset($_GET['email']) || !isset($_GET['token'])) {
 }
 
 // Truy vấn kiểm tra xem email và token có tồn tại trong database không
-$querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=? AND cust_token=?");
-$querry->execute(array($_GET['email'], $_GET['token']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
-$tot = $querry->rowCount();
+$query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=? AND cust_token=?");
+$query->execute(array($_GET['email'], $_GET['token']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+$tot = $query->rowCount();
 if ($tot == 0) {
     // Nếu không tồn tại, chuyển hướng về trang đăng nhập
     header('location: ' . BASE_URL . 'login-customer.php');
@@ -61,8 +61,8 @@ if (isset($_POST['form1'])) {
     if ($valid == 1) {
 
         $cust_new_password = strip_tags($_POST['cust_new_password']); // Loại bỏ ký tự HTML nguy hiểm
-        $querry = $pdo->prepare("UPDATE table_customer SET cust_password=?, cust_token=?, cust_timestamp=? WHERE cust_email=?");
-        $querry->execute(array(md5($cust_new_password), '', '', $_GET['email']));
+        $query = $pdo->prepare("UPDATE table_customer SET cust_password=?, cust_token=?, cust_timestamp=? WHERE cust_email=?");
+        $query->execute(array(md5($cust_new_password), '', '', $_GET['email']));
 
         // Chuyển hướng đến trang thông báo đổi mật khẩu thành công
         header('location: ' . BASE_URL . 'reset-password-success.php');
@@ -91,29 +91,29 @@ if (isset($_POST['form1'])) {
                     }
                     ?>
                     <?php if ($error_message2 != ''): ?>
-                        <div class="error"><?php echo $error_message2; ?></div>
+                    <div class="error"><?php echo $error_message2; ?></div>
                     <?php else: ?>
-                        <form action="" method="post">
-                            <?php $csrf->echoInputField(); ?>
-                            <div class="row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for=""><?php echo 'Mật Khẩu Mới' ?> *</label>
-                                        <input type="password" class="form-control" name="cust_new_password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for=""><?php echo 'Nhập Lại Mật Khẩu Mới' ?> *</label>
-                                        <input type="password" class="form-control" name="cust_re_password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for=""></label>
-                                        <input type="submit" class="btn btn-primary" value="<?php echo 'Đổi Mật Khẩu'; ?>"
-                                            name="form1">
-                                    </div>
+                    <form action="" method="post">
+                        <?php $csrf->echoInputField(); ?>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for=""><?php echo 'Mật Khẩu Mới' ?> *</label>
+                                    <input type="password" class="form-control" name="cust_new_password">
+                                </div>
+                                <div class="form-group">
+                                    <label for=""><?php echo 'Nhập Lại Mật Khẩu Mới' ?> *</label>
+                                    <input type="password" class="form-control" name="cust_re_password">
+                                </div>
+                                <div class="form-group">
+                                    <label for=""></label>
+                                    <input type="submit" class="btn btn-primary" value="<?php echo 'Đổi Mật Khẩu'; ?>"
+                                        name="form1">
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </form>
                     <?php endif; ?>
 
                 </div>

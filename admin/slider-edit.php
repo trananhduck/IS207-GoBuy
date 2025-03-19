@@ -24,8 +24,8 @@ if (isset($_POST['form1'])) {
 
         // Nếu không có ảnh mới được tải lên
         if ($path == '') {
-            $querry = $pdo->prepare("UPDATE table_slider SET heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
-            $querry->execute(array($_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
+            $query = $pdo->prepare("UPDATE table_slider SET heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
+            $query->execute(array($_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
         } else {
             // Xóa ảnh cũ
             unlink('../assets/uploads/' . $_POST['current_photo']);
@@ -35,8 +35,8 @@ if (isset($_POST['form1'])) {
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
             // Cập nhật dữ liệu vào database, bao gồm ảnh mới
-            $querry = $pdo->prepare("UPDATE table_slider SET photo=?, heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
-            $querry->execute(array($final_name, $_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
+            $query = $pdo->prepare("UPDATE table_slider SET photo=?, heading=?, content=?, button_text=?, button_url=?, position=? WHERE id=?");
+            $query->execute(array($final_name, $_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
         }
 
         $successMsg = 'Cập nhật slider thành công!';
@@ -51,10 +51,10 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra id có hợp lệ hay không
-    $querry = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     if ($total == 0) {
         header('location: logout.php'); // Điều hướng nếu id không hợp lệ
         exit;
@@ -73,9 +73,9 @@ if (!isset($_REQUEST['id'])) {
 
 <?php
 // Lấy dữ liệu slider theo id
-$querry = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $photo       = $row['photo'];
     $heading     = $row['heading'];

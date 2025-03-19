@@ -7,9 +7,9 @@ if (!isset($_SESSION['customer'])) {
     exit;
 } else {
     // If customer is logged in, but admin make him inactive, then force logout this user.
-    $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
-    $querry->execute(array($_SESSION['customer']['cust_id'], 0));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
+    $query->execute(array($_SESSION['customer']['cust_id'], 0));
+    $total = $query->rowCount();
     if ($total) {
         header('location: ' . BASE_URL . 'logout.php');
         exit;
@@ -47,9 +47,9 @@ if (!isset($_SESSION['customer'])) {
                                 /*Pagination Code  */
                                 $adjacents = 5;
 
-                                $querry = $pdo->prepare("SELECT * FROM table_payment WHERE customer_email=? ORDER BY id DESC");
-                                $querry->execute(array($_SESSION['customer']['cust_email']));
-                                $total_pages = $querry->rowCount();
+                                $query = $pdo->prepare("SELECT * FROM table_payment WHERE customer_email=? ORDER BY id DESC");
+                                $query->execute(array($_SESSION['customer']['cust_email']));
+                                $total_pages = $query->rowCount();
 
                                 $targetpage = BASE_URL . 'customer-order.php';
                                 $limit = 10;
@@ -60,9 +60,9 @@ if (!isset($_SESSION['customer'])) {
                                     $start = 0;
 
 
-                                $querry = $pdo->prepare("SELECT * FROM table_payment WHERE customer_email=? ORDER BY id DESC LIMIT $start, $limit");
-                                $querry->execute(array($_SESSION['customer']['cust_email']));
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_payment WHERE customer_email=? ORDER BY id DESC LIMIT $start, $limit");
+                                $query->execute(array($_SESSION['customer']['cust_email']));
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
                                 if ($page == 0) $page = 1;
@@ -139,9 +139,9 @@ if (!isset($_SESSION['customer'])) {
                                     <td><?php echo $tip; ?></td>
                                     <td>
                                         <?php
-                                            $querry1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
-                                            $querry1->execute(array($row['payment_id']));
-                                            $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
+                                            $query1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
+                                            $query1->execute(array($row['payment_id']));
+                                            $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
                                                 echo 'Product Name: ' . $row1['product_name'];
                                                 echo '<br>Size: ' . $row1['size'];

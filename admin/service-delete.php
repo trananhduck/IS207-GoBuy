@@ -8,9 +8,9 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra ID có hợp lệ hay không
-    $querry = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
     if ($total == 0) {
         header('location: logout.php');
         exit;
@@ -23,9 +23,9 @@ if (!isset($_REQUEST['id'])) {
 
 // Lấy ảnh liên quan đến ID để xóa khỏi thư mục
 
-$querry = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $photo = $row['photo'];
 }
@@ -38,8 +38,8 @@ if ($photo != '') {
 
 
 // Xóa dữ liệu khỏi bảng table_service
-$querry = $pdo->prepare("DELETE FROM table_service WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
+$query = $pdo->prepare("DELETE FROM table_service WHERE id=?");
+$query->execute(array($_REQUEST['id']));
 
 // Chuyển hướng về trang danh sách dịch vụ
 header('location: service.php');

@@ -8,9 +8,9 @@ if (empty($_REQUEST['search_text'])) {
 }
 
 // Lấy dữ liệu banner từ bảng cài đặt
-$querry = $pdo->prepare("SELECT banner_search FROM table_settings WHERE id = 1");
-$querry->execute();
-$row = $querry->fetch(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT banner_search FROM table_settings WHERE id = 1");
+$query->execute();
+$row = $query->fetch(PDO::FETCH_ASSOC);
 $banner_search = $row['banner_search'] ?? 'default-banner.jpg'; // Nếu không có thì dùng ảnh mặc định
 
 // Xử lý chuỗi tìm kiếm an toàn hơn
@@ -46,9 +46,9 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                         $search_text = isset($_REQUEST['search_text']) ? "%" . $_REQUEST['search_text'] . "%" : "%";
 
                         // Đếm tổng số sản phẩm thỏa mãn điều kiện
-                        $querry = $pdo->prepare("SELECT COUNT(*) FROM table_product WHERE p_is_active = ? AND p_name LIKE ?");
-                        $querry->execute([1, $search_text]);
-                        $total_pages = $querry->fetchColumn(); // Lấy tổng số bản ghi
+                        $query = $pdo->prepare("SELECT COUNT(*) FROM table_product WHERE p_is_active = ? AND p_name LIKE ?");
+                        $query->execute([1, $search_text]);
+                        $total_pages = $query->fetchColumn(); // Lấy tổng số bản ghi
 
                         // Xác định trang hiện tại
                         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -56,13 +56,13 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                         $start = ($page - 1) * $limit; // Tính vị trí bắt đầu
 
                         // Truy vấn lấy dữ liệu sản phẩm của trang hiện tại
-                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active = ? AND p_name LIKE ? LIMIT ?, ?");
-                        $querry->bindValue(1, 1, PDO::PARAM_INT);
-                        $querry->bindValue(2, $search_text, PDO::PARAM_STR);
-                        $querry->bindValue(3, $start, PDO::PARAM_INT);
-                        $querry->bindValue(4, $limit, PDO::PARAM_INT);
-                        $querry->execute();
-                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active = ? AND p_name LIKE ? LIMIT ?, ?");
+                        $query->bindValue(1, 1, PDO::PARAM_INT);
+                        $query->bindValue(2, $search_text, PDO::PARAM_STR);
+                        $query->bindValue(3, $start, PDO::PARAM_INT);
+                        $query->bindValue(4, $limit, PDO::PARAM_INT);
+                        $query->execute();
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
                         // Tính toán các trang liên quan
                         $lastpage = ceil($total_pages / $limit); // Tổng số trang
@@ -144,13 +144,13 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                                     <div class="rating">
                                         <?php
                                                 $t_rating = 0;
-                                                $querry1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-                                                $querry1->execute(array($row['p_id']));
-                                                $tot_rating = $querry1->rowCount();
+                                                $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
+                                                $query1->execute(array($row['p_id']));
+                                                $tot_rating = $query1->rowCount();
                                                 if ($tot_rating == 0) {
                                                     $avg_rating = 0;
                                                 } else {
-                                                    $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
+                                                    $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                                     foreach ($result1 as $row1) {
                                                         $t_rating = $t_rating + $row1['rating'];
                                                     }

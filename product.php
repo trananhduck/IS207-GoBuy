@@ -6,10 +6,10 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra xem id có hợp lệ không
-    $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     if ($total == 0) {
         header('location: index.php');
         exit;
@@ -32,7 +32,7 @@ foreach ($result as $row) {
     $ecat_id = $row['ecat_id'];
 }
 //Lấy thông tin danh mục sản phẩm từ db
-$querry = $pdo->prepare("SELECT
+$query = $pdo->prepare("SELECT
                         t1.ecat_id,t1.ecat_name,t1.mcat_id,
                         t2.mcat_id,t2.mcat_name,t2.tcat_id,
                         t3.tcat_id,t3.tcat_name
@@ -43,9 +43,9 @@ $querry = $pdo->prepare("SELECT
                         JOIN table_top_category t3
                         ON t2.tcat_id = t3.tcat_id
                         WHERE t1.ecat_id=?");
-$querry->execute(array($ecat_id));
-$total = $querry->rowCount();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query->execute(array($ecat_id));
+$total = $query->rowCount();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // Lặp để lấy thông tin danh mục sản phẩm
 foreach ($result as $row) {
@@ -58,20 +58,20 @@ foreach ($result as $row) {
 
 $p_total_view = $p_total_view + 1;
 
-$querry = $pdo->prepare("UPDATE table_product SET p_total_view=? WHERE p_id=?");
-$querry->execute(array($p_total_view, $_REQUEST['id']));
+$query = $pdo->prepare("UPDATE table_product SET p_total_view=? WHERE p_id=?");
+$query->execute(array($p_total_view, $_REQUEST['id']));
 
 // Lấy danh sách kích thước và màu sắc sản phẩm từ database
-$querry = $pdo->prepare("SELECT * FROM table_product_size WHERE p_id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_product_size WHERE p_id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $size[] = $row['size_id'];
 }
 
-$querry = $pdo->prepare("SELECT * FROM table_product_color WHERE p_id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_product_color WHERE p_id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $color[] = $row['color_id'];
 }
@@ -80,28 +80,28 @@ foreach ($result as $row) {
 
 if (isset($_POST['form_review'])) {
 
-    $querry = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=? AND cust_id=?");
-    $querry->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=? AND cust_id=?");
+    $query->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
+    $total = $query->rowCount();
 
     if ($total) {
         $errorMsg = 'Bạn đã đánh giá';
     } else {
-        $querry = $pdo->prepare("INSERT INTO table_rating (p_id,cust_id,comment,rating) VALUES (?,?,?,?)");
-        $querry->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id'], $_POST['comment'], $_POST['rating']));
+        $query = $pdo->prepare("INSERT INTO table_rating (p_id,cust_id,comment,rating) VALUES (?,?,?,?)");
+        $query->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id'], $_POST['comment'], $_POST['rating']));
         $success_message = 'Đánh giá được ghi nhận';
     }
 }
 
 // Lấy xếp hạng trung bình của sản phẩm
 $t_rating = 0;
-$querry = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-$querry->execute(array($_REQUEST['id']));
-$tot_rating = $querry->rowCount();
+$query = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
+$query->execute(array($_REQUEST['id']));
+$tot_rating = $query->rowCount();
 if ($tot_rating == 0) {
     $avg_rating = 0;
 } else {
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
         $t_rating = $t_rating + $row['rating'];
     }
@@ -113,9 +113,9 @@ if ($tot_rating == 0) {
 if (isset($_POST['form_add_to_cart'])) {
 
     // Lấy số lượng sản phẩm hiện có trong kho
-    $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
+    $query->execute(array($_REQUEST['id']));
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
         $current_p_qty = $row['p_qty'];
     }
@@ -185,9 +185,9 @@ alert('<?php echo $temp_msg; ?>');
 
                     $size_id = $_POST['size_id'];
 
-                    $querry = $pdo->prepare("SELECT * FROM table_size WHERE size_id=?");
-                    $querry->execute(array($size_id));
-                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                    $query = $pdo->prepare("SELECT * FROM table_size WHERE size_id=?");
+                    $query->execute(array($size_id));
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                         $size_name = $row['size_name'];
                     }
@@ -198,9 +198,9 @@ alert('<?php echo $temp_msg; ?>');
 
                 if (isset($_POST['color_id'])) {
                     $color_id = $_POST['color_id'];
-                    $querry = $pdo->prepare("SELECT * FROM table_color WHERE color_id=?");
-                    $querry->execute(array($color_id));
-                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                    $query = $pdo->prepare("SELECT * FROM table_color WHERE color_id=?");
+                    $query->execute(array($color_id));
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                         $color_name = $row['color_name'];
                     }
@@ -228,9 +228,9 @@ alert('<?php echo $temp_msg; ?>');
 
                 $size_id = $_POST['size_id'];
 
-                $querry = $pdo->prepare("SELECT * FROM table_size WHERE size_id=?");
-                $querry->execute(array($size_id));
-                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                $query = $pdo->prepare("SELECT * FROM table_size WHERE size_id=?");
+                $query->execute(array($size_id));
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                     $size_name = $row['size_name'];
                 }
@@ -241,9 +241,9 @@ alert('<?php echo $temp_msg; ?>');
 
             if (isset($_POST['color_id'])) {
                 $color_id = $_POST['color_id'];
-                $querry = $pdo->prepare("SELECT * FROM table_color WHERE color_id=?");
-                $querry->execute(array($color_id));
-                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                $query = $pdo->prepare("SELECT * FROM table_color WHERE color_id=?");
+                $query->execute(array($color_id));
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                     $color_name = $row['color_name'];
                 }
@@ -313,9 +313,9 @@ if ($successMsg != '') {
                                     <a class="popup" href="assets/uploads/<?php echo $p_featured_photo; ?>"></a>
                                 </li>
                                 <?php
-                                $querry = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
-                                $querry->execute(array($_REQUEST['id']));
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
+                                $query->execute(array($_REQUEST['id']));
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
 
@@ -337,9 +337,9 @@ if ($successMsg != '') {
                                 </a>
                                 <?php
                                 $i = 1;
-                                $querry = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
-                                $querry->execute(array($_REQUEST['id']));
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
+                                $query->execute(array($_REQUEST['id']));
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
 
@@ -427,9 +427,9 @@ if ($successMsg != '') {
                                             <select name="size_id" class="form-control select2" style="width:auto;">
                                                 <?php
 
-                                                    $querry = $pdo->prepare("SELECT * FROM table_size");
-                                                    $querry->execute();
-                                                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                                    $query = $pdo->prepare("SELECT * FROM table_size");
+                                                    $query->execute();
+                                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                     foreach ($result as $row) {
                                                         if (in_array($row['size_id'], $size)) {
                                                     ?>
@@ -449,9 +449,9 @@ if ($successMsg != '') {
                                             <select name="color_id" class="form-control select2" style="width:auto;">
                                                 <?php
 
-                                                    $querry = $pdo->prepare("SELECT * FROM table_color");
-                                                    $querry->execute();
-                                                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                                    $query = $pdo->prepare("SELECT * FROM table_color");
+                                                    $query->execute();
+                                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                     foreach ($result as $row) {
                                                         if (in_array($row['color_id'], $color)) {
                                                     ?>
@@ -554,19 +554,19 @@ if ($successMsg != '') {
 
                                     <div class="review-form">
                                         <?php
-                                        $querry = $pdo->prepare("SELECT * 
+                                        $query = $pdo->prepare("SELECT * 
                                                             FROM table_rating t1 
                                                             JOIN table_customer t2 
                                                             ON t1.cust_id = t2.cust_id 
                                                             WHERE t1.p_id=?");
-                                        $querry->execute(array($_REQUEST['id']));
-                                        $total = $querry->rowCount();
+                                        $query->execute(array($_REQUEST['id']));
+                                        $total = $query->rowCount();
                                         ?>
                                         <h2><?php echo 'Nhận xét' ?> (<?php echo $total; ?>)</h2>
                                         <?php
                                         if ($total) {
                                             $j = 0;
-                                            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result as $row) {
                                                 $j++;
                                         ?>
@@ -624,11 +624,11 @@ if ($successMsg != '') {
                                         <?php
 
 
-                                            $querry = $pdo->prepare("SELECT * 
+                                            $query = $pdo->prepare("SELECT * 
                                                                 FROM table_rating
                                                                 WHERE p_id=? AND cust_id=?");
-                                            $querry->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
-                                            $total = $querry->rowCount();
+                                            $query->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
+                                            $total = $query->rowCount();
                                             ?>
 
                                         <?php if ($total == 0): ?>
@@ -687,9 +687,9 @@ if ($successMsg != '') {
                 <div class="product-carousel">
 
                     <?php
-                    $querry = $pdo->prepare("SELECT * FROM table_product WHERE ecat_id=? AND p_id!=?");
-                    $querry->execute(array($ecat_id, $_REQUEST['id']));
-                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                    $query = $pdo->prepare("SELECT * FROM table_product WHERE ecat_id=? AND p_id!=?");
+                    $query->execute(array($ecat_id, $_REQUEST['id']));
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                     ?>
 
@@ -715,13 +715,13 @@ if ($successMsg != '') {
                                 <?php
 
                                     $t_rating = 0;
-                                    $querry1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-                                    $querry1->execute(array($row['p_id']));
-                                    $tot_rating = $querry1->rowCount();
+                                    $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
+                                    $query1->execute(array($row['p_id']));
+                                    $tot_rating = $query1->rowCount();
                                     if ($tot_rating == 0) {
                                         $avg_rating = 0;
                                     } else {
-                                        $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
+                                        $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result1 as $row1) {
                                             $t_rating = $t_rating + $row1['rating'];
                                         }

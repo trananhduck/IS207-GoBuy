@@ -22,9 +22,9 @@ if (isset($_POST['form1'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $logo = $row['logo'];
             unlink('../assets/uploads/' . $logo);
@@ -35,8 +35,8 @@ if (isset($_POST['form1'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET logo=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET logo=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Cập nhật logo thành công.';
     }
@@ -62,9 +62,9 @@ if (isset($_POST['form2'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $favicon = $row['favicon'];
             unlink('../assets/uploads/' . $favicon);
@@ -75,8 +75,8 @@ if (isset($_POST['form2'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET favicon=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET favicon=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Cập nhật favicon thành công.';
     }
@@ -85,9 +85,9 @@ if (isset($_POST['form2'])) {
 // Cập nhật phần Footer & trang Liên hệ
 if (isset($_POST['form3'])) {
     // Cập nhật cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_settings SET newsletter_on_off=?, footer_copyright=?, contact_address=?, 
+    $query = $pdo->prepare("UPDATE table_settings SET newsletter_on_off=?, footer_copyright=?, contact_address=?, 
         contact_email=?, contact_phone=?, contact_map_iframe=? WHERE id=1");
-    $querry->execute(array(
+    $query->execute(array(
         $_POST['newsletter_on_off'],
         $_POST['footer_copyright'],
         $_POST['contact_address'],
@@ -102,9 +102,9 @@ if (isset($_POST['form3'])) {
 // Cài đặt Email
 if (isset($_POST['form4'])) {
     // Cập nhật cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_settings SET receive_email=?, receive_email_subject=?, 
+    $query = $pdo->prepare("UPDATE table_settings SET receive_email=?, receive_email_subject=?, 
         receive_email_thank_you_message=?, forget_password_message=? WHERE id=1");
-    $querry->execute(array(
+    $query->execute(array(
         $_POST['receive_email'],
         $_POST['receive_email_subject'],
         $_POST['receive_email_thank_you_message'],
@@ -117,9 +117,9 @@ if (isset($_POST['form4'])) {
 // Không thể hoàn thành phần này, để lại
 if (isset($_POST['form5'])) {
     // Cập nhật cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_settings SET total_featured_product_home=?, total_latest_product_home=?, 
+    $query = $pdo->prepare("UPDATE table_settings SET total_featured_product_home=?, total_latest_product_home=?, 
         total_popular_product_home=? WHERE id=1");
-    $querry->execute(array(
+    $query->execute(array(
         $_POST['total_featured_product_home'],
         $_POST['total_latest_product_home'],
         $_POST['total_popular_product_home']
@@ -131,9 +131,9 @@ if (isset($_POST['form5'])) {
 // Cài đặt bật/tắt các phần trên trang chủ
 if (isset($_POST['form6_0'])) {
     // Cập nhật cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_settings SET home_service_on_off=?, home_welcome_on_off=?, 
+    $query = $pdo->prepare("UPDATE table_settings SET home_service_on_off=?, home_welcome_on_off=?, 
         home_featured_product_on_off=?, home_latest_product_on_off=?, home_popular_product_on_off=? WHERE id=1");
-    $querry->execute(array(
+    $query->execute(array(
         $_POST['home_service_on_off'],
         $_POST['home_welcome_on_off'],
         $_POST['home_featured_product_on_off'],
@@ -145,8 +145,8 @@ if (isset($_POST['form6_0'])) {
 }
 if (isset($_POST['form6'])) {
     // cập nhật cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_settings SET meta_title_home=?, meta_keyword_home=?, meta_description_home=? WHERE id=1");
-    $querry->execute(array($_POST['meta_title_home'], $_POST['meta_keyword_home'], $_POST['meta_description_home']));
+    $query = $pdo->prepare("UPDATE table_settings SET meta_title_home=?, meta_keyword_home=?, meta_description_home=? WHERE id=1");
+    $query->execute(array($_POST['meta_title_home'], $_POST['meta_keyword_home'], $_POST['meta_description_home']));
 
     $successMsg = 'Cài đặt Meta trang chủ đã được cập nhật thành công.';
 }
@@ -191,9 +191,9 @@ if (isset($_POST['form6_7'])) {
 
         if ($path != '') {
             // xóa ảnh hiện có
-            $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-            $querry->execute();
-            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+            $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $row) {
                 $cta_photo = $row['cta_photo'];
                 unlink('../assets/uploads/' . $cta_photo);
@@ -204,8 +204,8 @@ if (isset($_POST['form6_7'])) {
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
             // cập nhật cơ sở dữ liệu
-            $querry = $pdo->prepare("UPDATE table_settings SET cta_title=?, cta_content=?, cta_read_more_text=?, cta_read_more_url=?, cta_photo=? WHERE id=1");
-            $querry->execute(array(
+            $query = $pdo->prepare("UPDATE table_settings SET cta_title=?, cta_content=?, cta_read_more_text=?, cta_read_more_url=?, cta_photo=? WHERE id=1");
+            $query->execute(array(
                 $_POST['cta_title'],
                 $_POST['cta_content'],
                 $_POST['cta_read_more_text'],
@@ -214,8 +214,8 @@ if (isset($_POST['form6_7'])) {
             ));
         } else {
             // cập nhật cơ sở dữ liệu (không có ảnh)
-            $querry = $pdo->prepare("UPDATE table_settings SET cta_title=?, cta_content=?, cta_read_more_text=?, cta_read_more_url=? WHERE id=1");
-            $querry->execute(array(
+            $query = $pdo->prepare("UPDATE table_settings SET cta_title=?, cta_content=?, cta_read_more_text=?, cta_read_more_url=? WHERE id=1");
+            $query->execute(array(
                 $_POST['cta_title'],
                 $_POST['cta_content'],
                 $_POST['cta_read_more_text'],
@@ -244,8 +244,8 @@ if (isset($_POST['form6_4'])) {
     if ($valid == 1) {
 
         // cập nhật cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET featured_product_title=?,featured_product_subtitle=? WHERE id=1");
-        $querry->execute(array($_POST['featured_product_title'], $_POST['featured_product_subtitle']));
+        $query = $pdo->prepare("UPDATE table_settings SET featured_product_title=?,featured_product_subtitle=? WHERE id=1");
+        $query->execute(array($_POST['featured_product_title'], $_POST['featured_product_subtitle']));
 
         $successMsg = 'Dữ liệu Sản phẩm Nổi bật đã được cập nhật thành công.';
     }
@@ -268,8 +268,8 @@ if (isset($_POST['form6_5'])) {
     if ($valid == 1) {
 
         // cập nhật cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET latest_product_title=?,latest_product_subtitle=? WHERE id=1");
-        $querry->execute(array($_POST['latest_product_title'], $_POST['latest_product_subtitle']));
+        $query = $pdo->prepare("UPDATE table_settings SET latest_product_title=?,latest_product_subtitle=? WHERE id=1");
+        $query->execute(array($_POST['latest_product_title'], $_POST['latest_product_subtitle']));
 
         $successMsg = 'Dữ liệu Sản phẩm Mới nhất đã được cập nhật thành công.';
     }
@@ -292,8 +292,8 @@ if (isset($_POST['form6_6'])) {
     if ($valid == 1) {
 
         // cập nhật cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET popular_product_title=?,popular_product_subtitle=? WHERE id=1");
-        $querry->execute(array($_POST['popular_product_title'], $_POST['popular_product_subtitle']));
+        $query = $pdo->prepare("UPDATE table_settings SET popular_product_title=?,popular_product_subtitle=? WHERE id=1");
+        $query->execute(array($_POST['popular_product_title'], $_POST['popular_product_subtitle']));
 
         $successMsg = 'Dữ liệu Sản phẩm Phổ biến đã được cập nhật thành công.';
     }
@@ -302,8 +302,8 @@ if (isset($_POST['form6_6'])) {
 if (isset($_POST['form6_3'])) {
 
     // cập nhật cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_settings SET newsletter_text=? WHERE id=1");
-    $querry->execute(array($_POST['newsletter_text']));
+    $query = $pdo->prepare("UPDATE table_settings SET newsletter_text=? WHERE id=1");
+    $query->execute(array($_POST['newsletter_text']));
 
     $successMsg = 'Nội dung Bản tin đã được cập nhật thành công.';
 }
@@ -327,9 +327,9 @@ if (isset($_POST['form7_1'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_login = $row['banner_login'];
             unlink('../assets/uploads/' . $banner_login);
@@ -340,8 +340,8 @@ if (isset($_POST['form7_1'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_login=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_login=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang đăng nhập đã được cập nhật thành công.';
     }
@@ -367,9 +367,9 @@ if (isset($_POST['form7_2'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_registration = $row['banner_registration'];
             unlink('../assets/uploads/' . $banner_registration);
@@ -380,8 +380,8 @@ if (isset($_POST['form7_2'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_registration=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_registration=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang đăng ký đã được cập nhật thành công.';
     }
@@ -407,9 +407,9 @@ if (isset($_POST['form7_3'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_forget_password = $row['banner_forget_password'];
             unlink('../assets/uploads/' . $banner_forget_password);
@@ -420,8 +420,8 @@ if (isset($_POST['form7_3'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_forget_password=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_forget_password=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang quên mật khẩu đã được cập nhật thành công.';
     }
@@ -447,9 +447,9 @@ if (isset($_POST['form7_4'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_reset_password = $row['banner_reset_password'];
             unlink('../assets/uploads/' . $banner_reset_password);
@@ -460,8 +460,8 @@ if (isset($_POST['form7_4'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_reset_password=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_reset_password=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang đặt lại mật khẩu đã được cập nhật thành công.';
     }
@@ -486,9 +486,9 @@ if (isset($_POST['form7_6'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_search = $row['banner_search'];
             unlink('../assets/uploads/' . $banner_search);
@@ -499,8 +499,8 @@ if (isset($_POST['form7_6'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_search=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_search=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang tìm kiếm đã được cập nhật thành công.';
     }
@@ -526,9 +526,9 @@ if (isset($_POST['form7_7'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_cart = $row['banner_cart'];
             unlink('../assets/uploads/' . $banner_cart);
@@ -539,8 +539,8 @@ if (isset($_POST['form7_7'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_cart=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_cart=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang giỏ hàng đã được cập nhật thành công.';
     }
@@ -566,9 +566,9 @@ if (isset($_POST['form7_8'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_checkout = $row['banner_checkout'];
             unlink('../assets/uploads/' . $banner_checkout);
@@ -579,8 +579,8 @@ if (isset($_POST['form7_8'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật vào cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_checkout=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_checkout=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Banner trang thanh toán đã được cập nhật thành công.';
     }
@@ -605,9 +605,9 @@ if (isset($_POST['form7_9'])) {
 
     if ($valid == 1) {
         // Xóa ảnh hiện tại
-        $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $banner_product_category = $row['banner_product_category'];
             unlink('../assets/uploads/' . $banner_product_category);
@@ -618,8 +618,8 @@ if (isset($_POST['form7_9'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Cập nhật cơ sở dữ liệu
-        $querry = $pdo->prepare("UPDATE table_settings SET banner_product_category=? WHERE id=1");
-        $querry->execute(array($final_name));
+        $query = $pdo->prepare("UPDATE table_settings SET banner_product_category=? WHERE id=1");
+        $query->execute(array($final_name));
 
         $successMsg = 'Ảnh banner trang danh mục sản phẩm đã được cập nhật thành công.';
     }
@@ -652,9 +652,9 @@ if (isset($_POST['form7_10'])) {
 </section>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $logo                            = $row['logo'];
     $favicon                         = $row['favicon'];
@@ -698,19 +698,19 @@ foreach ($result as $row) {
     <div class="row">
         <div class="col-md-12">
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
+            <div class="callout callout-danger">
 
-                    <p>
-                        <?php echo $errorMsg; ?>
-                    </p>
-                </div>
+                <p>
+                    <?php echo $errorMsg; ?>
+                </p>
+            </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
+            <div class="callout callout-success">
 
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
         </div>
     </div>

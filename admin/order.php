@@ -150,73 +150,73 @@ if ($successMsg != '') {
                         <tbody>
                             <?php
                             $i = 0;
-                            $querry = $pdo->prepare("SELECT * FROM table_payment ORDER by id DESC");
-                            $querry->execute();
-                            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                            $query = $pdo->prepare("SELECT * FROM table_payment ORDER by id DESC");
+                            $query->execute();
+                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                                <tr class="<?php if ($row['payment_status'] == 'Pending') {
+                            <tr class="<?php if ($row['payment_status'] == 'Pending') {
                                                 echo 'bg-r';
                                             } else {
                                                 echo 'bg-g';
                                             } ?>">
-                                    <td><?php echo $i; ?></td>
-                                    <td>
-                                        <b>Id:</b> <?php echo $row['customer_id']; ?><br>
-                                        <b>Name:</b><br> <?php echo $row['customer_name']; ?><br>
-                                        <b>Email:</b><br> <?php echo $row['customer_email']; ?><br><br>
-                                        <a href="#" data-toggle="modal" data-target="#model-<?php echo $i; ?>"
-                                            class="btn btn-warning btn-xs" style="width:100%;margin-bottom:4px;">Gửi tin
-                                            nhắn</a>
-                                        <div id="model-<?php echo $i; ?>" class="modal fade" role="dialog">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close"
-                                                            data-dismiss="modal">&times;</button>
-                                                        <h4 class="modal-title" style="font-weight: bold;">Gửi tin nhắn</h4>
-                                                    </div>
-                                                    <div class="modal-body" style="font-size: 14px">
-                                                        <form action="" method="post">
-                                                            <input type="hidden" name="cust_id"
-                                                                value="<?php echo $row['customer_id']; ?>">
-                                                            <input type="hidden" name="payment_id"
-                                                                value="<?php echo $row['payment_id']; ?>">
-                                                            <table class="table table-bordered">
-                                                                <tr>
-                                                                    <td>Tiêu đề</td>
-                                                                    <td>
-                                                                        <input type="text" name="subject_text"
-                                                                            class="form-control" style="width: 100%;">
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Nội dung</td>
-                                                                    <td>
-                                                                        <textarea name="message_text" class="form-control"
-                                                                            cols="30" rows="10"
-                                                                            style="width:100%;height: 200px;"></textarea>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td><input type="submit" value="Send Message"
-                                                                            name="form1"></td>
-                                                                </tr>
-                                                            </table>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default"
-                                                            data-dismiss="modal">Đóng</button>
-                                                    </div>
+                                <td><?php echo $i; ?></td>
+                                <td>
+                                    <b>Id:</b> <?php echo $row['customer_id']; ?><br>
+                                    <b>Name:</b><br> <?php echo $row['customer_name']; ?><br>
+                                    <b>Email:</b><br> <?php echo $row['customer_email']; ?><br><br>
+                                    <a href="#" data-toggle="modal" data-target="#model-<?php echo $i; ?>"
+                                        class="btn btn-warning btn-xs" style="width:100%;margin-bottom:4px;">Gửi tin
+                                        nhắn</a>
+                                    <div id="model-<?php echo $i; ?>" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title" style="font-weight: bold;">Gửi tin nhắn</h4>
+                                                </div>
+                                                <div class="modal-body" style="font-size: 14px">
+                                                    <form action="" method="post">
+                                                        <input type="hidden" name="cust_id"
+                                                            value="<?php echo $row['customer_id']; ?>">
+                                                        <input type="hidden" name="payment_id"
+                                                            value="<?php echo $row['payment_id']; ?>">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <td>Tiêu đề</td>
+                                                                <td>
+                                                                    <input type="text" name="subject_text"
+                                                                        class="form-control" style="width: 100%;">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Nội dung</td>
+                                                                <td>
+                                                                    <textarea name="message_text" class="form-control"
+                                                                        cols="30" rows="10"
+                                                                        style="width:100%;height: 200px;"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td><input type="submit" value="Send Message"
+                                                                        name="form1"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Đóng</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        <?php
+                                    </div>
+                                </td>
+                                <td>
+                                    <?php
                                         $statement1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
                                         $statement1->execute(array($row['payment_id']));
                                         $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
@@ -229,57 +229,57 @@ if ($successMsg != '') {
                                             echo '<br><br>';
                                         }
                                         ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($row['payment_method'] == 'PayPal'): ?>
-                                            <b>Phương thức thanh toán:</b>
-                                            <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
-                                            <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
-                                            <b>Ngày thanh toán:</b> <?php echo $row['payment_date']; ?><br>
-                                            <b>Mã giao dịch:</b> <?php echo $row['txnid']; ?><br>
-                                        <?php elseif ($row['payment_method'] == 'Bank Deposit'): ?>
-                                            <b>Phương thức thanh toán:</b>
-                                            <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
-                                            <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
-                                            <b>Ngày thanh toán:</b> <?php echo $row['payment_date']; ?><br>
-                                            <b>Thông tin giao dịch:</b> <br><?php echo $row['bank_transaction_info']; ?><br>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>$<?php echo $row['paid_amount']; ?></td>
-                                    <td>
-                                        <?php echo $row['payment_status']; ?>
-                                        <br><br>
-                                        <?php
+                                </td>
+                                <td>
+                                    <?php if ($row['payment_method'] == 'PayPal'): ?>
+                                    <b>Phương thức thanh toán:</b>
+                                    <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
+                                    <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
+                                    <b>Ngày thanh toán:</b> <?php echo $row['payment_date']; ?><br>
+                                    <b>Mã giao dịch:</b> <?php echo $row['txnid']; ?><br>
+                                    <?php elseif ($row['payment_method'] == 'Bank Deposit'): ?>
+                                    <b>Phương thức thanh toán:</b>
+                                    <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
+                                    <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
+                                    <b>Ngày thanh toán:</b> <?php echo $row['payment_date']; ?><br>
+                                    <b>Thông tin giao dịch:</b> <br><?php echo $row['bank_transaction_info']; ?><br>
+                                    <?php endif; ?>
+                                </td>
+                                <td>$<?php echo $row['paid_amount']; ?></td>
+                                <td>
+                                    <?php echo $row['payment_status']; ?>
+                                    <br><br>
+                                    <?php
                                         if ($row['payment_status'] == 'Pending') {
                                         ?>
-                                            <a href="order-change-status.php?id=<?php echo $row['id']; ?>&task=Completed"
-                                                class="btn btn-success btn-xs" style="width:100%;margin-bottom:4px;">Xác nhận
-                                                hoàn thành</a>
-                                        <?php
+                                    <a href="order-change-status.php?id=<?php echo $row['id']; ?>&task=Completed"
+                                        class="btn btn-success btn-xs" style="width:100%;margin-bottom:4px;">Xác nhận
+                                        hoàn thành</a>
+                                    <?php
                                         }
                                         ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $row['shipping_status']; ?>
-                                        <br><br>
-                                        <?php
+                                </td>
+                                <td>
+                                    <?php echo $row['shipping_status']; ?>
+                                    <br><br>
+                                    <?php
                                         if ($row['payment_status'] == 'Completed') {
                                             if ($row['shipping_status'] == 'Pending') {
                                         ?>
-                                                <a href="shipping-change-status.php?id=<?php echo $row['id']; ?>&task=Completed"
-                                                    class="btn btn-warning btn-xs" style="width:100%;margin-bottom:4px;">Xác nhận
-                                                    hoàn thành</a>
-                                        <?php
+                                    <a href="shipping-change-status.php?id=<?php echo $row['id']; ?>&task=Completed"
+                                        class="btn btn-warning btn-xs" style="width:100%;margin-bottom:4px;">Xác nhận
+                                        hoàn thành</a>
+                                    <?php
                                             }
                                         }
                                         ?>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger btn-xs"
-                                            data-href="order-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
-                                            data-target="#confirm-delete" style="width:100%;">Xóa</a>
-                                    </td>
-                                </tr>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-danger btn-xs"
+                                        data-href="order-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
+                                        data-target="#confirm-delete" style="width:100%;">Xóa</a>
+                                </td>
+                            </tr>
                             <?php
                             }
                             ?>

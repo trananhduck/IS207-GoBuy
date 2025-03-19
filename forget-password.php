@@ -10,9 +10,9 @@ require 'PHPMailer/PHPMailer/src/SMTP.php';
 require 'PHPMailer/PHPMailer/src/Exception.php';
 
 // Lấy dữ liệu banner quên mật khẩu
-$querry = $pdo->prepare("SELECT banner_forget_password, forget_password_message FROM table_settings WHERE id=1");
-$querry->execute();
-$row = $querry->fetch(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT banner_forget_password, forget_password_message FROM table_settings WHERE id=1");
+$query->execute();
+$row = $query->fetch(PDO::FETCH_ASSOC);
 
 $banner_forget_password = $row['banner_forget_password'];
 $forget_password_message = $row['forget_password_message'];
@@ -31,10 +31,10 @@ if (isset($_POST['form1'])) {
             $valid = false;
             $errorMsg .= 'Địa chỉ email không hợp lệ.\n';
         } else {
-            $querry = $pdo->prepare("SELECT cust_email FROM table_customer WHERE cust_email=?");
-            $querry->execute([$email]);
+            $query = $pdo->prepare("SELECT cust_email FROM table_customer WHERE cust_email=?");
+            $query->execute([$email]);
 
-            if ($querry->rowCount() === 0) {
+            if ($query->rowCount() === 0) {
                 $valid = false;
                 $errorMsg .= 'Địa chỉ email không tồn tại trong hệ thống.\n';
             }
@@ -47,8 +47,8 @@ if (isset($_POST['form1'])) {
         $now = time();
 
         // Cập nhật token vào database
-        $querry = $pdo->prepare("UPDATE table_customer SET cust_token=?, cust_timestamp=? WHERE cust_email=?");
-        $querry->execute([$token, $now, $email]);
+        $query = $pdo->prepare("UPDATE table_customer SET cust_token=?, cust_timestamp=? WHERE cust_email=?");
+        $query->execute([$token, $now, $email]);
         // Kiểm tra xem đang chạy trên localhost hay server thật
         if ($_SERVER['HTTP_HOST'] == 'localhost') {
             $base_url = 'http://localhost/IS207-GoBuy/';

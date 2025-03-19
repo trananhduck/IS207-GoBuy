@@ -19,9 +19,9 @@ try {
     }
 
     // Kiểm tra token trong cơ sở dữ liệu
-    $querry = $pdo->prepare("SELECT token FROM table_user WHERE email = ? AND status = 0");
-    $querry->execute([$email]);
-    $result = $querry->fetch(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT token FROM table_user WHERE email = ? AND status = 0");
+    $query->execute([$email]);
+    $result = $query->fetch(PDO::FETCH_ASSOC);
 
     if (!$result) {
         throw new Exception('Email không tồn tại hoặc đã được xác minh.');
@@ -32,8 +32,8 @@ try {
     }
 
     // Xác minh thành công, cập nhật trạng thái tài khoản
-    $querry = $pdo->prepare("UPDATE table_user SET token = '', status = 1 WHERE email = ?");
-    $querry->execute([$email]);
+    $query = $pdo->prepare("UPDATE table_user SET token = '', status = 1 WHERE email = ?");
+    $query->execute([$email]);
 
     $successMsg = '<p style="color:green;">Xác minh email thành công! Bạn có thể đăng nhập với tư cách admin ngay bây giờ.</p>
                    <p><a href="' . BASE_URL . 'login-admin.php" style="color:#167ac6;font-weight:bold;">Bấm vào đây để đăng nhập với tư cách admin</a></p>';

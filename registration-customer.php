@@ -10,9 +10,9 @@ require 'PHPMailer/PHPMailer/src/SMTP.php';
 require 'PHPMailer/PHPMailer/src/Exception.php';
 ?>
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_registration = $row['banner_registration'];
 }
@@ -36,9 +36,9 @@ if (isset($_POST['form1'])) {
             $valid = 0;
             $errorMsg .= 'Địa chỉ email phải hợp lệ' . "<br>";
         } else {
-            $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
-            $querry->execute(array($_POST['cust_email']));
-            $total = $querry->rowCount();
+            $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
+            $query->execute(array($_POST['cust_email']));
+            $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
                 $errorMsg .= 'Địa chỉ email đã tồn tại' . "<br>";
@@ -86,7 +86,7 @@ if (isset($_POST['form1'])) {
         $cust_timestamp = time();
 
         //Lưu vào DB
-        $querry = $pdo->prepare("INSERT INTO table_customer (
+        $query = $pdo->prepare("INSERT INTO table_customer (
                                         cust_name,
                                         cust_email,
                                         cust_phone,
@@ -104,7 +104,7 @@ if (isset($_POST['form1'])) {
                                         cust_timestamp,
                                         cust_status
                                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $querry->execute(array(
+        $query->execute(array(
             // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
             strip_tags($_POST['cust_name']),      // Tên khách hàng
             strip_tags($_POST['cust_email']),     // Email khách hàng
@@ -235,9 +235,9 @@ if (isset($_POST['form1'])) {
                                     <select name="cust_province" class="form-control select2">
                                         <option value="">Chọn tỉnh/thành phố</option>
                                         <?php
-                                        $querry = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                        $querry->execute();
-                                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                        $query = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
                                         <option value="<?php echo $row['province_id']; ?>">

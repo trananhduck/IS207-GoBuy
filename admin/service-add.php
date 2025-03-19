@@ -32,9 +32,9 @@ if (isset($_POST['form1'])) {
     if ($valid == 1) {
 
         // tự động tăng id
-        $querry = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_service'");
-        $querry->execute();
-        $result = $querry->fetchAll();
+        $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_service'");
+        $query->execute();
+        $result = $query->fetchAll();
         foreach ($result as $row) {
             $ai_id = $row[10];
         }
@@ -44,8 +44,8 @@ if (isset($_POST['form1'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
 
-        $querry = $pdo->prepare("INSERT INTO table_service (title,content,photo) VALUES (?,?,?)");
-        $querry->execute(array($_POST['title'], $_POST['content'], $final_name));
+        $query = $pdo->prepare("INSERT INTO table_service (title,content,photo) VALUES (?,?,?)");
+        $query->execute(array($_POST['title'], $_POST['content'], $final_name));
 
         $successMsg = 'Service is added successfully!';
 

@@ -20,17 +20,17 @@ if (isset($_POST['form1'])) {
             $error_message .= 'Email phải hợp lệ<br>';
         } else {
             // Lấy email hiện tại từ cơ sở dữ liệu
-            $querry = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
-            $querry->execute(array($_SESSION['user']['id']));
-            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+            $query = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
+            $query->execute(array($_SESSION['user']['id']));
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $row) {
                 $current_email = $row['email'];
             }
 
             // Kiểm tra xem email mới có bị trùng không
-            $querry = $pdo->prepare("SELECT * FROM table_user WHERE email=? and email!=?");
-            $querry->execute(array($_POST['email'], $current_email));
-            $total = $querry->rowCount();
+            $query = $pdo->prepare("SELECT * FROM table_user WHERE email=? and email!=?");
+            $query->execute(array($_POST['email'], $current_email));
+            $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
                 $error_message .= 'Email đã tồn tại<br>';
@@ -44,8 +44,8 @@ if (isset($_POST['form1'])) {
         $_SESSION['user']['email'] = $_POST['email'];
 
         // Cập nhật dữ liệu vào database
-        $querry = $pdo->prepare("UPDATE table_user SET full_name=?, email=?, phone=? WHERE id=?");
-        $querry->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['user']['id']));
+        $query = $pdo->prepare("UPDATE table_user SET full_name=?, email=?, phone=? WHERE id=?");
+        $query->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['user']['id']));
 
         $success_message = 'Thông tin người dùng đã được cập nhật thành công.';
     }
@@ -78,8 +78,8 @@ if (isset($_POST['form2'])) {
         $_SESSION['user']['photo'] = $final_name;
 
         // Cập nhật vào database
-        $querry = $pdo->prepare("UPDATE table_user SET photo=? WHERE id=?");
-        $querry->execute(array($final_name, $_SESSION['user']['id']));
+        $query = $pdo->prepare("UPDATE table_user SET photo=? WHERE id=?");
+        $query->execute(array($final_name, $_SESSION['user']['id']));
 
         $success_message = 'Ảnh đại diện đã được cập nhật thành công.';
     }
@@ -105,8 +105,8 @@ if (isset($_POST['form3'])) {
         $_SESSION['user']['password'] = md5($_POST['password']);
 
         // Cập nhật mật khẩu vào database
-        $querry = $pdo->prepare("UPDATE table_user SET password=? WHERE id=?");
-        $querry->execute(array(md5($_POST['password']), $_SESSION['user']['id']));
+        $query = $pdo->prepare("UPDATE table_user SET password=? WHERE id=?");
+        $query->execute(array(md5($_POST['password']), $_SESSION['user']['id']));
 
         $success_message = 'Mật khẩu đã được cập nhật thành công.';
     }
@@ -121,10 +121,10 @@ if (isset($_POST['form3'])) {
 
 <?php
 // Lấy thông tin người dùng từ database
-$querry = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
-$querry->execute(array($_SESSION['user']['id']));
-$querry->rowCount();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
+$query->execute(array($_SESSION['user']['id']));
+$query->rowCount();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $full_name = $row['full_name'];
     $email     = $row['email'];

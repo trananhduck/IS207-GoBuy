@@ -10,9 +10,9 @@ require 'PHPMailer/PHPMailer/src/SMTP.php';
 require 'PHPMailer/PHPMailer/src/Exception.php';
 ?>
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_registration = $row['banner_registration'];
 }
@@ -36,9 +36,9 @@ if (isset($_POST['form1'])) {
             $valid = 0;
             $errorMsg .= 'Địa chỉ email phải hợp lệ' . "<br>";
         } else {
-            $querry = $pdo->prepare("SELECT * FROM table_user WHERE email=?");
-            $querry->execute(array($_POST['email']));
-            $total = $querry->rowCount();
+            $query = $pdo->prepare("SELECT * FROM table_user WHERE email=?");
+            $query->execute(array($_POST['email']));
+            $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
                 $errorMsg .= 'Địa chỉ email đã tồn tại' . "<br>";
@@ -72,7 +72,7 @@ if (isset($_POST['form1'])) {
         $photo = isset($_POST['photo']) ? $_POST['photo'] : 'default.jpg';
 
         //Lưu vào DB
-        $querry = $pdo->prepare("INSERT INTO table_user (
+        $query = $pdo->prepare("INSERT INTO table_user (
                                         full_name,
                                         email,
                                         phone,
@@ -83,7 +83,7 @@ if (isset($_POST['form1'])) {
                                         timestamp,
                                         status
                                     ) VALUES (?,?,?,?,?,?,?,?,?)");
-        $querry->execute(array(
+        $query->execute(array(
             // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
             strip_tags($_POST['full_name']),  // Tên admin
             strip_tags($_POST['email']),     // Email admin

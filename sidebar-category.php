@@ -5,9 +5,9 @@
         <?php
         $i = 0;
         // Truy vấn danh mục cấp 1 từ bảng table_top_category (danh mục chính)
-        $querry = $pdo->prepare("SELECT * FROM table_top_category WHERE show_on_menu=1");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_top_category WHERE show_on_menu=1");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
         // Lặp qua từng danh mục cấp 1
         foreach ($result as $row) {
@@ -23,9 +23,9 @@
                 <?php
                     $j = 0;
                     // Truy vấn danh mục cấp 2 từ bảng table_mid_category (danh mục trung gian)
-                    $querry1 = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id=?");
-                    $querry1->execute(array($row['tcat_id']));
-                    $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
+                    $query1 = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id=?");
+                    $query1->execute(array($row['tcat_id']));
+                    $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
 
                     // Lặp qua từng danh mục cấp 2
                     foreach ($result1 as $row1) {
@@ -41,9 +41,9 @@
                         <?php
                                 $k = 0; // Biến đếm cho danh mục cấp 3
                                 // Truy vấn danh mục cấp 3 từ bảng table_end_category (danh mục con)
-                                $querry2 = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id=?");
-                                $querry2->execute(array($row1['mcat_id']));
-                                $result2 = $querry2->fetchAll(PDO::FETCH_ASSOC);
+                                $query2 = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id=?");
+                                $query2->execute(array($row1['mcat_id']));
+                                $result2 = $query2->fetchAll(PDO::FETCH_ASSOC);
 
                                 // Lặp qua từng danh mục cấp 3
                                 foreach ($result2 as $row2) {
