@@ -90,6 +90,14 @@ if (isset($_POST['form1'])) {
                     </form>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="user-sidebar">
+                    <ul>
+                        <a href="login-admin.php"><button
+                                class="btn btn-danger"><?php echo 'Đăng nhập với tư cách admin' ?></button></a>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

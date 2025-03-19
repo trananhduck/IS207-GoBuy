@@ -14,7 +14,7 @@ foreach ($result as $row) {
 // Kiểm tra xem URL có chứa email và token hay không
 if (!isset($_GET['email']) || !isset($_GET['token'])) {
     // Nếu không có, chuyển hướng về trang đăng nhập
-    header('location: ' . BASE_URL . 'login.php');
+    header('location: ' . BASE_URL . 'login-customer.php');
     exit;
 }
 
@@ -25,7 +25,7 @@ $result = $querry->fetchAll(PDO::FETCH_ASSOC);
 $tot = $querry->rowCount();
 if ($tot == 0) {
     // Nếu không tồn tại, chuyển hướng về trang đăng nhập
-    header('location: ' . BASE_URL . 'login.php');
+    header('location: ' . BASE_URL . 'login-customer.php');
     exit;
 }
 

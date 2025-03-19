@@ -246,8 +246,8 @@ if (isset($_POST['form1'])) {
                                         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
-                                            <option value="<?php echo $row['province_id']; ?>">
-                                                <?php echo $row['province_name']; ?></option>
+                                        <option value="<?php echo $row['province_id']; ?>">
+                                            <?php echo $row['province_name']; ?></option>
                                         <?php
                                         }
                                         ?>

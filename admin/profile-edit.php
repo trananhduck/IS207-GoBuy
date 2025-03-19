@@ -4,61 +4,48 @@
 // Kiểm tra nếu người dùng gửi form cập nhật thông tin cá nhân
 if (isset($_POST['form1'])) {
 
-    // Chỉ cho phép 'Super Admin' chỉnh sửa thông tin cá nhân
-    if ($_SESSION['user']['role'] == 'Super Admin') {
+    $valid = 1;
 
-        $valid = 1;
+    if (empty($_POST['full_name'])) {
+        $valid = 0;
+        $error_message .= "Tên không được để trống<br>";
+    }
 
-        if (empty($_POST['full_name'])) {
+    if (empty($_POST['email'])) {
+        $valid = 0;
+        $error_message .= 'Email không được để trống<br>';
+    } else {
+        if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $error_message .= "Tên không được để trống<br>";
-        }
-
-        if (empty($_POST['email'])) {
-            $valid = 0;
-            $error_message .= 'Email không được để trống<br>';
+            $error_message .= 'Email phải hợp lệ<br>';
         } else {
-            if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
-                $valid = 0;
-                $error_message .= 'Email phải hợp lệ<br>';
-            } else {
-                // Lấy email hiện tại từ cơ sở dữ liệu
-                $statement = $pdo->prepare("SELECT * FROM tbl_user WHERE id=?");
-                $statement->execute(array($_SESSION['user']['id']));
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($result as $row) {
-                    $current_email = $row['email'];
-                }
+            // Lấy email hiện tại từ cơ sở dữ liệu
+            $querry = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
+            $querry->execute(array($_SESSION['user']['id']));
+            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result as $row) {
+                $current_email = $row['email'];
+            }
 
-                // Kiểm tra xem email mới có bị trùng không
-                $statement = $pdo->prepare("SELECT * FROM tbl_user WHERE email=? and email!=?");
-                $statement->execute(array($_POST['email'], $current_email));
-                $total = $statement->rowCount();
-                if ($total) {
-                    $valid = 0;
-                    $error_message .= 'Email đã tồn tại<br>';
-                }
+            // Kiểm tra xem email mới có bị trùng không
+            $querry = $pdo->prepare("SELECT * FROM table_user WHERE email=? and email!=?");
+            $querry->execute(array($_POST['email'], $current_email));
+            $total = $querry->rowCount();
+            if ($total) {
+                $valid = 0;
+                $error_message .= 'Email đã tồn tại<br>';
             }
         }
+    }
 
-        if ($valid == 1) {
-            // Cập nhật thông tin vào session
-            $_SESSION['user']['full_name'] = $_POST['full_name'];
-            $_SESSION['user']['email'] = $_POST['email'];
+    if ($valid == 1) {
+        // Cập nhật thông tin vào session
+        $_SESSION['user']['full_name'] = $_POST['full_name'];
+        $_SESSION['user']['email'] = $_POST['email'];
 
-            // Cập nhật dữ liệu vào database
-            $statement = $pdo->prepare("UPDATE tbl_user SET full_name=?, email=?, phone=? WHERE id=?");
-            $statement->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['user']['id']));
-
-            $success_message = 'Thông tin người dùng đã được cập nhật thành công.';
-        }
-    } else {
-        // Nếu không phải Super Admin, chỉ được cập nhật số điện thoại
-        $_SESSION['user']['phone'] = $_POST['phone'];
-
-        // Cập nhật số điện thoại vào database
-        $statement = $pdo->prepare("UPDATE tbl_user SET phone=? WHERE id=?");
-        $statement->execute(array($_POST['phone'], $_SESSION['user']['id']));
+        // Cập nhật dữ liệu vào database
+        $querry = $pdo->prepare("UPDATE table_user SET full_name=?, email=?, phone=? WHERE id=?");
+        $querry->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['user']['id']));
 
         $success_message = 'Thông tin người dùng đã được cập nhật thành công.';
     }
@@ -91,8 +78,8 @@ if (isset($_POST['form2'])) {
         $_SESSION['user']['photo'] = $final_name;
 
         // Cập nhật vào database
-        $statement = $pdo->prepare("UPDATE tbl_user SET photo=? WHERE id=?");
-        $statement->execute(array($final_name, $_SESSION['user']['id']));
+        $querry = $pdo->prepare("UPDATE table_user SET photo=? WHERE id=?");
+        $querry->execute(array($final_name, $_SESSION['user']['id']));
 
         $success_message = 'Ảnh đại diện đã được cập nhật thành công.';
     }
@@ -118,8 +105,8 @@ if (isset($_POST['form3'])) {
         $_SESSION['user']['password'] = md5($_POST['password']);
 
         // Cập nhật mật khẩu vào database
-        $statement = $pdo->prepare("UPDATE tbl_user SET password=? WHERE id=?");
-        $statement->execute(array(md5($_POST['password']), $_SESSION['user']['id']));
+        $querry = $pdo->prepare("UPDATE table_user SET password=? WHERE id=?");
+        $querry->execute(array(md5($_POST['password']), $_SESSION['user']['id']));
 
         $success_message = 'Mật khẩu đã được cập nhật thành công.';
     }
@@ -134,17 +121,16 @@ if (isset($_POST['form3'])) {
 
 <?php
 // Lấy thông tin người dùng từ database
-$statement = $pdo->prepare("SELECT * FROM tbl_user WHERE id=?");
-$statement->execute(array($_SESSION['user']['id']));
-$statement->rowCount();
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
+$querry->execute(array($_SESSION['user']['id']));
+$querry->rowCount();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $full_name = $row['full_name'];
     $email     = $row['email'];
     $phone     = $row['phone'];
     $photo     = $row['photo'];
     $status    = $row['status'];
-    $role      = $row['role'];
 }
 ?>
 
@@ -168,23 +154,10 @@ foreach ($result as $row) {
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label">Name <span>*</span></label>
-                                        <?php
-                                        if ($_SESSION['user']['role'] == 'Super Admin') {
-                                        ?>
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control" name="full_name"
                                                 value="<?php echo $full_name; ?>">
                                         </div>
-                                        <?php
-                                        } else {
-                                        ?>
-                                        <div class="col-sm-4" style="padding-top:7px;">
-                                            <?php echo $full_name; ?>
-                                        </div>
-                                        <?php
-                                        }
-                                        ?>
-
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label">Existing Photo</label>
@@ -197,22 +170,10 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label">Email Address
                                             <span>*</span></label>
-                                        <?php
-                                        if ($_SESSION['user']['role'] == 'Super Admin') {
-                                        ?>
                                         <div class="col-sm-4">
                                             <input type="email" class="form-control" name="email"
                                                 value="<?php echo $email; ?>">
                                         </div>
-                                        <?php
-                                        } else {
-                                        ?>
-                                        <div class="col-sm-4" style="padding-top:7px;">
-                                            <?php echo $email; ?>
-                                        </div>
-                                        <?php
-                                        }
-                                        ?>
 
                                     </div>
                                     <div class="form-group">
@@ -220,12 +181,6 @@ foreach ($result as $row) {
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control" name="phone"
                                                 value="<?php echo $phone; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Role <span>*</span></label>
-                                        <div class="col-sm-4" style="padding-top:7px;">
-                                            <?php echo $role; ?>
                                         </div>
                                     </div>
                                     <div class="form-group">

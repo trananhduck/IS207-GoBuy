@@ -11,30 +11,30 @@ foreach ($result as $row) {
 <?php
 if (isset($_POST['form1'])) {
 
-    if (empty($_POST['admin_email']) || empty($_POST['admin_password'])) {
+    if (empty($_POST['email']) || empty($_POST['password'])) {
         $errorMsg = 'Email và mật khẩu không thể để trống' . '<br>';
     } else {
 
-        $admin_email = strip_tags($_POST['admin_email']);
-        $admin_password = strip_tags($_POST['admin_password']);
+        $email = strip_tags($_POST['email']);
+        $password = strip_tags($_POST['password']);
 
-        $querry = $pdo->prepare("SELECT * FROM table_admin WHERE admin_email=?");
-        $querry->execute(array($admin_email));
+        $querry = $pdo->prepare("SELECT * FROM table_user WHERE email=?");
+        $querry->execute(array($email));
         $total = $querry->rowCount();
         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
-            $admin_status = $row['admin_status'];
-            $row_password = $row['admin_password'];
+            $status = $row['status'];
+            $row_password = $row['password'];
         }
 
         if ($total == 0) {
             $errorMsg .= 'Địa chỉ email không khớp.' . '<br>';
         } else {
             //using MD5 form
-            if ($row_password != md5($admin_password)) {
+            if ($row_password != md5($password)) {
                 $errorMsg .= 'Mật khẩu không khớp' . '<br>';
             } else {
-                if ($admin_status == 0) {
+                if ($status == 0) {
                     $errorMsg .= 'Xin lỗi! Tài khoản của bạn không hoạt động.' . '<br>';
                 } else {
                     $_SESSION['admin'] = $row;
@@ -73,11 +73,11 @@ if (isset($_POST['form1'])) {
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?php echo 'Địa chỉ email' ?> *</label>
-                                    <input type="email" class="form-control" name="admin_email">
+                                    <input type="email" class="form-control" name="email">
                                 </div>
                                 <div class="form-group">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control" name="admin_password">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
                                 <div class="form-group">
                                     <label for=""></label>
@@ -88,6 +88,14 @@ if (isset($_POST['form1'])) {
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="user-sidebar">
+                    <ul>
+                        <a href="login-customer.php"><button
+                                class="btn btn-danger"><?php echo 'Đăng nhập với tư cách khách hàng' ?></button></a>
+                    </ul>
                 </div>
             </div>
         </div>

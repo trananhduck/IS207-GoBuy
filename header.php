@@ -83,7 +83,7 @@ foreach ($result as $row) {
 
     $current_page = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
 
-    if ($current_page == 'index.php' || $current_page == 'login.php' || $current_page == 'registration.php' || $current_page == 'cart.php' || $current_page == 'checkout.php' || $current_page == 'forget-password.php' || $current_page == 'reset-password.php' || $current_page == 'product-category.php' || $current_page == 'product.php') {
+    if ($current_page == 'index.php' || $current_page == 'login-customer.php' || $current_page == 'registration.php' || $current_page == 'cart.php' || $current_page == 'checkout.php' || $current_page == 'forget-password.php' || $current_page == 'reset-password.php' || $current_page == 'product-category.php' || $current_page == 'product.php') {
     ?>
     <title><?php echo $meta_title_home; ?></title>
     <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
@@ -240,7 +240,8 @@ foreach ($result as $row) {
                         <?php
                         } else {
                         ?>
-                        <li><a href="login.php"><i class="fa fa-sign-in"></i> <?php echo 'Đăng nhập' ?></a></li>
+                        <li><a href="login-customer.php"><i class="fa fa-sign-in"></i> <?php echo 'Đăng nhập' ?></a>
+                        </li>
                         <li><a href="registration.php"><i class="fa fa-user-plus"></i> <?php echo 'Đăng ký' ?></a>
                         </li>
                         <?php

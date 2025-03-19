@@ -30,7 +30,7 @@ if (!isset($_SESSION['cart_p_id'])) {
 
                 <?php if (!isset($_SESSION['customer'])): ?>
                 <p>
-                    <a href="login.php"
+                    <a href="login-customer.php"
                         class="btn btn-md btn-danger"><?php echo 'Vui lòng đăng nhập để thanh toán' ?></a>
                 </p>
                 <?php else: ?>

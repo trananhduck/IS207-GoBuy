@@ -121,7 +121,7 @@ if (isset($_POST['form1'])) {
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-primary" value="Submit" name="form1">
                                 </div>
-                                <a href="login.php" style="color:#e4144d;">Quay lại trang đăng nhập</a>
+                                <a href="login-customer.php" style="color:#e4144d;">Quay lại trang đăng nhập</a>
                             </div>
                         </div>
                     </form>

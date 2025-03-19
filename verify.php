@@ -36,7 +36,7 @@ try {
     $statement->execute([$email]);
 
     $successMsg = '<p style="color:green;">Xác minh email thành công! Bạn có thể đăng nhập ngay bây giờ.</p>
-                   <p><a href="' . BASE_URL . 'login.php" style="color:#167ac6;font-weight:bold;">Bấm vào đây để đăng nhập</a></p>';
+                   <p><a href="' . BASE_URL . 'login-customer.php" style="color:#167ac6;font-weight:bold;">Bấm vào đây để đăng nhập</a></p>';
 } catch (Exception $e) {
     $errorMsg = '<p style="color:red;">' . htmlspecialchars($e->getMessage()) . '</p>';
 }
@@ -61,4 +61,3 @@ try {
 </div>
 
 <?php require_once('footer.php'); ?>
-
