@@ -6,9 +6,9 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Check the id is valid or not
-    $querry = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
     if ($total == 0) {
         header('location: logout.php');
         exit;
@@ -19,9 +19,9 @@ if (!isset($_REQUEST['id'])) {
 <?php
 
 // Getting photo ID to unlink from folder
-$querry = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $photo = $row['photo'];
 }
@@ -32,8 +32,8 @@ if ($photo != '') {
 }
 
 // xóa khỏi table_slider
-$querry = $pdo->prepare("DELETE FROM table_slider WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
+$query = $pdo->prepare("DELETE FROM table_slider WHERE id=?");
+$query->execute(array($_REQUEST['id']));
 
 header('location: slider.php');
 ?><?php require_once('header.php'); ?>
@@ -45,9 +45,9 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra xem ID có hợp lệ không
-    $querry = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
     if ($total == 0) {
         // Nếu ID không tồn tại, chuyển hướng đến trang đăng xuất
         header('location: logout.php');
@@ -59,9 +59,9 @@ if (!isset($_REQUEST['id'])) {
 <?php
 
 // Lấy ảnh hiện tại của slider để xóa khỏi thư mục
-$querry = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_slider WHERE id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $photo = $row['photo']; // Lưu tên file ảnh vào biến $photo
 }
@@ -72,8 +72,8 @@ if ($photo != '') {
 }
 
 // Xóa dữ liệu slider khỏi bảng `table_slider`
-$querry = $pdo->prepare("DELETE FROM table_slider WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
+$query = $pdo->prepare("DELETE FROM table_slider WHERE id=?");
+$query->execute(array($_REQUEST['id']));
 
 // Chuyển hướng về trang danh sách slider sau khi xóa
 header('location: slider.php');

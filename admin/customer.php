@@ -30,13 +30,13 @@
                             <?php
                             $i = 0;
                             // Truy vấn lấy danh sách khách hàng và thông tin quốc gia của họ
-                            $querry = $pdo->prepare("SELECT * 
+                            $query = $pdo->prepare("SELECT * 
                                                         FROM table_customer t1
                                                         JOIN table_province t2
                                                         ON t1.cust_province = t2.province_id
                                                     ");
-                            $querry->execute();
-                            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                            $query->execute();
+                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($result as $row) {
                                 $i++;
                             ?>

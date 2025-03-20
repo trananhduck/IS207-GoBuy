@@ -29,8 +29,8 @@ if (isset($_POST['form1'])) {
     if ($valid == 1) {
 
         if ($path == '') {
-            $querry = $pdo->prepare("UPDATE table_service SET title=?, content=? WHERE id=?");
-            $querry->execute(array($_POST['title'], $_POST['content'], $_REQUEST['id']));
+            $query = $pdo->prepare("UPDATE table_service SET title=?, content=? WHERE id=?");
+            $query->execute(array($_POST['title'], $_POST['content'], $_REQUEST['id']));
         } else {
 
             unlink('../assets/uploads/' . $_POST['current_photo']);
@@ -38,8 +38,8 @@ if (isset($_POST['form1'])) {
             $final_name = 'service-' . $_REQUEST['id'] . '.' . $ext;
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
-            $querry = $pdo->prepare("UPDATE table_service SET title=?, content=?, photo=? WHERE id=?");
-            $querry->execute(array($_POST['title'], $_POST['content'], $final_name, $_REQUEST['id']));
+            $query = $pdo->prepare("UPDATE table_service SET title=?, content=?, photo=? WHERE id=?");
+            $query->execute(array($_POST['title'], $_POST['content'], $final_name, $_REQUEST['id']));
         }
 
         $successMsg = 'Dịch vụ đã được cập nhật thành công!';
@@ -52,10 +52,10 @@ if (!isset($_REQUEST['id'])) {
     header('location: logout.php');
     exit;
 } else {
-    $querry = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     if ($total == 0) {
         header('location: logout.php');
         exit;
@@ -73,9 +73,9 @@ if (!isset($_REQUEST['id'])) {
 </section>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_service WHERE id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $title = $row['title'];
     $content = $row['content'];

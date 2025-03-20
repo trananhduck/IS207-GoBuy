@@ -51,9 +51,9 @@ if (isset($_POST['form1'])) {
 
     if ($valid == 1) {
 
-        $querry = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product'");
-        $querry->execute();
-        $result = $querry->fetchAll();
+        $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product'");
+        $query->execute();
+        $result = $query->fetchAll();
         foreach ($result as $row) {
             $ai_id = $row[10];
         }
@@ -67,9 +67,9 @@ if (isset($_POST['form1'])) {
             $photo_temp = $_FILES['photo']["temp_name"];
             $photo_temp = array_values(array_filter($photo_temp));
 
-            $querry = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product_photo'");
-            $querry->execute();
-            $result = $querry->fetchAll();
+            $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product_photo'");
+            $query->execute();
+            $result = $query->fetchAll();
             foreach ($result as $row) {
                 $next_id1 = $row[10];
             }
@@ -88,8 +88,8 @@ if (isset($_POST['form1'])) {
 
             if (isset($final_name1)) {
                 for ($i = 0; $i < count($final_name1); $i++) {
-                    $querry = $pdo->prepare("INSERT INTO table_product_photo (photo,p_id) VALUES (?,?)");
-                    $querry->execute(array($final_name1[$i], $ai_id));
+                    $query = $pdo->prepare("INSERT INTO table_product_photo (photo,p_id) VALUES (?,?)");
+                    $query->execute(array($final_name1[$i], $ai_id));
                 }
             }
         }
@@ -98,7 +98,7 @@ if (isset($_POST['form1'])) {
         move_uploaded_file($temp_path, '../assets/uploads/' . $final_name);
 
         // Lưu dữ liệu vào bảng sản phẩm chính table_product
-        $querry = $pdo->prepare("INSERT INTO table_product(
+        $query = $pdo->prepare("INSERT INTO table_product(
 										p_name,
 										p_old_price,
 										p_current_price,
@@ -114,7 +114,7 @@ if (isset($_POST['form1'])) {
 										p_is_active,
 										ecat_id
 									) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $querry->execute(array(
+        $query->execute(array(
             $_POST['p_name'],
             $_POST['p_old_price'],
             $_POST['p_current_price'],
@@ -133,15 +133,15 @@ if (isset($_POST['form1'])) {
 
         if (isset($_POST['size'])) {
             foreach ($_POST['size'] as $value) {
-                $querry = $pdo->prepare("INSERT INTO table_product_size (size_id,p_id) VALUES (?,?)");
-                $querry->execute(array($value, $ai_id));
+                $query = $pdo->prepare("INSERT INTO table_product_size (size_id,p_id) VALUES (?,?)");
+                $query->execute(array($value, $ai_id));
             }
         }
 
         if (isset($_POST['color'])) {
             foreach ($_POST['color'] as $value) {
-                $querry = $pdo->prepare("INSERT INTO table_product_color (color_id,p_id) VALUES (?,?)");
-                $querry->execute(array($value, $ai_id));
+                $query = $pdo->prepare("INSERT INTO table_product_color (color_id,p_id) VALUES (?,?)");
+                $query->execute(array($value, $ai_id));
             }
         }
 
@@ -191,9 +191,9 @@ if (isset($_POST['form1'])) {
                                 <select name="tcat_id" class="form-control select2 top-cat">
                                     <option value="">Chọn danh mục cấp cao nhất</option>
                                     <?php
-                                $querry = $pdo->prepare("SELECT * FROM table_top_category ORDER BY tcat_name ASC");
-                                $querry->execute();
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_top_category ORDER BY tcat_name ASC");
+                                $query->execute();
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
                                     <option value="<?php echo $row['tcat_id']; ?>"><?php echo $row['tcat_name']; ?>
@@ -251,9 +251,9 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <select name="size[]" class="form-control select2" multiple="multiple">
                                     <?php
-                                $querry = $pdo->prepare("SELECT * FROM table_size ORDER BY size_id ASC");
-                                $querry->execute();
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_size ORDER BY size_id ASC");
+                                $query->execute();
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
                                     <option value="<?php echo $row['size_id']; ?>"><?php echo $row['size_name']; ?>
@@ -269,9 +269,9 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <select name="color[]" class="form-control select2" multiple="multiple">
                                     <?php
-                                $querry = $pdo->prepare("SELECT * FROM table_color ORDER BY color_id ASC");
-                                $querry->execute();
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_color ORDER BY color_id ASC");
+                                $query->execute();
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
                                     <option value="<?php echo $row['color_id']; ?>"><?php echo $row['color_name']; ?>

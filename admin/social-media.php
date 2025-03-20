@@ -3,17 +3,17 @@
 <?php
 if (isset($_POST['form1'])) {
     // Cập nhật URL mạng xã hội vào cơ sở dữ liệu
-    $querry = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
-    $querry->execute(array($_POST['facebook'], 'Facebook'));
+    $query = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
+    $query->execute(array($_POST['facebook'], 'Facebook'));
 
-    $querry = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
-    $querry->execute(array($_POST['twitter'], 'Twitter'));
+    $query = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
+    $query->execute(array($_POST['twitter'], 'Twitter'));
 
-    $querry = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
-    $querry->execute(array($_POST['youtube'], 'YouTube'));
+    $query = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
+    $query->execute(array($_POST['youtube'], 'YouTube'));
 
-    $querry = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
-    $querry->execute(array($_POST['instagram'], 'Instagram'));
+    $query = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
+    $query->execute(array($_POST['instagram'], 'Instagram'));
 
     $successMsg = 'Các URL mạng xã hội đã được cập nhật thành công.';
 }
@@ -27,9 +27,9 @@ if (isset($_POST['form1'])) {
 
 <?php
 // Lấy dữ liệu mạng xã hội từ cơ sở dữ liệu
-$querry = $pdo->prepare("SELECT * FROM table_social");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_social");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     if ($row['social_name'] == 'Facebook') {
         $facebook = $row['social_url'];

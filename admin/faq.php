@@ -31,17 +31,17 @@
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                                <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['faq_title']; ?></td>
-                                    <td>
-                                        <a href="faq-edit.php?id=<?php echo $row['faq_id']; ?>"
-                                            class="btn btn-primary btn-xs">Sửa</a>
-                                        <a href="#" class="btn btn-danger btn-xs"
-                                            data-href="faq-delete.php?id=<?php echo $row['faq_id']; ?>" data-toggle="modal"
-                                            data-target="#confirm-delete">Xóa</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $row['faq_title']; ?></td>
+                                <td>
+                                    <a href="faq-edit.php?id=<?php echo $row['faq_id']; ?>"
+                                        class="btn btn-primary btn-xs">Sửa</a>
+                                    <a href="#" class="btn btn-danger btn-xs"
+                                        data-href="faq-delete.php?id=<?php echo $row['faq_id']; ?>" data-toggle="modal"
+                                        data-target="#confirm-delete">Xóa</a>
+                                </td>
+                            </tr>
                             <?php
                             }
                             ?>

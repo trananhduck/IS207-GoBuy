@@ -6,9 +6,9 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     //Kiểm tra ID có hợp lệ không
-    $querry = $pdo->prepare("SELECT * FROM table_faq WHERE faq_id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_faq WHERE faq_id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
     if ($total == 0) {
         header('location: logout.php');
         exit;
@@ -18,7 +18,7 @@ if (!isset($_REQUEST['id'])) {
 
 <?php
 // xóa khỏi table_faq
-$querry = $pdo->prepare("DELETE FROM table_faq WHERE faq_id=?");
-$querry->execute(array($_REQUEST['id']));
+$query = $pdo->prepare("DELETE FROM table_faq WHERE faq_id=?");
+$query->execute(array($_REQUEST['id']));
 header('location: faq.php');
 ?>

@@ -1,9 +1,9 @@
 <?php require_once('header.php'); ?>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_checkout = $row['banner_checkout'];
 }
@@ -30,7 +30,7 @@ if (!isset($_SESSION['cart_p_id'])) {
 
                 <?php if (!isset($_SESSION['customer'])): ?>
                 <p>
-                    <a href="login.php"
+                    <a href="login-customer.php"
                         class="btn btn-md btn-danger"><?php echo 'Vui lòng đăng nhập để thanh toán' ?></a>
                 </p>
                 <?php else: ?>
@@ -130,18 +130,18 @@ if (!isset($_SESSION['cart_p_id'])) {
                             <th class="total-amount"><?php echo $table_total_price; ?><?php echo ' VND' ?></th>
                         </tr>
                         <?php
-                            $querry = $pdo->prepare("SELECT * FROM table_shipping_cost WHERE province_id=?");
-                            $querry->execute(array($_SESSION['customer']['cust_province']));
-                            $total = $querry->rowCount();
+                            $query = $pdo->prepare("SELECT * FROM table_shipping_cost WHERE province_id=?");
+                            $query->execute(array($_SESSION['customer']['cust_province']));
+                            $total = $query->rowCount();
                             if ($total) {
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                     $shipping_cost = $row['amount'];
                                 }
                             } else {
-                                $querry = $pdo->prepare("SELECT * FROM table_shipping_cost_all WHERE sca_id=1");
-                                $querry->execute();
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_shipping_cost_all WHERE sca_id=1");
+                                $query->execute();
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                     $shipping_cost = $row['amount'];
                                 }
@@ -184,9 +184,9 @@ if (!isset($_SESSION['cart_p_id'])) {
                                     <td><?php echo 'Tỉnh/thành phố' ?></td>
                                     <td>
                                         <?php
-                                            $querry = $pdo->prepare("SELECT * FROM table_province WHERE province_id=?");
-                                            $querry->execute(array($_SESSION['customer']['cust_s_province']));
-                                            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                            $query = $pdo->prepare("SELECT * FROM table_province WHERE province_id=?");
+                                            $query->execute(array($_SESSION['customer']['cust_s_province']));
+                                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result as $row) {
                                                 echo $row['province_name'];
                                             }
@@ -280,9 +280,9 @@ if (!isset($_SESSION['cart_p_id'])) {
                                 <div class="col-md-12 form-group">
                                     <label for=""><?php echo 'Gửi tới chi tiết này' ?></span></label><br>
                                     <?php
-                                            $querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-                                            $querry->execute();
-                                            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                            $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+                                            $query->execute();
+                                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result as $row) {
                                                 echo nl2br($row['bank_detail']);
                                             }

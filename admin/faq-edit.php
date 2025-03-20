@@ -15,8 +15,8 @@ if (isset($_POST['form1'])) {
     }
 
     if ($valid == 1) {
-        $querry = $pdo->prepare("UPDATE table_faq SET faq_title=?, faq_content=? WHERE faq_id=?");
-        $querry->execute(array($_POST['faq_title'], $_POST['faq_content'], $_REQUEST['id']));
+        $query = $pdo->prepare("UPDATE table_faq SET faq_title=?, faq_content=? WHERE faq_id=?");
+        $query->execute(array($_POST['faq_title'], $_POST['faq_content'], $_REQUEST['id']));
 
         $successMsg = 'FAQ đã được cập nhật thành công!';
     }
@@ -29,10 +29,10 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra xem id có hợp lệ hay không
-    $querry = $pdo->prepare("SELECT * FROM table_faq WHERE faq_id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_faq WHERE faq_id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     if ($total == 0) {
         header('location: logout.php');
         exit;
@@ -50,9 +50,9 @@ if (!isset($_REQUEST['id'])) {
 </section>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_faq WHERE faq_id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_faq WHERE faq_id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $faq_title = $row['faq_title'];
     $faq_content = $row['faq_content'];
@@ -64,15 +64,15 @@ foreach ($result as $row) {
         <div class="col-md-12">
 
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
-                    <p><?php echo $errorMsg; ?></p>
-                </div>
+            <div class="callout callout-danger">
+                <p><?php echo $errorMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+            <div class="callout callout-success">
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post">

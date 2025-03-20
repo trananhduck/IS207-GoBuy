@@ -1,9 +1,9 @@
 <?php require_once('header.php'); ?>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_product_category = $row['banner_product_category'];
 }
@@ -20,26 +20,26 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
         exit;
     } else {
 
-        $querry = $pdo->prepare("SELECT * FROM table_top_category");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_top_category");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $top[] = $row['tcat_id'];
             $top1[] = $row['tcat_name'];
         }
 
-        $querry = $pdo->prepare("SELECT * FROM table_mid_category");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_mid_category");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $mid[] = $row['mcat_id'];
             $mid1[] = $row['mcat_name'];
             $mid2[] = $row['tcat_id'];
         }
 
-        $querry = $pdo->prepare("SELECT * FROM table_end_category");
-        $querry->execute();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_end_category");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $end[] = $row['ecat_id'];
             $end1[] = $row['ecat_name'];
@@ -141,9 +141,9 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                         <?php
                         // Kiểm tra xem sản phẩm có tồn tại không
                         $prod_count = 0;
-                        $querry = $pdo->prepare("SELECT * FROM table_product");
-                        $querry->execute();
-                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                        $query = $pdo->prepare("SELECT * FROM table_product");
+                        $query->execute();
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                             $prod_table_ecat_ids[] = $row['ecat_id'];
                         }
@@ -158,48 +158,48 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                             echo '<div class="pl_15">' . 'Không tìm thấy sản phẩm' . '</div>';
                         } else {
                             for ($ii = 0; $ii < count($final_ecat_ids); $ii++) {
-                                $querry = $pdo->prepare("SELECT * FROM table_product WHERE ecat_id=? AND p_is_active=?");
-                                $querry->execute(array($final_ecat_ids[$ii], 1));
-                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                $query = $pdo->prepare("SELECT * FROM table_product WHERE ecat_id=? AND p_is_active=?");
+                                $query->execute(array($final_ecat_ids[$ii], 1));
+                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                         ?>
-                                    <div class="col-md-4 item item-product-cat">
-                                        <div class="inner">
-                                            <div class="thumb">
-                                                <div class="photo"
-                                                    style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
-                                                </div>
-                                                <div class="overlay"></div>
-                                            </div>
-                                            <div class="text">
-                                                <h3><a
-                                                        href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
-                                                </h3>
-                                                <h4>
-                                                    <?php echo $row['p_current_price']; ?><?php echo ' VND' ?>
-                                                    <?php if ($row['p_old_price'] != ''): ?>
-                                                        <del>
-                                                            <?php echo $row['p_old_price']; ?><?php echo ' VND' ?>
-                                                        </del>
-                                                    <?php endif; ?>
-                                                </h4>
-                                                <div class="rating">
-                                                    <?php
+                        <div class="col-md-4 item item-product-cat">
+                            <div class="inner">
+                                <div class="thumb">
+                                    <div class="photo"
+                                        style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                                    </div>
+                                    <div class="overlay"></div>
+                                </div>
+                                <div class="text">
+                                    <h3><a
+                                            href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
+                                    </h3>
+                                    <h4>
+                                        <?php echo $row['p_current_price']; ?><?php echo ' VND' ?>
+                                        <?php if ($row['p_old_price'] != ''): ?>
+                                        <del>
+                                            <?php echo $row['p_old_price']; ?><?php echo ' VND' ?>
+                                        </del>
+                                        <?php endif; ?>
+                                    </h4>
+                                    <div class="rating">
+                                        <?php
                                                     $t_rating = 0;
-                                                    $querry1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-                                                    $querry1->execute(array($row['p_id']));
-                                                    $tot_rating = $querry1->rowCount();
+                                                    $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
+                                                    $query1->execute(array($row['p_id']));
+                                                    $tot_rating = $query1->rowCount();
                                                     if ($tot_rating == 0) {
                                                         $avg_rating = 0;
                                                     } else {
-                                                        $result1 = $querry1->fetchAll(PDO::FETCH_ASSOC);
+                                                        $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                                         foreach ($result1 as $row1) {
                                                             $t_rating = $t_rating + $row1['rating'];
                                                         }
                                                         $avg_rating = $t_rating / $tot_rating;
                                                     }
                                                     ?>
-                                                    <?php
+                                        <?php
                                                     if ($avg_rating == 0) {
                                                         echo '';
                                                     } elseif ($avg_rating == 1.5) {
@@ -237,30 +237,30 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                                                     } else {
                                                         for ($i = 1; $i <= 5; $i++) {
                                                     ?>
-                                                            <?php if ($i > $avg_rating): ?>
-                                                                <i class="fa fa-star-o"></i>
-                                                            <?php else: ?>
-                                                                <i class="fa fa-star"></i>
-                                                            <?php endif; ?>
-                                                    <?php
+                                        <?php if ($i > $avg_rating): ?>
+                                        <i class="fa fa-star-o"></i>
+                                        <?php else: ?>
+                                        <i class="fa fa-star"></i>
+                                        <?php endif; ?>
+                                        <?php
                                                         }
                                                     }
                                                     ?>
-                                                </div>
-                                                <?php if ($row['p_qty'] == 0): ?>
-                                                    <div class="out-of-stock">
-                                                        <div class="inner">
-                                                            Hết hàng
-                                                        </div>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i
-                                                                class="fa fa-shopping-cart"></i> <?php echo 'Thêm vào giỏ hàng' ?></a>
-                                                    </p>
-                                                <?php endif; ?>
-                                            </div>
+                                    </div>
+                                    <?php if ($row['p_qty'] == 0): ?>
+                                    <div class="out-of-stock">
+                                        <div class="inner">
+                                            Hết hàng
                                         </div>
                                     </div>
+                                    <?php else: ?>
+                                    <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i
+                                                class="fa fa-shopping-cart"></i> <?php echo 'Thêm vào giỏ hàng' ?></a>
+                                    </p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
                         <?php
                                 }
                             }

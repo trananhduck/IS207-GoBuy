@@ -59,9 +59,9 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
             $photo_temp = array_values(array_filter($photo_temp));
 
             // Lấy ID sản phẩm tiếp theo từ bảng table_product_photo
-            $querry = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product_photo'");
-            $querry->execute();
-            $result = $querry->fetchAll();
+            $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product_photo'");
+            $query->execute();
+            $result = $query->fetchAll();
             foreach ($result as $row) {
                 $next_id1 = $row[10];
             }
@@ -82,14 +82,14 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
             // Lưu ảnh vào database
             if (isset($final_name1)) {
                 for ($i = 0; $i < count($final_name1); $i++) {
-                    $querry = $pdo->prepare("INSERT INTO table_product_photo (photo,p_id) VALUES (?,?)");
-                    $querry->execute(array($final_name1[$i], $_REQUEST['id']));
+                    $query = $pdo->prepare("INSERT INTO table_product_photo (photo,p_id) VALUES (?,?)");
+                    $query->execute(array($final_name1[$i], $_REQUEST['id']));
                 }
             }
         }
 
         if ($path == '') {  // Nếu không có ảnh sản phẩm nổi bật mới
-            $querry = $pdo->prepare("UPDATE table_product SET 
+            $query = $pdo->prepare("UPDATE table_product SET 
                                     p_name=?, 
                                     p_old_price=?, 
                                     p_current_price=?, 
@@ -102,7 +102,7 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
                                     p_is_active=?,
                                     ecat_id=?
                                     WHERE p_id=?");
-            $querry->execute(array(
+            $query->execute(array(
                 $_POST['p_name'],
                 $_POST['p_old_price'],
                 $_POST['p_current_price'],
@@ -122,7 +122,7 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
             $final_name = 'product-featured-' . $_REQUEST['id'] . '.' . $ext;
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name); // Lưu ảnh mới
 
-            $querry = $pdo->prepare("UPDATE table_product SET 
+            $query = $pdo->prepare("UPDATE table_product SET 
                                     p_name=?, 
                                     p_old_price=?, 
                                     p_current_price=?, 
@@ -136,7 +136,7 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
                                     p_is_active=?,
                                     ecat_id=?
                                     WHERE p_id=?");
-            $querry->execute(array(
+            $query->execute(array(
                 $_POST['p_name'],
                 $_POST['p_old_price'],
                 $_POST['p_current_price'],
@@ -155,30 +155,30 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
 
         // Xử lý kích thước sản phẩm
         if (isset($_POST['size'])) {
-            $querry = $pdo->prepare("DELETE FROM table_product_size WHERE p_id=?");
-            $querry->execute(array($_REQUEST['id']));
+            $query = $pdo->prepare("DELETE FROM table_product_size WHERE p_id=?");
+            $query->execute(array($_REQUEST['id']));
 
             foreach ($_POST['size'] as $value) {
-                $querry = $pdo->prepare("INSERT INTO table_product_size (size_id,p_id) VALUES (?,?)");
-                $querry->execute(array($value, $_REQUEST['id']));
+                $query = $pdo->prepare("INSERT INTO table_product_size (size_id,p_id) VALUES (?,?)");
+                $query->execute(array($value, $_REQUEST['id']));
             }
         } else {
-            $querry = $pdo->prepare("DELETE FROM table_product_size WHERE p_id=?");
-            $querry->execute(array($_REQUEST['id']));
+            $query = $pdo->prepare("DELETE FROM table_product_size WHERE p_id=?");
+            $query->execute(array($_REQUEST['id']));
         }
 
         // Xử lý màu sắc sản phẩm
         if (isset($_POST['color'])) {
-            $querry = $pdo->prepare("DELETE FROM table_product_color WHERE p_id=?");
-            $querry->execute(array($_REQUEST['id']));
+            $query = $pdo->prepare("DELETE FROM table_product_color WHERE p_id=?");
+            $query->execute(array($_REQUEST['id']));
 
             foreach ($_POST['color'] as $value) {
-                $querry = $pdo->prepare("INSERT INTO table_product_color (color_id,p_id) VALUES (?,?)");
-                $querry->execute(array($value, $_REQUEST['id']));
+                $query = $pdo->prepare("INSERT INTO table_product_color (color_id,p_id) VALUES (?,?)");
+                $query->execute(array($value, $_REQUEST['id']));
             }
         } else {
-            $querry = $pdo->prepare("DELETE FROM table_product_color WHERE p_id=?");
-            $querry->execute(array($_REQUEST['id']));
+            $query = $pdo->prepare("DELETE FROM table_product_color WHERE p_id=?");
+            $query->execute(array($_REQUEST['id']));
         }
 
         $successMsg = 'Sản phẩm đã được cập nhật thành công.';
@@ -192,10 +192,10 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra xem ID có hợp lệ không
-    $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
     if ($total == 0) {
         header('location: logout.php');
         exit;
@@ -213,9 +213,9 @@ if (!isset($_REQUEST['id'])) {
 </section>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $p_name = $row['p_name'];
     $p_old_price = $row['p_old_price'];
@@ -231,31 +231,31 @@ foreach ($result as $row) {
     $ecat_id = $row['ecat_id'];
 }
 
-$querry = $pdo->prepare("SELECT * 
+$query = $pdo->prepare("SELECT * 
                         FROM table_end_category t1
                         JOIN table_mid_category t2
                         ON t1.mcat_id = t2.mcat_id
                         JOIN table_top_category t3
                         ON t2.tcat_id = t3.tcat_id
                         WHERE t1.ecat_id=?");
-$querry->execute(array($ecat_id));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query->execute(array($ecat_id));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $ecat_name = $row['ecat_name'];
     $mcat_id = $row['mcat_id'];
     $tcat_id = $row['tcat_id'];
 }
 
-$querry = $pdo->prepare("SELECT * FROM table_product_size WHERE p_id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_product_size WHERE p_id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $size_id[] = $row['size_id'];
 }
 
-$querry = $pdo->prepare("SELECT * FROM table_product_color WHERE p_id=?");
-$querry->execute(array($_REQUEST['id']));
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_product_color WHERE p_id=?");
+$query->execute(array($_REQUEST['id']));
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $color_id[] = $row['color_id'];
 }
@@ -419,9 +419,9 @@ foreach ($result as $row) {
                                 <select name="color[]" class="form-control select2" multiple="multiple">
                                     <?php
                                     $is_select = '';
-                                    $querry = $pdo->prepare("SELECT * FROM table_color ORDER BY color_id ASC");
-                                    $querry->execute();
-                                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                    $query = $pdo->prepare("SELECT * FROM table_color ORDER BY color_id ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                         if (isset($color_id)) {
                                             if (in_array($row['color_id'], $color_id)) {
@@ -463,9 +463,9 @@ foreach ($result as $row) {
                                 <table id="ProductTable" style="width:100%;">
                                     <tbody>
                                         <?php
-                                        $querry = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
-                                        $querry->execute(array($_REQUEST['id']));
-                                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                        $query = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
+                                        $query->execute(array($_REQUEST['id']));
+                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
                                         <tr>

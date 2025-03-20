@@ -24,9 +24,9 @@ if (isset($_POST['form1'])) {
 
     if ($valid == 1) {
         // Lấy ID tự động tăng
-        $querry = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_slider'");
-        $querry->execute();
-        $result = $querry->fetchAll();
+        $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_slider'");
+        $query->execute();
+        $result = $query->fetchAll();
         foreach ($result as $row) {
             $ai_id = $row[10];
         }
@@ -36,8 +36,8 @@ if (isset($_POST['form1'])) {
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
         // Chèn dữ liệu vào bảng table_slider
-        $querry = $pdo->prepare("INSERT INTO table_slider (photo,heading,content,button_text,button_url,position) VALUES (?,?,?,?,?,?)");
-        $querry->execute(array($final_name, $_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position']));
+        $query = $pdo->prepare("INSERT INTO table_slider (photo,heading,content,button_text,button_url,position) VALUES (?,?,?,?,?,?)");
+        $query->execute(array($final_name, $_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position']));
 
         $successMsg = 'Thêm slider thành công!';
 

@@ -7,9 +7,9 @@ if (!isset($_SESSION['customer'])) {
     exit;
 } else {
     // If customer is logged in, but admin make him inactive, then force logout this user.
-    $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
-    $querry->execute(array($_SESSION['customer']['cust_id'], 0));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
+    $query->execute(array($_SESSION['customer']['cust_id'], 0));
+    $total = $query->rowCount();
     if ($total) {
         header('location: ' . BASE_URL . 'logout.php');
         exit;
@@ -22,14 +22,14 @@ if (isset($_POST['form1'])) {
 
 
     // update data into the database
-    $querry = $pdo->prepare("UPDATE table_customer SET  
+    $query = $pdo->prepare("UPDATE table_customer SET  
                             cust_s_name=?, 
                             cust_s_phone=?, 
                             cust_s_province=?, 
                             cust_s_district=?, 
                             cust_s_address=?
                             WHERE cust_id=?");
-    $querry->execute(array(
+    $query->execute(array(
         strip_tags($_POST['cust_s_name']),
         strip_tags($_POST['cust_s_phone']),
         strip_tags($_POST['cust_s_province']),
@@ -90,9 +90,9 @@ if (isset($_POST['form1'])) {
                                             <label class="text-left"><?php echo 'Tỉnh/thành phố' ?></label>
                                             <select name="cust_s_province" class="form-control">
                                                 <?php
-                                                $querry = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                                $querry->execute();
-                                                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                                $query = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
+                                                $query->execute();
+                                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                 foreach ($result as $row) {
                                                 ?>
                                                 <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {

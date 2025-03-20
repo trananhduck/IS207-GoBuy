@@ -1,9 +1,9 @@
 <?php require_once('header.php'); ?>
 
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_cart = $row['banner_cart'];
 }
@@ -16,9 +16,9 @@ if (isset($_POST['form1'])) { // Kiểm tra nếu biểu mẫu đã được g�
 
     $i = 0;
     // Truy vấn tất cả sản phẩm từ bảng table_product
-    $querry = $pdo->prepare("SELECT * FROM table_product");
-    $querry->execute();
-    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+    $query = $pdo->prepare("SELECT * FROM table_product");
+    $query->execute();
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // Lưu ID sản phẩm và số lượng tồn kho vào mảng
     foreach ($result as $row) {
@@ -74,17 +74,17 @@ if (isset($_POST['form1'])) { // Kiểm tra nếu biểu mẫu đã được g�
     $errorMsg .= '\nOther items quantity are updated successfully!';
 ?>
 
-    <?php if ($allow_update == 0): ?>
-        <script>
-            // Hiển thị thông báo lỗi nếu có sản phẩm không đủ số lượng
-            alert('<?php echo $errorMsg; ?>');
-        </script>
-    <?php else: ?>
-        <script>
-            // Hiển thị thông báo thành công nếu tất cả sản phẩm đều cập nhật thành công
-            alert('Tất cả số lượng sản phẩm được cập nhật thành công');
-        </script>
-    <?php endif; ?>
+<?php if ($allow_update == 0): ?>
+<script>
+// Hiển thị thông báo lỗi nếu có sản phẩm không đủ số lượng
+alert('<?php echo $errorMsg; ?>');
+</script>
+<?php else: ?>
+<script>
+// Hiển thị thông báo thành công nếu tất cả sản phẩm đều cập nhật thành công
+alert('Tất cả số lượng sản phẩm được cập nhật thành công');
+</script>
+<?php endif; ?>
 <?php
 }
 ?>
@@ -103,25 +103,25 @@ if (isset($_POST['form1'])) { // Kiểm tra nếu biểu mẫu đã được g�
             <div class="col-md-12">
 
                 <?php if (!isset($_SESSION['cart_p_id'])): ?>
-                    <?php echo '<h2 class="text-center">Giỏ hàng đang trống</h2></br>'; ?>
-                    <?php echo '<h4 class="text-center">Thêm sản phẩm vào giỏ hàng tại đây</h4>'; ?>
+                <?php echo '<h2 class="text-center">Giỏ hàng đang trống</h2></br>'; ?>
+                <?php echo '<h4 class="text-center">Thêm sản phẩm vào giỏ hàng tại đây</h4>'; ?>
                 <?php else: ?>
-                    <form action="" method="post">
-                        <?php $csrf->echoInputField(); ?>
-                        <div class="cart">
-                            <table class="table table-responsive table-hover table-bordered">
-                                <tr>
-                                    <th><?php echo 'STT' ?></th>
-                                    <th><?php echo 'Ảnh' ?></th>
-                                    <th><?php echo 'Tên sản phẩm' ?></th>
-                                    <th><?php echo 'Kích thước' ?></th>
-                                    <th><?php echo 'Màu sắc' ?></th>
-                                    <th><?php echo 'Giá' ?></th>
-                                    <th><?php echo 'Số lượng' ?></th>
-                                    <th class="text-right"><?php echo 'Tổng' ?></th>
-                                    <th class="text-center" style="width: 100px;"><?php echo 'Hành động' ?></th>
-                                </tr>
-                                <?php
+                <form action="" method="post">
+                    <?php $csrf->echoInputField(); ?>
+                    <div class="cart">
+                        <table class="table table-responsive table-hover table-bordered">
+                            <tr>
+                                <th><?php echo 'STT' ?></th>
+                                <th><?php echo 'Ảnh' ?></th>
+                                <th><?php echo 'Tên sản phẩm' ?></th>
+                                <th><?php echo 'Kích thước' ?></th>
+                                <th><?php echo 'Màu sắc' ?></th>
+                                <th><?php echo 'Giá' ?></th>
+                                <th><?php echo 'Số lượng' ?></th>
+                                <th class="text-right"><?php echo 'Tổng' ?></th>
+                                <th class="text-center" style="width: 100px;"><?php echo 'Hành động' ?></th>
+                            </tr>
+                            <?php
                                 $table_total_price = 0;
 
                                 $i = 0;
@@ -178,56 +178,56 @@ if (isset($_POST['form1'])) { // Kiểm tra nếu biểu mẫu đã được g�
                                     $arr_cart_p_featured_photo[$i] = $value;
                                 }
                                 ?>
-                                <?php for ($i = 1; $i <= count($arr_cart_p_id); $i++): ?>
-                                    <tr>
-                                        <td><?php echo $i; ?></td>
-                                        <td>
-                                            <img src="assets/uploads/<?php echo $arr_cart_p_featured_photo[$i]; ?>" alt="">
-                                        </td>
-                                        <td><?php echo $arr_cart_p_name[$i]; ?></td>
-                                        <td><?php echo $arr_cart_size_name[$i]; ?></td>
-                                        <td><?php echo $arr_cart_color_name[$i]; ?></td>
-                                        <td><?php echo $arr_cart_p_current_price[$i]; ?><?php echo ' VND' ?></td>
-                                        <td>
-                                            <input type="hidden" name="product_id[]" value="<?php echo $arr_cart_p_id[$i]; ?>">
-                                            <input type="hidden" name="product_name[]"
-                                                value="<?php echo $arr_cart_p_name[$i]; ?>">
-                                            <input type="number" class="input-text qty text" step="1" min="1" max=""
-                                                name="quantity[]" value="<?php echo $arr_cart_p_qty[$i]; ?>" title="Qty"
-                                                size="4" pattern="[0-9]*" inputmode="numeric">
-                                        </td>
-                                        <td class="text-right">
-                                            <?php
+                            <?php for ($i = 1; $i <= count($arr_cart_p_id); $i++): ?>
+                            <tr>
+                                <td><?php echo $i; ?></td>
+                                <td>
+                                    <img src="assets/uploads/<?php echo $arr_cart_p_featured_photo[$i]; ?>" alt="">
+                                </td>
+                                <td><?php echo $arr_cart_p_name[$i]; ?></td>
+                                <td><?php echo $arr_cart_size_name[$i]; ?></td>
+                                <td><?php echo $arr_cart_color_name[$i]; ?></td>
+                                <td><?php echo $arr_cart_p_current_price[$i]; ?><?php echo ' VND' ?></td>
+                                <td>
+                                    <input type="hidden" name="product_id[]" value="<?php echo $arr_cart_p_id[$i]; ?>">
+                                    <input type="hidden" name="product_name[]"
+                                        value="<?php echo $arr_cart_p_name[$i]; ?>">
+                                    <input type="number" class="input-text qty text" step="1" min="1" max=""
+                                        name="quantity[]" value="<?php echo $arr_cart_p_qty[$i]; ?>" title="Qty"
+                                        size="4" pattern="[0-9]*" inputmode="numeric">
+                                </td>
+                                <td class="text-right">
+                                    <?php
                                             $row_total_price = $arr_cart_p_current_price[$i] * $arr_cart_p_qty[$i];
                                             $table_total_price = $table_total_price + $row_total_price;
                                             ?>
-                                            <?php echo $row_total_price; ?><?php echo ' VND' ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <a onclick="return confirmDelete();"
-                                                href="cart-delete-item.php?id=<?php echo $arr_cart_p_id[$i]; ?>&size=<?php echo $arr_cart_size_id[$i]; ?>&color=<?php echo $arr_cart_color_id[$i]; ?>"
-                                                class="trash"><i class="fa fa-trash" style="color:red;"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php endfor; ?>
-                                <tr>
-                                    <th colspan="7" class="total-text">Thành tiền</th>
-                                    <th class="total-amount"><?php echo $table_total_price; ?><?php echo ' VND' ?>
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </table>
-                        </div>
+                                    <?php echo $row_total_price; ?><?php echo ' VND' ?>
+                                </td>
+                                <td class="text-center">
+                                    <a onclick="return confirmDelete();"
+                                        href="cart-delete-item.php?id=<?php echo $arr_cart_p_id[$i]; ?>&size=<?php echo $arr_cart_size_id[$i]; ?>&color=<?php echo $arr_cart_color_id[$i]; ?>"
+                                        class="trash"><i class="fa fa-trash" style="color:red;"></i></a>
+                                </td>
+                            </tr>
+                            <?php endfor; ?>
+                            <tr>
+                                <th colspan="7" class="total-text">Thành tiền</th>
+                                <th class="total-amount"><?php echo $table_total_price; ?><?php echo ' VND' ?>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </table>
+                    </div>
 
-                        <div class="cart-buttons">
-                            <ul>
-                                <li><input type="submit" value="<?php echo 'Cập nhật số lượng' ?>" class="btn btn-primary"
-                                        name="form1"></li>
-                                <li><a href="index.php" class="btn btn-primary"><?php echo 'Tiếp tục mua hàng' ?></a></li>
-                                <li><a href="checkout.php" class="btn btn-primary"><?php echo 'Thanh toán' ?></a></li>
-                            </ul>
-                        </div>
-                    </form>
+                    <div class="cart-buttons">
+                        <ul>
+                            <li><input type="submit" value="<?php echo 'Cập nhật số lượng' ?>" class="btn btn-primary"
+                                    name="form1"></li>
+                            <li><a href="index.php" class="btn btn-primary"><?php echo 'Tiếp tục mua hàng' ?></a></li>
+                            <li><a href="checkout.php" class="btn btn-primary"><?php echo 'Thanh toán' ?></a></li>
+                        </ul>
+                    </div>
+                </form>
                 <?php endif; ?>
             </div>
         </div>

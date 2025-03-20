@@ -10,9 +10,9 @@ if (isset($_POST['form1'])) {
         $errorMsg .= "Tên danh mục cấp cao không được để trống<br>";
     } else {
         // Kiểm tra danh mục trùng lặp
-        $querry = $pdo->prepare("SELECT * FROM tbl_top_category WHERE tcat_name=?");
-        $querry->execute(array($_POST['tcat_name']));
-        $total = $querry->rowCount();
+        $query = $pdo->prepare("SELECT * FROM tbl_top_category WHERE tcat_name=?");
+        $query->execute(array($_POST['tcat_name']));
+        $total = $query->rowCount();
         if ($total) {
             $valid = 0;
             $errorMsg .= "Tên danh mục cấp cao đã tồn tại<br>";
@@ -21,8 +21,8 @@ if (isset($_POST['form1'])) {
 
     // Nếu không có lỗi, tiến hành thêm vào cơ sở dữ liệu
     if ($valid == 1) {
-        $querry = $pdo->prepare("INSERT INTO tbl_top_category (tcat_name,show_on_menu) VALUES (?,?)");
-        $querry->execute(array($_POST['tcat_name'], $_POST['show_on_menu']));
+        $query = $pdo->prepare("INSERT INTO tbl_top_category (tcat_name,show_on_menu) VALUES (?,?)");
+        $query->execute(array($_POST['tcat_name'], $_POST['show_on_menu']));
 
         $successMsg = 'Danh mục cấp cao đã được thêm thành công.';
     }
@@ -44,16 +44,16 @@ if (isset($_POST['form1'])) {
 
             <!-- Hiển thị thông báo lỗi nếu có -->
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
-                    <p><?php echo $errorMsg; ?></p>
-                </div>
+            <div class="callout callout-danger">
+                <p><?php echo $errorMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <!-- Hiển thị thông báo thành công nếu có -->
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+            <div class="callout callout-success">
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post">

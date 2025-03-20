@@ -2,9 +2,9 @@
 
 <?php
 // Lấy thông tin trang FAQ từ cơ sở dữ liệu
-$querry = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $faq_title = $row['faq_title'];  // Tiêu đề trang FAQ
     $faq_banner = $row['faq_banner']; // Ảnh banner của trang FAQ
@@ -27,9 +27,9 @@ foreach ($result as $row) {
 
                     <?php
                     // Lấy danh sách câu hỏi từ bảng table_faq
-                    $querry = $pdo->prepare("SELECT * FROM table_faq");
-                    $querry->execute();
-                    $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                    $query = $pdo->prepare("SELECT * FROM table_faq");
+                    $query->execute();
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                     ?>
                         <div class="panel panel-default">

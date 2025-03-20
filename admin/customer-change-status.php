@@ -8,9 +8,9 @@ if (!isset($_REQUEST['id'])) {
     exit;
 } else {
     // Kiểm tra xem id có hợp lệ không
-    $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=?");
-    $querry->execute(array($_REQUEST['id']));
-    $total = $querry->rowCount();
+    $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=?");
+    $query->execute(array($_REQUEST['id']));
+    $total = $query->rowCount();
     
     if ($total == 0) {
         // Nếu không tìm thấy khách hàng với id này, chuyển hướng về trang đăng xuất
@@ -18,7 +18,7 @@ if (!isset($_REQUEST['id'])) {
         exit;
     } else {
         // Lấy thông tin khách hàng từ cơ sở dữ liệu
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);							
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);							
         foreach ($result as $row) {
             $cust_status = $row['cust_status']; // Lấy trạng thái hiện tại của khách hàng
         }
@@ -33,8 +33,8 @@ if ($cust_status == 0) {
 }
 
 // Cập nhật trạng thái khách hàng trong cơ sở dữ liệu
-$querry = $pdo->prepare("UPDATE table_customer SET cust_status=? WHERE cust_id=?");
-$querry->execute(array($final, $_REQUEST['id']));
+$query = $pdo->prepare("UPDATE table_customer SET cust_status=? WHERE cust_id=?");
+$query->execute(array($final, $_REQUEST['id']));
 
 // Chuyển hướng trở lại trang danh sách khách hàng sau khi cập nhật trạng thái
 header('location: customer.php');

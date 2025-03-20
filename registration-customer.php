@@ -10,9 +10,9 @@ require 'PHPMailer/PHPMailer/src/SMTP.php';
 require 'PHPMailer/PHPMailer/src/Exception.php';
 ?>
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_registration = $row['banner_registration'];
 }
@@ -36,9 +36,9 @@ if (isset($_POST['form1'])) {
             $valid = 0;
             $errorMsg .= 'Địa chỉ email phải hợp lệ' . "<br>";
         } else {
-            $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
-            $querry->execute(array($_POST['cust_email']));
-            $total = $querry->rowCount();
+            $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
+            $query->execute(array($_POST['cust_email']));
+            $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
                 $errorMsg .= 'Địa chỉ email đã tồn tại' . "<br>";
@@ -86,7 +86,7 @@ if (isset($_POST['form1'])) {
         $cust_timestamp = time();
 
         //Lưu vào DB
-        $querry = $pdo->prepare("INSERT INTO table_customer (
+        $query = $pdo->prepare("INSERT INTO table_customer (
                                         cust_name,
                                         cust_email,
                                         cust_phone,
@@ -104,7 +104,7 @@ if (isset($_POST['form1'])) {
                                         cust_timestamp,
                                         cust_status
                                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $querry->execute(array(
+        $query->execute(array(
             // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
             strip_tags($_POST['cust_name']),      // Tên khách hàng
             strip_tags($_POST['cust_email']),     // Email khách hàng
@@ -142,8 +142,8 @@ if (isset($_POST['form1'])) {
         // Gửi email xác nhận tài khoản
         $to = $_POST['cust_email'];
 
-        $subject = 'GoBuy - Registration Email Confirmation';
-        $verify_link = $base_url . 'verify.php?email=' . urlencode($to) . '&token=' . urlencode($token);
+        $subject = 'GoBuy - Customer Registration Email Confirmation';
+        $verify_link = $base_url . 'verify-customer.php?email=' . urlencode($to) . '&token=' . urlencode($token);
         $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br>
     <a href="' . $verify_link . '">' . $verify_link . '</a>';
 
@@ -174,15 +174,12 @@ if (isset($_POST['form1'])) {
         } catch (Exception $e) {
             echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
         }
-
-
         unset($_POST['cust_name']);
         unset($_POST['cust_email']);
         unset($_POST['cust_phone']);
         unset($_POST['cust_province']);
         unset($_POST['cust_district']);
         unset($_POST['cust_address']);
-
         $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra địa chỉ email của bạn để làm theo quy trình xác nhận đăng ký của bạn.';
     }
 }
@@ -200,9 +197,6 @@ if (isset($_POST['form1'])) {
         <div class="row">
             <div class="col-md-12">
                 <div class="user-content">
-
-
-
                     <form action="" method="post">
                         <?php $csrf->echoInputField(); ?>
                         <div class="row">
@@ -241,13 +235,13 @@ if (isset($_POST['form1'])) {
                                     <select name="cust_province" class="form-control select2">
                                         <option value="">Chọn tỉnh/thành phố</option>
                                         <?php
-                                        $querry = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                        $querry->execute();
-                                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                        $query = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
+                                        $query->execute();
+                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
-                                            <option value="<?php echo $row['province_id']; ?>">
-                                                <?php echo $row['province_name']; ?></option>
+                                        <option value="<?php echo $row['province_id']; ?>">
+                                            <?php echo $row['province_name']; ?></option>
                                         <?php
                                         }
                                         ?>
@@ -280,14 +274,20 @@ if (isset($_POST['form1'])) {
                                         name="form1">
                                 </div>
                             </div>
-
-
-                        </div>
+                    </form>
                 </div>
-                </form>
+            </div>
+            <div class="col-md-12">
+                <div class="user-sidebar">
+                    <ul>
+                        <a href="registration-admin.php"><button
+                                class="btn btn-danger"><?php echo 'Đăng ký tài khoản admin' ?></button></a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 

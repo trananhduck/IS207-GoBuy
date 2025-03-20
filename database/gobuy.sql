@@ -727,14 +727,16 @@ CREATE TABLE `table_user` (
   `phone` varchar(100) NOT NULL,
   `password` TEXT NOT NULL,
   `photo` TEXT NOT NULL,
-  `role` varchar(30) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `token` TEXT NOT NULL,
+  `datetime` varchar(100) NOT NULL,
+  `timestamp` varchar(100) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO `table_user` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `role`, `status`) 
+INSERT INTO `table_user` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `token`, `datetime`, `timestamp`,`status`) 
 VALUES
-(1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'Admin', 'Active');
+(1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'xxxx', '23-2-2025', '25-2-2025', 'Active');
 
 CREATE TABLE `table_video` (
   `id` int(11) NOT NULL,

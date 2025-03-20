@@ -1,8 +1,8 @@
 <?php require_once('header.php'); ?>
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_login = $row['banner_login'];
 }
@@ -18,10 +18,10 @@ if (isset($_POST['form1'])) {
         $cust_email = strip_tags($_POST['cust_email']);
         $cust_password = strip_tags($_POST['cust_password']);
 
-        $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
-        $querry->execute(array($cust_email));
-        $total = $querry->rowCount();
-        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
+        $query->execute(array($cust_email));
+        $total = $query->rowCount();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
             $cust_status = $row['cust_status'];
             $row_password = $row['cust_password'];
@@ -88,6 +88,14 @@ if (isset($_POST['form1'])) {
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="user-sidebar">
+                    <ul>
+                        <a href="login-admin.php"><button
+                                class="btn btn-danger"><?php echo 'Đăng nhập với tư cách admin' ?></button></a>
+                    </ul>
                 </div>
             </div>
         </div>

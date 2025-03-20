@@ -32,9 +32,9 @@ if (isset($_POST['form_about'])) {
 
         if ($path != '') {
             // Xóa ảnh hiện có
-            $querry = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-            $querry->execute();
-            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+            $query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $row) {
                 $about_banner = $row['about_banner'];
                 unlink('../assets/uploads/' . $about_banner);
@@ -75,9 +75,9 @@ if (isset($_POST['form_faq'])) {
 
         if ($path != '') {
             // Xóa ảnh hiện có
-            $querry = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-            $querry->execute();
-            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+            $query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $row) {
                 $faq_banner = $row['faq_banner'];
                 unlink('../assets/uploads/' . $faq_banner);
@@ -118,9 +118,9 @@ if (isset($_POST['form_contact'])) {
 
         if ($path != '') {
             // Xóa ảnh hiện có
-            $querry = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-            $querry->execute();
-            $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+            $query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $row) {
                 $contact_banner = $row['contact_banner'];
                 unlink('../assets/uploads/' . $contact_banner);
@@ -142,9 +142,9 @@ if (isset($_POST['form_contact'])) {
     </div>
 </section>
 <?php
-$querry = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-$querry->execute();
-$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $about_title = $row['about_title'];
     $about_content = $row['about_content'];

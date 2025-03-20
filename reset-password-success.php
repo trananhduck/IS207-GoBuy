@@ -22,7 +22,7 @@ foreach ($result as $row) {
             <div class="col-md-12">
                 <div class="user-content">
                     <?php echo 'Mật khẩu đã được đặt lại thành công. Bạn có thể đăng nhập ngay bây giờ.', 'Mật khẩu đã được đặt lại thành công. Bạn có thể đăng nhập ngay bây giờ.' ?><br><br>
-                    <a href="<?php echo BASE_URL; ?>login.php"
+                    <a href="<?php echo BASE_URL; ?>login-customer.php"
                         style="color:#e4144d;font-weight:bold;"><?php echo 'Nhấn vào đây để đăng nhập' ?></a>
                 </div>
             </div>
