@@ -1,12 +1,12 @@
 <?php require_once('header.php'); ?>
 
 <?php
-$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$query->execute();
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
-$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$query->execute();
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
+$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($result as $row) {
     $cta_title = $row['cta_title'];
@@ -39,9 +39,9 @@ foreach ($result as $row) {
     <ol class="carousel-indicators">
         <?php
         $i = 0;
-        $query = $pdo->prepare("SELECT * FROM table_slider");
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $querry = $pdo->prepare("SELECT * FROM table_slider");
+        $querry->execute();
+        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
         ?>
         <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {
@@ -59,9 +59,9 @@ foreach ($result as $row) {
 
         <?php
         $i = 0;
-        $query = $pdo->prepare("SELECT * FROM table_slider");
-        $query->execute();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $querry = $pdo->prepare("SELECT * FROM table_slider");
+        $querry->execute();
+        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
         ?>
         <div class="item <?php if ($i == 0) {
@@ -131,9 +131,9 @@ foreach ($result as $row) {
     <div class="container">
         <div class="row">
             <?php
-                $query = $pdo->prepare("SELECT * FROM table_service");
-                $query->execute();
-                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                $querry = $pdo->prepare("SELECT * FROM table_service");
+                $querry->execute();
+                $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                 ?>
             <div class="col-md-4">
@@ -172,9 +172,9 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
-                        $query->execute(array(1, 1));
-                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_featured=? AND p_is_active=? LIMIT " . $total_featured_product_home);
+                        $querry->execute(array(1, 1));
+                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                     <div class="item">
@@ -237,9 +237,9 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
-                        $query->execute(array(1));
-                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $querry = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
+                        $querry->execute(array(1));
+                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                     <div class="item">

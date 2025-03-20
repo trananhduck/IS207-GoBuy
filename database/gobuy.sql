@@ -476,7 +476,7 @@ INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
 (2, 'Mã giảm giá', '', 'service-2.png'),
 (3, 'Miễn phí ship', '', 'service-3.png'),
 (4, 'GoBuy style giảm 30%', '', 'service-4.png'),
-(5, 'Voucher giảm đến 1 tỷ', '', 'serivce-5.png'),
+(5, 'Voucher giảm đến 1 tỷ', '', 'service-5.png'),
 (6, 'Khung giờ săn sale', '', 'service-6.png'),
 (7, 'Hàng quốc tế', '', 'service-7.png'),
 (8, 'Nạp thẻ, Dịch vụ & Vé tàu hỏa', '', 'service-8.png');
