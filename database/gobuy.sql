@@ -557,7 +557,22 @@ CREATE TABLE `table_settings` (
 
 
 INSERT INTO table_settings 
-(id, logo, favicon, footer_about, footer_copyright, contact_address, contact_email, contact_phone, contact_fax, contact_map_iframe, receive_email, receive_email_subject, receive_email_thank_you_message, forget_password_message, total_recent_post_footer, total_popular_post_footer, total_recent_post_sidebar, total_popular_post_sidebar, total_featured_product_home, total_latest_product_home, total_popular_product_home, meta_title_home, meta_keyword_home, meta_description_home, banner_login, banner_registration, banner_forget_password, banner_reset_password, banner_search, banner_cart, banner_checkout, banner_product_category, banner_blog, cta_title, cta_content, cta_read_more_text, cta_read_more_url, cta_photo, featured_product_title, featured_product_subtitle, latest_product_title, latest_product_subtitle, popular_product_title, popular_product_subtitle, testimonial_title, testimonial_subtitle, testimonial_photo, blog_title, blog_subtitle, newsletter_text, bank_public_key, bank_secret_key, bank_detail, before_head, after_body, before_body, home_service_on_off, home_welcome_on_off, home_featured_product_on_off, home_latest_product_on_off, home_popular_product_on_off, home_testimonial_on_off, home_blog_on_off, newsletter_on_off, ads_above_welcome_on_off, ads_above_featured_product_on_off, ads_above_latest_product_on_off, ads_above_popular_product_on_off, ads_above_testimonial_on_off, ads_category_sidebar_on_off) 
+(id, logo, favicon, footer_about, footer_copyright, 
+contact_address, contact_email, contact_phone, contact_fax, 
+contact_map_iframe, receive_email, receive_email_subject, 
+receive_email_thank_you_message, forget_password_message, 
+total_latest_product_home, total_popular_product_home, 
+meta_title_home, meta_keyword_home, meta_description_home, 
+banner_login, banner_registration, banner_forget_password,
+ banner_reset_password, banner_search, banner_cart, banner_checkout, 
+ banner_product_category, banner_blog, cta_title, cta_content, 
+ cta_read_more_text, cta_read_more_url, cta_photo, 
+ latest_product_title, latest_product_subtitle, 
+ popular_product_title, popular_product_subtitle, 
+ bank_public_key, 
+ bank_secret_key, bank_detail, before_head, after_body, before_body, 
+ home_service_on_off, home_welcome_on_off, home_featured_product_on_off, 
+ home_latest_product_on_off, home_popular_product_on_off) 
 VALUES
 (1, 'logo.png', 'favicon.png', 
 '<p>Đây là một website bán hàng, đồ án môn học IS207 tại UIT</p>', 
@@ -572,7 +587,7 @@ VALUES
 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 
 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 
 
-4, 4, 5, 5, 5, 6, 8, 
+6, 8, 
 'GoBuy', 
 'online fashion store, garments shop, online garments', 
 'GoBuy project with mysql database', 
@@ -583,16 +598,11 @@ VALUES
 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 
 'Xem thêm', '#', 'cta.jpg', 
 
-'Sản phẩm nổi bật', 'Top sản phẩm nổi bật', 
 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 
 'Sẩn phẩm phổ biến', 'Sản phẩm phổ biến dựa trên lựa chọn của khách hàng', 
 
-'Đánh giá từ khách hàng', 'Xem khách hàng nói gì về chúng tôi', 'testimonial.jpg', 
-'Blog mới nhất', 'Xem tất cả bài viết và tin tức mới nhất của chúng tôi bên dưới', 
-'Đăng ký nhận thông báo để nhận các khuyến mãi và giảm giá mới nhất', 
-
 'xxxxxx', 'yyyyyy', 
-'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1, 1, 1);
 
 
 
