@@ -4,11 +4,13 @@
 
     var mainWindow          = $(window),
         mainDocument        = $(document),
+        youtubeThumb        = $('.youtube-thumbnail'),
         productCarousel     = $('.product-carousel'),
         bxMainSlider        = $('.bxslider'),
         prodSlider          = $('.prod-slider'),
         scrollUp            = $('.scrollup'),
         popup               = $('.popup'),
+        ratingSection       = $('.rating-section'),
         bootstrapTouchSlider = $('#bootstrap-touch-slider'),
         testimonialCarousel = $('.testimonial-carousel');
 

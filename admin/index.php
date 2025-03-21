@@ -1,7 +1,4 @@
-<?php require_once('header.php');
-session_start();
-var_dump($_SESSION);
-exit(); ?>
+<?php require_once('header.php'); ?>
 
 <section class="content-header">
     <h1>Thông tin</h1>
