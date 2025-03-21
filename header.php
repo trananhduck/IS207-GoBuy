@@ -21,8 +21,6 @@ foreach ($result as $row) {
     $contact_email = $row['contact_email'];
     $contact_phone = $row['contact_phone'];
     $meta_title_home = $row['meta_title_home'];
-    $meta_keyword_home = $row['meta_keyword_home'];
-    $meta_description_home = $row['meta_description_home'];
     $before_head = $row['before_head'];
     $after_body = $row['after_body'];
 }
@@ -64,23 +62,11 @@ foreach ($result as $row) {
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
         $about_meta_title = $row['about_meta_title'];
-        $about_meta_keyword = $row['about_meta_keyword'];
-        $about_meta_description = $row['about_meta_description'];
         $faq_meta_title = $row['faq_meta_title'];
-        $faq_meta_keyword = $row['faq_meta_keyword'];
-        $faq_meta_description = $row['faq_meta_description'];
         $blog_meta_title = $row['blog_meta_title'];
-        $blog_meta_keyword = $row['blog_meta_keyword'];
-        $blog_meta_description = $row['blog_meta_description'];
         $contact_meta_title = $row['contact_meta_title'];
-        $contact_meta_keyword = $row['contact_meta_keyword'];
-        $contact_meta_description = $row['contact_meta_description'];
         $pgallery_meta_title = $row['pgallery_meta_title'];
-        $pgallery_meta_keyword = $row['pgallery_meta_keyword'];
-        $pgallery_meta_description = $row['pgallery_meta_description'];
         $vgallery_meta_title = $row['vgallery_meta_title'];
-        $vgallery_meta_keyword = $row['vgallery_meta_keyword'];
-        $vgallery_meta_description = $row['vgallery_meta_description'];
     }
 
     $current_page = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
@@ -88,30 +74,22 @@ foreach ($result as $row) {
     if ($current_page == 'index.php' || $current_page == 'login-customer.php' || $current_page == 'login-admin.php' || $current_page == 'registration-customer.php' || $current_page == 'registration-admin.php' || $current_page == 'cart.php' || $current_page == 'checkout.php' || $current_page == 'forget-password.php' || $current_page == 'reset-password.php' || $current_page == 'product-category.php' || $current_page == 'product.php') {
     ?>
     <title><?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
 
     if ($current_page == 'about.php') {
     ?>
     <title><?php echo $about_meta_title; ?></title>
-    <meta name="keywords" content="<?php echo $about_meta_keyword; ?>">
-    <meta name="description" content="<?php echo $about_meta_description; ?>">
     <?php
     }
     if ($current_page == 'faq.php') {
     ?>
     <title><?php echo $faq_meta_title; ?></title>
-    <meta name="keywords" content="<?php echo $faq_meta_keyword; ?>">
-    <meta name="description" content="<?php echo $faq_meta_description; ?>">
     <?php
     }
     if ($current_page == 'contact.php') {
     ?>
     <title><?php echo $contact_meta_title; ?></title>
-    <meta name="keywords" content="<?php echo $contact_meta_keyword; ?>">
-    <meta name="description" content="<?php echo $contact_meta_description; ?>">
     <?php
     }
     if ($current_page == 'product.php') {
@@ -129,36 +107,26 @@ foreach ($result as $row) {
     if ($current_page == 'dashboard.php') {
     ?>
     <title>Dashboard - <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($current_page == 'customer-profile.php') {
     ?>
     <title>Cập nhật hồ sơ <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($current_page == 'customer-billing-shipping-update.php') {
     ?>
     <title>Cập nhật thông tin giao hàng <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($current_page == 'customer-password-update.php') {
     ?>
     <title>Cập nhật mật khẩu - <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     if ($current_page == 'customer-order.php') {
     ?>
     <title>Hàng đã đặt - <?php echo $meta_title_home; ?></title>
-    <meta name="keywords" content="<?php echo $meta_keyword_home; ?>">
-    <meta name="description" content="<?php echo $meta_description_home; ?>">
     <?php
     }
     ?>
