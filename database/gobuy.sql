@@ -290,8 +290,6 @@ CREATE TABLE table_page (
   pgallery_title TEXT NOT NULL,
   pgallery_banner TEXT NOT NULL,
   pgallery_meta_title TEXT NOT NULL,
-  vgallery_title TEXT NOT NULL,
-  vgallery_banner TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 INSERT INTO table_page (id, about_title, about_content, about_banner, 
