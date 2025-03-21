@@ -252,57 +252,25 @@ if (!isset($_SESSION['cart_p_id'])) {
                                 <label for=""><?php echo 'Chọn phương thức thanh toán' ?> *</label>
                                 <select name="payment_method" class="form-control select2" id="advFieldsStatus">
                                     <option value=""><?php echo 'Chọn 1 phương thức' ?></option>
-                                    <option value="Momo"><?php echo 'Momo' ?></option>
-                                    <option value="Bank Deposit"><?php echo 'Tài khoản ngân hàng' ?></option>
+                                    <option value="Bank"><?php echo 'Ngân hàng' ?></option>
                                 </select>
 
                             </div>
 
-                            <form class="Momo" action="<?php echo BASE_URL; ?>payment/Momo/payment-process.php"
-                                method="post" id="Momo_form" target="_blank">
+                            <form class="Bank" action="<?php echo BASE_URL; ?>payment/Bank/payment-process.php"
+                                method="post" id="Bank_form" target="_blank">
                                 <input type="hidden" name="cmd" value="_xclick" />
                                 <input type="hidden" name="no_note" value="1" />
                                 <input type="hidden" name="lc" value="UK" />
                                 <input type="hidden" name="currency_code" value="USD" />
                                 <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
-
                                 <input type="hidden" name="final_total" value="<?php echo $final_total; ?>">
                                 <div class="col-md-12 form-group">
                                     <input type="submit" class="btn btn-primary" value="<?php echo 'Thanh toán ngay' ?>"
                                         name="form1">
                                 </div>
                             </form>
-
-
-
-                            <form action="payment/bank/init.php" method="post" id="bank_form">
-                                <input type="hidden" name="amount" value="<?php echo $final_total; ?>">
-                                <div class="col-md-12 form-group">
-                                    <label for=""><?php echo 'Gửi tới chi tiết này' ?></span></label><br>
-                                    <?php
-                                            $query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-                                            $query->execute();
-                                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($result as $row) {
-                                                echo nl2br($row['bank_detail']);
-                                            }
-                                            ?>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <label for=""><?php echo 'Thông tin giao dịch' ?> <br><span
-                                            style="font-size:12px;font-weight:normal;">(<?php echo 'Include transaction id and other information correctly' ?>)</span></label>
-                                    <textarea name="transaction_info" class="form-control" cols="30"
-                                        rows="10"></textarea>
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <input type="submit" class="btn btn-primary" value="<?php echo 'Thanh toán ngay' ?>"
-                                        name="form3">
-                                </div>
-                            </form>
-
                         </div>
-
-
                     </div>
                     <?php endif; ?>
 
