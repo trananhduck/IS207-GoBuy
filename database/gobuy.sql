@@ -299,7 +299,7 @@ pgallery_banner, pgallery_meta_title)
 VALUES  
 (1, 'About Us', 'abcdefghiklm', 'about-banner.jpg',
 'About Us', 'FAQ', 'fag-banner.jpg', 'FAQ', 
-'Contact', 'contact-banner.jpg', 'Contact', '', 
+'Liên hệ', 'contact-banner.jpg', 'Liên hệ', '', 
 '', '');
 
 
