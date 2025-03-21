@@ -144,10 +144,6 @@ if (isset($_POST['form6_0'])) {
     $successMsg = 'Cập nhật cài đặt bật/tắt các phần thành công.';
 }
 if (isset($_POST['form6'])) {
-    // cập nhật cơ sở dữ liệu
-    $query = $pdo->prepare("UPDATE table_settings SET meta_title_home=?, meta_keyword_home=?, meta_description_home=? WHERE id=1");
-    $query->execute(array($_POST['meta_title_home'], $_POST['meta_keyword_home'], $_POST['meta_description_home']));
-
     $successMsg = 'Cài đặt Meta trang chủ đã được cập nhật thành công.';
 }
 
@@ -671,8 +667,6 @@ foreach ($result as $row) {
     $total_latest_product_home       = $row['total_latest_product_home'];
     $total_popular_product_home      = $row['total_popular_product_home'];
     $meta_title_home                 = $row['meta_title_home'];
-    $meta_keyword_home               = $row['meta_keyword_home'];
-    $meta_description_home           = $row['meta_description_home'];
     $banner_login                    = $row['banner_login'];
     $banner_registration             = $row['banner_registration'];
     $banner_forget_password          = $row['banner_forget_password'];
@@ -1012,20 +1006,7 @@ foreach ($result as $row) {
                                                 value="<?php echo $meta_title_home ?>">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Từ Khóa Meta</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" name="meta_keyword_home"
-                                                style="height:100px;"><?php echo $meta_keyword_home ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Mô Tả Meta</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" name="meta_description_home"
-                                                style="height:200px;"><?php echo $meta_description_home ?></textarea>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="" class="col-sm-3 control-label"></label>
                                         <div class="col-sm-6">
