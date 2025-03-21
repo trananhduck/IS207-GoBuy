@@ -258,7 +258,7 @@ if (!isset($_SESSION['cart_p_id'])) {
 
                             </div>
 
-                            <form class="Momo" action="<?php echo BASE_URL; ?>payment/Momo/payment_process.php"
+                            <form class="Momo" action="<?php echo BASE_URL; ?>payment/Momo/payment-process.php"
                                 method="post" id="Momo_form" target="_blank">
                                 <input type="hidden" name="cmd" value="_xclick" />
                                 <input type="hidden" name="no_note" value="1" />

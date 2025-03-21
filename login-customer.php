@@ -7,39 +7,32 @@ foreach ($result as $row) {
     $banner_login = $row['banner_login'];
 }
 ?>
-<!-- login form -->
+
 <?php
 if (isset($_POST['form1'])) {
-
     if (empty($_POST['cust_email']) || empty($_POST['cust_password'])) {
-        $errorMsg = 'Email và mật khẩu không thể để trống' . '<br>';
+        $_SESSION['error_message'] = 'Email và mật khẩu không thể để trống.';
     } else {
-
         $cust_email = strip_tags($_POST['cust_email']);
         $cust_password = strip_tags($_POST['cust_password']);
 
         $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
-        $query->execute(array($cust_email));
+        $query->execute([$cust_email]);
         $total = $query->rowCount();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            $cust_status = $row['cust_status'];
-            $row_password = $row['cust_password'];
-        }
 
         if ($total == 0) {
-            $errorMsg .= 'Địa chỉ email không khớp.' . '<br>';
+            $_SESSION['error_message'] = 'Địa chỉ email không khớp.';
         } else {
-            //using MD5 form
-            if ($row_password != md5($cust_password)) {
-                $errorMsg .= 'Mật khẩu không khớp' . '<br>';
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+            if ($row['cust_password'] != md5($cust_password)) {
+                $_SESSION['error_message'] = 'Mật khẩu không khớp.';
+            } elseif ($row['cust_status'] == 0) {
+                $_SESSION['error_message'] = 'Tài khoản của bạn chưa được kích hoạt. Vui lòng kiểm tra email hoặc liên hệ quản trị viên.';
             } else {
-                if ($cust_status == 0) {
-                    $errorMsg .= 'Xin lỗi! Tài khoản của bạn không hoạt động. Vui lòng liên hệ với quản trị viên.' . '<br>';
-                } else {
-                    $_SESSION['customer'] = $row;
-                    header("location: " . BASE_URL . "index.php");
-                }
+                $_SESSION['customer'] = $row;
+                $_SESSION['success_message'] = 'Đăng nhập thành công! Chào mừng bạn trở lại.';
+                header("Location: " . BASE_URL . "index.php");
+                exit;
             }
         }
     }
@@ -49,7 +42,7 @@ if (isset($_POST['form1'])) {
 <div class="page-banner"
     style="background-color:#444;background-image: url(assets/uploads/<?php echo $banner_login; ?>);">
     <div class="inner">
-        <h1><?php echo 'Đăng nhập với tư cách khách hàng' ?></h1>
+        <h1>Đăng nhập với tư cách khách hàng</h1>
     </div>
 </div>
 
@@ -63,28 +56,18 @@ if (isset($_POST['form1'])) {
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <?php
-                                if ($errorMsg != '') {
-                                    echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
-                                }
-                                if ($successMsg != '') {
-                                    echo "<div class='success' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $successMsg . "</div>";
-                                }
-                                ?>
                                 <div class="form-group">
-                                    <label for=""><?php echo 'Địa chỉ email' ?> *</label>
+                                    <label>Địa chỉ email *</label>
                                     <input type="email" class="form-control" name="cust_email">
                                 </div>
                                 <div class="form-group">
-                                    <label for=""><?php echo 'Mật khẩu' ?> *</label>
+                                    <label>Mật khẩu *</label>
                                     <input type="password" class="form-control" name="cust_password">
                                 </div>
                                 <div class="form-group">
-                                    <label for=""></label>
-                                    <input type="submit" class="btn btn-success" value="<?php echo 'Submit' ?>"
-                                        name="form1">
+                                    <input type="submit" class="btn btn-success" value="Đăng nhập" name="form1">
                                 </div>
-                                <a href="forget-password.php" style="color:#e4144d;"><?php echo 'Quên mật khẩu' ?>?</a>
+                                <a href="forget-password.php" style="color:#e4144d;">Quên mật khẩu?</a>
                             </div>
                         </div>
                     </form>
@@ -93,13 +76,56 @@ if (isset($_POST['form1'])) {
             <div class="col-md-12">
                 <div class="user-sidebar">
                     <ul>
-                        <a href="login-admin.php"><button
-                                class="btn btn-danger"><?php echo 'Đăng nhập với tư cách admin' ?></button></a>
+                        <a href="login-admin.php">
+                            <button class="btn btn-danger">Đăng nhập với tư cách admin</button>
+                        </a>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Toast Container -->
+<div id="toast"></div>
+<style>
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+    transform: translateY(-20px);
+}
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
+<script>
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
+</script>
+
+<?php
+// Hiển thị toast nếu có trong session
+if (isset($_SESSION['error_message'])) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode($_SESSION['error_message']) . ", '#e74c3c');
+    });</script>";
+    unset($_SESSION['error_message']);
+}
+?>
 
 <?php require_once('footer.php'); ?>

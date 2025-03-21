@@ -9,18 +9,14 @@ foreach ($result as $row) {
     $cta_read_more_text = $row['cta_read_more_text'];
     $cta_read_more_url = $row['cta_read_more_url'];
     $cta_photo = $row['cta_photo'];
-    $featured_product_title = $row['featured_product_title'];
-    $featured_product_subtitle = $row['featured_product_subtitle'];
     $latest_product_title = $row['latest_product_title'];
     $latest_product_subtitle = $row['latest_product_subtitle'];
     $popular_product_title = $row['popular_product_title'];
     $popular_product_subtitle = $row['popular_product_subtitle'];
-    $total_featured_product_home = $row['total_featured_product_home'];
     $total_latest_product_home = $row['total_latest_product_home'];
     $total_popular_product_home = $row['total_popular_product_home'];
     $home_service_on_off = $row['home_service_on_off'];
     $home_welcome_on_off = $row['home_welcome_on_off'];
-    $home_featured_product_on_off = $row['home_featured_product_on_off'];
     $home_latest_product_on_off = $row['home_latest_product_on_off'];
     $home_popular_product_on_off = $row['home_popular_product_on_off'];
 }
@@ -41,8 +37,8 @@ foreach ($result as $row) {
         foreach ($result as $row) {
         ?>
         <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {
-                    echo 'class="active"';
-                } ?>></li>
+                                                                                            echo 'class="active"';
+                                                                                        } ?>></li>
         <?php
             $i++;
         }
@@ -81,12 +77,12 @@ foreach ($result as $row) {
                                                             } ?>">
                             <?php echo $row['heading']; ?></h1>
                         <p data-animation="animated <?php if ($row['position'] == 'Left') {
-                                                                echo 'fadeInLeft';
-                                                            } elseif ($row['position'] == 'Center') {
-                                                                echo 'fadeInDown';
-                                                            } elseif ($row['position'] == 'Right') {
-                                                                echo 'fadeInRight';
-                                                            } ?>">
+                                                            echo 'fadeInLeft';
+                                                        } elseif ($row['position'] == 'Center') {
+                                                            echo 'fadeInDown';
+                                                        } elseif ($row['position'] == 'Right') {
+                                                            echo 'fadeInRight';
+                                                        } ?>">
                             <?php echo nl2br($row['content']); ?></p>
                         <a href="<?php echo $row['button_url']; ?>" target="_blank" class="btn btn-primary"
                             data-animation="animated <?php if ($row['position'] == 'Left') {
@@ -131,7 +127,7 @@ foreach ($result as $row) {
                 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                 ?>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="item">
                     <div class="photo"><img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
                             alt="<?php echo $row['title']; ?>"></div>
@@ -410,5 +406,49 @@ foreach ($result as $row) {
 
 
 
+
+<?php require_once('footer.php'); ?>
+
+
+<!-- Toast Container -->
+<div id="toast"></div>
+<style>
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+    transform: translateY(-20px);
+}
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+
+<script>
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
+</script>
+
+<?php
+if (isset($_SESSION['success_message'])) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode($_SESSION['success_message']) . ", '#2ecc71');
+    });</script>";
+    unset($_SESSION['success_message']);
+}
+?>
 
 <?php require_once('footer.php'); ?>
