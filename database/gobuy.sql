@@ -153,10 +153,10 @@ INSERT INTO table_end_category (ecat_id, ecat_name, mcat_id) VALUES
 (13, 'Giày bệt', 6),
 (14, 'Áo hoodie', 7),
 (15, 'Áo khoác & Áo choàng', 7),
-(16, 'Quần', 😎,
-(17, 'Quần jeans', 😎,
-(18, 'Quần jogger', 😎,
-(19, 'Quần short', 😎,
+(16, 'Quần', 7),
+(17, 'Quần jeans', 8),
+(18, 'Quần jogger', 8),
+(19, 'Quần short', 8),
 (20, 'Áo thun', 9),
 (21, 'Áo sơ mi thường', 9),
 (22, 'Áo sơ mi công sở', 9),
@@ -284,9 +284,6 @@ CREATE TABLE table_page (
   faq_title TEXT NOT NULL,
   faq_banner TEXT NOT NULL,
   faq_meta_title TEXT NOT NULL,
-  blog_title TEXT NOT NULL,
-  blog_banner TEXT NOT NULL,
-  blog_meta_title TEXT NOT NULL,
   contact_title TEXT NOT NULL,
   contact_banner TEXT NOT NULL,
   contact_meta_title TEXT NOT NULL,
@@ -297,9 +294,15 @@ CREATE TABLE table_page (
   vgallery_banner TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
-INSERT INTO table_page (id, about_title, about_content, about_banner, about_meta_title, faq_title, faq_banner, faq_meta_title, blog_title, blog_banner, blog_meta_title, contact_title, contact_banner, contact_meta_title, pgallery_title, pgallery_banner, pgallery_meta_title, vgallery_title, vgallery_banner) 
+INSERT INTO table_page (id, about_title, about_content, about_banner, 
+about_meta_title, faq_title, faq_banner, faq_meta_title, 
+contact_title, contact_banner, contact_meta_title, pgallery_title, 
+pgallery_banner, pgallery_meta_title) 
 VALUES  
-(1, 'About Us', 'abcdefghiklm', '', 'About', 'FAQ', '', '', '', '', '', 'Contact', '', '', '', '', '', '', '');
+(1, 'About Us', 'abcdefghiklm', 'about-banner.jpg',
+'About Us', 'FAQ', 'fag-banner.jpg', 'FAQ', 
+'Contact', 'contact-banner.jpg', 'Contact', '', 
+'', '');
 
 
 CREATE TABLE table_payment (
@@ -417,7 +420,7 @@ INSERT INTO table_product_photo (pp_id, photo, p_id) VALUES
 (12, '12.jpg', 6),
 (13, '13.jpg', 7),
 (14, '14.jpg', 7),
-(15, '15.jpg', 😎,
+(15, '15.jpg', 8),
 (16, '16.jpg', 9),
 (17, '17.jpg', 10),
 (18, '18.jpg', 10),

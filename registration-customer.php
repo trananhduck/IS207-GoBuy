@@ -125,34 +125,40 @@ if (isset($_POST['form1'])) {
 ?>
 
 <div class="page-banner" style="background-image: url(assets/uploads/<?php echo $banner_registration; ?>);">
-    <div class="inner"><h1>Đăng ký tài khoản khách hàng</h1></div>
+    <div class="inner">
+        <h1>Đăng ký tài khoản khách hàng</h1>
+    </div>
 </div>
 
 <div class="page">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-10 user-content">
+            <div class="col-md-8 user-content">
                 <form action="" method="post">
                     <?php $csrf->echoInputField(); ?>
-                    <div class="row">
-                        <!-- Dòng 1: Họ tên & Email -->
-                        <div class="col-md-6 form-group">
+
+                    <div class="row g-3">
+                        <!-- Họ tên & Email -->
+                        <div class="col-md-6">
                             <label>Họ tên *</label>
-                            <input type="text" name="cust_name" class="form-control" value="<?php echo $_POST['cust_name'] ?? '' ?>">
+                            <input type="text" name="cust_name" class="form-control"
+                                value="<?php echo $_POST['cust_name'] ?? '' ?>">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6">
                             <label>Email *</label>
-                            <input type="email" name="cust_email" class="form-control" value="<?php echo $_POST['cust_email'] ?? '' ?>">
+                            <input type="email" name="cust_email" class="form-control"
+                                value="<?php echo $_POST['cust_email'] ?? '' ?>">
                         </div>
 
-                        <!-- Dòng 2: SĐT & Tỉnh/Thành -->
-                        <div class="col-md-6 form-group">
+                        <!-- Số điện thoại & Tỉnh/Thành phố -->
+                        <div class="col-md-6">
                             <label>Số điện thoại *</label>
-                            <input type="text" name="cust_phone" class="form-control" value="<?php echo $_POST['cust_phone'] ?? '' ?>">
+                            <input type="text" name="cust_phone" class="form-control"
+                                value="<?php echo $_POST['cust_phone'] ?? '' ?>">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6">
                             <label>Tỉnh/Thành phố *</label>
-                            <select name="cust_province" class="form-control select2">
+                            <select name="cust_province" class="form-control">
                                 <option value="">-- Chọn --</option>
                                 <?php
                                 $stmt = $pdo->query("SELECT * FROM table_province ORDER BY province_name ASC");
@@ -163,41 +169,41 @@ if (isset($_POST['form1'])) {
                             </select>
                         </div>
 
-                        <!-- Dòng 3: Quận/Huyện & Xã/Phường -->
-                        <div class="col-md-6 form-group">
+                        <!-- Quận/Huyện & Xã/Phường -->
+                        <div class="col-md-6">
                             <label>Quận/Huyện *</label>
-                            <input type="text" name="cust_district" class="form-control" value="<?php echo $_POST['cust_district'] ?? '' ?>">
+                            <input type="text" name="cust_district" class="form-control"
+                                value="<?php echo $_POST['cust_district'] ?? '' ?>">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6">
                             <label>Xã/Phường *</label>
-                            <input type="text" name="cust_address" class="form-control" value="<?php echo $_POST['cust_address'] ?? '' ?>">
+                            <input type="text" name="cust_address" class="form-control"
+                                value="<?php echo $_POST['cust_address'] ?? '' ?>">
                         </div>
 
-                        <!-- Dòng 4: Mật khẩu & Nhập lại -->
-                        <div class="col-md-6 form-group">
+                        <!-- Mật khẩu & Nhập lại mật khẩu -->
+                        <div class="col-md-6">
                             <label>Mật khẩu *</label>
                             <input type="password" name="cust_password" class="form-control">
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6">
                             <label>Nhập lại mật khẩu *</label>
                             <input type="password" name="cust_re_password" class="form-control">
                         </div>
+                    </div>
 
-                        <!-- Nút đăng ký căn giữa -->
-                        <div class="col-md-12 text-center mt-4">
-                            <input type="submit" class="btn btn-danger px-5" name="form1" value="Đăng ký khách hàng">
-                        </div>
-
-                        <!-- Link đăng ký admin căn giữa -->
-                        <div class="col-md-12 text-center mt-2">
-                            <a href="registration-admin.php" class="btn btn-outline-primary px-4">Đăng ký tài khoản admin</a>
-                        </div>
+                    <!-- Nút đăng ký & Link đăng ký admin -->
+                    <div class="d-flex flex-column align-items-center mt-4">
+                        <input type="submit" class="btn btn-danger px-5" name="form1" value="Đăng ký khách hàng">
+                        <a href="registration-admin.php" class="btn btn-outline-primary px-4 mt-2">Đăng ký tài khoản
+                            admin</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Toast -->
 <div id="toast"></div>
@@ -214,9 +220,11 @@ if (isset($_POST['form1'])) {
     transition: all 0.5s ease;
     z-index: 9999;
 }
+
 #toast.show {
     opacity: 1;
 }
+
 .btn {
     border-radius: 6px;
     width: 500px;

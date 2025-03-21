@@ -63,7 +63,6 @@ foreach ($result as $row) {
     foreach ($result as $row) {
         $about_meta_title = $row['about_meta_title'];
         $faq_meta_title = $row['faq_meta_title'];
-        $blog_meta_title = $row['blog_meta_title'];
         $contact_meta_title = $row['contact_meta_title'];
         $pgallery_meta_title = $row['pgallery_meta_title'];
     }
@@ -72,13 +71,13 @@ foreach ($result as $row) {
 
     if ($current_page == 'index.php' || $current_page == 'login-customer.php' || $current_page == 'login-admin.php' || $current_page == 'registration-customer.php' || $current_page == 'registration-admin.php' || $current_page == 'cart.php' || $current_page == 'checkout.php' || $current_page == 'forget-password.php' || $current_page == 'reset-password.php' || $current_page == 'product-category.php' || $current_page == 'product.php') {
     ?>
-        <title><?php echo $meta_title_home; ?></title>
+    <title><?php echo $meta_title_home; ?></title>
     <?php
     }
 
     if ($current_page == 'about.php') {
     ?>
-        <title><?php echo $about_meta_title; ?></title>
+    <title><?php echo $about_meta_title; ?></title>
     <?php
     }
     if ($current_page == 'faq.php') {
@@ -89,7 +88,7 @@ foreach ($result as $row) {
     }
     if ($current_page == 'contact.php') {
     ?>
-        <title><?php echo $contact_meta_title; ?></title>
+    <title><?php echo $contact_meta_title; ?></title>
     <?php
     }
     if ($current_page == 'product.php') {
@@ -106,12 +105,12 @@ foreach ($result as $row) {
 
     if ($current_page == 'dashboard.php') {
     ?>
-        <title>Dashboard - <?php echo $meta_title_home; ?></title>
+    <title>Dashboard - <?php echo $meta_title_home; ?></title>
     <?php
     }
     if ($current_page == 'customer-profile.php') {
     ?>
-        <title>Cập nhật hồ sơ <?php echo $meta_title_home; ?></title>
+    <title>Cập nhật hồ sơ <?php echo $meta_title_home; ?></title>
     <?php
     }
     if ($current_page == 'customer-billing-shipping-update.php') {
@@ -121,30 +120,30 @@ foreach ($result as $row) {
     }
     if ($current_page == 'customer-password-update.php') {
     ?>
-        <title>Cập nhật mật khẩu - <?php echo $meta_title_home; ?></title>
+    <title>Cập nhật mật khẩu - <?php echo $meta_title_home; ?></title>
     <?php
     }
     if ($current_page == 'customer-order.php') {
     ?>
-        <title>Hàng đã đặt - <?php echo $meta_title_home; ?></title>>
+    <title>Hàng đã đặt - <?php echo $meta_title_home; ?></title>>
     <?php
     }
     ?>
 
     <?php if ($current_page == 'blog-single.php'): ?>
-        <meta property="og:title" content="<?php echo $og_title; ?>">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
-        <meta property="og:description" content="<?php echo $og_description; ?>">
-        <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
+    <meta property="og:title" content="<?php echo $og_title; ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
+    <meta property="og:description" content="<?php echo $og_description; ?>">
+    <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
     <?php endif; ?>
 
     <?php if ($current_page == 'product.php'): ?>
-        <meta property="og:title" content="<?php echo $og_title; ?>">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
-        <meta property="og:description" content="<?php echo $og_description; ?>">
-        <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
+    <meta property="og:title" content="<?php echo $og_title; ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo BASE_URL . $og_slug; ?>">
+    <meta property="og:description" content="<?php echo $og_description; ?>">
+    <meta property="og:image" content="assets/uploads/<?php echo $og_photo; ?>">
     <?php endif; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
@@ -175,10 +174,10 @@ foreach ($result as $row) {
                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($result as $row) {
                             ?>
-                                <?php if ($row['social_url'] != ''): ?>
-                                    <li><a href="<?php echo $row['social_url']; ?>"><i
-                                                class="<?php echo $row['social_icon']; ?>"></i></a></li>
-                                <?php endif; ?>
+                            <?php if ($row['social_url'] != ''): ?>
+                            <li><a href="<?php echo $row['social_url']; ?>"><i
+                                        class="<?php echo $row['social_icon']; ?>"></i></a></li>
+                            <?php endif; ?>
                             <?php
                             }
                             ?>
@@ -203,17 +202,17 @@ foreach ($result as $row) {
                         <?php
                         if (isset($_SESSION['customer'])) {
                         ?>
-                            <li><i class="fa fa-user"></i>
-                                <a href="customer-profile.php"><?php echo $_SESSION['customer']['cust_name']; ?>
-                            </li>
-                            <li><a href="logout.php"><i class="fa fa-home"></i> <?php echo 'Đăng xuất' ?></a></li>
+                        <li><i class="fa fa-user"></i>
+                            <a href="customer-profile.php"><?php echo $_SESSION['customer']['cust_name']; ?>
+                        </li>
+                        <li><a href="logout.php"><i class="fa fa-home"></i> <?php echo 'Đăng xuất' ?></a></li>
                         <?php
                         } else {
                         ?>
-                            <li><a href="login-customer.php"><i class="fa fa-sign-in"></i> <?php echo 'Đăng nhập' ?></a>
-                            <li><a href="registration-customer.php"><i class="fa fa-user-plus"></i>
-                                    <?php echo 'Đăng ký' ?></a>
-                            </li>
+                        <li><a href="login-customer.php"><i class="fa fa-sign-in"></i> <?php echo 'Đăng nhập' ?></a>
+                        <li><a href="registration-customer.php"><i class="fa fa-user-plus"></i>
+                                <?php echo 'Đăng ký' ?></a>
+                        </li>
                         <?php
                         }
                         ?>
@@ -281,37 +280,37 @@ foreach ($result as $row) {
                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
-                                    <li><a
-                                            href="product-category.php?id=<?php echo $row['tcat_id']; ?>&type=top-category"><?php echo $row['tcat_name']; ?></a>
-                                        <ul>
-                                            <?php
+                                <li><a
+                                        href="product-category.php?id=<?php echo $row['tcat_id']; ?>&type=top-category"><?php echo $row['tcat_name']; ?></a>
+                                    <ul>
+                                        <?php
                                             $query1 = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id=?");
                                             $query1->execute(array($row['tcat_id']));
                                             $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
                                             ?>
-                                                <li><a
-                                                        href="product-category.php?id=<?php echo $row1['mcat_id']; ?>&type=mid-category"><?php echo $row1['mcat_name']; ?></a>
-                                                    <ul>
-                                                        <?php
+                                        <li><a
+                                                href="product-category.php?id=<?php echo $row1['mcat_id']; ?>&type=mid-category"><?php echo $row1['mcat_name']; ?></a>
+                                            <ul>
+                                                <?php
                                                         $query2 = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id=?");
                                                         $query2->execute(array($row1['mcat_id']));
                                                         $result2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                                                         foreach ($result2 as $row2) {
                                                         ?>
-                                                            <li><a
-                                                                    href="product-category.php?id=<?php echo $row2['ecat_id']; ?>&type=end-category"><?php echo $row2['ecat_name']; ?></a>
-                                                            </li>
-                                                        <?php
+                                                <li><a
+                                                        href="product-category.php?id=<?php echo $row2['ecat_id']; ?>&type=end-category"><?php echo $row2['ecat_name']; ?></a>
+                                                </li>
+                                                <?php
                                                         }
                                                         ?>
-                                                    </ul>
-                                                </li>
-                                            <?php
+                                            </ul>
+                                        </li>
+                                        <?php
                                             }
                                             ?>
-                                        </ul>
-                                    </li>
+                                    </ul>
+                                </li>
                                 <?php
                                 }
                                 ?>
@@ -323,10 +322,8 @@ foreach ($result as $row) {
                                 foreach ($result as $row) {
                                     $about_title = $row['about_title'];
                                     $faq_title = $row['faq_title'];
-                                    $blog_title = $row['blog_title'];
                                     $contact_title = $row['contact_title'];
                                     $pgallery_title = $row['pgallery_title'];
-                                    $vgallery_title = $row['vgallery_title'];
                                 }
                                 ?>
                                 <li><a href="about.php"><?php echo $about_title; ?></a></li>
