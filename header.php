@@ -83,7 +83,8 @@ foreach ($result as $row) {
     }
     if ($current_page == 'faq.php') {
     ?>
-        <title><?php echo $faq_meta_title; ?></title>
+
+    <title><?php echo $faq_meta_title; ?></title>
     <?php
     }
     if ($current_page == 'contact.php') {
@@ -115,7 +116,7 @@ foreach ($result as $row) {
     }
     if ($current_page == 'customer-billing-shipping-update.php') {
     ?>
-        <title>Cập nhật thông tin giao hàng <?php echo $meta_title_home; ?></title>
+    <title>Cập nhật thông tin giao hàng <?php echo $meta_title_home; ?></title>
     <?php
     }
     if ($current_page == 'customer-password-update.php') {
