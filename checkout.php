@@ -254,9 +254,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                                     <option value=""><?php echo 'Chọn 1 phương thức' ?></option>
                                     <option value="Bank"><?php echo 'Ngân hàng' ?></option>
                                 </select>
-
                             </div>
-
                             <form class="Bank" action="<?php echo BASE_URL; ?>payment/Bank/payment-process.php"
                                 method="post" id="Bank_form" target="_blank">
                                 <input type="hidden" name="cmd" value="_xclick" />
