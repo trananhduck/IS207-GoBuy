@@ -173,14 +173,7 @@ if (isset($_POST['form1'])) {
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
 
-                                <?php
-                                if ($errorMsg != '') {
-                                    echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
-                                }
-                                if ($successMsg != '') {
-                                    echo "<div class='success' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $successMsg . "</div>";
-                                }
-                                ?>
+                                
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Tên đầy đủ' ?> *</label>
                                     <input type="text" class="form-control" name="full_name" value="<?php if (isset($_POST['full_name'])) {
@@ -241,5 +234,57 @@ if (isset($_POST['form1'])) {
     </div>
 </div>
 </div>
+<!-- Toast Container -->
+<div id="toast"></div>
+<style>
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+    transform: translateY(-20px);
+}
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
 
+<script>
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
+</script>
+<script>
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
+</script>
+
+<?php
+if (!empty($errorMsg)) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode($errorMsg) . ", '#e74c3c');
+    });</script>";
+}
+if (!empty($successMsg)) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode($successMsg) . ", '#2ecc71');
+    });</script>";
+}
+?>
 <?php require_once('footer.php'); ?>

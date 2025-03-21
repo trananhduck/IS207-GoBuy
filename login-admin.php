@@ -101,5 +101,45 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
+<!-- Toast Container -->
+<div id="toast"></div>
+<style>
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+    transform: translateY(-20px);
+}
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
 
+<script>
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
+</script>
+
+<?php
+// Hiển thị toast nếu có trong session
+if (isset($_SESSION['error_message'])) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode($_SESSION['error_message']) . ", '#e74c3c');
+    });</script>";
+    unset($_SESSION['error_message']);
+}
+?>
 <?php require_once('footer.php'); ?>

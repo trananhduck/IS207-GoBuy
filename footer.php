@@ -2,17 +2,12 @@
 $statement = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
 $statement->execute();
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-foreach ($result as $row)
-{
-	$footer_about = $row['footer_about'];
-	$contact_email = $row['contact_email'];
-	$contact_phone = $row['contact_phone'];
-	$contact_address = $row['contact_address'];
-	$footer_copyright = $row['footer_copyright'];
-	$total_recent_post_footer = $row['total_recent_post_footer'];
-    $total_popular_post_footer = $row['total_popular_post_footer'];
-    $newsletter_on_off = $row['newsletter_on_off'];
-    $before_body = $row['before_body'];
+foreach ($result as $row) {
+    $footer_about = $row['footer_about'];
+    $contact_email = $row['contact_email'];
+    $contact_phone = $row['contact_phone'];
+    $contact_address = $row['contact_address'];
+    $footer_copyright = $row['footer_copyright'];
 }
 ?>
 
@@ -20,7 +15,11 @@ foreach ($result as $row)
     <div class="container">
         <div class="row">
             <div class="col-md-12 copyright">
-                <?php echo $footer_copyright; ?>
+                <p><?php echo htmlspecialchars($footer_about); ?></p>
+                <p>Địa chỉ: <?php echo htmlspecialchars($contact_address); ?></p>
+                <p>Email: <?php echo htmlspecialchars($contact_email); ?></p>
+                <p>Số điện thoại: <?php echo htmlspecialchars($contact_phone); ?></p>
+                <p><?php echo htmlspecialchars($footer_copyright); ?></p>
             </div>
         </div>
     </div>
@@ -46,9 +45,3 @@ foreach ($result as $row)
 <script src="assets/js/select2.full.min.js"></script>
 <script src="assets/js/custom.js"></script>
 <script>
-
-</script>
-<?php echo $before_body; ?>
-</body>
-
-</html>
