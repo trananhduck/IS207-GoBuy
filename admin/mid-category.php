@@ -2,7 +2,7 @@
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem danh mục cấp trung</h1>
+        <h1>Tất cả danh mục trung gian</h1>
     </div>
     <div class="content-header-right">
         <a href="mid-category-add.php" class="btn btn-primary btn-sm">Thêm mới</a>
@@ -19,8 +19,8 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên danh mục cấp trung</th>
-                                <th>Tên danh mục cấp cao</th>
+                                <th>Tên danh mục trung gian</th>
+                                <th>Tên danh mục lớn</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
@@ -37,18 +37,18 @@
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                                <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['mcat_name']; ?></td>
-                                    <td><?php echo $row['tcat_name']; ?></td>
-                                    <td>
-                                        <a href="mid-category-edit.php?id=<?php echo $row['mcat_id']; ?>"
-                                            class="btn btn-primary btn-xs">Sửa</a>
-                                        <a href="#" class="btn btn-danger btn-xs"
-                                            data-href="mid-category-delete.php?id=<?php echo $row['mcat_id']; ?>"
-                                            data-toggle="modal" data-target="#confirm-delete">Xóa</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $row['mcat_name']; ?></td>
+                                <td><?php echo $row['tcat_name']; ?></td>
+                                <td>
+                                    <a href="mid-category-edit.php?id=<?php echo $row['mcat_id']; ?>"
+                                        class="btn btn-primary btn-xs">Sửa</a>
+                                    <a href="#" class="btn btn-danger btn-xs"
+                                        data-href="mid-category-delete.php?id=<?php echo $row['mcat_id']; ?>"
+                                        data-toggle="modal" data-target="#confirm-delete">Xóa</a>
+                                </td>
+                            </tr>
                             <?php
                             }
                             ?>
@@ -68,7 +68,8 @@
             </div>
             <div class="modal-body">
                 <p>Bạn có chắc chắn muốn xóa mục này không?</p>
-                <p style="color:red;">Hãy cẩn thận! Tất cả sản phẩm và danh mục cấp cuối thuộc danh mục cấp trung này sẽ
+                <p style="color:red;">Hãy cẩn thận! Tất cả sản phẩm và danh mục cấp cuối thuộc danh mục trung gian này
+                    sẽ
                     bị xóa khỏi tất cả các bảng như bảng đơn hàng, bảng thanh toán, bảng kích thước, bảng màu sắc, bảng
                     đánh giá, v.v.</p>
             </div>

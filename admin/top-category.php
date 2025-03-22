@@ -2,7 +2,7 @@
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem danh mục lớn</h1>
+        <h1>Tất cả danh mục lớn</h1>
     </div>
     <div class="content-header-right">
         <a href="top-category-add.php" class="btn btn-primary btn-sm">Thêm mới</a>
@@ -18,7 +18,7 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên danh mục cấp cao</th>
+                                <th>Tên danh mục lớn</th>
                                 <th>Hiển thị trên menu?</th>
                                 <th>Hành động</th>
                             </tr>
@@ -72,8 +72,8 @@
             </div>
             <div class="modal-body">
                 <p>Bạn có chắc chắn muốn xóa mục này không?</p>
-                <p style="color:red;">Hãy cẩn thận! Tất cả sản phẩm, danh mục cấp trung và danh mục cấp cuối thuộc danh
-                    mục cấp cao này sẽ bị xóa khỏi tất cả các bảng như bảng đơn hàng, bảng thanh toán, bảng kích thước,
+                <p style="color:red;">Hãy cẩn thận! Tất cả sản phẩm, danh mục trung gian và danh mục cấp cuối thuộc danh
+                    mục lớn này sẽ bị xóa khỏi tất cả các bảng như bảng đơn hàng, bảng thanh toán, bảng kích thước,
                     bảng màu sắc, bảng đánh giá, v.v.</p>
             </div>
             <div class="modal-footer">

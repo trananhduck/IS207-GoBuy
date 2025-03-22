@@ -112,7 +112,7 @@ if (isset($_POST['form2'])) {
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem chi phí vận chuyển</h1>
+        <h1>Tất cả chi phí vận chuyển</h1>
     </div>
 </section>
 
@@ -124,7 +124,7 @@ if (isset($_POST['form2'])) {
                     <table id="example1" class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>STT</th>
                                 <th>Tên tỉnh</th>
                                 <th>Chi phí vận chuyển</th>
                                 <th>Hành động</th>

@@ -2,10 +2,10 @@
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem Màu Sắc</h1>
+        <h1>Tất cả màu sản phẩm</h1>
     </div>
     <div class="content-header-right">
-        <a href="color-add.php" class="btn btn-primary btn-sm">Thêm Mới</a>
+        <a href="color-add.php" class="btn btn-primary btn-sm">Thêm mới</a>
     </div>
 </section>
 
@@ -31,17 +31,17 @@
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                            <tr>
-                                <td><?php echo $i; ?></td>
-                                <td><?php echo $row['color_name']; ?></td>
-                                <td>
-                                    <a href="color-edit.php?id=<?php echo $row['color_id']; ?>"
-                                        class="btn btn-primary btn-xs">Sửa</a>
-                                    <a href="#" class="btn btn-danger btn-xs"
-                                        data-href="color-delete.php?id=<?php echo $row['color_id']; ?>"
-                                        data-toggle="modal" data-target="#confirm-delete">Xóa</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $row['color_name']; ?></td>
+                                    <td>
+                                        <a href="color-edit.php?id=<?php echo $row['color_id']; ?>"
+                                            class="btn btn-primary btn-xs">Sửa</a>
+                                        <a href="#" class="btn btn-danger btn-xs"
+                                            data-href="color-delete.php?id=<?php echo $row['color_id']; ?>"
+                                            data-toggle="modal" data-target="#confirm-delete">Xóa</a>
+                                    </td>
+                                </tr>
                             <?php
                             }
                             ?>

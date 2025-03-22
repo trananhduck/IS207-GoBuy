@@ -48,15 +48,15 @@ if (isset($_POST['form1'])) {
         <div class="col-md-12">
 
             <?php if ($errorMsg): ?>
-            <div class="callout callout-danger">
-                <p><?php echo $errorMsg; ?></p>
-            </div>
+                <div class="callout callout-danger">
+                    <p><?php echo $errorMsg; ?></p>
+                </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-            <div class="callout callout-success">
-                <p><?php echo $successMsg; ?></p>
-            </div>
+                <div class="callout callout-success">
+                    <p><?php echo $successMsg; ?></p>
+                </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post">
@@ -67,9 +67,8 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" name="color_name"
                                     placeholder="Nhập một hoặc nhiều màu, cách nhau bằng dấu phẩy">
-                                <small class="text-muted">Có thể nhập một hoặc nhiều kích thước cùng lúc. Nếu nhập
-                                    nhiều,
-                                    vui lòng phân tách bằng dấu phẩy (,).</small>
+                                <small class="text-muted">Có thể nhập một hoặc nhiều màu cùng lúc. Nếu nhập nhiều màu
+                                    cùng lúc, vui lòng phân tách bằng dấu phẩy (,).</small>
                             </div>
                         </div>
                         <div class="form-group">

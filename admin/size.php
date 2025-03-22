@@ -2,10 +2,10 @@
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem Kích Thước</h1>
+        <h1>Tất cả kích thước sản phẩm</h1>
     </div>
     <div class="content-header-right">
-        <a href="size-add.php" class="btn btn-primary btn-sm">Thêm Mới</a>
+        <a href="size-add.php" class="btn btn-primary btn-sm">Thêm mới</a>
     </div>
 </section>
 <section class="content">
@@ -35,7 +35,7 @@
                                     <td><?php echo $row['size_name']; ?></td>
                                     <td>
                                         <a href="size-edit.php?id=<?php echo $row['size_id']; ?>"
-                                            class="btn btn-primary btn-xs">Chỉnh Sửa</a>
+                                            class="btn btn-primary btn-xs">Sửa</a>
                                         <a href="#" class="btn btn-danger btn-xs"
                                             data-href="size-delete.php?id=<?php echo $row['size_id']; ?>"
                                             data-toggle="modal" data-target="#confirm-delete">Xóa</a>
