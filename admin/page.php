@@ -138,7 +138,7 @@ if (isset($_POST['form_contact'])) {
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Page Settings</h1>
+        <h1>Cài đặt các trang</h1>
     </div>
 </section>
 <?php

@@ -3,7 +3,7 @@
 <!-- Phần tiêu đề nội dung -->
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem Khách Hàng</h1> <!-- Tiêu đề trang -->
+        <h1>Tất cả khách hàng</h1> <!-- Tiêu đề trang -->
     </div>
 </section>
 
@@ -40,35 +40,35 @@
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                            <tr class="<?php if ($row['cust_status'] == 1) {
+                                <tr class="<?php if ($row['cust_status'] == 1) {
                                                 echo 'bg-g';
                                             } else {
                                                 echo 'bg-r';
                                             } ?>">
-                                <td><?php echo $i; ?></td>
-                                <td><?php echo $row['cust_name']; ?></td>
-                                <td><?php echo $row['cust_email']; ?></td>
-                                <td>
-                                    <?php echo $row['province_name']; ?><br>
-                                    <?php echo $row['cust_district']; ?><br>
-                                    <?php echo $row['cust_address']; ?><br>
-                                </td>
-                                <td><?php if ($row['cust_status'] == 1) {
+                                    <td><?php echo $i; ?></td>
+                                    <td><?php echo $row['cust_name']; ?></td>
+                                    <td><?php echo $row['cust_email']; ?></td>
+                                    <td>
+                                        <?php echo $row['province_name']; ?><br>
+                                        <?php echo $row['cust_district']; ?><br>
+                                        <?php echo $row['cust_address']; ?><br>
+                                    </td>
+                                    <td><?php if ($row['cust_status'] == 1) {
                                             echo 'Hoạt động';
                                         } else {
                                             echo 'Không hoạt động';
                                         } ?>
-                                </td>
-                                <td>
-                                    <a href="customer-change-status.php?id=<?php echo $row['cust_id']; ?>"
-                                        class="btn btn-success btn-xs">Đổi trạng thái</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-danger btn-xs"
-                                        data-href="customer-delete.php?id=<?php echo $row['cust_id']; ?>"
-                                        data-toggle="modal" data-target="#confirm-delete">Xóa</a>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <a href="customer-change-status.php?id=<?php echo $row['cust_id']; ?>"
+                                            class="btn btn-success btn-xs">Đổi trạng thái</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-danger btn-xs"
+                                            data-href="customer-delete.php?id=<?php echo $row['cust_id']; ?>"
+                                            data-toggle="modal" data-target="#confirm-delete">Xóa</a>
+                                    </td>
+                                </tr>
                             <?php
                             }
                             ?>
