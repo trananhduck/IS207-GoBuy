@@ -208,14 +208,14 @@ foreach ($result as $row) {
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Ảnh biểu ngữ hiện tại</label>
+                                        <label for="" class="col-sm-3 control-label">Banner hiện tại</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <img src="../assets/uploads/<?php echo $about_banner; ?>"
                                                 class="existing-photo" style="height:80px;">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Ảnh biểu ngữ mới</label>
+                                        <label for="" class="col-sm-3 control-label">Banner mới</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <input type="file" name="about_banner">
                                         </div>
@@ -247,14 +247,14 @@ foreach ($result as $row) {
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Ảnh banner hiện tại</label>
+                                        <label for="" class="col-sm-3 control-label">Banner hiện tại</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <img src="../assets/uploads/<?php echo $faq_banner; ?>"
                                                 class="existing-photo" style="height:80px;">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Ảnh banner mới</label>
+                                        <label for="" class="col-sm-3 control-label">Banner mới</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <input type="file" name="faq_banner">
                                         </div>
@@ -285,14 +285,14 @@ foreach ($result as $row) {
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Ảnh banner hiện tại</label>
+                                        <label for="" class="col-sm-3 control-label">Banner hiện tại</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <img src="../assets/uploads/<?php echo $contact_banner; ?>"
                                                 class="existing-photo" style="height:80px;">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Ảnh banner mới</label>
+                                        <label for="" class="col-sm-3 control-label">Banner mới</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <input type="file" name="contact_banner">
                                         </div>

@@ -10,6 +10,19 @@ CREATE TABLE table_color (
   color_name TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+INSERT INTO table_color (color_id, color_name) VALUES
+(1, 'Đỏ'),
+(2, 'Xanh dương'),
+(3, 'Xanh lá'),
+(4, 'Vàng'),
+(5, 'Cam'),
+(6, 'Tím'),
+(7, 'Hồng'),
+(8, 'Nâu'),
+(9, 'Xám'),
+(10, 'Đen');
+
+
 CREATE TABLE table_province (
   province_id int(11) NOT NULL,
   province_name varchar(100) NOT NULL DEFAULT ''
@@ -289,7 +302,7 @@ CREATE TABLE table_page (
   contact_meta_title TEXT NOT NULL,
   pgallery_title TEXT NOT NULL,
   pgallery_banner TEXT NOT NULL,
-  pgallery_meta_title TEXT NOT NULL,
+  pgallery_meta_title TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 INSERT INTO table_page (id, about_title, about_content, about_banner, 
@@ -559,16 +572,17 @@ CREATE TABLE table_shipping_cost (
   amount varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
-
-CREATE TABLE table_shipping_cost_all (
-  sca_id int(11) NOT NULL,
-  amount varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
-INSERT INTO table_shipping_cost_all (sca_id, amount) VALUES
-(1, '100');
-
-
+INSERT INTO table_shipping_cost (shipping_cost_id, province_id, amount) VALUES
+(1, 1, '500'),
+(2, 2, '450'),
+(3, 3, '600'),
+(4, 4, '550'),
+(5, 5, '700'),
+(6, 6, '600'),
+(7, 7, '620'),
+(8, 8, '530'),
+(9, 9, '590'),
+(10, 10, '750');
 
 CREATE TABLE table_size (
   size_id int(11) NOT NULL,
@@ -758,7 +772,7 @@ ALTER TABLE table_shipping_cost
   ADD PRIMARY KEY (shipping_cost_id);
 
 ALTER TABLE table_shipping_cost_all
-  ADD PRIMARY KEY (sca_id);
+  ADD PRIMARY KEY (shipping_cost_all_id);
 
 ALTER TABLE table_size
   ADD PRIMARY KEY (size_id);
@@ -835,9 +849,6 @@ ALTER TABLE table_settings
 
 ALTER TABLE table_shipping_cost
   MODIFY shipping_cost_id int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE table_shipping_cost_all
-  MODIFY sca_id int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE table_size
   MODIFY size_id int(11) NOT NULL AUTO_INCREMENT;

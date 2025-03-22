@@ -22,7 +22,7 @@
                                 <th width="150">Địa chỉ Email</th>
                                 <th width="180">Địa chỉ</th>
                                 <th>Trạng thái</th>
-                                <th width="100">Thay đổi Trạng thái</th>
+                                <th width="100">Đổi Trạng thái</th>
                                 <th width="100">Hành động</th>
                             </tr>
                         </thead>
@@ -61,7 +61,7 @@
                                 </td>
                                 <td>
                                     <a href="customer-change-status.php?id=<?php echo $row['cust_id']; ?>"
-                                        class="btn btn-success btn-xs">Thay đổi Trạng thái</a>
+                                        class="btn btn-success btn-xs">Đổi trạng thái</a>
                                 </td>
                                 <td>
                                     <a href="#" class="btn btn-danger btn-xs"
