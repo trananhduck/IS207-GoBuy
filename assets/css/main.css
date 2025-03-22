@@ -1073,10 +1073,6 @@ table.bill-address tr td:nth-of-type(1) {
   border-bottom: 2px solid #ddd;
   background: #fff;
 }
-.card .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-}
 .card .nav-tabs > li > a {
   border: none;
   color: #666;
@@ -1208,5 +1204,3 @@ div.pagination span.disabled {
   background-size: cover;
   height: 500px;
 }
-
-select
