@@ -1,5 +1,4 @@
-<?php
-require_once('header.php');
+<?php require_once('header.php');
 require_once('admin/inc/config.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -9,201 +8,282 @@ use PHPMailer\PHPMailer\SMTP;
 require 'PHPMailer/PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/PHPMailer/src/SMTP.php';
 require 'PHPMailer/PHPMailer/src/Exception.php';
-
-$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$query->execute();
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+<?php
+$querry = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$querry->execute();
+$result = $querry->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $banner_registration = $row['banner_registration'];
 }
+?>
 
+<?php
 if (isset($_POST['form1'])) {
+
     $valid = 1;
-    $errorMsg = '';
 
     if (empty($_POST['cust_name'])) {
         $valid = 0;
-        $errorMsg .= 'Tên khách hàng không được để trống\n';
+        $errorMsg .= 'Tên khách hàng không được để trống' . "<br>";
     }
 
     if (empty($_POST['cust_email'])) {
         $valid = 0;
-        $errorMsg .= 'Email không được để trống\n';
-    } else if (!filter_var($_POST['cust_email'], FILTER_VALIDATE_EMAIL)) {
-        $valid = 0;
-        $errorMsg .= 'Email không hợp lệ\n';
+        $errorMsg .= 'Địa chỉ email không được để trống' . "<br>";
     } else {
-        $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
-        $query->execute([$_POST['cust_email']]);
-        if ($query->rowCount()) {
+        if (filter_var($_POST['cust_email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $errorMsg .= 'Email đã tồn tại\n';
+            $errorMsg .= 'Địa chỉ email phải hợp lệ' . "<br>";
+        } else {
+            $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
+            $querry->execute(array($_POST['cust_email']));
+            $total = $querry->rowCount();
+            if ($total) {
+                $valid = 0;
+                $errorMsg .= 'Địa chỉ email đã tồn tại' . "<br>";
+            }
         }
     }
 
     if (empty($_POST['cust_phone'])) {
         $valid = 0;
-        $errorMsg .= 'Số điện thoại không được để trống\n';
+        $errorMsg .= 'Số điện thoại không được để trống' . "<br>";
     }
 
     if (empty($_POST['cust_province'])) {
         $valid = 0;
-        $errorMsg .= 'Chọn tỉnh/thành phố\n';
+        $errorMsg .= 'Bạn phải chọn tỉnh/thành phố' . "<br>";
     }
 
     if (empty($_POST['cust_district'])) {
         $valid = 0;
-        $errorMsg .= 'Chọn quận/huyện\n';
+        $errorMsg .= 'Bạn phải chọn quận/huyện' . "<br>";
     }
 
     if (empty($_POST['cust_address'])) {
         $valid = 0;
-        $errorMsg .= 'Chọn xã/phường\n';
+        $errorMsg .= 'Bạn phải chọn xã' . "<br>";
     }
+
 
     if (empty($_POST['cust_password']) || empty($_POST['cust_re_password'])) {
         $valid = 0;
-        $errorMsg .= 'Mật khẩu không được để trống\n';
-    } else if ($_POST['cust_password'] !== $_POST['cust_re_password']) {
-        $valid = 0;
-        $errorMsg .= 'Mật khẩu không khớp\n';
+        $errorMsg .= 'Mật khẩu không được để trống' . "<br>";
+    }
+
+    if (!empty($_POST['cust_password']) && !empty($_POST['cust_re_password'])) {
+        if ($_POST['cust_password'] != $_POST['cust_re_password']) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu không khớp' . "<br>";
+        }
     }
 
     if ($valid == 1) {
+
         $token = md5(time());
-        $cust_datetime = date('Y-m-d H:i:s');
+        $cust_datetime = date('Y-m-d h:i:s');
         $cust_timestamp = time();
 
-        $query = $pdo->prepare("INSERT INTO table_customer (
-            cust_name, cust_email, cust_phone,
-            cust_province, cust_district, cust_address,
-            cust_s_name, cust_s_phone, cust_s_province, cust_s_district, cust_s_address,
-            cust_password, cust_token, cust_datetime, cust_timestamp, cust_status
-        ) VALUES (?, ?, ?, ?, ?, ?, '', '', '', '', '', ?, ?, ?, ?, 0)");
-
-        $query->execute([
-            strip_tags($_POST['cust_name']),
-            strip_tags($_POST['cust_email']),
-            strip_tags($_POST['cust_phone']),
-            strip_tags($_POST['cust_province']),
-            strip_tags($_POST['cust_district']),
-            strip_tags($_POST['cust_address']),
+        //Lưu vào DB
+        $querry = $pdo->prepare("INSERT INTO table_customer (
+                                         cust_name,
+                                         cust_email,
+                                         cust_phone,
+                                         cust_province,
+                                         cust_district,
+                                         cust_address,
+                                         cust_s_name,
+                                         cust_s_phone,
+                                         cust_s_province,
+                                         cust_s_district,
+                                         cust_s_address,
+                                         cust_password,
+                                         cust_token,
+                                         cust_datetime,
+                                         cust_timestamp,
+                                         cust_status
+                                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $querry->execute(array(
+            // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
+            strip_tags($_POST['cust_name']),      // Tên khách hàng
+            strip_tags($_POST['cust_email']),     // Email khách hàng
+            strip_tags($_POST['cust_phone']),     // Số điện thoại khách hàng
+            strip_tags($_POST['cust_province']),   // Tỉnh/thành phố
+            strip_tags($_POST['cust_district']),   //quận/huyện
+            strip_tags($_POST['cust_address']),   // địa chỉ nhà
+            '',
+            '',
+            '',
+            '',
+            '',
+            // Mã hóa mật khẩu bằng MD5 
             md5($_POST['cust_password']),
+
+            // Token dùng để xác thực (có thể là token đăng ký hoặc xác nhận email)
             $token,
-            $cust_datetime,
-            $cust_timestamp
-        ]);
 
-        $base_url = ($_SERVER['HTTP_HOST'] == 'localhost') ? 'http://localhost/IS207-GoBuy/' : BASE_URL;
+            // Thời gian đăng ký khách hàng
+            $cust_datetime,   // Định dạng thời gian
+            $cust_timestamp,  // Timestamp (số nguyên)
 
-        $verify_link = $base_url . 'verify-customer.php?email=' . urlencode($_POST['cust_email']) . '&token=' . urlencode($token);
+            // Giá trị 0, có thể dùng để đánh dấu trạng thái tài khoản (ví dụ: 0 = chưa kích hoạt)
+            0
+        ));
+
+
+        // Kiểm tra xem đang chạy trên localhost hay server thật
+        if ($_SERVER['HTTP_HOST'] == 'localhost') {
+            $base_url = 'http://localhost/IS207-GoBuy/';
+        } else {
+            $base_url = BASE_URL; // Dùng BASE_URL bình thường nếu chạy trên server
+        }
+
+        // Gửi email xác nhận tài khoản
+        $to = $_POST['cust_email'];
+
+        $subject = 'GoBuy - Registration Email Confirmation';
+        $verify_link = $base_url . 'verify-customer.php?email=' . urlencode($to) . '&token=' . urlencode($token);
+        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br>
+     <a href="' . $verify_link . '">' . $verify_link . '</a>';
+
 
         $mail = new PHPMailer(true);
+
         try {
+            // Cấu hình SMTP
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'smtp.gmail.com'; // SMTP của Gmail
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'taduc0508@gmail.com';
-            $mail->Password   = 'ikwz kgyi hcby stai'; // app password
+            $mail->Username   = 'taduc0508@gmail.com'; // Thay bằng email 
+            $mail->Password   = 'ikwz kgyi hcby stai'; // Dùng App Password nếu bật 2FA
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            $mail->setFrom('your-email@gmail.com', 'GoBuy');
-            $mail->addAddress($_POST['cust_email']);
+            // Cấu hình người gửi & người nhận
+            $mail->setFrom('your-email@gmail.com', 'Your Name');
+            $mail->addAddress($to); // Gửi đến email khách hàng
 
+            // Nội dung email
             $mail->isHTML(true);
-            $mail->Subject = 'Xác nhận đăng ký GoBuy';
-            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Click vào link sau để xác nhận: <br><a href="' . $verify_link . '">' . $verify_link . '</a>';
-            $mail->send();
+            $mail->Subject = 'GoBuy - Registration Email Confirmation';
+            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br><a href="' . $verify_link . '">' . $verify_link . '</a>';
 
-            $successMsg = 'Vui lòng kiểm tra email để xác nhận đăng ký.';
+            $mail->send();
         } catch (Exception $e) {
-            $errorMsg = 'Không thể gửi email. Lỗi: ' . $mail->ErrorInfo;
+            echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
         }
+
+
+        unset($_POST['cust_name']);
+        unset($_POST['cust_email']);
+        unset($_POST['cust_phone']);
+        unset($_POST['cust_province']);
+        unset($_POST['cust_district']);
+        unset($_POST['cust_address']);
+        $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra địa chỉ email của bạn để làm theo quy trình xác nhận đăng ký của bạn.';
     }
 }
 ?>
-
-<div class="page-banner" style="background-image: url(assets/uploads/<?php echo $banner_registration; ?>);">
+<div class="page-banner"
+    style="background-color:#444;background-image: url(assets/uploads/<?php echo $banner_registration; ?>);">
     <div class="inner">
-        <h1>Đăng ký tài khoản khách hàng</h1>
+        <h1><?php echo 'Đăng ký tài khoản khách hàng' ?></h1>
     </div>
 </div>
 
 <div class="page">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 user-content">
-                <form action="" method="post">
-                    <?php $csrf->echoInputField(); ?>
-
-                    <div class="row g-3">
-                        <!-- Họ tên & Email -->
-                        <div class="col-md-6">
-                            <label>Họ tên *</label>
-                            <input type="text" name="cust_name" class="form-control"
-                                value="<?php echo $_POST['cust_name'] ?? '' ?>">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Email *</label>
-                            <input type="email" name="cust_email" class="form-control"
-                                value="<?php echo $_POST['cust_email'] ?? '' ?>">
-                        </div>
-
-                        <!-- Số điện thoại & Tỉnh/Thành phố -->
-                        <div class="col-md-6">
-                            <label>Số điện thoại *</label>
-                            <input type="text" name="cust_phone" class="form-control"
-                                value="<?php echo $_POST['cust_phone'] ?? '' ?>">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Tỉnh/Thành phố *</label>
-                            <select name="cust_province" class="form-control">
-                                <option value="">-- Chọn --</option>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="user-content">
+                    <form action="" method="post">
+                        <?php $csrf->echoInputField(); ?>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
                                 <?php
-                                $stmt = $pdo->query("SELECT * FROM table_province ORDER BY province_name ASC");
-                                foreach ($stmt as $row) {
-                                    echo '<option value="' . $row['province_id'] . '">' . $row['province_name'] . '</option>';
+                                if ($errorMsg != '') {
+                                    echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
                                 }
                                 ?>
-                            </select>
-                        </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Tên đầy đủ' ?> *</label>
+                                    <input type="text" class="form-control" name="cust_name" value="<?php if (isset($_POST['cust_name'])) {
+                                                                                                        echo $_POST['cust_name'];
+                                                                                                    } ?>">
+                                </div>
 
-                        <!-- Quận/Huyện & Xã/Phường -->
-                        <div class="col-md-6">
-                            <label>Quận/Huyện *</label>
-                            <input type="text" name="cust_district" class="form-control"
-                                value="<?php echo $_POST['cust_district'] ?? '' ?>">
-                        </div>
-                        <div class="col-md-6">
-                            <label>Xã/Phường *</label>
-                            <input type="text" name="cust_address" class="form-control"
-                                value="<?php echo $_POST['cust_address'] ?? '' ?>">
-                        </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Địa chỉ email' ?> *</label>
+                                    <input type="email" class="form-control" name="cust_email" value="<?php if (isset($_POST['cust_email'])) {
+                                                                                                            echo $_POST['cust_email'];
+                                                                                                        } ?>">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Số điện thoại' ?> *</label>
+                                    <input type="text" class="form-control" name="cust_phone" value="<?php if (isset($_POST['cust_phone'])) {
+                                                                                                            echo $_POST['cust_phone'];
+                                                                                                        } ?>">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Tỉnh/thành phố' ?> *</label>
+                                    <select name="cust_province" class="form-control select1">
+                                        <option value="">Chọn tỉnh/thành phố</option>
+                                        <?php
+                                        $querry = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
+                                        $querry->execute();
+                                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach ($result as $row) {
+                                        ?>
+                                        <option value="<?php echo $row['province_id']; ?>">
+                                            <?php echo $row['province_name']; ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Quận/huyện' ?> *</label>
+                                    <input type="text" class="form-control" name="cust_district" value="<?php if (isset($_POST['cust_district'])) {
+                                                                                                            echo $_POST['cust_district'];
+                                                                                                        } ?>">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Xã/thị trấn' ?> *</label>
+                                    <input type="text" class="form-control" name="cust_address" value="<?php if (isset($_POST['cust_address'])) {
+                                                                                                            echo $_POST['cust_address'];
+                                                                                                        } ?>">
+                                </div>
 
-                        <!-- Mật khẩu & Nhập lại mật khẩu -->
-                        <div class="col-md-6">
-                            <label>Mật khẩu *</label>
-                            <input type="password" name="cust_password" class="form-control">
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Mật khẩu' ?> *</label>
+                                    <input type="password" class="form-control" name="cust_password">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for=""><?php echo 'Nhập lại mật khẩu' ?> *</label>
+                                    <input type="password" class="form-control" name="cust_re_password">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="submit" class="btn btn-danger" value="<?php echo 'Đăng ký' ?>"
+                                        name="form1">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label>Nhập lại mật khẩu *</label>
-                            <input type="password" name="cust_re_password" class="form-control">
-                        </div>
-                    </div>
-
-                    <!-- Nút đăng ký & Link đăng ký admin -->
-                    <div class="d-flex flex-column align-items-center mt-4">
-                        <input type="submit" class="btn btn-danger px-5" name="form1" value="Đăng ký khách hàng">
-                        <a href="registration-admin.php" class="btn btn-outline-primary px-4 mt-2">Đăng ký tài khoản
-                            admin</a>
-                    </div>
-                </form>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="user-sidebar">
+                    <ul>
+                        <a href="registration-admin.php"><button
+                                class="btn btn-danger"><?php echo 'Đăng ký tài khoản admin' ?></button></a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Toast -->
 <div id="toast"></div>
@@ -242,11 +322,7 @@ function showToast(message, color = '#333') {
 </script>
 
 <?php
-if (!empty($errorMsg)) {
-    echo "<script>document.addEventListener('DOMContentLoaded', function() {
-        showToast(" . json_encode($errorMsg) . ", '#e74c3c');
-    });</script>";
-}
+
 if (!empty($successMsg)) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
         showToast(" . json_encode($successMsg) . ", '#2ecc71');
