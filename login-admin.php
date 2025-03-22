@@ -79,12 +79,12 @@ if (isset($_POST['form1'])) {
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
                                     <input type="password" class="form-control" name="password">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group d-flex">
                                     <label for=""></label>
-                                    <input type="submit" class="btn btn-success" value="<?php echo 'Submit' ?>"
+                                    <input type="submit" class="btn btn-danger" value="<?php echo 'Đăng nhập' ?>"
                                         name="form1">
                                 </div>
-                                <a href="forget-password.php" style="color:#e4144d;"><?php echo 'Quên mật khẩu' ?>?</a>
+                                <a href="forget-password.php"><?php echo 'Quên mật khẩu' ?>?</a>
                             </div>
                         </div>
                     </form>
@@ -93,8 +93,7 @@ if (isset($_POST['form1'])) {
             <div class="col-md-12">
                 <div class="user-sidebar">
                     <ul>
-                        <a href="login-admin.php"><button
-                                class="btn btn-danger"><?php echo 'Đăng nhập với tư cách khách hàng' ?></button></a>
+                        <a href="login-customer.php"><?php echo 'Đăng nhập với tư cách khách hàng' ?></a>
                     </ul>
                 </div>
             </div>
@@ -120,6 +119,46 @@ if (isset($_POST['form1'])) {
 #toast.show {
     opacity: 1;
     transform: translateY(0);
+}
+.form-group.d-flex {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.col-md-4 a{
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.col-md-4 a:hover {
+    color:rgb(41, 14, 133); 
+    text-decoration: underline;
+}
+.form-group .btn-danger {
+    margin-left: auto;
+}
+
+.user-sidebar {
+    position: absolute;
+    right: 403px;
+    top: -20px;
+}
+
+
+.user-sidebar a:hover {
+    color:rgb(41, 14, 133); 
+    text-decoration: underline;
+}
+
+.user-sidebar a {
+    color: #007bff; 
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 </style>
 

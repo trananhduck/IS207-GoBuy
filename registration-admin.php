@@ -210,7 +210,7 @@ if (isset($_POST['form1'])) {
                                     <input type="password" class="form-control" name="re_password">
                                 </div>
 
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-6 form-group-btn">
                                     <label for=""></label>
                                     <input type="submit" class="btn btn-danger" value="<?php echo 'Đăng ký' ?>"
                                         name="form1">
@@ -224,8 +224,7 @@ if (isset($_POST['form1'])) {
             <div class="col-md-12">
                 <div class="user-sidebar">
                     <ul>
-                        <a href="registration-customer.php"><button
-                                class="btn btn-danger"><?php echo 'Đăng ký tài khoản khách hàng' ?></button></a>
+                        <a href="registration-customer.php"><?php echo 'Đăng ký tài khoản khách hàng' ?></a>
                     </ul>
                 </div>
             </div>
@@ -253,6 +252,39 @@ if (isset($_POST['form1'])) {
 #toast.show {
     opacity: 1;
     transform: translateY(0);
+}
+.form-group-btn {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    margin-top: 15px; 
+}
+
+.btn-danger {
+    width: 50%; 
+    max-width: 200px; 
+    text-align: center;
+}
+.btn {
+    border-radius: 6px;
+    width: 30%;
+}
+.btn input{
+    position: relative;
+}
+.user-sidebar {
+    position: absolute;
+    bottom: -30px; /* Đưa xuống dưới nút */
+    right: 230px; /* Nằm bên phải */
+}
+.user-sidebar a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
+.user-sidebar a:hover {
+    text-decoration: underline;
 }
 </style>
 
