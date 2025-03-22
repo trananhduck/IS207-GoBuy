@@ -56,7 +56,7 @@ if (isset($_POST['form1'])) {
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <div class="form-group">
+                                <div class="form-group user">
                                     <label>Địa chỉ email *</label>
                                     <input type="email" class="form-control" name="cust_email">
                                 </div>
@@ -64,20 +64,20 @@ if (isset($_POST['form1'])) {
                                     <label>Mật khẩu *</label>
                                     <input type="password" class="form-control" name="cust_password">
                                 </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-success" value="Đăng nhập" name="form1">
+                                <div class="form-group d-flex">
+                                    <input type="submit" class="btn btn-danger" value="Đăng nhập" name="form1">
                                 </div>
-                                <a href="forget-password.php" style="color:#e4144d;">Quên mật khẩu?</a>
+                                <a href="forget-password.php">Quên mật khẩu?</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="user-sidebar">
+                <div class="user-sidebar login">
                     <ul>
                         <a href="login-admin.php">
-                            <button class="btn btn-danger">Đăng nhập với tư cách admin</button>
+                            Đăng nhập với tư cách admin
                         </a>
                     </ul>
                 </div>
@@ -106,6 +106,49 @@ if (isset($_POST['form1'])) {
     opacity: 1;
     transform: translateY(0);
 }
+
+.form-group.d-flex {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.col-md-4 a{
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+.col-md-4 a:hover {
+    color:rgb(41, 14, 133); 
+    text-decoration: underline;
+}
+.form-group .btn-danger {
+    margin-left: auto;
+}
+
+.user-sidebar {
+    position: absolute;
+    right: 403px;
+    top: -20px;
+}
+
+
+.user-sidebar a:hover {
+    color:rgb(41, 14, 133); 
+    text-decoration: underline;
+}
+
+.user-sidebar a {
+    color: #007bff; 
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+
 </style>
 
 <script>
