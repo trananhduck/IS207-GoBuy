@@ -347,7 +347,10 @@ INSERT INTO table_payment (
 
 (2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 
     750000.00, '5555555555554444', '456', '05', '2029', 
-    'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B');
+    'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B'),
+(3, 'Tran Anh Duc', 'taduc0508@gmail.com', '2025-02-22 14:25:00', 'TXN123567',
+570, '432225252525', '432', '06', '2030', 'Thanh toán đơn hàng OUF3HV', 'Bank Deposit', 'Completed', 'Pending', 'PAYID456C');
+
 
 
 CREATE TABLE table_photo (
@@ -770,9 +773,6 @@ ALTER TABLE table_settings
 
 ALTER TABLE table_shipping_cost
   ADD PRIMARY KEY (shipping_cost_id);
-
-ALTER TABLE table_shipping_cost_all
-  ADD PRIMARY KEY (shipping_cost_all_id);
 
 ALTER TABLE table_size
   ADD PRIMARY KEY (size_id);
