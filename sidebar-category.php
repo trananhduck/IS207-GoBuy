@@ -189,3 +189,20 @@
         ?>
     </ul>
 </div>
+<style>
+    
+    #left {
+        border: 1px solid #ddd; /* Viền ngoài */
+        border-radius: 8px; /* Bo góc */
+        background-color: #fff; /* Màu nền */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        max-width: 280px;
+    }
+    .cat-level-1 {
+        list-style: none;
+    }
+    .children li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee; /* Viền dưới */
+    }
+</style>
