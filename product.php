@@ -456,12 +456,14 @@ if ($successMsg1 != '') {
 
                                 </div>
                                 <div class="p-price">
-                                    <span style="font-size:14px;"><?php echo 'Giá sản phẩm'; ?></span><br>
+                                    <span style="font-size:14px; color: #000"><?php echo 'Giá sản phẩm'; ?></span><br>
                                     <span>
                                         <?php if ($p_old_price != ''): ?>
-                                        <del><?php echo $p_old_price; ?><?php echo 'VND'; ?></del>
+                                        <del><?php echo $p_old_price; ?><span class="vnd"><?php echo 'VND'; ?></span></del>
+                                    </span>
                                         <?php endif; ?>
-                                        <?php echo $p_current_price; ?><?php echo 'VND'; ?>
+                                    <span>
+                                        <?php echo $p_current_price; ?><span class="vnd"><?php echo 'VND'; ?></span>
                                     </span>
                                 </div>
                                 <input type="hidden" name="p_current_price" value="<?php echo $p_current_price; ?>">
