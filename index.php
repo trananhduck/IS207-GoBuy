@@ -179,12 +179,16 @@ foreach ($result as $row) {
                             <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                             </h3>
                             <h4>
-                                <?php echo $row['p_current_price']; ?>VND
-                                <?php if ($row['p_old_price'] != ''): ?>
-                                <del>
-                                    <?php echo $row['p_old_price']; ?>VND
-                                </del>
+                                <span>
+                                    <?php if ($row['p_old_price'] != ''): ?>
+                                    <del>
+                                        <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                    </del>
+                                </span>
                                 <?php endif; ?>
+                                <span>
+                                    <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
+                                </span>
                             </h4>
                             <div class="rating">
                                 <?php
@@ -306,12 +310,16 @@ foreach ($result as $row) {
                             <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                             </h3>
                             <h4>
-                                <?php echo $row['p_current_price']; ?>VND
-                                <?php if ($row['p_old_price'] != ''): ?>
-                                <del>
-                                    <?php echo $row['p_old_price']; ?>VND
-                                </del>
+                                <span>
+                                    <?php if ($row['p_old_price'] != ''): ?>
+                                    <del>
+                                        <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                    </del>
+                                </span>
                                 <?php endif; ?>
+                                <span>
+                                    <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
+                                </span>
                             </h4>
                             <div class="rating">
                                 <?php
