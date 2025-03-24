@@ -231,9 +231,6 @@ INSERT INTO table_end_category (ecat_id, ecat_name, mcat_id) VALUES
 (78, 'Đồ dùng gia đình', 17),
 (79, 'Văn phòng phẩm & Gói quà', 17);
 
-
-
-
 CREATE TABLE table_faq (
   faq_id int(11) NOT NULL,
   faq_title TEXT NOT NULL,

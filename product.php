@@ -5,7 +5,7 @@ if (!isset($_REQUEST['id'])) {
     header('location: index.php');
     exit;
 } else {
-    // Check the id is valid or not
+    // Kiểm tra id hợp lệ không
     $query = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
     $query->execute(array($_REQUEST['id']));
     $total = $query->rowCount();
@@ -32,7 +32,7 @@ foreach ($result as $row) {
     $ecat_id = $row['ecat_id'];
 }
 
-// Getting all categories name for breadcrumb
+// Lấy tên các danh mục
 $query = $pdo->prepare("SELECT
                         t1.ecat_id,t1.ecat_name,t1.mcat_id,
                         t2.mcat_id,t2.mcat_name,t2.tcat_id,
@@ -92,7 +92,7 @@ if (isset($_POST['form_review'])) {
     }
 }
 
-// Getting the average rating for this product
+// Lấy trung bình đánh giá cho sản phẩm
 $t_rating = 0;
 $query = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
 $query->execute(array($_REQUEST['id']));
@@ -109,7 +109,7 @@ if ($tot_rating == 0) {
 
 if (isset($_POST['form_add_to_cart'])) {
 
-    // getting the currect stock of this product
+    // lấy số lượng hàng còn trong kho
     $query = $pdo->prepare("SELECT * FROM table_product WHERE p_id=?");
     $query->execute(array($_REQUEST['id']));
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -117,7 +117,7 @@ if (isset($_POST['form_add_to_cart'])) {
         $current_p_qty = $row['p_qty'];
     }
     if ($_POST['p_qty'] > $current_p_qty):
-        $temp_msg = 'Sorry! There are only ' . $current_p_qty . ' item(s) in stock';
+        $temp_msg = 'Xin lỗi, chúng tôi chỉ có' . $current_p_qty . ' 30 món trong kho';
 ?>
 <script type="text/javascript">
 alert('<?php echo $temp_msg; ?>');
@@ -168,7 +168,7 @@ alert('<?php echo $temp_msg; ?>');
                 }
             }
             if ($added == 1) {
-                $errorMsg1 = 'This product is already added to the shopping cart.';
+                $errorMsg1 = 'Sản phẩm này đã được thêm vào giỏ hàng.';
             } else {
 
                 $i = 0;
@@ -216,7 +216,7 @@ alert('<?php echo $temp_msg; ?>');
                 $_SESSION['cart_p_name'][$new_key] = $_POST['p_name'];
                 $_SESSION['cart_p_featured_photo'][$new_key] = $_POST['p_featured_photo'];
 
-                $successMsg1 = 'Product is added to the cart successfully!';
+                $successMsg1 = 'Sản phẩm được thêm vào giỏ hàng thành công!';
             }
         } else {
 
@@ -282,7 +282,7 @@ if ($successMsg1 != '') {
             <div class="col-md-12">
                 <div class="breadcrumb mb_30">
                     <ul>
-                        <li><a href="<?php echo BASE_URL; ?>">Home</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>">Trang chủ</a></li>
                         <li>></li>
                         <li><a
                                 href="<?php echo BASE_URL . 'product-category.php?id=' . $tcat_id . '&type=top-category' ?>"><?php echo $tcat_name; ?></a>
@@ -304,7 +304,6 @@ if ($successMsg1 != '') {
                     <div class="row">
                         <div class="col-md-5">
                             <ul class="prod-slider">
-
                                 <li style="background-image: url(assets/uploads/<?php echo $p_featured_photo; ?>);">
                                     <a class="popup" href="assets/uploads/<?php echo $p_featured_photo; ?>"></a>
                                 </li>
@@ -459,9 +458,10 @@ if ($successMsg1 != '') {
                                     <span style="font-size:14px; color: #000"><?php echo 'Giá sản phẩm'; ?></span><br>
                                     <span>
                                         <?php if ($p_old_price != ''): ?>
-                                        <del><?php echo $p_old_price; ?><span class="vnd"><?php echo 'VND'; ?></span></del>
+                                        <del><?php echo $p_old_price; ?><span
+                                                class="vnd"><?php echo 'VND'; ?></span></del>
                                     </span>
-                                        <?php endif; ?>
+                                    <?php endif; ?>
                                     <span>
                                         <?php echo $p_current_price; ?><span class="vnd"><?php echo 'VND'; ?></span>
                                     </span>
