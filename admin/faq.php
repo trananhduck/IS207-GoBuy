@@ -29,6 +29,7 @@ if (isset($_POST['form1'])) {
 <section class="content-header">
     <div class="content-header-left">
         <h1>Thêm FAQ</h1>
+
     </div>
     <div class="content-header-right">
         <a href="faq.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
@@ -41,6 +42,7 @@ if (isset($_POST['form1'])) {
             <?php if ($errorMsg): ?>
                 <div class="callout callout-danger">
                     <p><?php echo $errorMsg; ?></p>
+
                 </div>
             <?php endif; ?>
 
