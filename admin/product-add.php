@@ -6,17 +6,17 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['tcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn danh mục cấp cao nhất<br>";
+        $errorMsg .= "Bạn phải chọn một danh mục lớn<br>";
     }
 
     if (empty($_POST['mcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn danh mục cấp trung<br>";
+        $errorMsg .= "Bạn phải chọn một danh mục trung bình<br>";
     }
 
     if (empty($_POST['ecat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn danh mục cấp cuối<br>";
+        $errorMsg .= "Bạn phải chọn một danh mục con<br>";
     }
 
     if (empty($_POST['p_name'])) {
@@ -35,19 +35,20 @@ if (isset($_POST['form1'])) {
     }
 
     $path = $_FILES['p_featured_photo']['name'];
-    $temp_path = $_FILES['p_featured_photo']['temp_name'];
+    $path_tmp = $_FILES['p_featured_photo']['tmp_name'];
 
     if ($path != '') {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>';
+            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
         }
     } else {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh đại diện cho sản phẩm<br>';
+        $errorMsg .= 'Bạn phải chọn một ảnh đại diện<br>';
     }
+
 
     if ($valid == 1) {
 
@@ -55,23 +56,23 @@ if (isset($_POST['form1'])) {
         $query->execute();
         $result = $query->fetchAll();
         foreach ($result as $row) {
-            $ai_id = $row[10];
+            $ai_id = $row[10]; // Lấy ID tự động tăng của sản phẩm tiếp theo
         }
 
-        if (isset($_FILES['photo']["name"]) && isset($_FILES['photo']["temp_name"])) {
+        if (isset($_FILES['photo']["name"]) && isset($_FILES['photo']["tmp_name"])) {
             $photo = array();
             $photo = $_FILES['photo']["name"];
             $photo = array_values(array_filter($photo));
 
             $photo_temp = array();
-            $photo_temp = $_FILES['photo']["temp_name"];
+            $photo_temp = $_FILES['photo']["tmp_name"];
             $photo_temp = array_values(array_filter($photo_temp));
 
             $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product_photo'");
             $query->execute();
             $result = $query->fetchAll();
             foreach ($result as $row) {
-                $next_id1 = $row[10];
+                $next_id1 = $row[10]; // Lấy ID tự động tăng của ảnh sản phẩm tiếp theo
             }
             $z = $next_id1;
 
@@ -95,9 +96,9 @@ if (isset($_POST['form1'])) {
         }
 
         $final_name = 'product-featured-' . $ai_id . '.' . $ext;
-        move_uploaded_file($temp_path, '../assets/uploads/' . $final_name);
+        move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
 
-        // Lưu dữ liệu vào bảng sản phẩm chính table_product
+        // Lưu dữ liệu vào bảng chính table_product
         $query = $pdo->prepare("INSERT INTO table_product(
 										p_name,
 										p_old_price,
@@ -107,13 +108,12 @@ if (isset($_POST['form1'])) {
 										p_description,
 										p_short_description,
 										p_feature,
-										p_condition,
 										p_return_policy,
 										p_total_view,
 										p_is_featured,
 										p_is_active,
 										ecat_id
-									) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+									) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $query->execute(array(
             $_POST['p_name'],
             $_POST['p_old_price'],
@@ -123,13 +123,14 @@ if (isset($_POST['form1'])) {
             $_POST['p_description'],
             $_POST['p_short_description'],
             $_POST['p_feature'],
-            $_POST['p_condition'],
             $_POST['p_return_policy'],
             0,
             $_POST['p_is_featured'],
             $_POST['p_is_active'],
             $_POST['ecat_id']
         ));
+
+
 
         if (isset($_POST['size'])) {
             foreach ($_POST['size'] as $value) {
@@ -148,95 +149,94 @@ if (isset($_POST['form1'])) {
         $successMsg = 'Sản phẩm đã được thêm thành công.';
     }
 }
-
 ?>
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Tất cả sản phẩm</h1>
+        <h1>Thêm Sản Phẩm</h1>
     </div>
     <div class="content-header-right">
-        <a href="product.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="product.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
     </div>
 </section>
 
-
 <section class="content">
-
     <div class="row">
         <div class="col-md-12">
-
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
-                    <p>
-                        <?php echo $errorMsg; ?>
-                    </p>
-                </div>
+            <div class="callout callout-danger">
+                <p>
+                    <?php echo $errorMsg; ?>
+                </p>
+            </div>
             <?php endif; ?>
-
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+            <div class="callout callout-success">
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
+            <?php
+            $tcat_id = isset($_POST['tcat_id']) ? intval($_POST['tcat_id']) : '';
+            $mcat_id = isset($_POST['mcat_id']) ? intval($_POST['mcat_id']) : '';
 
+            ?>
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 
                 <div class="box box-info">
                     <div class="box-body">
+                        <!-- Danh mục lớn -->
                         <div class="form-group">
-                            <label for="" class="col-sm-3 control-label">Tên danh mục cấp cao nhất
-                                <span>*</span></label>
+                            <label for="" class="col-sm-3 control-label">Tên danh mục lớn <span>*</span></label>
                             <div class="col-sm-4">
-                                <select name="tcat_id" class="form-control select2 top-cat">
-                                    <option value="">Chọn danh mục cấp cao nhất</option>
+                                <select name="tcat_id" class="form-control select2" onchange="this.form.submit()">
+                                    <option value="">Chọn Danh Mục lớn</option>
                                     <?php
                                     $query = $pdo->prepare("SELECT * FROM table_top_category ORDER BY tcat_name ASC");
                                     $query->execute();
                                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
-                                    ?>
-                                        <option value="<?php echo $row['tcat_id']; ?>"><?php echo $row['tcat_name']; ?>
-                                        </option>
-                                    <?php
+                                        $selected = ($row['tcat_id'] == $tcat_id) ? "selected" : "";
+                                        echo "<option value='{$row['tcat_id']}' $selected>{$row['tcat_name']}</option>";
                                     }
                                     ?>
                                 </select>
                             </div>
                         </div>
+
+                        <!-- Danh mục trung bình -->
                         <div class="form-group">
-                            <label for="" class="col-sm-3 control-label">Tên danh mục trung cấp <span>*</span></label>
+                            <label for="" class="col-sm-3 control-label">Tên danh mục trung bình <span>*</span></label>
                             <div class="col-sm-4">
-                                <select name="mcat_id" class="form-control select2 mid-cat">
-                                    <option value="">Chọn danh mục trung cấp</option>
+                                <select name="mcat_id" class="form-control select2" onchange="this.form.submit()">
+                                    <option value="">Chọn Danh Mục trung bình</option>
                                     <?php
-                                    $query = $pdo->prepare("SELECT * FROM table_mid_category ORDER BY mcat_name ASC");
-                                    $query->execute();
-                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($result as $row) {
-                                    ?>
-                                        <option value="<?php echo $row['mcat_id']; ?>"><?php echo $row['mcat_name']; ?>
-                                        </option>
-                                    <?php
+                                    if ($tcat_id) { // Chỉ hiển thị danh mục con khi đã chọn danh mục lớn
+                                        $query = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id = ? ORDER BY mcat_name ASC");
+                                        $query->execute([$tcat_id]);
+                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach ($result as $row) {
+                                            $selected = ($row['mcat_id'] == $mcat_id) ? "selected" : "";
+                                            echo "<option value='{$row['mcat_id']}' $selected>{$row['mcat_name']}</option>";
+                                        }
                                     }
                                     ?>
                                 </select>
                             </div>
                         </div>
+                        <!-- Danh mục con -->
                         <div class="form-group">
-                            <label for="" class="col-sm-3 control-label">Tên danh mục cuối <span>*</span></label>
+                            <label for="" class="col-sm-3 control-label">Tên danh mục con <span>*</span></label>
                             <div class="col-sm-4">
-                                <select name="ecat_id" class="form-control select2 end-cat">
-                                    <option value="">Chọn danh mục cuối</option>
+                                <select name="ecat_id" class="form-control select2">
+                                    <option value="">Chọn danh mục con</option>
                                     <?php
-                                    $query = $pdo->prepare("SELECT * FROM table_end_category ORDER BY ecat_name ASC");
-                                    $query->execute();
-                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($result as $row) {
-                                    ?>
-                                        <option value="<?php echo $row['ecat_id']; ?>"><?php echo $row['ecat_name']; ?>
-                                        </option>
-                                    <?php
+                                    if ($mcat_id) { // Chỉ hiển thị danh mục con khi đã chọn danh mục trung bình
+                                        $query = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id = ? ORDER BY ecat_name ASC");
+                                        $query->execute([$mcat_id]);
+                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach ($result as $row) {
+                                            echo "<option value='{$row['ecat_id']}'>{$row['ecat_name']}</option>";
+                                        }
                                     }
                                     ?>
                                 </select>
@@ -269,7 +269,7 @@ if (isset($_POST['form1'])) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-3 control-label">Chọn kích cỡ</label>
+                            <label for="" class="col-sm-3 control-label">Chọn kích thước</label>
                             <div class="col-sm-4">
                                 <select name="size[]" class="form-control select2" multiple="multiple">
                                     <?php
@@ -278,8 +278,8 @@ if (isset($_POST['form1'])) {
                                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
-                                        <option value="<?php echo $row['size_id']; ?>"><?php echo $row['size_name']; ?>
-                                        </option>
+                                    <option value="<?php echo $row['size_id']; ?>"><?php echo $row['size_name']; ?>
+                                    </option>
                                     <?php
                                     }
                                     ?>
@@ -296,8 +296,8 @@ if (isset($_POST['form1'])) {
                                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
-                                        <option value="<?php echo $row['color_id']; ?>"><?php echo $row['color_name']; ?>
-                                        </option>
+                                    <option value="<?php echo $row['color_id']; ?>"><?php echo $row['color_name']; ?>
+                                    </option>
                                     <?php
                                     }
                                     ?>
@@ -305,7 +305,7 @@ if (isset($_POST['form1'])) {
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-sm-3 control-label">Ảnh nổi bật <span>*</span></label>
+                            <label for="" class="col-sm-3 control-label">Ảnh đại diện <span>*</span></label>
                             <div class="col-sm-4" style="padding-top:4px;">
                                 <input type="file" name="p_featured_photo">
                             </div>
@@ -313,13 +313,70 @@ if (isset($_POST['form1'])) {
                         <div class="form-group">
                             <label for="" class="col-sm-3 control-label">Ảnh khác</label>
                             <div class="col-sm-4" style="padding-top:4px;">
-                                <input type="file" name="photo[]" style="margin-bottom:5px;">
+                                <table id="ProductTable" style="width:100%;">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="upload-btn">
+                                                    <input type="file" name="photo[]" style="margin-bottom:5px;">
+                                                </div>
+                                            </td>
+                                            <td style="width:28px;"><a href="javascript:void()"
+                                                    class="Delete btn btn-danger btn-xs">X</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="button" id="btnAddNew" value="Thêm ảnh mới"
+                                    style="margin-top: 5px;margin-bottom:10px;border:0;color: #fff;font-size: 14px;border-radius:3px;"
+                                    class="btn btn-warning btn-xs">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-3 control-label">Mô tả</label>
                             <div class="col-sm-8">
-                                <textarea name="p_description" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea name="p_description" class="form-control" cols="30" rows="10"
+                                    id="editor1"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Mô tả ngắn</label>
+                            <div class="col-sm-8">
+                                <textarea name="p_short_description" class="form-control" cols="30" rows="10"
+                                    id="editor2"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Tính năng</label>
+                            <div class="col-sm-8">
+                                <textarea name="p_feature" class="form-control" cols="30" rows="10"
+                                    id="editor3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Chính sách hoàn trả</label>
+                            <div class="col-sm-8">
+                                <textarea name="p_return_policy" class="form-control" cols="30" rows="10"
+                                    id="editor5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Có nổi bật không?</label>
+                            <div class="col-sm-8">
+                                <select name="p_is_featured" class="form-control" style="width:auto;">
+                                    <option value="0">Không</option>
+                                    <option value="1">Có</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">Có hoạt động không?</label>
+                            <div class="col-sm-8">
+                                <select name="p_is_active" class="form-control" style="width:auto;">
+                                    <option value="0">Không</option>
+                                    <option value="1">Có</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -331,7 +388,10 @@ if (isset($_POST['form1'])) {
                         </div>
                     </div>
                 </div>
+
             </form>
+
+
         </div>
     </div>
 
