@@ -254,8 +254,8 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                                         </div>
                                     </div>
                                     <?php else: ?>
-                                    <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i
-                                                class="fa fa-shopping-cart"></i> <?php echo 'Thêm vào giỏ hàng' ?></a>
+                                    <p><a href="product.php?id=<?php echo $row['p_id']; ?>"></i>
+                                            <?php echo 'Xem sản phẩm' ?></a>
                                     </p>
                                     <?php endif; ?>
                                 </div>

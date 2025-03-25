@@ -109,36 +109,71 @@
 
 /* CHỦ ĐỀ 2 - MÀU ĐỎ */
 #left ul.nav {
-    background: #fff;
+    background: #ffffff;
+    padding: 0;
+    border-radius: 8px;
 }
 
 #left ul.nav > li.cat-level-1 {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    list-style: none;
 }
 
 #left ul.nav > li.cat-level-1.parent > a {
-    border: solid 1px #e4144d;
-    background: #e4144d;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+#left ul.nav > li.cat-level-1.parent > a:hover {
+    background: #218838;
+}
+#left ul.nav > li.cat-level-1 .children {
+    padding-left: 15px;
+    margin-top: 5px;
+}
+#left ul.nav > li.cat-level-1 li a {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+}
+#left ul.nav > li.cat-level-1 li a:hover {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
 }
 
 #left ul.nav > li.cat-level-1.parent > a > .sign,
 #left ul.nav > li.cat-level-1 li.parent > a > .sign {
+    font-weight: bold;
     margin-left: 0px;
-    background-color: #e4144d;
+    background-color: #28a745;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
 }
 
 #left ul.nav > li.cat-level-1 .lbl {
+    font-size: 20px;
     color: #fff;
 }
 
 #left ul.nav > li.cat-level-1 .lbl1 {
-    color: #e4144d;
+    color: #000;
+    font-size: 15px;
 }
 
 #left ul.nav > li.cat-level-1 li.current > a .lbl {
-    background-color: #e4144d;
-    color: #fff!important;
+    background-color: #28a745;
+    color: white !important;
 }
 
 /* CHỦ ĐỀ 3 - MÀU XANH LÁ */

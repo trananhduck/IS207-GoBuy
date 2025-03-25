@@ -1,79 +1,87 @@
 <?php require_once('header.php'); ?>
 
+<?php
+if (isset($_POST['form1'])) {
+    $valid = 1;
+
+    if (empty($_POST['faq_title'])) {
+        $valid = 0;
+        $errorMsg .= 'Tiêu đề không được để trống<br>';
+    }
+
+    if (empty($_POST['faq_content'])) {
+        $valid = 0;
+        $errorMsg .= 'Nội dung không được để trống<br>';
+    }
+
+    if ($valid == 1) {
+        $query = $pdo->prepare("INSERT INTO table_faq (faq_title,faq_content) VALUES (?,?)");
+        $query->execute(array($_POST['faq_title'], $_POST['faq_content']));
+
+        $successMsg = 'FAQ đã được thêm thành công!';
+
+        unset($_POST['faq_title']);
+        unset($_POST['faq_content']);
+    }
+}
+?>
+
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem FAQs</h1>
+        <h1>Thêm FAQ</h1>
     </div>
     <div class="content-header-right">
-        <a href="faq-add.php" class="btn btn-primary btn-sm">Thêm FAQ</a>
+        <a href="faq.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
     </div>
 </section>
 
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-info">
-                <div class="box-body table-responsive">
-                    <table id="example1" class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th width="30">STT</th>
-                                <th width="100">Tiêu đề</th>
-                                <th width="80">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 0;
-                            $statement = $pdo->prepare("SELECT * FROM table_faq");
-                            $statement->execute();
-                            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($result as $row) {
-                                $i++;
-                            ?>
-                            <tr>
-                                <td><?php echo $i; ?></td>
-                                <td><?php echo $row['faq_title']; ?></td>
-                                <td>
-                                    <a href="faq-edit.php?id=<?php echo $row['faq_id']; ?>"
-                                        class="btn btn-primary btn-xs">Sửa</a>
-                                    <a href="#" class="btn btn-danger btn-xs"
-                                        data-href="faq-delete.php?id=<?php echo $row['faq_id']; ?>" data-toggle="modal"
-                                        data-target="#confirm-delete">Xóa</a>
-                                </td>
-                            </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+            <?php if ($errorMsg): ?>
+                <div class="callout callout-danger">
+                    <p><?php echo $errorMsg; ?></p>
                 </div>
-            </div>
+            <?php endif; ?>
+
+            <?php if ($successMsg): ?>
+                <div class="callout callout-success">
+                    <p><?php echo $successMsg; ?></p>
+                </div>
+            <?php endif; ?>
+
+            <form class="form-horizontal" action="" method="post">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">Tiêu đề <span>*</span></label>
+                            <div class="col-sm-6">
+                                <input type="text" autocomplete="off" class="form-control" name="faq_title"
+                                    value="<?php if (isset($_POST['faq_title'])) {
+                                                echo $_POST['faq_title'];
+                                            } ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label">Nội dung <span>*</span></label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="faq_content" id="editor1"
+                                    style="height:200px;"><?php if (isset($_POST['faq_content'])) {
+                                                                echo $_POST['faq_content'];
+                                                            } ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-success pull-left" name="form1">Gửi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-
 </section>
-
-
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Xác nhận xóa</h4>
-            </div>
-            <div class="modal-body">
-                <p>Bạn có muốn xóa FAQ này không</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <a class="btn btn-danger btn-ok">Xóa</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <?php require_once('footer.php'); ?>

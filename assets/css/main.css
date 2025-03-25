@@ -521,11 +521,37 @@ Responsive cho Mobile
 .product .text h3 a:hover {
   text-decoration: none;
 }
-
-.product .text h4 {
-  color: #0d1452;
-  text-align: center;
+.product .text h4{
+  line-height: 1.4;
   font-size: 18px;
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product .text h4 del {
+  color: #999;
+  font-size: 14px;
+  margin-bottom: -5px;
+  text-decoration: line-through;
+  display: block;
+}
+
+.product .text h4 span {
+  font-size: 35px;
+  color: #d32f2f; /* Màu đỏ đậm hơn */
+  font-weight: 500;
+  margin: auto;
+}
+
+.product .text h4 .vnd{
+  color: #918a8a;
+  font-size: 20px;
+}
+.product .text h4 del .vnd{
+  color: #999;
+  font-size: 16px;
 }
 
 .product .text p {
@@ -714,21 +740,36 @@ ul.nav-tabs {
 }
 
 .product .p-price {
-  line-height: 30px;
-  font-size: 20px;
+  line-height: 1.4;
+  font-size: 18px;
   font-weight: 700;
   color: #333;
   margin-bottom: 20px;
-}
-
-.product .p-price span {
-  font-size: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .product .p-price del {
-  color: #c7c7c7;
+  color: #999;
+  font-size: 16px;
+  margin-bottom: -10px;
+  text-decoration: line-through;
+  display: block;
 }
 
+.product .p-price span {
+  font-size: 40px;
+  color: #d32f2f; /* Màu đỏ đậm hơn */
+  font-weight: bold;
+}
+.product .p-price .vnd{
+  color: #918a8a;
+  font-size: 20px;
+}
+.product .p-price del .vnd{
+  color: #999;
+  font-size: 16px;
+}
 .product .p-short-des {
   margin-bottom: 30px;
 }
@@ -1073,10 +1114,6 @@ table.bill-address tr td:nth-of-type(1) {
   border-bottom: 2px solid #ddd;
   background: #fff;
 }
-.card .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-}
 .card .nav-tabs > li > a {
   border: none;
   color: #666;
@@ -1208,5 +1245,3 @@ div.pagination span.disabled {
   background-size: cover;
   height: 500px;
 }
-
-select

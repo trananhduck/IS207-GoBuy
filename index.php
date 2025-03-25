@@ -1,8 +1,8 @@
 <?php require_once('header.php'); ?>
 <?php
-$statement = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
-$statement->execute();
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+$query = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $cta_title = $row['cta_title'];
     $cta_content = $row['cta_content'];
@@ -31,9 +31,9 @@ foreach ($result as $row) {
     <ol class="carousel-indicators">
         <?php
         $i = 0;
-        $statement = $pdo->prepare("SELECT * FROM table_slider");
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_slider");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
         ?>
         <li data-target="#bootstrap-touch-slider" data-slide-to="<?php echo $i; ?>" <?php if ($i == 0) {
@@ -45,14 +45,14 @@ foreach ($result as $row) {
         ?>
     </ol>
 
-    <!-- Wrapper For Slides -->
+    <!-- Wrapper cho cac slides -->
     <div class="carousel-inner" role="listbox">
 
         <?php
         $i = 0;
-        $statement = $pdo->prepare("SELECT * FROM table_slider");
-        $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $query = $pdo->prepare("SELECT * FROM table_slider");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $row) {
         ?>
         <div class="item <?php if ($i == 0) {
@@ -102,16 +102,16 @@ foreach ($result as $row) {
         ?>
     </div>
 
-    <!-- Slider Left Control -->
+    <!-- Điều hướng Slider trái -->
     <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
         <span class="fa fa-angle-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="sr-only">Trước</span>
     </a>
 
-    <!-- Slider Right Control -->
+    <!-- Điều hướng Slider phải -->
     <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
         <span class="fa fa-angle-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="sr-only">Sau</span>
     </a>
 
 </div>
@@ -122,9 +122,9 @@ foreach ($result as $row) {
     <div class="container">
         <div class="row">
             <?php
-                $statement = $pdo->prepare("SELECT * FROM table_service");
-                $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $query = $pdo->prepare("SELECT * FROM table_service");
+                $query->execute();
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                 ?>
             <div class="col-md-3">
@@ -163,9 +163,9 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
-                        $statement->execute(array(1));
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
+                        $query->execute(array(1));
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                     <div class="item">
@@ -179,23 +179,27 @@ foreach ($result as $row) {
                             <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                             </h3>
                             <h4>
-                                $<?php echo $row['p_current_price']; ?>
-                                <?php if ($row['p_old_price'] != ''): ?>
-                                <del>
-                                    $<?php echo $row['p_old_price']; ?>
-                                </del>
+                                <span>
+                                    <?php if ($row['p_old_price'] != ''): ?>
+                                    <del>
+                                        <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                    </del>
+                                </span>
                                 <?php endif; ?>
+                                <span>
+                                    <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
+                                </span>
                             </h4>
                             <div class="rating">
                                 <?php
                                         $t_rating = 0;
-                                        $statement1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-                                        $statement1->execute(array($row['p_id']));
-                                        $tot_rating = $statement1->rowCount();
+                                        $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
+                                        $query1->execute(array($row['p_id']));
+                                        $tot_rating = $query1->rowCount();
                                         if ($tot_rating == 0) {
                                             $avg_rating = 0;
                                         } else {
-                                            $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                                            $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
                                                 $t_rating = $t_rating + $row1['rating'];
                                             }
@@ -253,22 +257,19 @@ foreach ($result as $row) {
                             <?php if ($row['p_qty'] == 0): ?>
                             <div class="out-of-stock">
                                 <div class="inner">
-                                    Out Of Stock
+                                    Hết hàng
                                 </div>
                             </div>
                             <?php else: ?>
                             <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i class="fa fa-shopping-cart"></i>
-                                    Add to Cart</a></p>
+                                    Xem sản phẩm</a></p>
                             <?php endif; ?>
                         </div>
                     </div>
                     <?php
                         }
                         ?>
-
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -293,9 +294,9 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $statement = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_total_view DESC LIMIT " . $total_popular_product_home);
-                        $statement->execute(array(1));
-                        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_total_view DESC LIMIT " . $total_popular_product_home);
+                        $query->execute(array(1));
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
                         ?>
                     <div class="item">
@@ -309,23 +310,27 @@ foreach ($result as $row) {
                             <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                             </h3>
                             <h4>
-                                $<?php echo $row['p_current_price']; ?>
-                                <?php if ($row['p_old_price'] != ''): ?>
-                                <del>
-                                    $<?php echo $row['p_old_price']; ?>
-                                </del>
+                                <span>
+                                    <?php if ($row['p_old_price'] != ''): ?>
+                                    <del>
+                                        <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                    </del>
+                                </span>
                                 <?php endif; ?>
+                                <span>
+                                    <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
+                                </span>
                             </h4>
                             <div class="rating">
                                 <?php
                                         $t_rating = 0;
-                                        $statement1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-                                        $statement1->execute(array($row['p_id']));
-                                        $tot_rating = $statement1->rowCount();
+                                        $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
+                                        $query1->execute(array($row['p_id']));
+                                        $tot_rating = $query1->rowCount();
                                         if ($tot_rating == 0) {
                                             $avg_rating = 0;
                                         } else {
-                                            $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                                            $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
                                                 $t_rating = $t_rating + $row1['rating'];
                                             }
@@ -383,12 +388,12 @@ foreach ($result as $row) {
                             <?php if ($row['p_qty'] == 0): ?>
                             <div class="out-of-stock">
                                 <div class="inner">
-                                    Out Of Stock
+                                    Hết hàng
                                 </div>
                             </div>
                             <?php else: ?>
                             <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i class="fa fa-shopping-cart"></i>
-                                    Add to Cart</a></p>
+                                    Xem sản phẩm</a></p>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -426,6 +431,7 @@ foreach ($result as $row) {
     z-index: 9999;
     transform: translateY(-20px);
 }
+
 #toast.show {
     opacity: 1;
     transform: translateY(0);

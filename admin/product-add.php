@@ -167,17 +167,17 @@ if (isset($_POST['form1'])) {
         <div class="col-md-12">
 
             <?php if ($errorMsg): ?>
-            <div class="callout callout-danger">
-                <p>
-                    <?php echo $errorMsg; ?>
-                </p>
-            </div>
+                <div class="callout callout-danger">
+                    <p>
+                        <?php echo $errorMsg; ?>
+                    </p>
+                </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-            <div class="callout callout-success">
-                <p><?php echo $successMsg; ?></p>
-            </div>
+                <div class="callout callout-success">
+                    <p><?php echo $successMsg; ?></p>
+                </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -191,16 +191,16 @@ if (isset($_POST['form1'])) {
                                 <select name="tcat_id" class="form-control select2 top-cat">
                                     <option value="">Chọn danh mục cấp cao nhất</option>
                                     <?php
-                                $query = $pdo->prepare("SELECT * FROM table_top_category ORDER BY tcat_name ASC");
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                ?>
-                                    <option value="<?php echo $row['tcat_id']; ?>"><?php echo $row['tcat_name']; ?>
-                                    </option>
+                                    $query = $pdo->prepare("SELECT * FROM table_top_category ORDER BY tcat_name ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['tcat_id']; ?>"><?php echo $row['tcat_name']; ?>
+                                        </option>
                                     <?php
-                                }
-                                ?>
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -251,16 +251,16 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <select name="size[]" class="form-control select2" multiple="multiple">
                                     <?php
-                                $query = $pdo->prepare("SELECT * FROM table_size ORDER BY size_id ASC");
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                ?>
-                                    <option value="<?php echo $row['size_id']; ?>"><?php echo $row['size_name']; ?>
-                                    </option>
+                                    $query = $pdo->prepare("SELECT * FROM table_size ORDER BY size_id ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['size_id']; ?>"><?php echo $row['size_name']; ?>
+                                        </option>
                                     <?php
-                                }
-                                ?>
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -269,16 +269,16 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <select name="color[]" class="form-control select2" multiple="multiple">
                                     <?php
-                                $query = $pdo->prepare("SELECT * FROM table_color ORDER BY color_id ASC");
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                ?>
-                                    <option value="<?php echo $row['color_id']; ?>"><?php echo $row['color_name']; ?>
-                                    </option>
+                                    $query = $pdo->prepare("SELECT * FROM table_color ORDER BY color_id ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['color_id']; ?>"><?php echo $row['color_name']; ?>
+                                        </option>
                                     <?php
-                                }
-                                ?>
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

@@ -119,18 +119,17 @@ if (!isset($_SESSION['user'])) {
                                         } ?>">
                         <a href="#">
                             <i class="fa fa-cogs"></i>
-                            <span>Cài đặt shop</span>
+                            <span>Cài đặt cửa hàng</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="size.php"><i class="fa fa-circle-o"></i> Kích thước</a></li>
-                            <li><a href="color.php"><i class="fa fa-circle-o"></i> Màu sắc</a></li>
-                            <li><a href="province.php"><i class="fa fa-circle-o"></i> Tỉnh</a></li>
+                            <li><a href="size.php"><i class="fa fa-circle-o"></i> Kích thước sản phẩm</a></li>
+                            <li><a href="color.php"><i class="fa fa-circle-o"></i> Màu sắc sản phẩm</a></li>
                             <li><a href="shipping-cost.php"><i class="fa fa-circle-o"></i> Phí vận chuyển</a></li>
                             <li><a href="top-category.php"><i class="fa fa-circle-o"></i> Danh mục lớn</a></li>
-                            <li><a href="mid-category.php"><i class="fa fa-circle-o"></i> Danh mục giữa</a></li>
+                            <li><a href="mid-category.php"><i class="fa fa-circle-o"></i> Danh mục trung gian</a></li>
                             <li><a href="end-category.php"><i class="fa fa-circle-o"></i> Danh mục con</a></li>
                         </ul>
                     </li>

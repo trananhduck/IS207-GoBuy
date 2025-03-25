@@ -2,12 +2,13 @@
 
 <section class="content-header">
     <div class="content-header-left">
-        <h1>Xem Dịch Vụ</h1>
+        <h1>Tất cả danh mục trung gian</h1>
     </div>
     <div class="content-header-right">
-        <a href="service-add.php" class="btn btn-primary btn-sm">Thêm Dịch Vụ</a>
+        <a href="mid-category-add.php" class="btn btn-primary btn-sm">Thêm mới</a>
     </div>
 </section>
+
 
 <section class="content">
     <div class="row">
@@ -17,34 +18,35 @@
                     <table id="example1" class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th width="30">STT</th>
-                                <th>Hình Ảnh</th>
-                                <th width="100">Tiêu Đề</th>
-                                <th>Nội Dung</th>
-                                <th width="80">Hành Động</th>
+                                <th>STT</th>
+                                <th>Tên danh mục trung gian</th>
+                                <th>Tên danh mục lớn</th>
+                                <th>Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $i = 0;
-                            $statement = $pdo->prepare("SELECT * FROM table_service");
-                            $statement->execute();
-                            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                            $query = $pdo->prepare("SELECT * 
+                                    FROM table_mid_category t1
+                                    JOIN table_top_category t2
+                                    ON t1.tcat_id = t2.tcat_id
+                                    ORDER BY t1.mcat_id DESC");
+                            $query->execute();
+                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($result as $row) {
                                 $i++;
                             ?>
                                 <tr>
                                     <td><?php echo $i; ?></td>
-                                    <td style="width:130px;"><img src="../assets/uploads/<?php echo $row['photo']; ?>"
-                                            alt="<?php echo $row['title']; ?>" style="width:120px;"></td>
-                                    <td><?php echo $row['title']; ?></td>
-                                    <td><?php echo $row['content']; ?></td>
+                                    <td><?php echo $row['mcat_name']; ?></td>
+                                    <td><?php echo $row['tcat_name']; ?></td>
                                     <td>
-                                        <a href="service-edit.php?id=<?php echo $row['id']; ?>"
+                                        <a href="mid-category-edit.php?id=<?php echo $row['mcat_id']; ?>"
                                             class="btn btn-primary btn-xs">Sửa</a>
                                         <a href="#" class="btn btn-danger btn-xs"
-                                            data-href="service-delete.php?id=<?php echo $row['id']; ?>" data-toggle="modal"
-                                            data-target="#confirm-delete">Xóa</a>
+                                            data-href="mid-category-delete.php?id=<?php echo $row['mcat_id']; ?>"
+                                            data-toggle="modal" data-target="#confirm-delete">Xóa</a>
                                     </td>
                                 </tr>
                             <?php
@@ -54,8 +56,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
 </section>
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -64,10 +64,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Xác Nhận Xóa</h4>
+                <h4 class="modal-title" id="myModalLabel">Xác nhận xóa</h4>
             </div>
             <div class="modal-body">
                 <p>Bạn có chắc chắn muốn xóa mục này không?</p>
+                <p style="color:red;">Hãy cẩn thận! Tất cả sản phẩm và danh mục cấp cuối thuộc danh mục trung gian này
+                    sẽ
+                    bị xóa khỏi tất cả các bảng như bảng đơn hàng, bảng thanh toán, bảng kích thước, bảng màu sắc, bảng
+                    đánh giá, v.v.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
@@ -76,5 +80,6 @@
         </div>
     </div>
 </div>
+
 
 <?php require_once('footer.php'); ?>
