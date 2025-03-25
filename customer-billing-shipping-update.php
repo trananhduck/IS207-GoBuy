@@ -95,11 +95,11 @@ if (isset($_POST['form1'])) {
                                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                 foreach ($result as $row) {
                                                 ?>
-                                                <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {
+                                                    <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {
                                                                                                             echo 'selected';
                                                                                                         } ?>>
-                                                    <?php echo $row['province_name']; ?>
-                                                </option>
+                                                        <?php echo $row['province_name']; ?>
+                                                    </option>
                                                 <?php
                                                 }
                                                 ?>
