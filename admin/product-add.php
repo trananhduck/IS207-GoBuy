@@ -209,6 +209,17 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <select name="mcat_id" class="form-control select2 mid-cat">
                                     <option value="">Chọn danh mục trung cấp</option>
+                                    <?php
+                                    $query = $pdo->prepare("SELECT * FROM table_mid_category ORDER BY mcat_name ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['mcat_id']; ?>"><?php echo $row['mcat_name']; ?>
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -217,6 +228,17 @@ if (isset($_POST['form1'])) {
                             <div class="col-sm-4">
                                 <select name="ecat_id" class="form-control select2 end-cat">
                                     <option value="">Chọn danh mục cuối</option>
+                                    <?php
+                                    $query = $pdo->prepare("SELECT * FROM table_end_category ORDER BY ecat_name ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['ecat_id']; ?>"><?php echo $row['ecat_name']; ?>
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
