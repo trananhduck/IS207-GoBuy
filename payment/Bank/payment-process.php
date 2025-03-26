@@ -182,10 +182,7 @@ $qr_data = "https://img.vietqr.io/image/$bank_id-{$account_no}-compact.png?amoun
                 const result = await res2.text();
                 if (result.trim() === "success") {
                     showToast("✅ Thanh toán thành công!", "#28a745");
-                    setTimeout(() => {
-                        fetch("../../checkout.php?clear_cart=true") // Gửi request xóa giỏ hàng
-                            .then(() => window.location.href = "../../index.php"); // Chuyển về trang chủ
-                    }, 3000);
+                    setTimeout(() => window.location.href = "../../index.php", 3000);
                 } else {
                     showToast("❌ Lỗi khi lưu thanh toán", "#dc3545");
                 }

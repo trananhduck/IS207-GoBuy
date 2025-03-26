@@ -21,19 +21,6 @@ INSERT INTO table_color (color_id, color_name) VALUES
 (9, 'Hồng'),
 (10, 'Nâu');
 
-INSERT INTO table_color (color_id, color_name) VALUES
-(1, 'Đỏ'),
-(2, 'Xanh dương'),
-(3, 'Xanh lá'),
-(4, 'Vàng'),
-(5, 'Cam'),
-(6, 'Tím'),
-(7, 'Hồng'),
-(8, 'Nâu'),
-(9, 'Xám'),
-(10, 'Đen');
-
-
 CREATE TABLE table_province (
   province_id int(11) NOT NULL,
   province_name varchar(100) NOT NULL DEFAULT ''
@@ -242,6 +229,9 @@ INSERT INTO table_end_category (ecat_id, ecat_name, mcat_id) VALUES
 (78, 'Đồ dùng gia đình', 17),
 (79, 'Văn phòng phẩm & Gói quà', 17);
 
+
+
+
 CREATE TABLE table_faq (
   faq_id int(11) NOT NULL,
   faq_title TEXT NOT NULL,
@@ -355,10 +345,7 @@ INSERT INTO table_payment (
 
 (2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 
     750000.00, '5555555555554444', '456', '05', '2029', 
-    'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B'),
-(3, 'Tran Anh Duc', 'taduc0508@gmail.com', '2025-02-22 14:25:00', 'TXN123567',
-570, '432225252525', '432', '06', '2030', 'Thanh toán đơn hàng OUF3HV', 'Bank Deposit', 'Completed', 'Pending', 'PAYID456C');
-
+    'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B');
 
 
 CREATE TABLE table_photo (
@@ -583,17 +570,16 @@ CREATE TABLE table_shipping_cost (
   amount varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
-INSERT INTO table_shipping_cost (shipping_cost_id, province_id, amount) VALUES
-(1, 1, '500'),
-(2, 2, '450'),
-(3, 3, '600'),
-(4, 4, '550'),
-(5, 5, '700'),
-(6, 6, '600'),
-(7, 7, '620'),
-(8, 8, '530'),
-(9, 9, '590'),
-(10, 10, '750');
+
+CREATE TABLE table_shipping_cost_all (
+  sca_id int(11) NOT NULL,
+  amount varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO table_shipping_cost_all (sca_id, amount) VALUES
+(1, '100');
+
+
 
 CREATE TABLE table_size (
   size_id int(11) NOT NULL,
@@ -782,6 +768,9 @@ ALTER TABLE table_settings
 ALTER TABLE table_shipping_cost
   ADD PRIMARY KEY (shipping_cost_id);
 
+ALTER TABLE table_shipping_cost_all
+  ADD PRIMARY KEY (sca_id);
+
 ALTER TABLE table_size
   ADD PRIMARY KEY (size_id);
 
@@ -857,6 +846,9 @@ ALTER TABLE table_settings
 
 ALTER TABLE table_shipping_cost
   MODIFY shipping_cost_id int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE table_shipping_cost_all
+  MODIFY sca_id int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE table_size
   MODIFY size_id int(11) NOT NULL AUTO_INCREMENT;
