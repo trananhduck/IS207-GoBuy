@@ -48,7 +48,7 @@ if (isset($_POST['form1'])) {
         $order_data = $query->fetch(PDO::FETCH_ASSOC);
 
         $payment_details = "";
-        if ($order_data['payment_method'] == 'PayPal') {
+        if ($order_data['payment_method'] == 'Bank Transfer') {
             $payment_details = "Mã giao dịch: " . $order_data['txnid'] . "<br>";
         } elseif ($order_data['payment_method'] == 'Stripe') {
             $payment_details = "Mã giao dịch: " . $order_data['txnid'] . "<br>Số thẻ: " . $order_data['card_number'] . "<br>";
@@ -217,21 +217,30 @@ if ($successMsg != '') {
                                     </td>
                                     <td>
                                         <?php
-                                        $statement1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
-                                        $statement1->execute(array($row['payment_id']));
-                                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($result1 as $row1) {
-                                            echo '<b>Product:</b> ' . $row1['product_name'];
-                                            echo '<br>(<b>Size:</b> ' . $row1['size'];
-                                            echo ', <b>Color:</b> ' . $row1['color'] . ')';
-                                            echo '<br>(<b>Quantity:</b> ' . $row1['quantity'];
-                                            echo ', <b>Unit Price:</b> ' . $row1['unit_price'] . ')';
-                                            echo '<br><br>';
+                                        if (!isset($row['payment_id']) || empty($row['payment_id'])) {
+                                            echo "❌ Không có payment_id!";
+                                        } else {
+                                            $statement1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id = ?");
+                                            $statement1->execute([$row['payment_id']]);
+                                            $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+
+                                            if (empty($result1)) {
+                                                echo "❌ Không tìm thấy đơn hàng!";
+                                            } else {
+                                                foreach ($result1 as $row1) {
+                                                    echo '<b>Tên:</b> ' . htmlspecialchars($row1['product_name']);
+                                                    echo '<br>(<b>Kích thước:</b> ' . htmlspecialchars($row1['size']);
+                                                    echo ', <b>Màu:</b> ' . htmlspecialchars($row1['color']) . ')';
+                                                    echo '<br>(<b>Số lượng:</b> ' . htmlspecialchars($row1['quantity']);
+                                                    echo ', <b>Giá:</b> ' . htmlspecialchars($row1['unit_price']) . ')';
+                                                    echo '<br><br>';
+                                                }
+                                            }
                                         }
                                         ?>
                                     </td>
                                     <td>
-                                        <?php if ($row['payment_method'] == 'PayPal'): ?>
+                                        <?php if ($row['payment_method'] == 'Bank Transfer'): ?>
                                             <b>Phương thức thanh toán:</b>
                                             <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
                                             <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
