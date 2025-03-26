@@ -26,7 +26,7 @@ foreach ($result as $row) {
     $p_short_description = $row['p_short_description'];
     $p_feature = $row['p_feature'];
     $p_return_policy = $row['p_return_policy'];
-    $p_total_view = $row['p_total_view'];
+    $p_total_order = $row['p_total_order'];
     $p_is_featured = $row['p_is_featured'];
     $p_is_active = $row['p_is_active'];
     $ecat_id = $row['ecat_id'];
@@ -54,12 +54,6 @@ foreach ($result as $row) {
     $tcat_id = $row['tcat_id'];
     $tcat_name = $row['tcat_name'];
 }
-
-
-$p_total_view = $p_total_view + 1;
-
-$query = $pdo->prepare("UPDATE table_product SET p_total_view=? WHERE p_id=?");
-$query->execute(array($p_total_view, $_REQUEST['id']));
 
 
 $query = $pdo->prepare("SELECT * FROM table_product_size WHERE p_id=?");
@@ -348,7 +342,7 @@ if ($successMsg1 != '') {
                         </div>
                         <div class="col-md-7">
                             <div class="p-title">
-                                <h2><?php echo $p_name; ?></h2>
+                                <h1><?php echo $p_name; ?></h1>
                             </div>
                             <div class="p-review">
                                 <div class="rating">
@@ -410,9 +404,9 @@ if ($successMsg1 != '') {
                                 <div class="p-quantity">
                                     <div class="row">
                                         <?php if (isset($size)): ?>
-                                            <div class="col-md-12 mb_20">
+                                            <div class="col-md-4 mb-3">
                                                 <?php echo 'Chọn kích thước'; ?> <br>
-                                                <select name="size_id" class="form-control select2" style="width:auto;">
+                                                <select name="size_id" class="form-control select2" style="width:100%;">
                                                     <?php
                                                     $query = $pdo->prepare("SELECT * FROM table_size");
                                                     $query->execute();
@@ -421,7 +415,8 @@ if ($successMsg1 != '') {
                                                         if (in_array($row['size_id'], $size)) {
                                                     ?>
                                                             <option value="<?php echo $row['size_id']; ?>">
-                                                                <?php echo $row['size_name']; ?></option>
+                                                                <?php echo $row['size_name']; ?>
+                                                            </option>
                                                     <?php
                                                         }
                                                     }
@@ -431,9 +426,9 @@ if ($successMsg1 != '') {
                                         <?php endif; ?>
 
                                         <?php if (isset($color)): ?>
-                                            <div class="col-md-12">
+                                            <div class="col-md-4 mb-3">
                                                 <?php echo 'Chọn màu'; ?> <br>
-                                                <select name="color_id" class="form-control select2" style="width:auto;">
+                                                <select name="color_id" class="form-control select2" style="width:100%;">
                                                     <?php
                                                     $query = $pdo->prepare("SELECT * FROM table_color");
                                                     $query->execute();
@@ -442,7 +437,8 @@ if ($successMsg1 != '') {
                                                         if (in_array($row['color_id'], $color)) {
                                                     ?>
                                                             <option value="<?php echo $row['color_id']; ?>">
-                                                                <?php echo $row['color_name']; ?></option>
+                                                                <?php echo $row['color_name']; ?>
+                                                            </option>
                                                     <?php
                                                         }
                                                     }
@@ -451,29 +447,34 @@ if ($successMsg1 != '') {
                                             </div>
                                         <?php endif; ?>
 
+                                        <div class="col-md-4 mb-3">
+                                            <?php echo 'Số lượng'; ?> <br>
+                                            <input type="number" class="form-control qty" step="1" min="1" name="p_qty"
+                                                value="1" pattern="[0-9]*" inputmode="numeric">
+                                        </div>
                                     </div>
+
 
                                 </div>
                                 <div class="p-price">
-                                    <span style="font-size:14px; color: #000"><?php echo 'Giá sản phẩm'; ?></span><br>
+                                    <span style="font-size:20px; color: #000"><?php echo 'Giá sản phẩm'; ?></span><br>
                                     <span>
                                         <?php if ($p_old_price != ''): ?>
-                                            <del><?php echo $p_old_price; ?><span
-                                                    class="vnd"><?php echo 'VND'; ?></span></del>
+                                            <del><?php echo $p_old_price; ?><?php echo 'VND'; ?></del>
+                                        <?php endif; ?>
+                                        <?php echo $p_current_price; ?><?php echo 'VND'; ?>
                                     </span>
-                                <?php endif; ?>
-                                <span>
-                                    <?php echo $p_current_price; ?><span class="vnd"><?php echo 'VND'; ?></span>
-                                </span>
+                                </div>
+                                <div class="p-total-order">
+                                    <span style="font-size: 16px; color: #555;">
+                                        <?php echo 'Đã bán: '; ?>
+                                        <strong style="color: #d9534f;"><?php echo $p_total_order; ?></strong> sản phẩm
+                                    </span>
                                 </div>
                                 <input type="hidden" name="p_current_price" value="<?php echo $p_current_price; ?>">
                                 <input type="hidden" name="p_name" value="<?php echo $p_name; ?>">
                                 <input type="hidden" name="p_featured_photo" value="<?php echo $p_featured_photo; ?>">
-                                <div class="p-quantity">
-                                    <?php echo 'Số lượng'; ?> <br>
-                                    <input type="number" class="input-text qty" step="1" min="1" max="" name="p_qty"
-                                        value="1" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric">
-                                </div>
+
                                 <div class="btn-cart btn-cart1">
                                     <input type="submit" value="<?php echo 'Thêm vào giỏ hàng'; ?>"
                                         name="form_add_to_cart">

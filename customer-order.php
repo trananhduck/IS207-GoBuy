@@ -1,12 +1,12 @@
 <?php require_once('header.php'); ?>
 
 <?php
-// Check if the customer is logged in or not
+// Kiểm tra xem khách hàng đã đăng nhập hay chưa
 if (!isset($_SESSION['customer'])) {
     header('location: ' . BASE_URL . 'logout.php');
     exit;
 } else {
-    // If customer is logged in, but admin make him inactive, then force logout this user.
+    // Nếu khách hàng đã đăng nhập nhưng bị quản trị viên vô hiệu hóa, thì buộc đăng xuất người dùng này.
     $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
     $query->execute(array($_SESSION['customer']['cust_id'], 0));
     $total = $query->rowCount();
@@ -25,7 +25,7 @@ if (!isset($_SESSION['customer'])) {
             </div>
             <div class="col-md-12">
                 <div class="user-content">
-                    <h3><?php echo 'Lịch sử đăt hàng' ?></h3>
+                    <h3><?php echo 'Lịch sử đặt hàng' ?></h3>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
@@ -37,14 +37,13 @@ if (!isset($_SESSION['customer'])) {
                                     <th><?php echo 'Số tiền' ?></th>
                                     <th><?php echo 'Trạng thái thanh toán' ?></th>
                                     <th><?php echo 'Phương thức thanh toán' ?></th>
-                                    <th><?php echo 'Mã số thanh toán'  ?></th>
+                                    <th><?php echo 'Mã số thanh toán' ?></th>
                                 </tr>
                             </thead>
                             <tbody>
 
-
                                 <?php
-                                /*Pagination Code  */
+                                /* Mã phân trang */
                                 $adjacents = 5;
 
                                 $query = $pdo->prepare("SELECT * FROM table_payment WHERE customer_email=? ORDER BY id DESC");
@@ -59,11 +58,9 @@ if (!isset($_SESSION['customer'])) {
                                 else
                                     $start = 0;
 
-
                                 $query = $pdo->prepare("SELECT * FROM table_payment WHERE customer_email=? ORDER BY id DESC LIMIT $start, $limit");
                                 $query->execute(array($_SESSION['customer']['cust_email']));
                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
-
 
                                 if ($page == 0) $page = 1;
                                 $prev = $page - 1;
@@ -74,9 +71,10 @@ if (!isset($_SESSION['customer'])) {
                                 if ($lastpage > 1) {
                                     $pagination .= "<div class=\"pagination\">";
                                     if ($page > 1)
-                                        $pagination .= "<a href=\"$targetpage?page=$prev\">&#171; previous</a>";
+                                        $pagination .= "<a href=\"$targetpage?page=$prev\">&#171; Trước</a>";
                                     else
-                                        $pagination .= "<span class=\"disabled\">&#171; previous</span>";
+                                        $pagination .= "<span class=\"disabled\">&#171; Trước</span>";
+
                                     if ($lastpage < 7 + ($adjacents * 2)) {
                                         for ($counter = 1; $counter <= $lastpage; $counter++) {
                                             if ($counter == $page)
@@ -120,15 +118,15 @@ if (!isset($_SESSION['customer'])) {
                                             }
                                         }
                                     }
+
                                     if ($page < $counter - 1)
-                                        $pagination .= "<a href=\"$targetpage?page=$next\">next &#187;</a>";
+                                        $pagination .= "<a href=\"$targetpage?page=$next\">Tiếp &#187;</a>";
                                     else
-                                        $pagination .= "<span class=\"disabled\">next &#187;</span>";
+                                        $pagination .= "<span class=\"disabled\">Tiếp &#187;</span>";
                                     $pagination .= "</div>\n";
                                 }
-                                /* Pagination Code */
+                                /* Kết thúc mã phân trang */
                                 ?>
-
 
                                 <?php
                                 $tip = $page * 10 - 10;
@@ -143,18 +141,18 @@ if (!isset($_SESSION['customer'])) {
                                             $query1->execute(array($row['payment_id']));
                                             $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
-                                                echo 'Product Name: ' . $row1['product_name'];
-                                                echo '<br>Size: ' . $row1['size'];
-                                                echo '<br>Color: ' . $row1['color'];
-                                                echo '<br>Quantity: ' . $row1['quantity'];
-                                                echo '<br>Unit Price: $' . $row1['unit_price'];
+                                                echo 'Tên sản phẩm: ' . $row1['product_name'];
+                                                echo '<br>Kích thước: ' . $row1['size'];
+                                                echo '<br>Màu sắc: ' . $row1['color'];
+                                                echo '<br>Số lượng: ' . $row1['quantity'];
+                                                echo '<br>Giá đơn vị: $' . $row1['unit_price'];
                                                 echo '<br><br>';
                                             }
                                             ?>
                                     </td>
                                     <td><?php echo $row['payment_date']; ?></td>
                                     <td><?php echo $row['txnid']; ?></td>
-                                    <td><?php echo '$' . $row['paid_amount']; ?></td>
+                                    <td><?php echo $row['paid_amount'] . 'VND'; ?></td>
                                     <td><?php echo $row['payment_status']; ?></td>
                                     <td><?php echo $row['payment_method']; ?></td>
                                     <td><?php echo $row['payment_id']; ?></td>
@@ -166,9 +164,7 @@ if (!isset($_SESSION['customer'])) {
                             </tbody>
                         </table>
                         <div class="pagination" style="overflow: hidden;">
-                            <?php
-                            echo $pagination;
-                            ?>
+                            <?php echo $pagination; ?>
                         </div>
                     </div>
                 </div>

@@ -294,7 +294,7 @@ foreach ($result as $row) {
                 <div class="product-carousel">
 
                     <?php
-                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_total_view DESC LIMIT " . $total_popular_product_home);
+                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_total_order DESC LIMIT " . $total_popular_product_home);
                         $query->execute(array(1));
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {

@@ -287,16 +287,11 @@ if (!isset($_SESSION['cart_p_id'])) {
                                 </div>
                             </div>
                         <?php endif; ?>
-
                     </div>
-
-
                 <?php endif; ?>
-
             </div>
         </div>
     </div>
 </div>
-
 
 <?php require_once('footer.php'); ?>

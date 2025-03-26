@@ -337,15 +337,15 @@ CREATE TABLE table_payment (
 INSERT INTO table_payment (
     customer_id, customer_name, customer_email, payment_date, txnid, 
     paid_amount, card_number, card_cvv, card_month, card_year, 
-    bank_transaction_info, payment_method, payment_status, shipping_status, payment_id
+     payment_method, payment_status, shipping_status, payment_id
 ) VALUES
 (1, 'Nguyễn Văn A', 'vana@gmail.com', '2025-02-28 11:00:00', 'TXN123456A', 
-    500000.00, '4111111111111111', '123', '02', '2028', 
-    'Bank XYZ - Successful', 'Bank Deposit', 'Completed', 'Pending', 'PAYID123A'),
+    500000, '4111111111111111', '123', '02', '2028', 
+     'Ngân hàng', 'Completed', 'Pending', 'PAYID123A'),
 
 (2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 
-    750000.00, '5555555555554444', '456', '05', '2029', 
-    'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B');
+    750000, '5555555555554444', '456', '05', '2029', 
+     'Ngân hàng', 'Completed', 'Completed', 'PAYID456B');
 
 
 CREATE TABLE table_photo (
@@ -374,14 +374,14 @@ CREATE TABLE table_product (
   p_short_description text NOT NULL,
   p_feature text NOT NULL,
   p_return_policy text NOT NULL,
-  p_total_view int(11) NOT NULL,
+  p_total_order int(11) NOT NULL,
   p_is_featured int(1) NOT NULL,
   p_is_active int(1) NOT NULL,
   ecat_id int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 
-INSERT INTO table_product (p_id, p_name, p_old_price, p_current_price, p_qty, p_featured_photo, p_description, p_short_description, p_feature, p_return_policy, p_total_view, p_is_featured, p_is_active, ecat_id) VALUES
+INSERT INTO table_product (p_id, p_name, p_old_price, p_current_price, p_qty, p_featured_photo, p_description, p_short_description, p_feature, p_return_policy, p_total_order, p_is_featured, p_is_active, ecat_id) VALUES
 (1, 'Item1','20','10', 100,'product-featured-1.jpg','description','short description','features-list','Return policy', 5, 0, 1, 21),
 (2, 'Item2','20','10', 100,'product-featured-2.jpg','description','short description','features-list','Return policy', 5, 1, 1, 32),
 (3, 'Item3','20','10', 100,'product-featured-3.jpg','description','short description','features-list','Return policy', 5, 0, 1, 25),

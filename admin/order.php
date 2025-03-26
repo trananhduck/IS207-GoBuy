@@ -48,10 +48,8 @@ if (isset($_POST['form1'])) {
         $order_data = $query->fetch(PDO::FETCH_ASSOC);
 
         $payment_details = "";
-        if ($order_data['payment_method'] == 'Bank Transfer') {
+        if ($order_data['payment_method'] == 'Ngân hàng') {
             $payment_details = "Mã giao dịch: " . $order_data['txnid'] . "<br>";
-        } elseif ($order_data['payment_method'] == 'Bank Deposit') {
-            $payment_details = "Chi tiết giao dịch ngân hàng: <br>" . $order_data['bank_transaction_info'];
         }
 
         $order_detail = "<h3>Chi tiết đơn hàng:</h3>" .
@@ -238,18 +236,12 @@ if ($successMsg != '') {
                                         ?>
                                 </td>
                                 <td>
-                                    <?php if ($row['payment_method'] == 'Bank Transfer'): ?>
+                                    <?php if ($row['payment_method'] == 'Ngân hàng'): ?>
                                     <b>Phương thức thanh toán:</b>
                                     <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
                                     <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
                                     <b>Ngày thanh toán:</b> <?php echo $row['payment_date']; ?><br>
                                     <b>Mã giao dịch:</b> <?php echo $row['txnid']; ?><br>
-                                    <?php elseif ($row['payment_method'] == 'Bank Deposit'): ?>
-                                    <b>Phương thức thanh toán:</b>
-                                    <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
-                                    <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>
-                                    <b>Ngày thanh toán:</b> <?php echo $row['payment_date']; ?><br>
-                                    <b>Thông tin giao dịch:</b> <br><?php echo $row['bank_transaction_info']; ?><br>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $row['paid_amount']; ?>VND</td>

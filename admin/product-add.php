@@ -109,7 +109,7 @@ if (isset($_POST['form1'])) {
 										p_short_description,
 										p_feature,
 										p_return_policy,
-										p_total_view,
+										p_total_order,
 										p_is_featured,
 										p_is_active,
 										ecat_id
