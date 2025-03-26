@@ -261,7 +261,7 @@ foreach ($result as $row) {
                                 </div>
                             </div>
                             <?php else: ?>
-                            <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i class="fa fa-shopping-cart"></i>
+                            <p><a href="product.php?id=<?php echo $row['p_id']; ?>">
                                     Xem sản phẩm</a></p>
                             <?php endif; ?>
                         </div>
@@ -392,7 +392,7 @@ foreach ($result as $row) {
                                 </div>
                             </div>
                             <?php else: ?>
-                            <p><a href="product.php?id=<?php echo $row['p_id']; ?>"><i class="fa fa-shopping-cart"></i>
+                            <p><a href="product.php?id=<?php echo $row['p_id']; ?>">
                                     Xem sản phẩm</a></p>
                             <?php endif; ?>
                         </div>

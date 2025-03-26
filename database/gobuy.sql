@@ -9,6 +9,17 @@ CREATE TABLE table_color (
   color_id int(11) NOT NULL,
   color_name TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+INSERT INTO table_color (color_id, color_name) VALUES
+(1, 'Đỏ'),
+(2, 'Xanh dương'),
+(3, 'Xanh lá'),
+(4, 'Vàng'),
+(5, 'Đen'),
+(6, 'Trắng'),
+(7, 'Tím'),
+(8, 'Cam'),
+(9, 'Hồng'),
+(10, 'Nâu');
 
 CREATE TABLE table_province (
   province_id int(11) NOT NULL,
@@ -289,7 +300,7 @@ CREATE TABLE table_page (
   contact_meta_title TEXT NOT NULL,
   pgallery_title TEXT NOT NULL,
   pgallery_banner TEXT NOT NULL,
-  pgallery_meta_title TEXT NOT NULL,
+  pgallery_meta_title TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 INSERT INTO table_page (id, about_title, about_content, about_banner, 
