@@ -1,3 +1,4 @@
+<?php require_once('header.php'); ?>
 <?php
 $statement = $pdo->prepare("SELECT * FROM table_settings WHERE id=1");
 $statement->execute();
@@ -13,14 +14,20 @@ foreach ($result as $row) {
 
 <div class="footer-bottom">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 copyright">
-                <p><?php echo htmlspecialchars($footer_about); ?></p>
-                <p>Địa chỉ: <?php echo htmlspecialchars($contact_address); ?></p>
-                <p>Email: <?php echo htmlspecialchars($contact_email); ?></p>
-                <p>Số điện thoại: <?php echo htmlspecialchars($contact_phone); ?></p>
-                <p><?php echo htmlspecialchars($footer_copyright); ?></p>
+        <div class="footer-top">
+            <?php echo str_replace(['<p>', '</p>'], '', $footer_about); ?>
+        </div>
+        <div class="footer-info">
+            <div class="footer-item">
+                <p>📍 Địa chỉ: <?php echo htmlspecialchars($contact_address); ?></p>
             </div>
+            <div class="footer-item">
+                <p>📧 Email: <?php echo htmlspecialchars($contact_email); ?></p>
+            </div>
+        </div>
+        <div class="footer-bottom-info">
+            <p>📞 Số điện thoại: <?php echo htmlspecialchars($contact_phone); ?></p>
+            <p>© <?php echo htmlspecialchars($footer_copyright); ?></p>
         </div>
     </div>
 </div>

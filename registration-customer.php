@@ -280,7 +280,7 @@ if (isset($_POST['form1'])) {
                     </ul>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
 
@@ -303,22 +303,28 @@ if (isset($_POST['form1'])) {
 #toast.show {
     opacity: 1;
 }
-.form-group-btn{
+
+.form-group-btn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .btn {
     border-radius: 6px;
     width: 30%;
 }
-.btn input{
+
+.btn input {
     position: relative;
 }
+
 .user-sidebar {
     position: absolute;
-    bottom: -30px; /* Đưa xuống dưới nút */
-    right: 230px; /* Nằm bên phải */
+    bottom: -30px;
+    /* Đưa xuống dưới nút */
+    right: 230px;
+    /* Nằm bên phải */
 }
 
 .user-sidebar a {
