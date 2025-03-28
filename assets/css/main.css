@@ -532,7 +532,7 @@ Responsive cho Mobile
 
 .product .text h4 del {
   color: #999;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: -5px;
   text-decoration: line-through;
   display: block;
@@ -1290,3 +1290,4 @@ div.pagination span.disabled {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 5px;
 }
+

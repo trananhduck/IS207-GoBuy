@@ -51,19 +51,31 @@
 
 /* ======= ĐƯỜNG DẪN (LINK) ======= */
 #left ul.nav li.parent ul li a {
+    width: 100%;
     color: #222; /* Màu chữ */
     border: none;
-    display: block;
+    display: flex;
     padding-left: 5px;    
 }
 
 /* ======= BIỂU TƯỢNG (SIGN) CHO MỤC CHA ======= */
+#left ul.nav li.parent > a {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 10px 15px; /* Khoảng cách nội dung bên trong */
+    text-decoration: none;
+    color: #333;
+}
+
+/* Căn giữa icon trong dấu hiệu mở rộng */
 #left ul.nav li .sign {
-    display: inline-block;
-    width: 14px;
-    padding: 5px 17px 5px 8px;
+    display: flex;
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    color: white;
+    font-size: 12px; /* Kích thước icon */
+    margin-right: 10px; /* Khoảng cách giữa icon và chữ */
     background-color: transparent;
-    color: #fff;
 }
 
 #left ul.nav li.parent > a > .sign {
@@ -147,10 +159,10 @@
     border-radius: 4px;
 }
 #left ul.nav > li.cat-level-1 li a:hover {
+    width: 220px;
     background: rgba(40, 167, 69, 0.1);
     color: #28a745;
 }
-
 #left ul.nav > li.cat-level-1.parent > a > .sign,
 #left ul.nav > li.cat-level-1 li.parent > a > .sign {
     font-weight: bold;
