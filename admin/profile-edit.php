@@ -8,16 +8,16 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['full_name'])) {
         $valid = 0;
-        $error_message .= "Tên không được để trống<br>";
+        $errorMsg .= "Tên không được để trống<br>";
     }
 
     if (empty($_POST['email'])) {
         $valid = 0;
-        $error_message .= 'Email không được để trống<br>';
+        $errorMsg .= 'Email không được để trống<br>';
     } else {
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $error_message .= 'Email phải hợp lệ<br>';
+            $errorMsg .= 'Email phải hợp lệ<br>';
         } else {
             // Lấy email hiện tại từ cơ sở dữ liệu
             $query = $pdo->prepare("SELECT * FROM table_admin WHERE id=?");
@@ -33,7 +33,7 @@ if (isset($_POST['form1'])) {
             $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
-                $error_message .= 'Email đã tồn tại<br>';
+                $errorMsg .= 'Email đã tồn tại<br>';
             }
         }
     }
@@ -47,7 +47,7 @@ if (isset($_POST['form1'])) {
         $query = $pdo->prepare("UPDATE table_admin SET full_name=?, email=?, phone=? WHERE id=?");
         $query->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['admin']['id']));
 
-        $success_message = 'Thông tin người dùng đã được cập nhật thành công.';
+        $successMsg = 'Thông tin người dùng đã được cập nhật thành công.';
     }
 }
 
@@ -62,14 +62,17 @@ if (isset($_POST['form2'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $error_message .= 'Bạn chỉ có thể tải lên file jpg, jpeg, gif hoặc png<br>';
+            $errorMsg .= 'Bạn chỉ có thể tải lên file jpg, jpeg, gif hoặc png<br>';
         }
     }
 
     if ($valid == 1) {
-        // Xóa ảnh cũ
-        if ($_SESSION['admin']['photo'] != '') {
-            unlink('../assets/uploads/' . $_SESSION['admin']['photo']);
+        // Kiểm tra xem ảnh cũ có tồn tại không trước khi xóa
+        if (!empty($_SESSION['admin']['photo'])) {
+            $old_photo_path = '../assets/uploads/' . $_SESSION['admin']['photo'];
+            if (file_exists($old_photo_path) && is_writable($old_photo_path)) {
+                unlink($old_photo_path);
+            }
         }
 
         // Cập nhật ảnh mới
@@ -81,7 +84,7 @@ if (isset($_POST['form2'])) {
         $query = $pdo->prepare("UPDATE table_admin SET photo=? WHERE id=?");
         $query->execute(array($final_name, $_SESSION['admin']['id']));
 
-        $success_message = 'Ảnh đại diện đã được cập nhật thành công.';
+        $successMsg = 'Ảnh đại diện đã được cập nhật thành công.';
     }
 }
 
@@ -91,13 +94,13 @@ if (isset($_POST['form3'])) {
 
     if (empty($_POST['password']) || empty($_POST['re_password'])) {
         $valid = 0;
-        $error_message .= "Mật khẩu không được để trống<br>";
+        $errorMsg .= "Mật khẩu không được để trống<br>";
     }
 
     if (!empty($_POST['password']) && !empty($_POST['re_password'])) {
         if ($_POST['password'] != $_POST['re_password']) {
             $valid = 0;
-            $error_message .= "Mật khẩu không khớp<br>";
+            $errorMsg .= "Mật khẩu không khớp<br>";
         }
     }
 
@@ -108,7 +111,7 @@ if (isset($_POST['form3'])) {
         $query = $pdo->prepare("UPDATE table_admin SET password=? WHERE id=?");
         $query->execute(array(md5($_POST['password']), $_SESSION['admin']['id']));
 
-        $success_message = 'Mật khẩu đã được cập nhật thành công.';
+        $successMsg = 'Mật khẩu đã được cập nhật thành công.';
     }
 }
 ?>
@@ -247,5 +250,6 @@ foreach ($result as $row) {
         </div>
     </div>
 </section>
+
 
 <?php require_once('footer.php'); ?>
