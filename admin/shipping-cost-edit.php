@@ -54,7 +54,7 @@ if(!isset($_REQUEST['id'])) {
         <h1>Sửa chi phí vận chuyển</h1>
     </div>
     <div class="content-header-right">
-        <a href="shipping-cost.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="shipping-cost.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

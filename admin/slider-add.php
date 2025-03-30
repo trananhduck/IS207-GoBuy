@@ -55,7 +55,7 @@ if (isset($_POST['form1'])) {
         <h1>Thêm Slider</h1>
     </div>
     <div class="content-header-right">
-        <a href="slider.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="slider.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 
@@ -64,15 +64,15 @@ if (isset($_POST['form1'])) {
         <div class="col-md-12">
 
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
-                    <p><?php echo $errorMsg; ?></p>
-                </div>
+            <div class="callout callout-danger">
+                <p><?php echo $errorMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+            <div class="callout callout-success">
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -87,7 +87,8 @@ if (isset($_POST['form1'])) {
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Tiêu đề</label>
                             <div class="col-sm-6">
-                                <input type="text" autocomplete="off" class="form-control" name="heading" value="<?php if (isset($_POST['heading'])) {
+                                <input type="text" autocomplete="off" class="form-control" name="heading"
+                                    value="<?php if (isset($_POST['heading'])) {
                                                                                                                         echo $_POST['heading'];
                                                                                                                     } ?>">
                             </div>
@@ -103,7 +104,8 @@ if (isset($_POST['form1'])) {
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Nút bấm</label>
                             <div class="col-sm-6">
-                                <input type="text" autocomplete="off" class="form-control" name="button_text" value="<?php if (isset($_POST['button_text'])) {
+                                <input type="text" autocomplete="off" class="form-control" name="button_text"
+                                    value="<?php if (isset($_POST['button_text'])) {
                                                                                                                             echo $_POST['button_text'];
                                                                                                                         } ?>">
                             </div>
@@ -111,7 +113,8 @@ if (isset($_POST['form1'])) {
                         <div class="form-group">
                             <label class="col-sm-2 control-label">URL nút bấm</label>
                             <div class="col-sm-6">
-                                <input type="text" autocomplete="off" class="form-control" name="button_url" value="<?php if (isset($_POST['button_url'])) {
+                                <input type="text" autocomplete="off" class="form-control" name="button_url"
+                                    value="<?php if (isset($_POST['button_url'])) {
                                                                                                                         echo $_POST['button_url'];
                                                                                                                     } ?>">
                             </div>

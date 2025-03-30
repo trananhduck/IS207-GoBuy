@@ -48,7 +48,7 @@ if (isset($_POST['form1'])) {
         <h1>Thêm danh mục lớn</h1>
     </div>
     <div class="content-header-right">
-        <a href="top-category.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="top-category.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

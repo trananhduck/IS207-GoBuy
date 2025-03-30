@@ -41,19 +41,19 @@
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                                <tr>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['ecat_name']; ?></td>
-                                    <td><?php echo $row['mcat_name']; ?></td>
-                                    <td><?php echo $row['tcat_name']; ?></td>
-                                    <td>
-                                        <a href="end-category-edit.php?id=<?php echo $row['ecat_id']; ?>"
-                                            class="btn btn-primary btn-xs">Sửa</a>
-                                        <a href="#" class="btn btn-danger btn-xs"
-                                            data-href="end-category-delete.php?id=<?php echo $row['ecat_id']; ?>"
-                                            data-toggle="modal" data-target="#confirm-delete">Xóa</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?php echo $i; ?></td>
+                                <td><?php echo $row['ecat_name']; ?></td>
+                                <td><?php echo $row['mcat_name']; ?></td>
+                                <td><?php echo $row['tcat_name']; ?></td>
+                                <td>
+                                    <a href="end-category-edit.php?id=<?php echo $row['ecat_id']; ?>"
+                                        class="btn btn-primary btn-xs">Sửa</a>
+                                    <a href="#" class="btn btn-danger btn-xs"
+                                        data-href="end-category-delete.php?id=<?php echo $row['ecat_id']; ?>"
+                                        data-toggle="modal" data-target="#confirm-delete">Xóa</a>
+                                </td>
+                            </tr>
                             <?php
                             }
                             ?>

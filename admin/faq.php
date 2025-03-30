@@ -31,7 +31,7 @@ if (isset($_POST['form1'])) {
         <h1>Thêm FAQ</h1>
     </div>
     <div class="content-header-right">
-        <a href="faq.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
+        <a href="faq.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 
@@ -39,15 +39,15 @@ if (isset($_POST['form1'])) {
     <div class="row">
         <div class="col-md-12">
             <?php if ($errorMsg): ?>
-                <div class="callout callout-danger">
-                    <p><?php echo $errorMsg; ?></p>
-                </div>
+            <div class="callout callout-danger">
+                <p><?php echo $errorMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-                <div class="callout callout-success">
-                    <p><?php echo $successMsg; ?></p>
-                </div>
+            <div class="callout callout-success">
+                <p><?php echo $successMsg; ?></p>
+            </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post">
@@ -56,8 +56,7 @@ if (isset($_POST['form1'])) {
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">Tiêu đề <span>*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" autocomplete="off" class="form-control" name="faq_title"
-                                    value="<?php if (isset($_POST['faq_title'])) {
+                                <input type="text" autocomplete="off" class="form-control" name="faq_title" value="<?php if (isset($_POST['faq_title'])) {
                                                 echo $_POST['faq_title'];
                                             } ?>">
                             </div>
@@ -65,8 +64,7 @@ if (isset($_POST['form1'])) {
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label">Nội dung <span>*</span></label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" name="faq_content" id="editor1"
-                                    style="height:200px;"><?php if (isset($_POST['faq_content'])) {
+                                <textarea class="form-control" name="faq_content" id="editor1" style="height:200px;"><?php if (isset($_POST['faq_content'])) {
                                                                 echo $_POST['faq_content'];
                                                             } ?></textarea>
                             </div>

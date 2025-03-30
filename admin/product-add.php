@@ -96,7 +96,7 @@ if (isset($_POST['form1'])) {
         }
 
         $final_name = 'product-featured-' . $ai_id . '.' . $ext;
-        move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
+        move_uploaded_file($path_tmp, '../assets/uploads/product_photos/' . $final_name);
 
         // Lưu dữ liệu vào bảng chính table_product
         $query = $pdo->prepare("INSERT INTO table_product(
@@ -156,7 +156,7 @@ if (isset($_POST['form1'])) {
         <h1>Thêm Sản Phẩm</h1>
     </div>
     <div class="content-header-right">
-        <a href="product.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
+        <a href="product.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

@@ -30,7 +30,7 @@ $query->execute(array($_REQUEST['id']));
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {
     $p_featured_photo = $row['p_featured_photo'];
-    unlink('../assets/uploads/' . $p_featured_photo);
+    unlink('../assets/uploads/product_photos/' . $p_featured_photo);
 }
 
 // Lấy ID các ảnh khác để xóa khỏi thư mục

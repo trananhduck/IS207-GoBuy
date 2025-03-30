@@ -44,7 +44,7 @@
                             ?>
                                 <tr>
                                     <td><?= $i; ?></td>
-                                    <td><img src="../assets/uploads/<?= $row['p_featured_photo']; ?>"
+                                    <td><img src="../assets/uploads/product_photos/<?= $row['p_featured_photo']; ?>"
                                             alt="<?= $row['p_name']; ?>" style="width:80px;"></td>
                                     <td><?= $row['p_name']; ?></td>
                                     <td>$<?= $row['p_old_price']; ?></td>

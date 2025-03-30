@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 29, 2025 lúc 04:35 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Host: 127.0.0.1
+-- Generation Time: Mar 30, 2025 at 04:38 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,44 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `gobuy`
+-- Database: `gobuy`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_color`
+-- Table structure for table `table_admin`
+--
+
+CREATE TABLE `table_admin` (
+  `id` int(10) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `email` text NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `password` text NOT NULL,
+  `photo` text NOT NULL,
+  `token` text NOT NULL,
+  `datetime` varchar(100) NOT NULL,
+  `timestamp` varchar(100) NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_admin`
+--
+
+INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `token`, `datetime`, `timestamp`, `status`) VALUES
+(1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'xxxx', '23-2-2025', '25-2-2025', 0),
+(2, 'thu', 'ebedangiu2111@gmail.com', '+84774048884', 'fe9e27dd7bf526b57d69d3bd9fac33dc', 'default.jpg', '', '2025-03-26 01:46:19', '1742971579', 1),
+(3, 'thu', 'thupii@gmail.com', '+84774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '5d393e2a2f8f455f5a42aac1f0f262e7', '2025-03-28 10:33:05', '1743132785', 0),
+(4, 'thu', 'thupii2111@gmai.com', '+84 774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '59b68bb5c6b2cd89190ee8edd5209d42', '2025-03-28 10:33:50', '1743132830', 0),
+(5, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', '84e39cd756c73f70b52ba50a71278b15', '2025-03-30 09:16:26', '1743300986', 1),
+(6, 'Duc Anh Tran', 'anhduc9b1cva@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', 'f15eb404154b96a49aa2bc2b36a6759a', '2025-03-30 09:16:40', '1743301000', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_color`
 --
 
 CREATE TABLE `table_color` (
@@ -33,7 +64,7 @@ CREATE TABLE `table_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_color`
+-- Dumping data for table `table_color`
 --
 
 INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
@@ -51,7 +82,7 @@ INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_customer`
+-- Table structure for table `table_customer`
 --
 
 CREATE TABLE `table_customer` (
@@ -75,7 +106,7 @@ CREATE TABLE `table_customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_customer`
+-- Dumping data for table `table_customer`
 --
 
 INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_province`, `cust_district`, `cust_address`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_address`, `cust_password`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
@@ -85,7 +116,7 @@ INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_customer_message`
+-- Table structure for table `table_customer_message`
 --
 
 CREATE TABLE `table_customer_message` (
@@ -99,7 +130,7 @@ CREATE TABLE `table_customer_message` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_end_category`
+-- Table structure for table `table_end_category`
 --
 
 CREATE TABLE `table_end_category` (
@@ -109,7 +140,7 @@ CREATE TABLE `table_end_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_end_category`
+-- Dumping data for table `table_end_category`
 --
 
 INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
@@ -195,7 +226,7 @@ INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_faq`
+-- Table structure for table `table_faq`
 --
 
 CREATE TABLE `table_faq` (
@@ -205,7 +236,7 @@ CREATE TABLE `table_faq` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_faq`
+-- Dumping data for table `table_faq`
 --
 
 INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
@@ -218,7 +249,7 @@ INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_mid_category`
+-- Table structure for table `table_mid_category`
 --
 
 CREATE TABLE `table_mid_category` (
@@ -228,7 +259,7 @@ CREATE TABLE `table_mid_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_mid_category`
+-- Dumping data for table `table_mid_category`
 --
 
 INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
@@ -251,7 +282,7 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_order`
+-- Table structure for table `table_order`
 --
 
 CREATE TABLE `table_order` (
@@ -268,7 +299,7 @@ CREATE TABLE `table_order` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_page`
+-- Table structure for table `table_page`
 --
 
 CREATE TABLE `table_page` (
@@ -289,7 +320,7 @@ CREATE TABLE `table_page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_page`
+-- Dumping data for table `table_page`
 --
 
 INSERT INTO `table_page` (`id`, `about_title`, `about_content`, `about_banner`, `about_meta_title`, `faq_title`, `faq_banner`, `faq_meta_title`, `contact_title`, `contact_banner`, `contact_meta_title`, `pgallery_title`, `pgallery_banner`, `pgallery_meta_title`) VALUES
@@ -298,7 +329,7 @@ INSERT INTO `table_page` (`id`, `about_title`, `about_content`, `about_banner`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_payment`
+-- Table structure for table `table_payment`
 --
 
 CREATE TABLE `table_payment` (
@@ -321,7 +352,7 @@ CREATE TABLE `table_payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_payment`
+-- Dumping data for table `table_payment`
 --
 
 INSERT INTO `table_payment` (`id`, `customer_id`, `customer_name`, `customer_email`, `payment_date`, `txnid`, `paid_amount`, `card_number`, `card_cvv`, `card_month`, `card_year`, `bank_transaction_info`, `payment_method`, `payment_status`, `shipping_status`, `payment_id`) VALUES
@@ -331,7 +362,7 @@ INSERT INTO `table_payment` (`id`, `customer_id`, `customer_name`, `customer_ema
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_photo`
+-- Table structure for table `table_photo`
 --
 
 CREATE TABLE `table_photo` (
@@ -341,7 +372,7 @@ CREATE TABLE `table_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_photo`
+-- Dumping data for table `table_photo`
 --
 
 INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
@@ -355,7 +386,7 @@ INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product`
+-- Table structure for table `table_product`
 --
 
 CREATE TABLE `table_product` (
@@ -376,14 +407,14 @@ CREATE TABLE `table_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product`
+-- Dumping data for table `table_product`
 --
 
 INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_order`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
 (1, 'Bộ PC Gaming', '950', '850', 20, 'product-featured-1.jpg', '<p>Linh kiện máy tính chất lượng cao, đảm bảo hiệu suất mạnh mẽ và độ bền vượt trội. Phù hợp cho cả người dùng phổ thông và game thủ, hỗ trợ nâng cấp hệ thống một cách dễ dàng.</p><p><br></p>', '<p>\"Nâng cấp máy tính của bạn với linh kiện chất lượng cao, giá siêu hấp dẫn!\"</p><div><br></div>', '<p>Hiệu suất ổn định: Đáp ứng nhu cầu từ làm việc, giải trí đến chơi game chuyên nghiệp.</p><p>Tương thích cao: Dễ dàng lắp đặt, phù hợp với nhiều dòng máy.</p><p>Chất liệu bền bỉ: Linh kiện chính hãng, tuổi thọ cao.</p><p>Tiết kiệm năng lượng: Hoạt động hiệu quả, giảm tiêu thụ điện năng.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm cần nguyên vẹn, đầy đủ hộp, phụ kiện và hóa đơn khi đổi trả.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do lỗi người dùng.</p><div><br></div>', 0, 0, 1, 67),
 (2, 'Thiết bị làm mát laptop', '950', '850', 200, 'product-featured-2.jpg', '<p>Linh kiện máy tính chất lượng cao, đảm bảo hiệu suất mạnh mẽ và độ bền vượt trội. Phù hợp cho cả người dùng phổ thông và game thủ, hỗ trợ nâng cấp hệ thống một cách dễ dàng.</p><div><br></div>', '<p>\"Nâng cấp máy tính của bạn với linh kiện chất lượng cao, giá siêu hấp dẫn!\"</p><div><br></div>', '<p>Hiệu suất ổn định: Đáp ứng nhu cầu từ làm việc, giải trí đến chơi game chuyên nghiệp.</p><p>Tương thích cao: Dễ dàng lắp đặt, phù hợp với nhiều dòng máy.</p><p>Chất liệu bền bỉ: Linh kiện chính hãng, tuổi thọ cao.</p><p>Tiết kiệm năng lượng: Hoạt động hiệu quả, giảm tiêu thụ điện năng.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm cần nguyên vẹn, đầy đủ hộp, phụ kiện và hóa đơn khi đổi trả.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do lỗi người dùng.</p><div><br></div>', 0, 0, 1, 67),
 (3, 'Bộ PC Gaming', '950', '850', 35, 'product-featured-3.jpg', '<p>Linh kiện máy tính chất lượng cao, đảm bảo hiệu suất mạnh mẽ và độ bền vượt trội. Phù hợp cho cả người dùng phổ thông và game thủ, hỗ trợ nâng cấp hệ thống một cách dễ dàng.</p><div><br></div>', '<p>\"Nâng cấp máy tính của bạn với linh kiện chất lượng cao, giá siêu hấp dẫn!\"</p><div><br></div>', '<p>Hiệu suất ổn định: Đáp ứng nhu cầu từ làm việc, giải trí đến chơi game chuyên nghiệp.</p><p>Tương thích cao: Dễ dàng lắp đặt, phù hợp với nhiều dòng máy.</p><p>Chất liệu bền bỉ: Linh kiện chính hãng, tuổi thọ cao.</p><p>Tiết kiệm năng lượng: Hoạt động hiệu quả, giảm tiêu thụ điện năng.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm cần nguyên vẹn, đầy đủ hộp, phụ kiện và hóa đơn khi đổi trả.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do lỗi người dùng.</p><div><br></div>', 0, 0, 1, 67),
-(4, 'Bàn phím cơ', '880', '720', 200, 'product-featured-4.jpg', '<p>Linh kiện bàn phím chất lượng cao, phù hợp để nâng cấp hoặc thay thế, giúp trải nghiệm gõ phím mượt mà và bền bỉ hơn. Tương thích với nhiều loại bàn phím cơ và văn phòng.</p><div><br></div>', '<p>\"Linh kiện bàn phím chất lượng cao, bền bỉ, phù hợp nâng cấp hoặc thay thế cho mọi loại bàn phím.\"</p>', '<p>Chất liệu bền bỉ: Nhựa ABS/PBT, kim loại chống gỉ, tuổi thọ cao.</p><p>Tương thích đa dạng: Phù hợp với nhiều loại switch và layout bàn phím.</p><p>Hiệu suất tối ưu: Phản hồi nhanh, độ nhạy cao, nâng cao trải nghiệm gõ phím.</p><p>Dễ dàng thay thế: Thiết kế tiện lợi, hỗ trợ lắp đặt đơn giản.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên hộp và phụ kiện đi kèm.</p><p>Không áp dụng đổi trả với sản phẩm đã qua lắp đặt hoặc hư hỏng do tác động bên ngoài.</p><div><br></div>', 0, 0, 1, 71),
+(4, 'Bàn phím cơ', '880', '720', 200, 'product-featured-4.jpg', '<p>Linh kiện bàn phím chất lượng cao, phù hợp để nâng cấp hoặc thay thế, giúp trải nghiệm gõ phím mượt mà và bền bỉ hơn. Tương thích với nhiều loại bàn phím cơ và văn phòng.</p><div><br></div>', '<p>\"Linh kiện bàn phím chất lượng cao, bền bỉ, phù hợp nâng cấp hoặc thay thế cho mọi loại bàn phím.\"</p>', '<p>Chất liệu bền bỉ: Nhựa ABS/PBT, kim loại chống gỉ, tuổi thọ cao.</p><p>Tương thích đa dạng: Phù hợp với nhiều loại switch và layout bàn phím.</p><p>Hiệu suất tối ưu: Phản hồi nhanh, độ nhạy cao, nâng cao trải nghiệm gõ phím.</p><p>Dễ dàng thay thế: Thiết kế tiện lợi, hỗ trợ lắp đặt đơn giản.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên hộp và phụ kiện đi kèm.</p><p>Không áp dụng đổi trả với sản phẩm đã qua lắp đặt hoặc hư hỏng do tác động bên ngoài.</p><div><br></div>', 0, 1, 1, 71),
 (5, 'Bàn phím bluetooth', '880', '720', 200, 'product-featured-5.jpg', '<p>Linh kiện bàn phím chất lượng cao, phù hợp để nâng cấp hoặc thay thế, giúp trải nghiệm gõ phím mượt mà và bền bỉ hơn. Tương thích với nhiều loại bàn phím cơ và văn phòng.</p><p><br></p>', '<p>\"Linh kiện bàn phím chất lượng cao, bền bỉ, phù hợp nâng cấp hoặc thay thế cho mọi loại bàn phím.\"</p><div><br></div>', '<p>Chất liệu bền bỉ: Nhựa ABS/PBT, kim loại chống gỉ, tuổi thọ cao.</p><p>Tương thích đa dạng: Phù hợp với nhiều loại switch và layout bàn phím.</p><p>Hiệu suất tối ưu: Phản hồi nhanh, độ nhạy cao, nâng cao trải nghiệm gõ phím.</p><p>Dễ dàng thay thế: Thiết kế tiện lợi, hỗ trợ lắp đặt đơn giản.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên hộp và phụ kiện đi kèm.</p><p>Không áp dụng đổi trả với sản phẩm đã qua lắp đặt hoặc hư hỏng do tác động bên ngoài.</p><div><br></div>', 3, 0, 1, 71),
 (6, 'Bàn phím bluetooth', '880', '720', 150, 'product-featured-6.jpg', '<p>Linh kiện bàn phím chất lượng cao, phù hợp để nâng cấp hoặc thay thế, giúp trải nghiệm gõ phím mượt mà và bền bỉ hơn. Tương thích với nhiều loại bàn phím cơ và văn phòng.</p><div><br></div>', '<p>\"Linh kiện bàn phím chất lượng cao, bền bỉ, phù hợp nâng cấp hoặc thay thế cho mọi loại bàn phím.\"</p><div><br></div>', '<p>Chất liệu bền bỉ: Nhựa ABS/PBT, kim loại chống gỉ, tuổi thọ cao.</p><p>Tương thích đa dạng: Phù hợp với nhiều loại switch và layout bàn phím.</p><p>Hiệu suất tối ưu: Phản hồi nhanh, độ nhạy cao, nâng cao trải nghiệm gõ phím.</p><p>Dễ dàng thay thế: Thiết kế tiện lợi, hỗ trợ lắp đặt đơn giản.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên hộp và phụ kiện đi kèm.</p><p>Không áp dụng đổi trả với sản phẩm đã qua lắp đặt hoặc hư hỏng do tác động bên ngoài.</p><div><br></div>', 0, 0, 1, 71),
 (7, 'Máy in màu', '980', '900', 200, 'product-featured-7.jpg', '<p>Máy in chất lượng cao, tốc độ in nhanh, phù hợp cho văn phòng và gia đình. Thiết kế nhỏ gọn, dễ sử dụng, hỗ trợ in ấn sắc nét và tiết kiệm chi phí.</p><div><br></div>', '<p>\"Máy in chất lượng cao, tốc độ nhanh, tiết kiệm mực - lựa chọn hoàn hảo cho văn phòng hiện đại!\"</p><p><br></p>', '<p>Công nghệ in hiện đại: In laser/ phun màu sắc nét, độ phân giải cao.</p><p>Tốc độ in nhanh: Đáp ứng nhu cầu in ấn số lượng lớn.</p><p>Kết nối linh hoạt: USB, Wi-Fi, in từ điện thoại dễ dàng.</p><p>Tiết kiệm mực: Hiệu suất cao, chi phí in thấp.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi kỹ thuật từ nhà sản xuất.</p><p>Sản phẩm đổi trả cần nguyên vẹn, đầy đủ phụ kiện, hộp, hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do người dùng.</p><div><br></div>', 0, 0, 1, 70),
@@ -473,7 +504,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (90, 'Quần jogger nam chât vải gió cao cấp', '550', '480', 240, 'product-featured-90.jpg', '<p>Quần jogger nam thiết kế năng động, chất liệu cao cấp thoáng khí, co giãn tốt, mang lại sự thoải mái tối đa khi vận động. Phù hợp cho tập luyện, dạo phố hoặc mặc nhà.</p><div><br></div>', '<p>\"Quần jogger nam năng động, thoải mái - hoàn hảo cho tập luyện và dạo phố!\"</p><div><br></div>', '<p>✔ Chất vải mềm mại, co giãn 4 chiều</p><p>✔ Cạp chun linh hoạt, ôm vừa vặn</p><p>✔ Kiểu dáng hiện đại, dễ phối đồ</p><p>✔ Túi tiện lợi, có khóa kéo an toàn</p><div><br></div>', '<p>🔄 Đổi trả trong 7 ngày nếu sản phẩm lỗi hoặc không đúng mô tả</p><p>📦 Sản phẩm phải còn nguyên tem mác, chưa qua sử dụng</p><p>🚚 Hỗ trợ đổi size miễn phí (khách chịu phí vận chuyển)</p><div><br></div>', 0, 0, 1, 18),
 (91, 'Quần short thun thoải mái', '420', '350', 320, 'product-featured-91.jpg', '<p>Quần short nam phong cách thời trang, chất liệu cao cấp, thoáng mát, phù hợp cho cả hoạt động thường ngày và thể thao. Thiết kế năng động, dễ phối đồ, mang lại sự thoải mái tối đa.</p><p><br></p>', '<p>\"Quần short nam thoáng mát, thoải mái - lựa chọn hoàn hảo cho ngày hè!\"</p><div><br></div>', '<p>✔ Chất liệu cotton/jeans/khaki bền đẹp, thấm hút tốt</p><p>✔ Form dáng trẻ trung, dễ kết hợp với áo thun, polo</p><p>✔ Co giãn nhẹ, tạo cảm giác thoải mái khi vận động</p><p>✔ Đường may chắc chắn, bền bỉ theo thời gian</p><div><br></div>', '<p>✅ Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất</p><p>✅ Sản phẩm phải còn nguyên tem, nhãn mác, chưa qua sử dụng</p><p>✅ Hỗ trợ đổi size nếu không vừa (khách hàng chịu phí vận chuyển)</p><div><br></div>', 0, 0, 1, 19),
 (92, 'Quần short thun thoải mái', '420', '350', 200, 'product-featured-92.jpg', '<p>Quần short nam phong cách thời trang, chất liệu cao cấp, thoáng mát, phù hợp cho cả hoạt động thường ngày và thể thao. Thiết kế năng động, dễ phối đồ, mang lại sự thoải mái tối đa.</p><div><br></div>', '<p>\"Quần short nam thoáng mát, thoải mái - lựa chọn hoàn hảo cho ngày hè!\"</p><div><br></div>', '<p>✔ Chất liệu cotton/jeans/khaki bền đẹp, thấm hút tốt</p><p>✔ Form dáng trẻ trung, dễ kết hợp với áo thun, polo</p><p>✔ Co giãn nhẹ, tạo cảm giác thoải mái khi vận động</p><p>✔ Đường may chắc chắn, bền bỉ theo thời gian</p><div><br></div>', '<p>✅ Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất</p><p>✅ Sản phẩm phải còn nguyên tem, nhãn mác, chưa qua sử dụng</p><p>✅ Hỗ trợ đổi size nếu không vừa (khách hàng chịu phí vận chuyển)</p><div><br></div>', 0, 0, 1, 19),
-(93, 'Quần jeans short nam ', '420', '350', 350, 'product-featured-93.jpg', '<p>Quần short nam phong cách thời trang, chất liệu cao cấp, thoáng mát, phù hợp cho cả hoạt động thường ngày và thể thao. Thiết kế năng động, dễ phối đồ, mang lại sự thoải mái tối đa.</p><div><br></div>', '<p>\"Quần short nam thoáng mát, thoải mái - lựa chọn hoàn hảo cho ngày hè!\"</p>', '<p>✔ Chất liệu cotton/jeans/khaki bền đẹp, thấm hút tốt</p><p>✔ Form dáng trẻ trung, dễ kết hợp với áo thun, polo</p><p>✔ Co giãn nhẹ, tạo cảm giác thoải mái khi vận động</p><p>✔ Đường may chắc chắn, bền bỉ theo thời gian</p><div><br></div>', '<p>✅ Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất</p><p>✅ Sản phẩm phải còn nguyên tem, nhãn mác, chưa qua sử dụng</p><p>✅ Hỗ trợ đổi size nếu không vừa (khách hàng chịu phí vận chuyển)</p><div><br></div>', 0, 0, 1, 19),
+(93, 'Quần jeans short nam ', '420', '350', 350, 'product-featured-93.jpg', '<p>Quần short nam phong cách thời trang, chất liệu cao cấp, thoáng mát, phù hợp cho cả hoạt động thường ngày và thể thao. Thiết kế năng động, dễ phối đồ, mang lại sự thoải mái tối đa.</p><div><br></div>', '<p>\"Quần short nam thoáng mát, thoải mái - lựa chọn hoàn hảo cho ngày hè!\"</p>', '<p>✔ Chất liệu cotton/jeans/khaki bền đẹp, thấm hút tốt</p><p>✔ Form dáng trẻ trung, dễ kết hợp với áo thun, polo</p><p>✔ Co giãn nhẹ, tạo cảm giác thoải mái khi vận động</p><p>✔ Đường may chắc chắn, bền bỉ theo thời gian</p><div><br></div>', '<p>✅ Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất</p><p>✅ Sản phẩm phải còn nguyên tem, nhãn mác, chưa qua sử dụng</p><p>✅ Hỗ trợ đổi size nếu không vừa (khách hàng chịu phí vận chuyển)</p><div><br></div>', 0, 1, 1, 19),
 (94, 'Dép Hello Kitty', '290', '230', 300, 'product-featured-94.jpg', '<p>Dép nữ thời trang, thiết kế thanh lịch và thoải mái, phù hợp cho mọi phong cách. Chất liệu cao cấp, bền đẹp, mang đến cảm giác êm ái khi sử dụng. Dễ dàng phối hợp với nhiều trang phục, thích hợp cho đi chơi, dạo phố hay sử dụng hàng ngày.</p><p><br></p>', '<p>\"Dép nữ thời trang, êm ái - thoải mái bước đi mỗi ngày!\"</p>', '<p>✔ Chất liệu: [Cao su mềm/Da tổng hợp/Vải cao cấp]</p><p>✔ Kiểu dáng: [Dép bệt/Dép quai hậu/Dép xỏ ngón]</p><p>✔ Đế chống trơn trượt, êm ái, không gây đau chân</p><p>✔ Nhiều màu sắc thời trang, dễ dàng phối đồ</p><div><br></div>', '<p>Đổi trả trong vòng 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải còn nguyên vẹn, chưa qua sử dụng.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do người dùng.</p><p>Khách hàng chịu phí vận chuyển khi đổi trả nếu không phải lỗi từ nhà sản xuất.</p><div><br></div>', 0, 0, 1, 12),
 (95, 'Dép quai ngang nữ', '290', '230', 320, 'product-featured-95.jpg', '<p>Dép nữ thời trang, thiết kế thanh lịch và thoải mái, phù hợp cho mọi phong cách. Chất liệu cao cấp, bền đẹp, mang đến cảm giác êm ái khi sử dụng. Dễ dàng phối hợp với nhiều trang phục, thích hợp cho đi chơi, dạo phố hay sử dụng hàng ngày.</p><div><br></div>', '<p>\"Dép nữ thời trang, êm ái - thoải mái bước đi mỗi ngày!\"</p><div><br></div>', '<p>✔ Chất liệu: [Cao su mềm/Da tổng hợp/Vải cao cấp]</p><p>✔ Kiểu dáng: [Dép bệt/Dép quai hậu/Dép xỏ ngón]</p><p>✔ Đế chống trơn trượt, êm ái, không gây đau chân</p><p>✔ Nhiều màu sắc thời trang, dễ dàng phối đồ</p><div><br></div>', '<p>Đổi trả trong vòng 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải còn nguyên vẹn, chưa qua sử dụng.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do người dùng.</p><p>Khách hàng chịu phí vận chuyển khi đổi trả nếu không phải lỗi từ nhà sản xuất.</p><div><br></div>', 0, 0, 1, 12),
 (96, 'Dép quai ngang nữ', '290', '230', 340, 'product-featured-96.jpg', '<p>Dép nữ thời trang, thiết kế thanh lịch và thoải mái, phù hợp cho mọi phong cách. Chất liệu cao cấp, bền đẹp, mang đến cảm giác êm ái khi sử dụng. Dễ dàng phối hợp với nhiều trang phục, thích hợp cho đi chơi, dạo phố hay sử dụng hàng ngày.</p><div><br></div>', '<p>\"Dép nữ thời trang, êm ái - thoải mái bước đi mỗi ngày!\"</p>', '<p>✔ Chất liệu: [Cao su mềm/Da tổng hợp/Vải cao cấp]</p><p>✔ Kiểu dáng: [Dép bệt/Dép quai hậu/Dép xỏ ngón]</p><p>✔ Đế chống trơn trượt, êm ái, không gây đau chân</p><p>✔ Nhiều màu sắc thời trang, dễ dàng phối đồ</p><div><br></div>', '<p>Đổi trả trong vòng 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải còn nguyên vẹn, chưa qua sử dụng.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do người dùng.</p><p>Khách hàng chịu phí vận chuyển khi đổi trả nếu không phải lỗi từ nhà sản xuất.</p><div><br></div>', 0, 0, 1, 12),
@@ -486,7 +517,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (103, 'Dép crocs nhựa nữ', '520', '450', 320, 'product-featured-103.jpg', '<p>Ủng Crocs nữ nhẹ nhàng, tiện lợi, phù hợp cho mọi hoạt động ngoài trời. Thiết kế chống nước, thoáng khí giúp đôi chân luôn khô ráo và thoải mái cả ngày dài.</p><div><br></div>', '<p>\"Ủng nữ chống trơn, bền đẹp - bảo vệ đôi chân trong mọi điều kiện thời tiết!\"</p><div><br></div>', '<p>Chất liệu Croslite™: Nhẹ, bền, dễ vệ sinh.</p><p>Chống thấm nước: Hoàn hảo cho ngày mưa hay môi trường ẩm ướt.</p><p>Đế chống trượt: Đảm bảo an toàn khi di chuyển.</p><p>Kiểu dáng năng động: Phù hợp cho đi chơi, du lịch, làm vườn…</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm có lỗi từ nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên tem mác và hộp đựng.</p><p>Không áp dụng đổi trả cho sản phẩm giảm giá hoặc đặt theo yêu cầu.</p><div><br></div>', 0, 0, 1, 53),
 (104, 'Dép crocs nhựa nữ', '520', '450', 350, 'product-featured-104.jpg', '<p>Ủng Crocs nữ nhẹ nhàng, tiện lợi, phù hợp cho mọi hoạt động ngoài trời. Thiết kế chống nước, thoáng khí giúp đôi chân luôn khô ráo và thoải mái cả ngày dài.</p><div><br></div>', '<p>\"Ủng nữ chống trơn, bền đẹp - bảo vệ đôi chân trong mọi điều kiện thời tiết!\"</p><div><br></div>', '<p>Chất liệu Croslite™: Nhẹ, bền, dễ vệ sinh.</p><p>Chống thấm nước: Hoàn hảo cho ngày mưa hay môi trường ẩm ướt.</p><p>Đế chống trượt: Đảm bảo an toàn khi di chuyển.</p><p>Kiểu dáng năng động: Phù hợp cho đi chơi, du lịch, làm vườn…</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm có lỗi từ nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên tem mác và hộp đựng.</p><p>Không áp dụng đổi trả cho sản phẩm giảm giá hoặc đặt theo yêu cầu.</p><div><br></div>', 0, 0, 1, 53),
 (105, 'Dép crocs nhựa nữ', '520', '450', 340, 'product-featured-105.jpg', '<p>Ủng Crocs nữ nhẹ nhàng, tiện lợi, phù hợp cho mọi hoạt động ngoài trời. Thiết kế chống nước, thoáng khí giúp đôi chân luôn khô ráo và thoải mái cả ngày dài.</p><p><br></p>', '<p>\"Ủng nữ chống trơn, bền đẹp - bảo vệ đôi chân trong mọi điều kiện thời tiết!\"</p><div><br></div>', '<p>Chất liệu Croslite™: Nhẹ, bền, dễ vệ sinh.</p><p>Chống thấm nước: Hoàn hảo cho ngày mưa hay môi trường ẩm ướt.</p><p>Đế chống trượt: Đảm bảo an toàn khi di chuyển.</p><p>Kiểu dáng năng động: Phù hợp cho đi chơi, du lịch, làm vườn…</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm có lỗi từ nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên tem mác và hộp đựng.</p><p>Không áp dụng đổi trả cho sản phẩm giảm giá hoặc đặt theo yêu cầu.</p><div><br></div>', 0, 0, 1, 53),
-(106, 'Hoodie Zip Thêu', '590', '520', 350, 'product-featured-106.jpg', '<p>Áo hoodie nữ phong cách trẻ trung, năng động, phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, giữ ấm tốt, mang lại cảm giác thoải mái và dễ chịu khi mặc.</p><div><br></div>', '<p>\"Áo hoodie nữ mềm mại, ấm áp - phong cách trẻ trung, năng động!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton/ nỉ dày dặn, co giãn tốt, thoáng khí.</p><p>Kiểu dáng thời trang: Form rộng, dễ phối đồ, phù hợp với nhiều phong cách.</p><p>Thiết kế tiện lợi: Có nón, túi trước, bo gấu giúp giữ ấm tốt hơn.</p><p>Màu sắc đa dạng: Dễ dàng lựa chọn theo sở thích cá nhân.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 0, 1, 14),
+(106, 'Hoodie Zip Thêu', '590', '520', 350, 'product-featured-106.jpg', '<p>Áo hoodie nữ phong cách trẻ trung, năng động, phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, giữ ấm tốt, mang lại cảm giác thoải mái và dễ chịu khi mặc.</p><div><br></div>', '<p>\"Áo hoodie nữ mềm mại, ấm áp - phong cách trẻ trung, năng động!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton/ nỉ dày dặn, co giãn tốt, thoáng khí.</p><p>Kiểu dáng thời trang: Form rộng, dễ phối đồ, phù hợp với nhiều phong cách.</p><p>Thiết kế tiện lợi: Có nón, túi trước, bo gấu giúp giữ ấm tốt hơn.</p><p>Màu sắc đa dạng: Dễ dàng lựa chọn theo sở thích cá nhân.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 1, 1, 14),
 (107, 'Hoodie Zip Thêu', '590', '520', 300, 'product-featured-107.jpg', '<p>Áo hoodie nữ phong cách trẻ trung, năng động, phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, giữ ấm tốt, mang lại cảm giác thoải mái và dễ chịu khi mặc.</p><div><br></div>', '<p>&nbsp;\"Áo hoodie nữ mềm mại, ấm áp - phong cách trẻ trung, năng động!\"</p>', '<p>Chất liệu cao cấp: Cotton/ nỉ dày dặn, co giãn tốt, thoáng khí.</p><p>Kiểu dáng thời trang: Form rộng, dễ phối đồ, phù hợp với nhiều phong cách.</p><p>Thiết kế tiện lợi: Có nón, túi trước, bo gấu giúp giữ ấm tốt hơn.</p><p>Màu sắc đa dạng: Dễ dàng lựa chọn theo sở thích cá nhân.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 0, 1, 14);
 INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_order`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
 (108, 'Hoodie Zip Thêu', '590', '520', 350, 'product-featured-108.jpg', '<p>Áo hoodie nữ phong cách trẻ trung, năng động, phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, giữ ấm tốt, mang lại cảm giác thoải mái và dễ chịu khi mặc.</p><p><br></p>', '<p>\"Áo hoodie nữ mềm mại, ấm áp - phong cách trẻ trung, năng động!\"</p>', '<p>Chất liệu cao cấp: Cotton/ nỉ dày dặn, co giãn tốt, thoáng khí.</p><p>Kiểu dáng thời trang: Form rộng, dễ phối đồ, phù hợp với nhiều phong cách.</p><p>Thiết kế tiện lợi: Có nón, túi trước, bo gấu giúp giữ ấm tốt hơn.</p><p>Màu sắc đa dạng: Dễ dàng lựa chọn theo sở thích cá nhân.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 0, 1, 14),
@@ -494,7 +525,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (110, 'Đầm xòe trễ vai', '820', '750', 250, 'product-featured-110.jpg', '<p>Đầm nữ thanh lịch, tôn dáng, phù hợp cho nhiều dịp như đi làm, dạo phố hay dự tiệc. Chất liệu cao cấp, thoáng mát, mang đến sự thoải mái và tự tin cho người mặc.</p><div><br></div>', '<p>&nbsp;\"Đầm nữ duyên dáng, thanh lịch - tôn lên vẻ đẹp quyến rũ, sang trọng!\"</p><div><br></div>', '<p>Chất liệu mềm mại: Vải cao cấp, thấm hút tốt, tạo cảm giác dễ chịu.</p><p>Thiết kế hiện đại: Đa dạng kiểu dáng từ ôm body, suông đến xòe nữ tính.</p><p>Màu sắc thanh lịch: Dễ dàng phối đồ, phù hợp nhiều phong cách.</p><p>Đường may tinh tế: Tôn dáng, bền đẹp theo thời gian.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm cần chưa qua sử dụng, còn nguyên tag, hóa đơn và bao bì.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 32),
 (111, 'Đầm dự tiệc cưới, hỏi,...', '820', '750', 300, 'product-featured-111.jpg', '<p>Đầm nữ thanh lịch, tôn dáng, phù hợp cho nhiều dịp như đi làm, dạo phố hay dự tiệc. Chất liệu cao cấp, thoáng mát, mang đến sự thoải mái và tự tin cho người mặc.</p><div><br></div>', '<p>\"Đầm nữ duyên dáng, thanh lịch - tôn lên vẻ đẹp quyến rũ, sang trọng!\"</p><div><br></div>', '<p>Chất liệu mềm mại: Vải cao cấp, thấm hút tốt, tạo cảm giác dễ chịu.</p><p>Thiết kế hiện đại: Đa dạng kiểu dáng từ ôm body, suông đến xòe nữ tính.</p><p>Màu sắc thanh lịch: Dễ dàng phối đồ, phù hợp nhiều phong cách.</p><p>Đường may tinh tế: Tôn dáng, bền đẹp theo thời gian.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm cần chưa qua sử dụng, còn nguyên tag, hóa đơn và bao bì.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 32),
 (112, 'Quần jeans ống rộng nữ', '650', '570', 350, 'product-featured-112.jpg', '<p>Quần jeans nữ thời trang, thiết kế trẻ trung, tôn dáng và dễ phối đồ. Chất liệu denim cao cấp mang lại cảm giác thoải mái, phù hợp cho mọi hoạt động hàng ngày.</p><div><br></div>', '<p>\"Quần jeans nữ thời trang, tôn dáng - thoải mái, phù hợp mọi phong cách!\"</p><div><br></div>', '<p>Chất liệu bền đẹp: Denim co giãn nhẹ, thoáng khí, giữ form tốt.</p><p>Kiểu dáng đa dạng: Skinny, ống rộng, baggy… phù hợp với nhiều phong cách.</p><p>Màu sắc thời thượng: Xanh denim, đen, trắng, dễ kết hợp trang phục.</p><p>Dễ dàng bảo quản: Giặt máy thoải mái, không xù lông, không phai màu.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm cần chưa qua sử dụng, còn nguyên tag, nhãn mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 0, 1, 16),
-(113, 'Quần jeans ống rộng nữ', '650', '570', 300, 'product-featured-113.jpg', '<p>Quần jeans nữ thời trang, thiết kế trẻ trung, tôn dáng và dễ phối đồ. Chất liệu denim cao cấp mang lại cảm giác thoải mái, phù hợp cho mọi hoạt động hàng ngày.</p><div><br></div>', '<p>\"Quần jeans nữ thời trang, tôn dáng - thoải mái, phù hợp mọi phong cách!\"</p><div><br></div>', '<p>Chất liệu bền đẹp: Denim co giãn nhẹ, thoáng khí, giữ form tốt.</p><p>Kiểu dáng đa dạng: Skinny, ống rộng, baggy… phù hợp với nhiều phong cách.</p><p>Màu sắc thời thượng: Xanh denim, đen, trắng, dễ kết hợp trang phục.</p><p>Dễ dàng bảo quản: Giặt máy thoải mái, không xù lông, không phai màu.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm cần chưa qua sử dụng, còn nguyên tag, nhãn mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 0, 1, 16),
+(113, 'Quần jeans ống rộng nữ', '650', '570', 300, 'product-featured-113.jpg', '<p>Quần jeans nữ thời trang, thiết kế trẻ trung, tôn dáng và dễ phối đồ. Chất liệu denim cao cấp mang lại cảm giác thoải mái, phù hợp cho mọi hoạt động hàng ngày.</p><div><br></div>', '<p>\"Quần jeans nữ thời trang, tôn dáng - thoải mái, phù hợp mọi phong cách!\"</p><div><br></div>', '<p>Chất liệu bền đẹp: Denim co giãn nhẹ, thoáng khí, giữ form tốt.</p><p>Kiểu dáng đa dạng: Skinny, ống rộng, baggy… phù hợp với nhiều phong cách.</p><p>Màu sắc thời thượng: Xanh denim, đen, trắng, dễ kết hợp trang phục.</p><p>Dễ dàng bảo quản: Giặt máy thoải mái, không xù lông, không phai màu.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm cần chưa qua sử dụng, còn nguyên tag, nhãn mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 1, 1, 16),
 (114, 'Quần jeans ống rộng nữ', '650', '570', 340, 'product-featured-114.jpg', '<p>Quần jeans nữ thời trang, thiết kế trẻ trung, tôn dáng và dễ phối đồ. Chất liệu denim cao cấp mang lại cảm giác thoải mái, phù hợp cho mọi hoạt động hàng ngày.</p><div><br></div>', '<p>\"Quần jeans nữ thời trang, tôn dáng - thoải mái, phù hợp mọi phong cách!\"</p><div><br></div>', '<p>Chất liệu bền đẹp: Denim co giãn nhẹ, thoáng khí, giữ form tốt.</p><p>Kiểu dáng đa dạng: Skinny, ống rộng, baggy… phù hợp với nhiều phong cách.</p><p>Màu sắc thời thượng: Xanh denim, đen, trắng, dễ kết hợp trang phục.</p><p>Dễ dàng bảo quản: Giặt máy thoải mái, không xù lông, không phai màu.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm cần chưa qua sử dụng, còn nguyên tag, nhãn mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm giảm giá hoặc đặt hàng theo yêu cầu.</p><div><br></div>', 0, 0, 1, 16),
 (115, 'Mặt nạ dưỡng ẩm', '550', '480', 340, 'product-featured-115.jpg', '<p>Bộ sản phẩm chăm sóc da nữ giúp nuôi dưỡng làn da khỏe mạnh, rạng rỡ. Công thức dịu nhẹ, an toàn, phù hợp với nhiều loại da, cung cấp độ ẩm và dưỡng chất cần thiết cho làn da mềm mịn, tươi trẻ.</p><div><br></div>', '<p>\"Sản phẩm chăm sóc da dịu nhẹ, nuôi dưỡng sâu - cho làn da khỏe đẹp rạng rỡ!\"</p><div><br></div>', '<p>Thành phần an toàn: Chiết xuất thiên nhiên, không chứa hóa chất độc hại.</p><p>Dưỡng ẩm &amp; tái tạo da: Cung cấp độ ẩm, giúp da mịn màng, căng bóng.</p><p>Phù hợp nhiều loại da: Da dầu, da khô, da nhạy cảm,…</p><p>Hấp thụ nhanh: Không gây bết dính, dễ dàng thẩm thấu vào da.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm đổi trả phải chưa qua sử dụng, còn nguyên tem niêm phong và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với sản phẩm đã mở nắp hoặc dùng thử.</p><div><br></div>', 0, 0, 1, 40),
 (116, 'Mặt nạ BNBG', '550', '480', 320, 'product-featured-116.jpg', '<p>Bộ sản phẩm chăm sóc da nữ giúp nuôi dưỡng làn da khỏe mạnh, rạng rỡ. Công thức dịu nhẹ, an toàn, phù hợp với nhiều loại da, cung cấp độ ẩm và dưỡng chất cần thiết cho làn da mềm mịn, tươi trẻ.</p><div><br></div>', '<p>\"Sản phẩm chăm sóc da dịu nhẹ, nuôi dưỡng sâu - cho làn da khỏe đẹp rạng rỡ!\"</p><div><br></div>', '<p>Thành phần an toàn: Chiết xuất thiên nhiên, không chứa hóa chất độc hại.</p><p>Dưỡng ẩm &amp; tái tạo da: Cung cấp độ ẩm, giúp da mịn màng, căng bóng.</p><p>Phù hợp nhiều loại da: Da dầu, da khô, da nhạy cảm,…</p><p>Hấp thụ nhanh: Không gây bết dính, dễ dàng thẩm thấu vào da.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm đổi trả phải chưa qua sử dụng, còn nguyên tem niêm phong và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với sản phẩm đã mở nắp hoặc dùng thử.</p><div><br></div>', 0, 0, 1, 40),
@@ -517,7 +548,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (133, 'Nón kết cho bé trai', '300', '250', 320, 'product-featured-133.jpg', '<p>Nón bé trai thiết kế năng động, thoáng mát, giúp bảo vệ bé khỏi nắng và bụi. Chất liệu mềm mại, an toàn cho làn da nhạy cảm, phù hợp cho mọi hoạt động ngoài trời.</p><div><br></div>', '<p>\"Nón bé trai cá tính, bảo vệ khỏi nắng - cho bé thêm phong cách, năng động, thoải mái mọi lúc!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton thoáng khí, thấm hút mồ hôi tốt.</p><p>Thiết kế thời trang: Kiểu dáng đa dạng, họa tiết đáng yêu, dễ phối đồ.</p><p>Dễ điều chỉnh: Quai dán hoặc nút cài phù hợp với nhiều độ tuổi.</p><p>Bảo vệ tối ưu: Chắn nắng hiệu quả, giúp bé vui chơi thoải mái.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt theo yêu cầu.</p><div><br></div>', 0, 0, 1, 30),
 (134, 'Nón tai bèo bé trai', '300', '250', 350, 'product-featured-134.jpg', '<p>Nón bé trai thiết kế năng động, thoáng mát, giúp bảo vệ bé khỏi nắng và bụi. Chất liệu mềm mại, an toàn cho làn da nhạy cảm, phù hợp cho mọi hoạt động ngoài trời.</p><div><br></div>', '<p>\"Nón bé trai cá tính, bảo vệ khỏi nắng - cho bé thêm phong cách, năng động, thoải mái mọi lúc!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton thoáng khí, thấm hút mồ hôi tốt.</p><p>Thiết kế thời trang: Kiểu dáng đa dạng, họa tiết đáng yêu, dễ phối đồ.</p><p>Dễ điều chỉnh: Quai dán hoặc nút cài phù hợp với nhiều độ tuổi.</p><p>Bảo vệ tối ưu: Chắn nắng hiệu quả, giúp bé vui chơi thoải mái.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt theo yêu cầu.</p><div><br></div>', 0, 0, 1, 30),
 (135, 'Nón len bé trai', '300', '250', 320, 'product-featured-135.jpg', '<p>Nón bé trai thiết kế năng động, thoáng mát, giúp bảo vệ bé khỏi nắng và bụi. Chất liệu mềm mại, an toàn cho làn da nhạy cảm, phù hợp cho mọi hoạt động ngoài trời.</p><p><br></p>', '<p>&nbsp;\"Nón bé trai cá tính, bảo vệ khỏi nắng - cho bé thêm phong cách, năng động, thoải mái mọi lúc!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton thoáng khí, thấm hút mồ hôi tốt.</p><p>Thiết kế thời trang: Kiểu dáng đa dạng, họa tiết đáng yêu, dễ phối đồ.</p><p>Dễ điều chỉnh: Quai dán hoặc nút cài phù hợp với nhiều độ tuổi.</p><p>Bảo vệ tối ưu: Chắn nắng hiệu quả, giúp bé vui chơi thoải mái.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm lỗi do nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn nguyên tem mác và hóa đơn.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt theo yêu cầu.</p><div><br></div>', 0, 0, 1, 30),
-(136, 'Đồ bộ tay dài cho bé gái', '300', '250', 350, 'product-featured-136.jpg', '<p>Quần áo bé gái với thiết kế đáng yêu, chất liệu mềm mại, an toàn cho làn da nhạy cảm. Đa dạng mẫu mã, màu sắc tươi sáng, phù hợp cho mọi hoạt động hằng ngày hay các dịp đặc biệt.</p><p><br></p>', '<p>\"Trang phục bé gái dễ thương - Quần áo bé gái xinh xắn, thoáng mát, cho bé thêm đáng yêu và thoải mái suốt ngày dài!\"</p><div><br></div>', '<p>Chất liệu an toàn: Cotton, thun co giãn, vải lanh thoáng mát.</p><p>Thiết kế dễ thương: Kiểu dáng hiện đại, họa tiết sinh động.</p><p>Thoải mái vận động: Form dáng vừa vặn, không gây khó chịu khi bé chơi đùa.</p><p>Dễ giặt, nhanh khô: Bền màu, không xù lông sau nhiều lần giặt.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt may theo yêu cầu.</p><div><br></div>', 1, 0, 1, 27),
+(136, 'Đồ bộ tay dài cho bé gái', '300', '250', 350, 'product-featured-136.jpg', '<p>Quần áo bé gái với thiết kế đáng yêu, chất liệu mềm mại, an toàn cho làn da nhạy cảm. Đa dạng mẫu mã, màu sắc tươi sáng, phù hợp cho mọi hoạt động hằng ngày hay các dịp đặc biệt.</p><p><br></p>', '<p>\"Trang phục bé gái dễ thương - Quần áo bé gái xinh xắn, thoáng mát, cho bé thêm đáng yêu và thoải mái suốt ngày dài!\"</p><div><br></div>', '<p>Chất liệu an toàn: Cotton, thun co giãn, vải lanh thoáng mát.</p><p>Thiết kế dễ thương: Kiểu dáng hiện đại, họa tiết sinh động.</p><p>Thoải mái vận động: Form dáng vừa vặn, không gây khó chịu khi bé chơi đùa.</p><p>Dễ giặt, nhanh khô: Bền màu, không xù lông sau nhiều lần giặt.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt may theo yêu cầu.</p><div><br></div>', 1, 1, 1, 27),
 (137, 'Đồ bộ bé gái ba lỗ quần đùi', '300', '250', 340, 'product-featured-137.jpg', '<p>Quần áo bé gái với thiết kế đáng yêu, chất liệu mềm mại, an toàn cho làn da nhạy cảm. Đa dạng mẫu mã, màu sắc tươi sáng, phù hợp cho mọi hoạt động hằng ngày hay các dịp đặc biệt.</p><div><br></div>', '<p>\"Trang phục bé gái dễ thương - Quần áo bé gái xinh xắn, thoáng mát, cho bé thêm đáng yêu và thoải mái suốt ngày dài!\"</p><div><br></div>', '<p>Chất liệu an toàn: Cotton, thun co giãn, vải lanh thoáng mát.</p><p>Thiết kế dễ thương: Kiểu dáng hiện đại, họa tiết sinh động.</p><p>Thoải mái vận động: Form dáng vừa vặn, không gây khó chịu khi bé chơi đùa.</p><p>Dễ giặt, nhanh khô: Bền màu, không xù lông sau nhiều lần giặt.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 27),
 (138, 'Đồ bộ bé gái ba lỗ quần đùi', '300', '250', 260, 'product-featured-138.jpg', '<p>Quần áo bé gái với thiết kế đáng yêu, chất liệu mềm mại, an toàn cho làn da nhạy cảm. Đa dạng mẫu mã, màu sắc tươi sáng, phù hợp cho mọi hoạt động hằng ngày hay các dịp đặc biệt.</p><div><br></div>', '<p>\"Trang phục bé gái dễ thương - Quần áo bé gái xinh xắn, thoáng mát, cho bé thêm đáng yêu và thoải mái suốt ngày dài!\"</p><div><br></div>', '<p>Chất liệu an toàn: Cotton, thun co giãn, vải lanh thoáng mát.</p><p>Thiết kế dễ thương: Kiểu dáng hiện đại, họa tiết sinh động.</p><p>Thoải mái vận động: Form dáng vừa vặn, không gây khó chịu khi bé chơi đùa.</p><p>Dễ giặt, nhanh khô: Bền màu, không xù lông sau nhiều lần giặt.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi do nhà sản xuất.</p><p>Sản phẩm đổi trả cần chưa qua sử dụng, còn nguyên tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với các sản phẩm giảm giá hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 27),
 (139, 'Bộ quần áo cộc tay bé trai', '300', '250', 350, 'product-featured-139.jpg', '<p>Quần áo bé trai thoải mái, năng động, thiết kế đáng yêu phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, an toàn cho làn da nhạy cảm của bé, giúp bé luôn dễ chịu và vui chơi thoải mái.</p><div><br></div>', '<p>\"Trang phục bé trai năng động - Quần áo bé trai cá tính, thoải mái, cho bé tự tin khám phá và vui chơi cả ngày!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton thoáng mát, thấm hút mồ hôi tốt.</p><p>Kiểu dáng đa dạng: Từ năng động đến lịch sự, phù hợp đi học, đi chơi.</p><p>Đường may chắc chắn: Bền đẹp, không gây kích ứng da.</p><p>Dễ giặt, nhanh khô: Giữ form dáng tốt sau nhiều lần giặt.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 26),
@@ -527,7 +558,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_color`
+-- Table structure for table `table_product_color`
 --
 
 CREATE TABLE `table_product_color` (
@@ -537,7 +568,7 @@ CREATE TABLE `table_product_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_color`
+-- Dumping data for table `table_product_color`
 --
 
 INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
@@ -547,8 +578,6 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (4, 5, 2),
 (5, 5, 3),
 (6, 6, 3),
-(7, 2, 4),
-(8, 6, 4),
 (9, 5, 5),
 (10, 6, 5),
 (11, 5, 6),
@@ -679,7 +708,6 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (140, 6, 91),
 (141, 2, 92),
 (142, 4, 92),
-(143, 2, 93),
 (144, 9, 94),
 (145, 10, 94),
 (146, 5, 95),
@@ -703,8 +731,6 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (164, 9, 104),
 (165, 5, 105),
 (166, 6, 105),
-(167, 2, 106),
-(168, 5, 106),
 (169, 6, 107),
 (170, 5, 108),
 (171, 6, 108),
@@ -713,7 +739,6 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (174, 5, 111),
 (175, 6, 111),
 (176, 2, 112),
-(177, 10, 113),
 (178, 2, 114),
 (179, 6, 114),
 (180, 3, 115),
@@ -749,8 +774,6 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (212, 6, 134),
 (213, 6, 135),
 (214, 10, 135),
-(215, 6, 136),
-(216, 9, 136),
 (217, 6, 137),
 (218, 9, 137),
 (219, 2, 138),
@@ -759,13 +782,21 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (222, 10, 139),
 (223, 2, 140),
 (224, 5, 140),
-(225, 3, 141),
-(226, 5, 141);
+(227, 3, 141),
+(228, 5, 141),
+(229, 10, 113),
+(230, 2, 106),
+(231, 5, 106),
+(232, 2, 93),
+(235, 2, 4),
+(236, 6, 4),
+(237, 6, 136),
+(238, 9, 136);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_photo`
+-- Table structure for table `table_product_photo`
 --
 
 CREATE TABLE `table_product_photo` (
@@ -775,7 +806,7 @@ CREATE TABLE `table_product_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_photo`
+-- Dumping data for table `table_product_photo`
 --
 
 INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
@@ -924,7 +955,7 @@ INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_size`
+-- Table structure for table `table_product_size`
 --
 
 CREATE TABLE `table_product_size` (
@@ -934,7 +965,7 @@ CREATE TABLE `table_product_size` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_size`
+-- Dumping data for table `table_product_size`
 --
 
 INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
@@ -943,7 +974,6 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 (3, 29, 2),
 (4, 40, 3),
 (5, 41, 3),
-(6, 29, 4),
 (7, 29, 5),
 (8, 29, 6),
 (9, 34, 7),
@@ -1072,8 +1102,6 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 (137, 4, 91),
 (138, 4, 92),
 (139, 5, 92),
-(140, 5, 93),
-(141, 6, 93),
 (142, 12, 94),
 (143, 13, 94),
 (144, 11, 95),
@@ -1098,8 +1126,6 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 (163, 14, 104),
 (164, 12, 105),
 (165, 13, 105),
-(166, 3, 106),
-(167, 4, 106),
 (168, 3, 107),
 (169, 4, 107),
 (170, 2, 108),
@@ -1112,8 +1138,6 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 (177, 2, 111),
 (178, 2, 112),
 (179, 3, 112),
-(180, 3, 113),
-(181, 4, 113),
 (182, 3, 114),
 (183, 4, 114),
 (184, 29, 115),
@@ -1137,17 +1161,31 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 (203, 26, 133),
 (204, 26, 134),
 (205, 26, 135),
-(206, 26, 136),
 (207, 26, 137),
 (208, 26, 138),
 (209, 26, 139),
 (210, 26, 140),
-(211, 26, 141);
+(212, 1, 141),
+(213, 2, 141),
+(214, 3, 141),
+(215, 4, 141),
+(216, 5, 141),
+(217, 6, 141),
+(218, 7, 141),
+(219, 26, 141),
+(220, 3, 113),
+(221, 4, 113),
+(222, 3, 106),
+(223, 4, 106),
+(224, 5, 93),
+(225, 6, 93),
+(227, 29, 4),
+(228, 26, 136);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_province`
+-- Table structure for table `table_province`
 --
 
 CREATE TABLE `table_province` (
@@ -1156,7 +1194,7 @@ CREATE TABLE `table_province` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_province`
+-- Dumping data for table `table_province`
 --
 
 INSERT INTO `table_province` (`province_id`, `province_name`) VALUES
@@ -1227,7 +1265,7 @@ INSERT INTO `table_province` (`province_id`, `province_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_rating`
+-- Table structure for table `table_rating`
 --
 
 CREATE TABLE `table_rating` (
@@ -1241,7 +1279,7 @@ CREATE TABLE `table_rating` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_service`
+-- Table structure for table `table_service`
 --
 
 CREATE TABLE `table_service` (
@@ -1252,23 +1290,23 @@ CREATE TABLE `table_service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_service`
+-- Dumping data for table `table_service`
 --
 
 INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
-(1, 'Hàng chọn giá hời', '', 'service-1.png'),
-(2, 'Mã giảm giá', '', 'service-2.png'),
-(3, 'Miễn phí ship', '', 'service-3.png'),
-(4, 'GoBuy style giảm 30%', '', 'service-4.png'),
-(5, 'Voucher giảm đến 1 tỷ', '', 'service-5.png'),
-(6, 'Khung giờ săn sale', '', 'service-6.png'),
-(7, 'Hàng quốc tế', '', 'service-7.png'),
-(8, 'Nạp thẻ, Dịch vụ & Vé tàu hỏa', '', 'service-8.png');
+(1, 'Hàng chọn giá hời', '', 'service-1.jpg'),
+(2, 'Mã giảm giá', '', 'service-2.jpg'),
+(3, 'Miễn phí ship', '', 'service-3.jpg'),
+(4, 'GoBuy style giảm 30%', '', 'service-4.jpg'),
+(5, 'Voucher giảm đến 1 tỷ', '', 'service-5.jpg'),
+(6, 'Khung giờ săn sale', '', 'service-6.jpg'),
+(7, 'Hàng quốc tế', '', 'service-7.jpg'),
+(8, 'Nạp thẻ, Dịch vụ & Vé tàu hỏa', '', 'service-8.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_settings`
+-- Table structure for table `table_settings`
 --
 
 CREATE TABLE `table_settings` (
@@ -1318,16 +1356,16 @@ CREATE TABLE `table_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_settings`
+-- Dumping data for table `table_settings`
 --
 
 INSERT INTO `table_settings` (`id`, `logo`, `favicon`, `footer_about`, `footer_copyright`, `contact_address`, `contact_email`, `contact_phone`, `contact_map_iframe`, `receive_email`, `receive_email_subject`, `receive_email_thank_you_message`, `forget_password_message`, `total_latest_product_home`, `total_popular_product_home`, `meta_title_home`, `banner_login`, `banner_registration`, `banner_forget_password`, `banner_reset_password`, `banner_search`, `banner_cart`, `banner_checkout`, `banner_product_category`, `cta_title`, `cta_content`, `cta_read_more_text`, `cta_read_more_url`, `cta_photo`, `latest_product_title`, `latest_product_subtitle`, `popular_product_title`, `popular_product_subtitle`, `bank_public_key`, `bank_secret_key`, `bank_detail`, `before_head`, `after_body`, `before_body`, `home_service_on_off`, `home_welcome_on_off`, `home_latest_product_on_off`, `home_popular_product_on_off`) VALUES
-(1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Thu Duc, TP.HCM', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm phổ biến', 'Sản phẩm phổ biến dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1, 1);
+(1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Thu Duc, TP.HCM', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm nổi bật', 'Sản phẩm nổi bật dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_shipping_cost`
+-- Table structure for table `table_shipping_cost`
 --
 
 CREATE TABLE `table_shipping_cost` (
@@ -1339,7 +1377,7 @@ CREATE TABLE `table_shipping_cost` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_shipping_cost_all`
+-- Table structure for table `table_shipping_cost_all`
 --
 
 CREATE TABLE `table_shipping_cost_all` (
@@ -1348,7 +1386,7 @@ CREATE TABLE `table_shipping_cost_all` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_shipping_cost_all`
+-- Dumping data for table `table_shipping_cost_all`
 --
 
 INSERT INTO `table_shipping_cost_all` (`sca_id`, `amount`) VALUES
@@ -1357,7 +1395,7 @@ INSERT INTO `table_shipping_cost_all` (`sca_id`, `amount`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_size`
+-- Table structure for table `table_size`
 --
 
 CREATE TABLE `table_size` (
@@ -1366,7 +1404,7 @@ CREATE TABLE `table_size` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_size`
+-- Dumping data for table `table_size`
 --
 
 INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
@@ -1397,18 +1435,18 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 (25, '48'),
 (26, 'Free Size'),
 (27, '1 size cho tất cả'),
-(28, '10'),
-(29, '12 tháng'),
+(28, '1080x800'),
+(29, '720x500'),
 (30, '2T'),
 (31, '3T'),
 (32, '4T'),
 (33, '5T'),
-(34, '6 Năm'),
-(35, '7 Năm'),
-(36, '8 Năm'),
-(37, '10 Năm'),
-(38, '12 Năm'),
-(39, '14 Năm'),
+(34, '24 inch'),
+(35, '32 inch'),
+(36, '40 inch'),
+(37, '43 inch'),
+(38, '50 inch '),
+(39, '55 inch'),
 (40, '256 GB'),
 (41, '128 GB'),
 (42, '14 Plus'),
@@ -1421,7 +1459,7 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_slider`
+-- Table structure for table `table_slider`
 --
 
 CREATE TABLE `table_slider` (
@@ -1435,7 +1473,7 @@ CREATE TABLE `table_slider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_slider`
+-- Dumping data for table `table_slider`
 --
 
 INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, `button_url`, `position`) VALUES
@@ -1446,7 +1484,7 @@ INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_social`
+-- Table structure for table `table_social`
 --
 
 CREATE TABLE `table_social` (
@@ -1457,7 +1495,7 @@ CREATE TABLE `table_social` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_social`
+-- Dumping data for table `table_social`
 --
 
 INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_icon`) VALUES
@@ -1469,7 +1507,7 @@ INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_ic
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_top_category`
+-- Table structure for table `table_top_category`
 --
 
 CREATE TABLE `table_top_category` (
@@ -1479,7 +1517,7 @@ CREATE TABLE `table_top_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_top_category`
+-- Dumping data for table `table_top_category`
 --
 
 INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
@@ -1489,336 +1527,307 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 (4, 'Đồ điện tử', 1),
 (5, 'Đồ gia dụng', 1);
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `table_admin`
---
-
-CREATE TABLE `table_admin` (
-  `id` int(10) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
-  `email` text NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `password` text NOT NULL,
-  `photo` text NOT NULL,
-  `token` text NOT NULL,
-  `datetime` varchar(100) NOT NULL,
-  `timestamp` varchar(100) NOT NULL,
-  `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Đang đổ dữ liệu cho bảng `table_admin`
---
-
-INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `token`, `datetime`, `timestamp`, `status`) VALUES
-(1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'xxxx', '23-2-2025', '25-2-2025', 0),
-(2, 'thu', 'ebedangiu2111@gmail.com', '+84774048884', 'fe9e27dd7bf526b57d69d3bd9fac33dc', 'default.jpg', '', '2025-03-26 01:46:19', '1742971579', 1),
-(3, 'thu', 'thupii@gmail.com', '+84774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '5d393e2a2f8f455f5a42aac1f0f262e7', '2025-03-28 10:33:05', '1743132785', 0),
-(4, 'thu', 'thupii2111@gmai.com', '+84 774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '59b68bb5c6b2cd89190ee8edd5209d42', '2025-03-28 10:33:50', '1743132830', 0);
-
---
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `table_color`
+-- Indexes for table `table_admin`
+--
+ALTER TABLE `table_admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_color`
 --
 ALTER TABLE `table_color`
   ADD PRIMARY KEY (`color_id`);
 
 --
--- Chỉ mục cho bảng `table_customer`
+-- Indexes for table `table_customer`
 --
 ALTER TABLE `table_customer`
   ADD PRIMARY KEY (`cust_id`);
 
 --
--- Chỉ mục cho bảng `table_customer_message`
+-- Indexes for table `table_customer_message`
 --
 ALTER TABLE `table_customer_message`
   ADD PRIMARY KEY (`customer_message_id`);
 
 --
--- Chỉ mục cho bảng `table_end_category`
+-- Indexes for table `table_end_category`
 --
 ALTER TABLE `table_end_category`
   ADD PRIMARY KEY (`ecat_id`);
 
 --
--- Chỉ mục cho bảng `table_faq`
+-- Indexes for table `table_faq`
 --
 ALTER TABLE `table_faq`
   ADD PRIMARY KEY (`faq_id`);
 
 --
--- Chỉ mục cho bảng `table_mid_category`
+-- Indexes for table `table_mid_category`
 --
 ALTER TABLE `table_mid_category`
   ADD PRIMARY KEY (`mcat_id`);
 
 --
--- Chỉ mục cho bảng `table_order`
+-- Indexes for table `table_order`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_page`
+-- Indexes for table `table_page`
 --
 ALTER TABLE `table_page`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_payment`
+-- Indexes for table `table_payment`
 --
 ALTER TABLE `table_payment`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_photo`
+-- Indexes for table `table_photo`
 --
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_product`
+-- Indexes for table `table_product`
 --
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`p_id`);
 
 --
--- Chỉ mục cho bảng `table_product_color`
+-- Indexes for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_product_photo`
+-- Indexes for table `table_product_photo`
 --
 ALTER TABLE `table_product_photo`
   ADD PRIMARY KEY (`pp_id`);
 
 --
--- Chỉ mục cho bảng `table_product_size`
+-- Indexes for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_province`
+-- Indexes for table `table_province`
 --
 ALTER TABLE `table_province`
   ADD PRIMARY KEY (`province_id`);
 
 --
--- Chỉ mục cho bảng `table_rating`
+-- Indexes for table `table_rating`
 --
 ALTER TABLE `table_rating`
   ADD PRIMARY KEY (`rt_id`);
 
 --
--- Chỉ mục cho bảng `table_service`
+-- Indexes for table `table_service`
 --
 ALTER TABLE `table_service`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_settings`
+-- Indexes for table `table_settings`
 --
 ALTER TABLE `table_settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_shipping_cost`
+-- Indexes for table `table_shipping_cost`
 --
 ALTER TABLE `table_shipping_cost`
   ADD PRIMARY KEY (`shipping_cost_id`);
 
 --
--- Chỉ mục cho bảng `table_shipping_cost_all`
+-- Indexes for table `table_shipping_cost_all`
 --
 ALTER TABLE `table_shipping_cost_all`
   ADD PRIMARY KEY (`sca_id`);
 
 --
--- Chỉ mục cho bảng `table_size`
+-- Indexes for table `table_size`
 --
 ALTER TABLE `table_size`
   ADD PRIMARY KEY (`size_id`);
 
 --
--- Chỉ mục cho bảng `table_slider`
+-- Indexes for table `table_slider`
 --
 ALTER TABLE `table_slider`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `table_social`
+-- Indexes for table `table_social`
 --
 ALTER TABLE `table_social`
   ADD PRIMARY KEY (`social_id`);
 
 --
--- Chỉ mục cho bảng `table_top_category`
+-- Indexes for table `table_top_category`
 --
 ALTER TABLE `table_top_category`
   ADD PRIMARY KEY (`tcat_id`);
 
 --
--- Chỉ mục cho bảng `table_admin`
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `table_admin`
 --
 ALTER TABLE `table_admin`
-  ADD PRIMARY KEY (`id`);
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
---
-
---
--- AUTO_INCREMENT cho bảng `table_color`
+-- AUTO_INCREMENT for table `table_color`
 --
 ALTER TABLE `table_color`
   MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT cho bảng `table_customer`
+-- AUTO_INCREMENT for table `table_customer`
 --
 ALTER TABLE `table_customer`
   MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `table_customer_message`
+-- AUTO_INCREMENT for table `table_customer_message`
 --
 ALTER TABLE `table_customer_message`
   MODIFY `customer_message_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `table_end_category`
+-- AUTO_INCREMENT for table `table_end_category`
 --
 ALTER TABLE `table_end_category`
   MODIFY `ecat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
--- AUTO_INCREMENT cho bảng `table_faq`
+-- AUTO_INCREMENT for table `table_faq`
 --
 ALTER TABLE `table_faq`
   MODIFY `faq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `table_mid_category`
+-- AUTO_INCREMENT for table `table_mid_category`
 --
 ALTER TABLE `table_mid_category`
   MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT cho bảng `table_order`
+-- AUTO_INCREMENT for table `table_order`
 --
 ALTER TABLE `table_order`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `table_page`
+-- AUTO_INCREMENT for table `table_page`
 --
 ALTER TABLE `table_page`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `table_payment`
+-- AUTO_INCREMENT for table `table_payment`
 --
 ALTER TABLE `table_payment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `table_photo`
+-- AUTO_INCREMENT for table `table_photo`
 --
 ALTER TABLE `table_photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `table_product`
+-- AUTO_INCREMENT for table `table_product`
 --
 ALTER TABLE `table_product`
   MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_color`
+-- AUTO_INCREMENT for table `table_product_color`
 --
 ALTER TABLE `table_product_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=227;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_photo`
+-- AUTO_INCREMENT for table `table_product_photo`
 --
 ALTER TABLE `table_product_photo`
   MODIFY `pp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
--- AUTO_INCREMENT cho bảng `table_product_size`
+-- AUTO_INCREMENT for table `table_product_size`
 --
 ALTER TABLE `table_product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
--- AUTO_INCREMENT cho bảng `table_rating`
+-- AUTO_INCREMENT for table `table_rating`
 --
 ALTER TABLE `table_rating`
   MODIFY `rt_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `table_service`
+-- AUTO_INCREMENT for table `table_service`
 --
 ALTER TABLE `table_service`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `table_settings`
+-- AUTO_INCREMENT for table `table_settings`
 --
 ALTER TABLE `table_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `table_shipping_cost`
+-- AUTO_INCREMENT for table `table_shipping_cost`
 --
 ALTER TABLE `table_shipping_cost`
   MODIFY `shipping_cost_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `table_shipping_cost_all`
+-- AUTO_INCREMENT for table `table_shipping_cost_all`
 --
 ALTER TABLE `table_shipping_cost_all`
   MODIFY `sca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `table_size`
+-- AUTO_INCREMENT for table `table_size`
 --
 ALTER TABLE `table_size`
   MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT cho bảng `table_slider`
+-- AUTO_INCREMENT for table `table_slider`
 --
 ALTER TABLE `table_slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `table_social`
+-- AUTO_INCREMENT for table `table_social`
 --
 ALTER TABLE `table_social`
   MODIFY `social_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `table_top_category`
+-- AUTO_INCREMENT for table `table_top_category`
 --
 ALTER TABLE `table_top_category`
   MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT cho bảng `table_admin`
---
-ALTER TABLE `table_admin`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

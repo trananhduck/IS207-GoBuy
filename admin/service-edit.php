@@ -68,7 +68,7 @@ if (!isset($_REQUEST['id'])) {
         <h1>Chỉnh sửa dịch vụ</h1>
     </div>
     <div class="content-header-right">
-        <a href="service.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="service.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

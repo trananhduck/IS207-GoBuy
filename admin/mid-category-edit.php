@@ -45,7 +45,7 @@ if (!isset($_REQUEST['id'])) {
         <h1>Chỉnh sửa danh mục trung gian</h1>
     </div>
     <div class="content-header-right">
-        <a href="mid-category.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="mid-category.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

@@ -57,7 +57,7 @@ if(!isset($_REQUEST['id'])) {
         <h1>Chỉnh sửa danh mục con</h1>
     </div>
     <div class="content-header-right">
-        <a href="end-category.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="end-category.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

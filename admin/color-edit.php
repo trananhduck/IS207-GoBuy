@@ -58,7 +58,7 @@ if (!isset($_REQUEST['id'])) {
         <h1>Chỉnh sửa màu</h1>
     </div>
     <div class="content-header-right">
-        <a href="color.php" class="btn btn-primary btn-sm">Xem tất cả</a>
+        <a href="color.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

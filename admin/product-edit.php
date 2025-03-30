@@ -117,10 +117,10 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
                 $_REQUEST['id']
             ));
         } else {  // Nếu có ảnh sản phẩm nổi bật mới
-            unlink('../assets/uploads/' . $_POST['current_photo']); // Xóa ảnh cũ
+            unlink('../assets/uploads/product_photos/' . $_POST['current_photo']); // Xóa ảnh cũ
 
             $final_name = 'product-featured-' . $_REQUEST['id'] . '.' . $ext;
-            move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name); // Lưu ảnh mới
+            move_uploaded_file($path_tmp, '../assets/uploads/product_photos/' . $final_name); // Lưu ảnh mới
 
             $query = $pdo->prepare("UPDATE table_product SET 
                                     p_name=?, 
@@ -208,7 +208,7 @@ if (!isset($_REQUEST['id'])) {
         <h1>Chỉnh sửa sản phẩm</h1>
     </div>
     <div class="content-header-right">
-        <a href="product.php" class="btn btn-primary btn-sm">View All</a>
+        <a href="product.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 
@@ -444,7 +444,7 @@ foreach ($result as $row) {
                         <div class="form-group">
                             <label for="" class="col-sm-3 control-label">Ảnh nổi bật hiện tại</label>
                             <div class="col-sm-4" style="padding-top:4px;">
-                                <img src="../assets/uploads/<?php echo $p_featured_photo; ?>" alt=""
+                                <img src="../assets/uploads/product_photos/<?php echo $p_featured_photo; ?>" alt=""
                                     style="width:150px;">
                                 <input type="hidden" name="current_photo" value="<?php echo $p_featured_photo; ?>">
                             </div>

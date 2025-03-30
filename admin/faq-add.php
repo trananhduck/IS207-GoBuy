@@ -31,7 +31,7 @@ if (isset($_POST['form1'])) {
         <h1>Thêm FAQ</h1>
     </div>
     <div class="content-header-right">
-        <a href="faq.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
+        <a href="faq.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 

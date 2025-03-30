@@ -58,7 +58,7 @@ if (!isset($_REQUEST['id'])) {
         <h1>Chỉnh Sửa Kích Thước</h1>
     </div>
     <div class="content-header-right">
-        <a href="size.php" class="btn btn-primary btn-sm">Xem Tất Cả</a>
+        <a href="size.php" class="btn btn-primary btn-sm">Thoát</a>
     </div>
 </section>
 <?php
