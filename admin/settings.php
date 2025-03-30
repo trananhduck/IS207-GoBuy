@@ -85,10 +85,9 @@ if (isset($_POST['form2'])) {
 // Cập nhật phần Footer & trang Liên hệ
 if (isset($_POST['form3'])) {
     // Cập nhật cơ sở dữ liệu
-    $query = $pdo->prepare("UPDATE table_settings SET newsletter_on_off=?, footer_copyright=?, contact_address=?, 
+    $query = $pdo->prepare("UPDATE table_settings SET footer_copyright=?, contact_address=?, 
         contact_email=?, contact_phone=?, contact_map_iframe=? WHERE id=1");
     $query->execute(array(
-        $_POST['newsletter_on_off'],
         $_POST['footer_copyright'],
         $_POST['contact_address'],
         $_POST['contact_email'],
@@ -116,33 +115,41 @@ if (isset($_POST['form4'])) {
 
 // Không thể hoàn thành phần này, để lại
 if (isset($_POST['form5'])) {
+    // Kiểm tra nếu key không tồn tại thì đặt giá trị mặc định (ví dụ: 0)
+    $total_latest_product = isset($_POST['total_latest_product']) ? $_POST['total_latest_product'] : 0;
+    $total_popular_product = isset($_POST['total_popular_product']) ? $_POST['total_popular_product'] : 0;
+
     // Cập nhật cơ sở dữ liệu
-    $query = $pdo->prepare("UPDATE table_settings SET total_featured_product_home=?, total_latest_product_home=?, 
-        total_popular_product_home=? WHERE id=1");
+    $query = $pdo->prepare("UPDATE table_settings SET total_latest_product=?, 
+        total_popular_product=? WHERE id=1");
     $query->execute(array(
-        $_POST['total_featured_product_home'],
-        $_POST['total_latest_product_home'],
-        $_POST['total_popular_product_home']
+        $total_latest_product,
+        $total_popular_product
     ));
 
     $successMsg = 'Cập nhật cài đặt thanh bên thành công.';
 }
 
+
 // Cài đặt bật/tắt các phần trên trang chủ
 if (isset($_POST['form6_0'])) {
+    // Kiểm tra nếu key không tồn tại thì đặt giá trị mặc định (0: tắt, 1: bật)
+    $service_on_off = isset($_POST['service_on_off']) ? $_POST['service_on_off'] : 0;
+    $latest_product_on_off = isset($_POST['latest_product_on_off']) ? $_POST['latest_product_on_off'] : 0;
+    $popular_product_on_off = isset($_POST['popular_product_on_off']) ? $_POST['popular_product_on_off'] : 0;
+
     // Cập nhật cơ sở dữ liệu
-    $query = $pdo->prepare("UPDATE table_settings SET home_service_on_off=?, home_welcome_on_off=?, 
-        home_featured_product_on_off=?, home_latest_product_on_off=?, home_popular_product_on_off=? WHERE id=1");
+    $query = $pdo->prepare("UPDATE table_settings SET service_on_off=?, 
+        latest_product_on_off=?, popular_product_on_off=? WHERE id=1");
     $query->execute(array(
-        $_POST['home_service_on_off'],
-        $_POST['home_welcome_on_off'],
-        $_POST['home_featured_product_on_off'],
-        $_POST['home_latest_product_on_off'],
-        $_POST['home_popular_product_on_off']
+        $service_on_off,
+        $latest_product_on_off,
+        $popular_product_on_off
     ));
 
     $successMsg = 'Cập nhật cài đặt bật/tắt các phần thành công.';
 }
+
 if (isset($_POST['form6'])) {
     $successMsg = 'Cài đặt Meta trang chủ đã được cập nhật thành công.';
 }
@@ -222,31 +229,6 @@ if (isset($_POST['form6_7'])) {
         $successMsg = 'Dữ liệu Kêu gọi hành động đã được cập nhật thành công.';
     }
 }
-
-if (isset($_POST['form6_4'])) {
-
-    $valid = 1;
-
-    if (empty($_POST['featured_product_title'])) {
-        $valid = 0;
-        $errorMsg .= 'Tiêu đề Sản phẩm Nổi bật không được để trống<br>';
-    }
-
-    if (empty($_POST['featured_product_subtitle'])) {
-        $valid = 0;
-        $errorMsg .= 'Phụ đề Sản phẩm Nổi bật không được để trống<br>';
-    }
-
-    if ($valid == 1) {
-
-        // cập nhật cơ sở dữ liệu
-        $query = $pdo->prepare("UPDATE table_settings SET featured_product_title=?,featured_product_subtitle=? WHERE id=1");
-        $query->execute(array($_POST['featured_product_title'], $_POST['featured_product_subtitle']));
-
-        $successMsg = 'Dữ liệu Sản phẩm Nổi bật đã được cập nhật thành công.';
-    }
-}
-
 if (isset($_POST['form6_5'])) {
 
     $valid = 1;
@@ -664,9 +646,9 @@ foreach ($result as $row) {
     $receive_email_subject           = $row['receive_email_subject'];
     $receive_email_thank_you_message = $row['receive_email_thank_you_message'];
     $forget_password_message         = $row['forget_password_message'];
-    $total_latest_product_home       = $row['total_latest_product_home'];
-    $total_popular_product_home      = $row['total_popular_product_home'];
-    $meta_title_home                 = $row['meta_title_home'];
+    $total_latest_product       = $row['total_latest_product'];
+    $total_popular_product      = $row['total_popular_product'];
+    $meta_title                 = $row['meta_title'];
     $banner_login                    = $row['banner_login'];
     $banner_registration             = $row['banner_registration'];
     $banner_forget_password          = $row['banner_forget_password'];
@@ -680,10 +662,9 @@ foreach ($result as $row) {
     $popular_product_title           = $row['popular_product_title'];
     $popular_product_subtitle        = $row['popular_product_subtitle'];
     $bank_detail                     = $row['bank_detail'];
-    $home_service_on_off             = $row['home_service_on_off'];
-    $home_welcome_on_off             = $row['home_welcome_on_off'];
-    $home_latest_product_on_off      = $row['home_latest_product_on_off'];
-    $home_popular_product_on_off     = $row['home_popular_product_on_off'];
+    $service_on_off             = $row['service_on_off'];
+    $latest_product_on_off      = $row['latest_product_on_off'];
+    $popular_product_on_off     = $row['popular_product_on_off'];
 }
 ?>
 
@@ -893,16 +874,16 @@ foreach ($result as $row) {
                                         <label for="" class="col-sm-4 control-label">Trang chủ (Số lượng sản phẩm mới
                                             nhất?)<span>*</span></label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" name="total_latest_product_home"
-                                                value="<?php echo $total_latest_product_home; ?>">
+                                            <input type="text" class="form-control" name="total_latest_product"
+                                                value="<?php echo $total_latest_product; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-4 control-label">Trang chủ (Số lượng sản phẩm phổ
                                             biến?)<span>*</span></label>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control" name="total_popular_product_home"
-                                                value="<?php echo $total_popular_product_home; ?>">
+                                            <input type="text" class="form-control" name="total_popular_product"
+                                                value="<?php echo $total_popular_product; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -925,27 +906,12 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-3 control-label">Phần Dịch Vụ</label>
                                         <div class="col-sm-4">
-                                            <select name="home_service_on_off" class="form-control" style="width:auto;">
-                                                <option value="1" <?php if ($home_service_on_off == 1) {
+                                            <select name="service_on_off" class="form-control" style="width:auto;">
+                                                <option value="1" <?php if ($service_on_off == 1) {
                                                                         echo 'selected';
                                                                     } ?>>Bật
                                                 </option>
-                                                <option value="0" <?php if ($home_service_on_off == 0) {
-                                                                        echo 'selected';
-                                                                    } ?>>Tắt
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-3 control-label">Phần Chào Mừng</label>
-                                        <div class="col-sm-4">
-                                            <select name="home_welcome_on_off" class="form-control" style="width:auto;">
-                                                <option value="1" <?php if ($home_welcome_on_off == 1) {
-                                                                        echo 'selected';
-                                                                    } ?>>Bật
-                                                </option>
-                                                <option value="0" <?php if ($home_welcome_on_off == 0) {
+                                                <option value="0" <?php if ($service_on_off == 0) {
                                                                         echo 'selected';
                                                                     } ?>>Tắt
                                                 </option>
@@ -955,13 +921,13 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-3 control-label">Phần Sản Phẩm Mới Nhất</label>
                                         <div class="col-sm-4">
-                                            <select name="home_latest_product_on_off" class="form-control"
+                                            <select name="latest_product_on_off" class="form-control"
                                                 style="width:auto;">
-                                                <option value="1" <?php if ($home_latest_product_on_off == 1) {
+                                                <option value="1" <?php if ($latest_product_on_off == 1) {
                                                                         echo 'selected';
                                                                     } ?>>
                                                     Bật</option>
-                                                <option value="0" <?php if ($home_latest_product_on_off == 0) {
+                                                <option value="0" <?php if ($latest_product_on_off == 0) {
                                                                         echo 'selected';
                                                                     } ?>>
                                                     Tắt</option>
@@ -971,13 +937,13 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-3 control-label">Phần Sản Phẩm Phổ Biến</label>
                                         <div class="col-sm-4">
-                                            <select name="home_popular_product_on_off" class="form-control"
+                                            <select name="popular_product_on_off" class="form-control"
                                                 style="width:auto;">
-                                                <option value="1" <?php if ($home_popular_product_on_off == 1) {
+                                                <option value="1" <?php if ($popular_product_on_off == 1) {
                                                                         echo 'selected';
                                                                     } ?>>
                                                     Bật</option>
-                                                <option value="0" <?php if ($home_popular_product_on_off == 0) {
+                                                <option value="0" <?php if ($popular_product_on_off == 0) {
                                                                         echo 'selected';
                                                                     } ?>>
                                                     Tắt</option>
@@ -1002,8 +968,8 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-3 control-label">Tiêu Đề Meta</label>
                                         <div class="col-sm-8">
-                                            <input type="text" name="meta_title_home" class="form-control"
-                                                value="<?php echo $meta_title_home ?>">
+                                            <input type="text" name="meta_title" class="form-control"
+                                                value="<?php echo $meta_title ?>">
                                         </div>
                                     </div>
 

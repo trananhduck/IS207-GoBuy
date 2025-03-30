@@ -1323,9 +1323,10 @@ CREATE TABLE `table_settings` (
   `receive_email_subject` text NOT NULL,
   `receive_email_thank_you_message` text NOT NULL,
   `forget_password_message` text NOT NULL,
-  `total_latest_product_home` int(11) NOT NULL,
-  `total_popular_product_home` int(11) NOT NULL,
-  `meta_title_home` text NOT NULL,
+  `total_latest_product` int(11) NOT NULL,
+  `total_popular_product` int(11) NOT NULL,
+  `total_featured_product` int(11) NOT NULL,
+  `meta_title` text NOT NULL,
   `banner_login` text NOT NULL,
   `banner_registration` text NOT NULL,
   `banner_forget_password` text NOT NULL,
@@ -1349,18 +1350,17 @@ CREATE TABLE `table_settings` (
   `before_head` text NOT NULL,
   `after_body` text NOT NULL,
   `before_body` text NOT NULL,
-  `home_service_on_off` int(11) NOT NULL,
-  `home_welcome_on_off` int(11) NOT NULL,
-  `home_latest_product_on_off` int(11) NOT NULL,
-  `home_popular_product_on_off` int(11) NOT NULL
+  `service_on_off` int(11) NOT NULL,
+  `latest_product_on_off` int(11) NOT NULL,
+  `popular_product_on_off` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `table_settings`
 --
 
-INSERT INTO `table_settings` (`id`, `logo`, `favicon`, `footer_about`, `footer_copyright`, `contact_address`, `contact_email`, `contact_phone`, `contact_map_iframe`, `receive_email`, `receive_email_subject`, `receive_email_thank_you_message`, `forget_password_message`, `total_latest_product_home`, `total_popular_product_home`, `meta_title_home`, `banner_login`, `banner_registration`, `banner_forget_password`, `banner_reset_password`, `banner_search`, `banner_cart`, `banner_checkout`, `banner_product_category`, `cta_title`, `cta_content`, `cta_read_more_text`, `cta_read_more_url`, `cta_photo`, `latest_product_title`, `latest_product_subtitle`, `popular_product_title`, `popular_product_subtitle`, `bank_public_key`, `bank_secret_key`, `bank_detail`, `before_head`, `after_body`, `before_body`, `home_service_on_off`, `home_welcome_on_off`, `home_latest_product_on_off`, `home_popular_product_on_off`) VALUES
-(1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Thu Duc, TP.HCM', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm nổi bật', 'Sản phẩm nổi bật dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1, 1);
+INSERT INTO `table_settings` (`id`, `logo`, `favicon`, `footer_about`, `footer_copyright`, `contact_address`, `contact_email`, `contact_phone`, `contact_map_iframe`, `receive_email`, `receive_email_subject`, `receive_email_thank_you_message`, `forget_password_message`, `total_latest_product`, `total_popular_product`, `total_featured_product` ,`meta_title`, `banner_login`, `banner_registration`, `banner_forget_password`, `banner_reset_password`, `banner_search`, `banner_cart`, `banner_checkout`, `banner_product_category`, `cta_title`, `cta_content`, `cta_read_more_text`, `cta_read_more_url`, `cta_photo`, `latest_product_title`, `latest_product_subtitle`, `popular_product_title`, `popular_product_subtitle`, `bank_public_key`, `bank_secret_key`, `bank_detail`, `before_head`, `after_body`, `before_body`, `service_on_off`, `latest_product_on_off`, `popular_product_on_off`) VALUES
+(1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Thu Duc, TP.HCM', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 6, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm nổi bật', 'Sản phẩm nổi bật dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '',1, 1, 1);
 
 -- --------------------------------------------------------
 

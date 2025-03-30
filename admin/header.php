@@ -10,9 +10,9 @@ $successMsg = '';
 $errorMsg1 = '';
 $successMsg1 = '';
 
-// Kiểm tra xem người dùng đã đăng nhập chưa
+// Kiểm tra admin có đag hoạt động không
 if (!isset($_SESSION['admin'])) {
-    header('location: ../login-admin.php');
+    header('location: login.php');
     exit;
 }
 ?>
@@ -26,12 +26,8 @@ if (!isset($_SESSION['admin'])) {
     <title>Admin Panel</title>
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, admin-scalable=no" name="viewport">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- jQuery và Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
     <link rel="stylesheet" href="css/datepicker3.css">
@@ -60,12 +56,12 @@ if (!isset($_SESSION['admin'])) {
             <nav class="navbar navbar-static-top">
 
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Chuyển hướng</span>
+                    <span class="sr-only">Toggle navigation</span>
                 </a>
 
                 <span style="float:left;line-height:50px;color:#fff;padding-left:15px;font-size:18px;">Admin
                     Panel</span>
-                <!-- Top Bar, thông tin người dùng, đăng nhập/đăng ký -->
+                <!-- Top Bar ... admin Inforamtion .. Login/Log out -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
@@ -77,7 +73,7 @@ if (!isset($_SESSION['admin'])) {
                             <ul class="dropdown-menu">
                                 <li class="admin-footer">
                                     <div>
-                                        <a href="profile-edit.php" class="btn btn-default btn-flat">Chỉnh sửa hồ sơ</a>
+                                        <a href="profile-edit.php" class="btn btn-default btn-flat">Sửa hồ sơ</a>
                                     </div>
                                     <div>
                                         <a href="logout.php" class="btn btn-default btn-flat">Đăng xuất</a>
@@ -90,8 +86,9 @@ if (!isset($_SESSION['admin'])) {
 
             </nav>
         </header>
+
         <?php $current_page = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1); ?>
-        <!-- Side Bar quản lý hoạt động cửa hàng -->
+        <!-- Side Bar quản lý hoạt động -->
         <aside class="main-sidebar">
             <section class="sidebar">
 
@@ -101,40 +98,35 @@ if (!isset($_SESSION['admin'])) {
                                             echo 'active';
                                         } ?>">
                         <a href="index.php">
-                            <i class="fa fa-dashboard"></i> <span>Trang chủ</span>
+                            <i class="fa fa-dashboard"></i> <span>Bảng điều khiển</span>
                         </a>
                     </li>
-
-
-                    <li class="treeview <?php if (($current_page == 'settings.php')) {
-                                            echo 'active';
-                                        } ?>">
-                        <a href="settings.php">
-                            <i class="fa fa-sliders"></i> <span>Cài đặt Website</span>
-                        </a>
-                    </li>
-
-                    <li class="treeview <?php if (($current_page == 'size.php') || ($current_page == 'size-add.php') || ($current_page == 'size-edit.php') || ($current_page == 'color.php') || ($current_page == 'color-add.php') || ($current_page == 'color-edit.php') || ($current_page == 'country.php') || ($current_page == 'country-add.php') || ($current_page == 'country-edit.php') || ($current_page == 'shipping-cost.php') || ($current_page == 'shipping-cost-edit.php') || ($current_page == 'top-category.php') || ($current_page == 'top-category-add.php') || ($current_page == 'top-category-edit.php') || ($current_page == 'mid-category.php') || ($current_page == 'mid-category-add.php') || ($current_page == 'mid-category-edit.php') || ($current_page == 'end-category.php') || ($current_page == 'end-category-add.php') || ($current_page == 'end-category-edit.php')) {
+                    <li class="treeview <?php if (($current_page == 'size.php') || ($current_page == 'size-add.php') || ($current_page == 'size-edit.php') || ($current_page == 'color.php') || ($current_page == 'color-add.php') || ($current_page == 'color-edit.php')  || ($current_page == 'shipping-cost.php') || ($current_page == 'shipping-cost-edit.php') || ($current_page == 'top-category.php') || ($current_page == 'top-category-add.php') || ($current_page == 'top-category-edit.php') || ($current_page == 'mid-category.php') || ($current_page == 'mid-category-add.php') || ($current_page == 'mid-category-edit.php') || ($current_page == 'end-category.php') || ($current_page == 'end-category-add.php') || ($current_page == 'end-category-edit.php')) {
                                             echo 'active';
                                         } ?>">
                         <a href="#">
                             <i class="fa fa-cogs"></i>
-                            <span>Cài đặt cửa hàng</span>
+                            <span>Cài đặt shop</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="size.php"><i class="fa fa-circle-o"></i> Kích thước sản phẩm</a></li>
-                            <li><a href="color.php"><i class="fa fa-circle-o"></i> Màu sắc sản phẩm</a></li>
+                            <li><a href="size.php"><i class="fa fa-circle-o"></i> Kích thước</a></li>
+                            <li><a href="color.php"><i class="fa fa-circle-o"></i> Màu sắc</a></li>
                             <li><a href="shipping-cost.php"><i class="fa fa-circle-o"></i> Phí vận chuyển</a></li>
                             <li><a href="top-category.php"><i class="fa fa-circle-o"></i> Danh mục lớn</a></li>
-                            <li><a href="mid-category.php"><i class="fa fa-circle-o"></i> Danh mục trung gian</a></li>
+                            <li><a href="mid-category.php"><i class="fa fa-circle-o"></i> Danh mục trung bình</a></li>
                             <li><a href="end-category.php"><i class="fa fa-circle-o"></i> Danh mục con</a></li>
                         </ul>
                     </li>
-
-
+                    <li class="treeview <?php if (($current_page == 'product.php') || ($current_page == 'product-add.php') || ($current_page == 'product-edit.php')) {
+                                            echo 'active';
+                                        } ?>">
+                        <a href="product.php">
+                            <i class="fa fa-shopping-bag"></i> <span>Quản lý sản phẩm</span>
+                        </a>
+                    </li>
 
                     <li class="treeview <?php if (($current_page == 'order.php')) {
                                             echo 'active';
@@ -143,16 +135,6 @@ if (!isset($_SESSION['admin'])) {
                             <i class="fa fa-sticky-note"></i> <span>Quản lý đơn hàng</span>
                         </a>
                     </li>
-
-
-                    <li class="treeview <?php if (($current_page == 'product.php') || ($current_page == 'product-add.php') || ($current_page == 'product-edit.php')) {
-                                            echo 'active';
-                                        } ?>">
-                        <a href="product.php">
-                            <i class="fa fa-shopping-bag"></i> <span>Quản lý sản phẩm</span>
-                        </a>
-                    </li>
-                    <!-- Những icon được diss play trong Shops-->
                     <li class="treeview <?php if (($current_page == 'service.php')) {
                                             echo 'active';
                                         } ?>">
@@ -160,6 +142,21 @@ if (!isset($_SESSION['admin'])) {
                             <i class="fa fa-list-ol"></i> <span>Dịch vụ</span>
                         </a>
                     </li>
+                    <li class="treeview <?php if (($current_page == 'customer.php') || ($current_page == 'customer-add.php') || ($current_page == 'customer-edit.php')) {
+                                            echo 'active';
+                                        } ?>">
+                        <a href="customer.php">
+                            <i class="fa fa-user-plus"></i> <span>Khách hàng đã đăng ký</span>
+                        </a>
+                    </li>
+                    <li class="treeview <?php if (($current_page == 'settings.php')) {
+                                            echo 'active';
+                                        } ?>">
+                        <a href="settings.php">
+                            <i class="fa fa-sliders"></i> <span>Cài đặt website</span>
+                        </a>
+                    </li>
+
                     <li class="treeview <?php if (($current_page == 'slider.php')) {
                                             echo 'active';
                                         } ?>">
@@ -167,27 +164,24 @@ if (!isset($_SESSION['admin'])) {
                             <i class="fa fa-picture-o"></i> <span>Quản lý sliders</span>
                         </a>
                     </li>
-                    <li class="treeview <?php if (($current_page == 'page.php')) {
-                                            echo 'active';
-                                        } ?>">
-                        <a href="page.php">
-                            <i class="fa fa-tasks"></i> <span>Cài đặt page</span>
-                        </a>
-                    </li>
 
-                    <li class="treeview <?php if (($current_page == 'customer.php') || ($current_page == 'customer-add.php') || ($current_page == 'customer-edit.php')) {
-                                            echo 'active';
-                                        } ?>">
-                        <a href="customer.php">
-                            <i class="fa fa-admin-plus"></i> <span>Khách hàng đã đăng ký</span>
-                        </a>
-                    </li>
+
 
                     <li class="treeview <?php if (($current_page == 'faq.php')) {
                                             echo 'active';
                                         } ?>">
                         <a href="faq.php">
-                            <i class="fa fa-question-circle"></i> <span>FAQ</span>
+                            <i class="fa fa-question-circle"></i> <span>FAQs</span>
+                        </a>
+                    </li>
+
+
+
+                    <li class="treeview <?php if (($current_page == 'page.php')) {
+                                            echo 'active';
+                                        } ?>">
+                        <a href="page.php">
+                            <i class="fa fa-tasks"></i> <span>Cài đặt các trang</span>
                         </a>
                     </li>
 
@@ -201,5 +195,5 @@ if (!isset($_SESSION['admin'])) {
                 </ul>
             </section>
         </aside>
-
         <div class="content-wrapper">
+</body>

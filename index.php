@@ -13,12 +13,11 @@ foreach ($result as $row) {
     $latest_product_subtitle = $row['latest_product_subtitle'];
     $popular_product_title = $row['popular_product_title'];
     $popular_product_subtitle = $row['popular_product_subtitle'];
-    $total_latest_product_home = $row['total_latest_product_home'];
-    $total_popular_product_home = $row['total_popular_product_home'];
-    $home_service_on_off = $row['home_service_on_off'];
-    $home_welcome_on_off = $row['home_welcome_on_off'];
-    $home_latest_product_on_off = $row['home_latest_product_on_off'];
-    $home_popular_product_on_off = $row['home_popular_product_on_off'];
+    $total_latest_product = $row['total_latest_product'];
+    $total_popular_product = $row['total_popular_product'];
+    $service_on_off = $row['service_on_off'];
+    $latest_product_on_off = $row['latest_product_on_off'];
+    $popular_product_on_off = $row['popular_product_on_off'];
 }
 
 
@@ -117,7 +116,7 @@ foreach ($result as $row) {
 </div>
 
 
-<?php if ($home_service_on_off == 1): ?>
+<?php if ($service_on_off == 1): ?>
     <div class="service pt_70 pb_70">
         <div class="container">
             <div class="row">
@@ -145,7 +144,7 @@ foreach ($result as $row) {
     </div>
 <?php endif; ?>
 
-<?php if ($home_popular_product_on_off == 1): ?>
+<?php if ($popular_product_on_off == 1): ?>
     <div class="product bg-gray pt_70 pb_70">
         <div class="container">
             <div class="row">
@@ -162,7 +161,7 @@ foreach ($result as $row) {
                     <div class="product-carousel">
 
                         <?php
-                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_total_order DESC LIMIT " . $total_popular_product_home);
+                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_total_order DESC LIMIT " . $total_popular_product);
                         $query->execute(array(1));
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {
@@ -277,7 +276,7 @@ foreach ($result as $row) {
     </div>
 <?php endif; ?>
 
-<?php if ($home_latest_product_on_off == 1): ?>
+<?php if ($latest_product_on_off == 1): ?>
     <div class="product pt_70 pb_30">
         <div class="container">
             <div class="row">
@@ -294,7 +293,7 @@ foreach ($result as $row) {
                     <div class="product-carousel">
 
                         <?php
-                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product_home);
+                        $query = $pdo->prepare("SELECT * FROM table_product WHERE p_is_active=? ORDER BY p_id DESC LIMIT " . $total_latest_product);
                         $query->execute(array(1));
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) {

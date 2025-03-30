@@ -30,7 +30,7 @@ if (!isset($_SESSION['cart_p_id'])) {
 }
 ?>
 
-<div class="page-banner" style="background-image: url(assets/uploads/<?php echo $banner_checkout; ?>)">
+<div class="page-banner" style="background-image: url(assets/uploads/product_photos/<?php echo $banner_checkout; ?>)">
     <div class="overlay"></div>
     <div class="page-banner-inner">
         <h1><?php echo 'Thanh toán' ?></h1>
@@ -125,7 +125,8 @@ if (!isset($_SESSION['cart_p_id'])) {
                                 <tr>
                                     <td><?php echo $i; ?></td>
                                     <td>
-                                        <img src="assets/uploads/<?php echo $arr_cart_p_featured_photo[$i]; ?>" alt="">
+                                        <img src="assets/uploads/product_photos/<?php echo $arr_cart_p_featured_photo[$i]; ?>"
+                                            alt="">
                                     </td>
                                     <td><?php echo $arr_cart_p_name[$i]; ?></td>
                                     <td><?php echo $arr_cart_size_name[$i]; ?></td>

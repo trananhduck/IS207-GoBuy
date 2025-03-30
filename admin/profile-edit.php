@@ -142,9 +142,9 @@ foreach ($result as $row) {
 
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">Update Information</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">Update Photo</a></li>
-                    <li><a href="#tab_3" data-toggle="tab">Update Password</a></li>
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Cập nhật thông tin</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Cập nhật ảnh</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">Cập nhật mật khẩu</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
@@ -153,14 +153,14 @@ foreach ($result as $row) {
                             <div class="box box-info">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Name <span>*</span></label>
+                                        <label for="" class="col-sm-2 control-label">Họ và tên <span>*</span></label>
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control" name="full_name"
                                                 value="<?php echo $full_name; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Existing Photo</label>
+                                        <label for="" class="col-sm-2 control-label">Ảnh hiện tại</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <img src="../assets/uploads/<?php echo $photo; ?>" class="existing-photo"
                                                 width="140">
@@ -168,7 +168,7 @@ foreach ($result as $row) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Email Address
+                                        <label for="" class="col-sm-2 control-label">Địa chỉ Email
                                             <span>*</span></label>
                                         <div class="col-sm-4">
                                             <input type="email" class="form-control" name="email"
@@ -177,7 +177,7 @@ foreach ($result as $row) {
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Phone </label>
+                                        <label for="" class="col-sm-2 control-label">Số điện thoại </label>
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control" name="phone"
                                                 value="<?php echo $phone; ?>">
@@ -186,8 +186,8 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
                                         <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form1">Update
-                                                Information</button>
+                                            <button type="submit" class="btn btn-success pull-left" name="form1">Cập
+                                                nhật thông tin</button>
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@ foreach ($result as $row) {
                             <div class="box box-info">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">New Photo</label>
+                                        <label for="" class="col-sm-2 control-label">Ảnh mới</label>
                                         <div class="col-sm-6" style="padding-top:6px;">
                                             <input type="file" name="photo">
                                         </div>
@@ -207,8 +207,8 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
                                         <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form2">Update
-                                                Photo</button>
+                                            <button type="submit" class="btn btn-success pull-left" name="form2">Cập
+                                                nhật ảnh</button>
                                         </div>
                                     </div>
                                 </div>
@@ -220,13 +220,13 @@ foreach ($result as $row) {
                             <div class="box box-info">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Password </label>
+                                        <label for="" class="col-sm-2 control-label">Mật khẩu mới</label>
                                         <div class="col-sm-4">
                                             <input type="password" class="form-control" name="password">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Retype Password </label>
+                                        <label for="" class="col-sm-2 control-label">Nhập lại mật khẩu</label>
                                         <div class="col-sm-4">
                                             <input type="password" class="form-control" name="re_password">
                                         </div>
@@ -234,8 +234,8 @@ foreach ($result as $row) {
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
                                         <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form3">Update
-                                                Password</button>
+                                            <button type="submit" class="btn btn-success pull-left" name="form3">Cập
+                                                nhật mật khẩu</button>
                                         </div>
                                     </div>
                                 </div>

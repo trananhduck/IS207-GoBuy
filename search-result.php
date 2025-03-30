@@ -117,7 +117,7 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                         <?php
 
                         if (!$total_pages):
-                            echo '<span style="color:red;font-size:18px;">No result found</span>';
+                            echo '<span style="color:red;font-size:18px;">Không có kết quả</span>';
                         else:
                             foreach ($result as $row) {
                         ?>

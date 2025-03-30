@@ -27,10 +27,12 @@ select.form-control {
 }
 
 .navbar-nav > .admin-menu .admin-image {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin-top: -10px;
+  border-radius: 50%;
 }
+
 
 .login-logo {
   font-size: 20px;
@@ -261,7 +263,9 @@ img.existing-photo {
 .box.box-info {
   border-top-color: #4c4c4c;
 }
-
+.admin{
+  margin: 0px 50px;
+}
 .admin-footer div {
   width: 100%;
 }
@@ -273,12 +277,28 @@ img.existing-photo {
 }
 
 .navbar-nav > .admin-menu > .dropdown-menu {
-  width: 140px;
-}
-.navbar-nav > .admin-menu > .dropdown-menu > .admin-footer {
-  background-color: #d6d6d6;
+  width: 150px; /* Tăng chiều rộng */
+  padding: 10px;
+  border-radius: 8px; /* Bo góc */
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng */
+  border: none;
 }
 
+.navbar-nav > .admin-menu > .dropdown-menu > .admin-footer a {
+  display: block;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 6px; /* Bo góc nút */
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-nav > .admin-menu > .dropdown-menu > .admin-footer a:hover {
+  background-color: #007bff; /* Màu xanh khi hover */
+  color: #fff;
+}
 .content-header .content-header-right a {
   background-color: #333333;
   border-color: #333333;

@@ -20,9 +20,7 @@ foreach ($result as $row) {
     $favicon = $row['favicon'];
     $contact_email = $row['contact_email'];
     $contact_phone = $row['contact_phone'];
-    $meta_title_home = $row['meta_title_home'];
-    $before_head = $row['before_head'];
-    $after_body = $row['after_body'];
+    $meta_title = $row['meta_title'];
 }
 
 
@@ -71,7 +69,7 @@ foreach ($result as $row) {
 
     if ($current_page == 'index.php' || $current_page == 'login-customer.php' || $current_page == 'login-admin.php' || $current_page == 'registration-customer.php' || $current_page == 'registration-admin.php' || $current_page == 'cart.php' || $current_page == 'checkout.php' || $current_page == 'forget-password.php' || $current_page == 'reset-password.php' || $current_page == 'product-category.php' || $current_page == 'product.php') {
     ?>
-        <title><?php echo $meta_title_home; ?></title>
+        <title><?php echo $meta_title; ?></title>
     <?php
     }
 
@@ -105,27 +103,27 @@ foreach ($result as $row) {
 
     if ($current_page == 'dashboard.php') {
     ?>
-        <title>Dashboard - <?php echo $meta_title_home; ?></title>
+        <title>Dashboard - <?php echo $meta_title; ?></title>
     <?php
     }
     if ($current_page == 'customer-profile.php') {
     ?>
-        <title>Cập nhật hồ sơ <?php echo $meta_title_home; ?></title>
+        <title>Cập nhật hồ sơ <?php echo $meta_title; ?></title>
     <?php
     }
     if ($current_page == 'customer-billing-shipping-update.php') {
     ?>
-        <title>Cập nhật thông tin giao hàng <?php echo $meta_title_home; ?></title>
+        <title>Cập nhật thông tin giao hàng <?php echo $meta_title; ?></title>
     <?php
     }
     if ($current_page == 'customer-password-update.php') {
     ?>
-        <title>Cập nhật mật khẩu - <?php echo $meta_title_home; ?></title>
+        <title>Cập nhật mật khẩu - <?php echo $meta_title; ?></title>
     <?php
     }
     if ($current_page == 'customer-order.php') {
     ?>
-        <title>Hàng đã đặt - <?php echo $meta_title_home; ?></title>>
+        <title>Hàng đã đặt - <?php echo $meta_title; ?></title>>
     <?php
     }
     ?>
@@ -147,13 +145,9 @@ foreach ($result as $row) {
     <?php endif; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <?php echo $before_head; ?>
 </head>
 
 <body>
-
-    <?php echo $after_body; ?>
-
     <div class="top">
         <div class="container">
             <div class="row">
@@ -319,3 +313,4 @@ foreach ($result as $row) {
             </div>
         </div>
     </div>
+</body>

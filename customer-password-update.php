@@ -25,16 +25,36 @@ if (isset($_POST['form1'])) {
     $password = $_POST['cust_password'] ?? '';
     $rePassword = $_POST['cust_re_password'] ?? '';
 
-    // Kiểm tra mật khẩu có trống không
     if (empty($password) || empty($rePassword)) {
         $valid = false;
         $errorMsg .= 'Mật khẩu không được để trống.<br>';
-    }
+    } else {
+        // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
+        if (strlen($password) < 6) {
+            $valid = false;
+            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự.<br>';
+        }
 
-    // Kiểm tra mật khẩu có khớp nhau không
-    if ($password !== $rePassword) {
-        $valid = false;
-        $errorMsg .= 'Mật khẩu không khớp.<br>';
+        // Kiểm tra mật khẩu có đủ yêu cầu không
+        elseif (!preg_match('/[A-Z]/', $password)) {
+            $valid = false;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa.<br>';
+        } elseif (!preg_match('/[a-z]/', $password)) {
+            $valid = false;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường.<br>';
+        } elseif (!preg_match('/\d/', $password)) {
+            $valid = false;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số.<br>';
+        } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
+            $valid = false;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...).<br>';
+        }
+
+        // Kiểm tra xác nhận mật khẩu
+        elseif ($password !== $rePassword) {
+            $valid = false;
+            $errorMsg .= 'Mật khẩu nhập lại không khớp.<br>';
+        }
     }
 
     if ($valid) {

@@ -84,15 +84,15 @@ if (isset($_POST['form1'])) {
             <div class="col-md-12">
 
                 <?php if (!isset($_SESSION['cart_p_id'])): ?>
-                    <?php echo '<h2 class="text-center">Cart is Empty!!</h2></br>'; ?>
-                    <?php echo '<h4 class="text-center">Add products to the cart in order to view it here.</h4>'; ?>
+                    <?php echo '<h2 class="text-center">Giỏ hàng trống!!</h2></br>'; ?>
+                    <?php echo '<h4 class="text-center">Thêm sản phẩm vào giỏ hàng để xem tại đây.</h4>'; ?>
                 <?php else: ?>
                     <form action="" method="post">
                         <?php $csrf->echoInputField(); ?>
                         <div class="cart">
                             <table class="table table-responsive table-hover table-bordered">
                                 <tr>
-                                    <th><?php echo '#' ?></th>
+                                    <th><?php echo 'STT' ?></th>
                                     <th><?php echo 'Ảnh' ?></th>
                                     <th><?php echo 'Tên sản phẩm' ?></th>
                                     <th><?php echo 'Kích thước' ?></th>
