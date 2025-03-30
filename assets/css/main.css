@@ -607,37 +607,12 @@ Responsive cho Mobile
   transition: transform 0.3s ease-in-out;
 }
 .product .item .thumb:hover .photo {
-  transform: scale(1.1); /* Phóng to ảnh 10% */
+  transform: scale(1.1); 
 }
-/* 
-.product .item .thumb .overlay {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-transform: scale(0.2);
-  -ms-transform: scale(0.2);
-  -o-transform: scale(0.2);
-  transform: scale(0.2);
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.product .item:hover .thumb .overlay {
-  opacity: 1;
-  filter: alpha(opacity=1);
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transform: scale(1);
-} */
 
 .product-cat {
   padding-top: 14px;
+  width: 100%;
 }
 
 .product-cat .item {

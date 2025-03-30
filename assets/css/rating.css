@@ -9,15 +9,19 @@
     cursor: pointer;
     zoom:1;
 }
+
 .fullStar{
-    background-position:left -64px;
+    background-position:left -59px;
 }
+
 .stars{
     overflow: hidden;
 }
+
 .tmp_es{
-    background-position:left -25px;
+    background-position:left -21px;
 }
+
 .tmp_fs{
-    background-position:left -45px;
+    background-position:left -40px;
 }

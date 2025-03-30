@@ -697,21 +697,6 @@ if ($successMsg1 != '') {
                             </h4>
                             <div class="rating">
                                 <?php
-                                    $t_rating = 0;
-                                    $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
-                                    $query1->execute(array($row['p_id']));
-                                    $tot_rating = $query1->rowCount();
-                                    if ($tot_rating == 0) {
-                                        $avg_rating = 0;
-                                    } else {
-                                        $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($result1 as $row1) {
-                                            $t_rating = $t_rating + $row1['rating'];
-                                        }
-                                        $avg_rating = $t_rating / $tot_rating;
-                                    }
-                                    ?>
-                                <?php
                                     if ($avg_rating == 0) {
                                         echo '';
                                     } elseif ($avg_rating == 1.5) {
