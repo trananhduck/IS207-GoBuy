@@ -1,41 +1,41 @@
 <?php require_once('header.php'); ?>
 
 <?php
-if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi hay không
-    $valid = 1; // Biến kiểm tra tính hợp lệ của dữ liệu đầu vào
+if (isset($_POST['form1'])) {
+    $valid = 1;
 
-    if (empty($_POST['tcat_id'])) {  // Kiểm tra xem danh mục cấp cao đã được chọn chưa
+    if (empty($_POST['tcat_id'])) {
         $valid = 0;
         $errorMsg .= "Bạn phải chọn một danh mục cấp cao<br>";
     }
 
-    if (empty($_POST['mcat_id'])) {  // Kiểm tra xem danh mục cấp trung đã được chọn chưa
+    if (empty($_POST['mcat_id'])) {
         $valid = 0;
         $errorMsg .= "Bạn phải chọn một danh mục cấp trung<br>";
     }
 
-    if (empty($_POST['ecat_id'])) {  // Kiểm tra xem danh mục cấp cuối đã được chọn chưa
+    if (empty($_POST['ecat_id'])) {
         $valid = 0;
         $errorMsg .= "Bạn phải chọn một danh mục cấp cuối<br>";
     }
 
-    if (empty($_POST['p_name'])) {  // Kiểm tra xem tên sản phẩm có bị trống không
+    if (empty($_POST['p_name'])) {
         $valid = 0;
         $errorMsg .= "Tên sản phẩm không được để trống<br>";
     }
 
-    if (empty($_POST['p_current_price'])) {  // Kiểm tra xem giá hiện tại có bị trống không
+    if (empty($_POST['p_current_price'])) {
         $valid = 0;
         $errorMsg .= "Giá hiện tại không được để trống<br>";
     }
 
-    if (empty($_POST['p_qty'])) {  // Kiểm tra xem số lượng có bị trống không
+    if (empty($_POST['p_qty'])) {
         $valid = 0;
         $errorMsg .= "Số lượng không được để trống<br>";
     }
 
-    $path = $_FILES['p_featured_photo']['name']; // Lấy tên tệp ảnh sản phẩm nổi bật
-    $path_tmp = $_FILES['p_featured_photo']['tmp_name']; // Lấy đường dẫn tạm thời của ảnh
+    $path = $_FILES['p_featured_photo']['name'];
+    $path_tmp = $_FILES['p_featured_photo']['tmp_name'];
 
     if ($path != '') {  // Nếu có tệp ảnh được tải lên
         $ext = pathinfo($path, PATHINFO_EXTENSION); // Lấy phần mở rộng của tệp
@@ -58,7 +58,6 @@ if (isset($_POST['form1'])) {  // Kiểm tra xem biểu mẫu có được gửi
             $photo_temp = $_FILES['photo']["tmp_name"]; // Lấy danh sách đường dẫn tạm thời của ảnh
             $photo_temp = array_values(array_filter($photo_temp));
 
-            // Lấy ID sản phẩm tiếp theo từ bảng table_product_photo
             $query = $pdo->prepare("SHOW TABLE STATUS LIKE 'table_product_photo'");
             $query->execute();
             $result = $query->fetchAll();
@@ -268,19 +267,19 @@ foreach ($result as $row) {
         <div class="col-md-12">
 
             <?php if ($errorMsg): ?>
-            <div class="callout callout-danger">
+                <div class="callout callout-danger">
 
-                <p>
-                    <?php echo $errorMsg; ?>
-                </p>
-            </div>
+                    <p>
+                        <?php echo $errorMsg; ?>
+                    </p>
+                </div>
             <?php endif; ?>
 
             <?php if ($successMsg): ?>
-            <div class="callout callout-success">
+                <div class="callout callout-success">
 
-                <p><?php echo $successMsg; ?></p>
-            </div>
+                    <p><?php echo $successMsg; ?></p>
+                </div>
             <?php endif; ?>
 
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
@@ -299,10 +298,10 @@ foreach ($result as $row) {
                                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
-                                    <option value="<?php echo $row['tcat_id']; ?>" <?php if ($row['tcat_id'] == $tcat_id) {
+                                        <option value="<?php echo $row['tcat_id']; ?>" <?php if ($row['tcat_id'] == $tcat_id) {
                                                                                             echo 'selected';
                                                                                         } ?>>
-                                        <?php echo $row['tcat_name']; ?></option>
+                                            <?php echo $row['tcat_name']; ?></option>
                                     <?php
                                     }
                                     ?>
@@ -321,10 +320,10 @@ foreach ($result as $row) {
                                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
-                                    <option value="<?php echo $row['mcat_id']; ?>" <?php if ($row['mcat_id'] == $mcat_id) {
+                                        <option value="<?php echo $row['mcat_id']; ?>" <?php if ($row['mcat_id'] == $mcat_id) {
                                                                                             echo 'selected';
                                                                                         } ?>>
-                                        <?php echo $row['mcat_name']; ?></option>
+                                            <?php echo $row['mcat_name']; ?></option>
                                     <?php
                                     }
                                     ?>
@@ -343,10 +342,10 @@ foreach ($result as $row) {
                                     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
-                                    <option value="<?php echo $row['ecat_id']; ?>" <?php if ($row['ecat_id'] == $ecat_id) {
+                                        <option value="<?php echo $row['ecat_id']; ?>" <?php if ($row['ecat_id'] == $ecat_id) {
                                                                                             echo 'selected';
                                                                                         } ?>>
-                                        <?php echo $row['ecat_name']; ?></option>
+                                            <?php echo $row['ecat_name']; ?></option>
                                     <?php
                                     }
                                     ?>
@@ -391,24 +390,24 @@ foreach ($result as $row) {
                             <div class="col-sm-4">
                                 <select name="size[]" class="form-control select2" multiple="multiple">
                                     <?php
-									$is_select = '';
-									$statement = $pdo->prepare("SELECT * FROM table_size ORDER BY size_id ASC");
-									$statement->execute();
-									$result = $statement->fetchAll(PDO::FETCH_ASSOC);			
-									foreach ($result as $row) {
-										if(isset($size_id)) {
-											if(in_array($row['size_id'],$size_id)) {
-												$is_select = 'selected';
-											} else {
-												$is_select = '';
-											}
-										}
-										?>
-                                    <option value="<?php echo $row['size_id']; ?>" <?php echo $is_select; ?>>
-                                        <?php echo $row['size_name']; ?></option>
+                                    $is_select = '';
+                                    $statement = $pdo->prepare("SELECT * FROM table_size ORDER BY size_id ASC");
+                                    $statement->execute();
+                                    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                        if (isset($size_id)) {
+                                            if (in_array($row['size_id'], $size_id)) {
+                                                $is_select = 'selected';
+                                            } else {
+                                                $is_select = '';
+                                            }
+                                        }
+                                    ?>
+                                        <option value="<?php echo $row['size_id']; ?>" <?php echo $is_select; ?>>
+                                            <?php echo $row['size_name']; ?></option>
                                     <?php
-									}
-									?>
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -431,9 +430,9 @@ foreach ($result as $row) {
                                             }
                                         }
                                     ?>
-                                    <option value="<?php echo $row['color_id']; ?>" <?php echo $is_select; ?>>
-                                        <?php echo $row['color_name']; ?>
-                                    </option>
+                                        <option value="<?php echo $row['color_id']; ?>" <?php echo $is_select; ?>>
+                                            <?php echo $row['color_name']; ?>
+                                        </option>
                                     <?php
                                     }
                                     ?>
@@ -468,17 +467,17 @@ foreach ($result as $row) {
                                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
-                                        <tr>
-                                            <td>
-                                                <img src="../assets/uploads/product_photos/<?php echo $row['photo']; ?>"
-                                                    alt="" style="width:150px;margin-bottom:5px;">
-                                            </td>
-                                            <td style="width:28px;">
-                                                <a onclick="return confirmDelete();"
-                                                    href="product-other-photo-delete.php?id=<?php echo $row['pp_id']; ?>&id1=<?php echo $_REQUEST['id']; ?>"
-                                                    class="btn btn-danger btn-xs">Xóa</a>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="../assets/uploads/product_photos/<?php echo $row['photo']; ?>"
+                                                        alt="" style="width:150px;margin-bottom:5px;">
+                                                </td>
+                                                <td style="width:28px;">
+                                                    <a onclick="return confirmDelete();"
+                                                        href="product-other-photo-delete.php?id=<?php echo $row['pp_id']; ?>&id1=<?php echo $_REQUEST['id']; ?>"
+                                                        class="btn btn-danger btn-xs">Xóa</a>
+                                                </td>
+                                            </tr>
                                         <?php
                                         }
                                         ?>
