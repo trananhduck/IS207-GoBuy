@@ -70,7 +70,38 @@ if (isset($_POST['form1'])) {
     if (empty($_POST['cust_password']) || empty($_POST['cust_re_password'])) {
         $valid = 0;
         $errorMsg .= 'Mật khẩu không được để trống' . "<br>";
+    } else {
+        $password = $_POST['cust_password'];
+        $re_password = $_POST['cust_re_password'];
+
+        // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
+        if (strlen($password) < 6) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự' . "<br>";
+        }
+
+        // Kiểm tra mật khẩu có đủ yêu cầu không
+        elseif (!preg_match('/[A-Z]/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa' . "<br>";
+        } elseif (!preg_match('/[a-z]/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường' . "<br>";
+        } elseif (!preg_match('/\d/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số' . "<br>";
+        } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)' . "<br>";
+        }
+
+        // Kiểm tra xác nhận mật khẩu
+        elseif ($password !== $re_password) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu nhập lại không khớp' . "<br>";
+        }
     }
+
 
     if (!empty($_POST['cust_password']) && !empty($_POST['cust_re_password'])) {
         if ($_POST['cust_password'] != $_POST['cust_re_password']) {
@@ -171,7 +202,7 @@ if (isset($_POST['form1'])) {
 
             $mail->send();
         } catch (Exception $e) {
-            echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
+            // echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
         }
 
 
@@ -236,8 +267,8 @@ if (isset($_POST['form1'])) {
                                         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
-                                        <option value="<?php echo $row['province_id']; ?>">
-                                            <?php echo $row['province_name']; ?></option>
+                                            <option value="<?php echo $row['province_id']; ?>">
+                                                <?php echo $row['province_name']; ?></option>
                                         <?php
                                         }
                                         ?>
@@ -287,65 +318,65 @@ if (isset($_POST['form1'])) {
 <!-- Toast -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: 9999;
-}
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: all 0.5s ease;
+        z-index: 9999;
+    }
 
-#toast.show {
-    opacity: 1;
-}
+    #toast.show {
+        opacity: 1;
+    }
 
-.form-group-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .form-group-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.btn {
-    border-radius: 6px;
-    width: 30%;
-}
+    .btn {
+        border-radius: 6px;
+        width: 30%;
+    }
 
-.btn input {
-    position: relative;
-}
+    .btn input {
+        position: relative;
+    }
 
-.user-sidebar {
-    position: absolute;
-    bottom: -30px;
-    /* Đưa xuống dưới nút */
-    right: 230px;
-    /* Nằm bên phải */
-}
+    .user-sidebar {
+        position: absolute;
+        bottom: -30px;
+        /* Đưa xuống dưới nút */
+        right: 230px;
+        /* Nằm bên phải */
+    }
 
-.user-sidebar a {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 12px;
-}
+    .user-sidebar a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+    }
 
-.user-sidebar a:hover {
-    text-decoration: underline;
-}
+    .user-sidebar a:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <script>
-function showToast(message, color = '#333') {
-    const toast = document.getElementById('toast');
-    toast.innerText = message;
-    toast.style.backgroundColor = color;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
-}
+    function showToast(message, color = '#333') {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.style.backgroundColor = color;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
 </script>
 
 <?php

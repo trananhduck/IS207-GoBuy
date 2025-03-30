@@ -54,6 +54,36 @@ if (isset($_POST['form1'])) {
     if (empty($_POST['password']) || empty($_POST['re_password'])) {
         $valid = 0;
         $errorMsg .= 'Mật khẩu không được để trống' . "<br>";
+    } else {
+        $password = $_POST['password'];
+        $re_password = $_POST['re_password'];
+
+        // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
+        if (strlen($password) < 6) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự' . "<br>";
+        }
+
+        // Kiểm tra mật khẩu có đủ yêu cầu không
+        elseif (!preg_match('/[A-Z]/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa' . "<br>";
+        } elseif (!preg_match('/[a-z]/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường' . "<br>";
+        } elseif (!preg_match('/\d/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số' . "<br>";
+        } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)' . "<br>";
+        }
+
+        // Kiểm tra xác nhận mật khẩu
+        elseif ($password !== $re_password) {
+            $valid = 0;
+            $errorMsg .= 'Mật khẩu nhập lại không khớp' . "<br>";
+        }
     }
 
     if (!empty($_POST['password']) && !empty($_POST['re_password'])) {
@@ -140,9 +170,9 @@ if (isset($_POST['form1'])) {
             $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br><a href="' . $verify_link . '">' . $verify_link . '</a>';
 
             $mail->send();
-            echo 'Email xác nhận đã được gửi!';
+            // echo 'Email xác nhận đã được gửi!';
         } catch (Exception $e) {
-            echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
+            // echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
         }
 
 
@@ -173,7 +203,7 @@ if (isset($_POST['form1'])) {
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
 
-                                
+
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Tên đầy đủ' ?> *</label>
                                     <input type="text" class="form-control" name="full_name" value="<?php if (isset($_POST['full_name'])) {
@@ -236,75 +266,84 @@ if (isset($_POST['form1'])) {
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 9999;
-    transform: translateY(-20px);
-}
-#toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-.form-group-btn {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    width: 100%; 
-    margin-top: 15px; 
-}
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
 
-.btn-danger {
-    width: 50%; 
-    max-width: 200px; 
-    text-align: center;
-}
-.btn {
-    border-radius: 6px;
-    width: 30%;
-}
-.btn input{
-    position: relative;
-}
-.user-sidebar {
-    position: absolute;
-    bottom: -30px; /* Đưa xuống dưới nút */
-    right: 230px; /* Nằm bên phải */
-}
-.user-sidebar a {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 12px;
-}
-.user-sidebar a:hover {
-    text-decoration: underline;
-}
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .form-group-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .btn-danger {
+        width: 50%;
+        max-width: 200px;
+        text-align: center;
+    }
+
+    .btn {
+        border-radius: 6px;
+        width: 30%;
+    }
+
+    .btn input {
+        position: relative;
+    }
+
+    .user-sidebar {
+        position: absolute;
+        bottom: -30px;
+        /* Đưa xuống dưới nút */
+        right: 230px;
+        /* Nằm bên phải */
+    }
+
+    .user-sidebar a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .user-sidebar a:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <script>
-function showToast(message, bg = "#333") {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.style.backgroundColor = bg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 4000);
-}
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+    }
 </script>
 <script>
-function showToast(message, bg = "#333") {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.style.backgroundColor = bg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 4000);
-}
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+    }
 </script>
 
 <?php
