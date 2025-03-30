@@ -25,35 +25,35 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['full_name'])) {
         $valid = 0;
-        $errorMsg .= 'Tên admin không được để trống' . "<br>";
+        $errorMsg .= 'Tên admin không được để trống';
     }
 
     if (empty($_POST['email'])) {
         $valid = 0;
-        $errorMsg .= 'Địa chỉ email không được để trống' . "<br>";
+        $errorMsg .= 'Địa chỉ email không được để trống';
     } else {
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $errorMsg .= 'Địa chỉ email phải hợp lệ' . "<br>";
+            $errorMsg .= 'Địa chỉ email phải hợp lệ';
         } else {
-            $query = $pdo->prepare("SELECT * FROM table_user WHERE email=?");
+            $query = $pdo->prepare("SELECT * FROM table_admin WHERE email=?");
             $query->execute(array($_POST['email']));
             $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
-                $errorMsg .= 'Địa chỉ email đã tồn tại' . "<br>";
+                $errorMsg .= 'Địa chỉ email đã tồn tại';
             }
         }
     }
 
     if (empty($_POST['phone'])) {
         $valid = 0;
-        $errorMsg .= 'Số điện thoại không được để trống' . "<br>";
+        $errorMsg .= 'Số điện thoại không được để trống';
     }
 
     if (empty($_POST['password']) || empty($_POST['re_password'])) {
         $valid = 0;
-        $errorMsg .= 'Mật khẩu không được để trống' . "<br>";
+        $errorMsg .= 'Mật khẩu không được để trống';
     } else {
         $password = $_POST['password'];
         $re_password = $_POST['re_password'];
@@ -61,35 +61,35 @@ if (isset($_POST['form1'])) {
         // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
         if (strlen($password) < 6) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự' . "<br>";
+            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự';
         }
 
         // Kiểm tra mật khẩu có đủ yêu cầu không
         elseif (!preg_match('/[A-Z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa';
         } elseif (!preg_match('/[a-z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường';
         } elseif (!preg_match('/\d/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số';
         } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)';
         }
 
         // Kiểm tra xác nhận mật khẩu
         elseif ($password !== $re_password) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu nhập lại không khớp' . "<br>";
+            $errorMsg .= 'Mật khẩu nhập lại không khớp';
         }
     }
 
     if (!empty($_POST['password']) && !empty($_POST['re_password'])) {
         if ($_POST['password'] != $_POST['re_password']) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu không khớp' . "<br>";
+            $errorMsg .= 'Mật khẩu không khớp';
         }
     }
 
@@ -102,7 +102,7 @@ if (isset($_POST['form1'])) {
         $photo = isset($_POST['photo']) ? $_POST['photo'] : 'default.jpg';
 
         //Lưu vào DB
-        $query = $pdo->prepare("INSERT INTO table_user (
+        $query = $pdo->prepare("INSERT INTO table_admin (
                                         full_name,
                                         email,
                                         phone,
@@ -131,7 +131,6 @@ if (isset($_POST['form1'])) {
 
         ));
 
-
         // Kiểm tra xem đang chạy trên localhost hay server thật
         if ($_SERVER['HTTP_HOST'] == 'localhost') {
             $base_url = 'http://localhost/IS207-GoBuy/';
@@ -144,7 +143,7 @@ if (isset($_POST['form1'])) {
 
         $subject = 'GoBuy - Admin Registration Email Confirmation';
         $verify_link = $base_url . 'verify-admin.php?email=' . urlencode($to) . '&token=' . urlencode($token);
-        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br>
+        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '
     <a href="' . $verify_link . '">' . $verify_link . '</a>';
 
 
@@ -167,7 +166,7 @@ if (isset($_POST['form1'])) {
             // Nội dung email
             $mail->isHTML(true);
             $mail->Subject = 'GoBuy - Registration Email Confirmation';
-            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br><a href="' . $verify_link . '">' . $verify_link . '</a>';
+            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<a href="' . $verify_link . '">' . $verify_link . '</a>';
 
             $mail->send();
             // echo 'Email xác nhận đã được gửi!';
@@ -202,22 +201,18 @@ if (isset($_POST['form1'])) {
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
-
-
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Tên đầy đủ' ?> *</label>
                                     <input type="text" class="form-control" name="full_name" value="<?php if (isset($_POST['full_name'])) {
                                                                                                         echo $_POST['full_name'];
                                                                                                     } ?>">
                                 </div>
-
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Địa chỉ email' ?> *</label>
                                     <input type="email" class="form-control" name="email" value="<?php if (isset($_POST['email'])) {
                                                                                                         echo $_POST['email'];
                                                                                                     } ?>">
                                 </div>
-
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Số điện thoại' ?> *</label>
                                     <input type="text" class="form-control" name="phone" value="<?php if (isset($_POST['phone'])) {
@@ -311,9 +306,7 @@ if (isset($_POST['form1'])) {
     .user-sidebar {
         position: absolute;
         bottom: -30px;
-        /* Đưa xuống dưới nút */
         right: 230px;
-        /* Nằm bên phải */
     }
 
     .user-sidebar a {

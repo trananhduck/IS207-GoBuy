@@ -19,7 +19,7 @@ try {
     }
 
     // Kiểm tra token trong cơ sở dữ liệu
-    $query = $pdo->prepare("SELECT token FROM table_user WHERE email = ? AND status = 0");
+    $query = $pdo->prepare("SELECT token FROM table_admin WHERE email = ? AND status = 0");
     $query->execute([$email]);
     $result = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -32,7 +32,7 @@ try {
     }
 
     // Xác minh thành công, cập nhật trạng thái tài khoản
-    $query = $pdo->prepare("UPDATE table_user SET token = '', status = 1 WHERE email = ?");
+    $query = $pdo->prepare("UPDATE table_admin SET token = '', status = 1 WHERE email = ?");
     $query->execute([$email]);
 
     $successMsg = '<p style="color:green;">Xác minh email thành công! Bạn có thể đăng nhập với tư cách admin ngay bây giờ.</p>

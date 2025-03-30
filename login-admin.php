@@ -18,7 +18,7 @@ if (isset($_POST['form1'])) {
         $email = strip_tags($_POST['email']);
         $password = strip_tags($_POST['password']);
 
-        $query = $pdo->prepare("SELECT * FROM table_user WHERE email=?");
+        $query = $pdo->prepare("SELECT * FROM table_admin WHERE email=?");
         $query->execute(array($email));
         $total = $query->rowCount();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ if (isset($_POST['form1'])) {
                 if ($status == 0) {
                     $errorMsg .= 'Xin lỗi! Tài khoản của bạn không hoạt động.' . '<br>';
                 } else {
-                    $_SESSION['user'] = $row;
+                    $_SESSION['admin'] = $row;
                     header("location: " . BASE_URL . "admin/service.php");
                 }
             }
@@ -116,27 +116,32 @@ if (isset($_POST['form1'])) {
     z-index: 9999;
     transform: translateY(-20px);
 }
+
 #toast.show {
     opacity: 1;
     transform: translateY(0);
 }
+
 .form-group.d-flex {
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.col-md-4 a{
+
+.col-md-4 a {
     color: #007bff;
     font-size: 14px;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
+
 .col-md-4 a:hover {
-    color:rgb(41, 14, 133); 
+    color: rgb(41, 14, 133);
     text-decoration: underline;
 }
+
 .form-group .btn-danger {
     margin-left: auto;
 }
@@ -149,12 +154,12 @@ if (isset($_POST['form1'])) {
 
 
 .user-sidebar a:hover {
-    color:rgb(41, 14, 133); 
+    color: rgb(41, 14, 133);
     text-decoration: underline;
 }
 
 .user-sidebar a {
-    color: #007bff; 
+    color: #007bff;
     font-size: 14px;
     text-decoration: none;
     font-weight: bold;

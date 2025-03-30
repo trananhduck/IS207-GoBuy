@@ -26,7 +26,7 @@ select.form-control {
   padding-top: 2px;
 }
 
-.navbar-nav > .user-menu .user-image {
+.navbar-nav > .admin-menu .admin-image {
   width: 40px;
   height: 40px;
   margin-top: -10px;
@@ -262,20 +262,20 @@ img.existing-photo {
   border-top-color: #4c4c4c;
 }
 
-.user-footer div {
+.admin-footer div {
   width: 100%;
 }
-.user-footer div:first-child {
+.admin-footer div:first-child {
   margin-bottom: 10px;
 }
-.user-footer div a {
+.admin-footer div a {
   display: block;
 }
 
-.navbar-nav > .user-menu > .dropdown-menu {
+.navbar-nav > .admin-menu > .dropdown-menu {
   width: 140px;
 }
-.navbar-nav > .user-menu > .dropdown-menu > .user-footer {
+.navbar-nav > .admin-menu > .dropdown-menu > .admin-footer {
   background-color: #d6d6d6;
 }
 

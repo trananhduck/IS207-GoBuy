@@ -50,13 +50,13 @@ if (isset($_POST['form1'])) {
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="user-content">
+                <div class="admin-content">
                     <form action="" method="post">
                         <?php $csrf->echoInputField(); ?>
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
-                                <div class="form-group user">
+                                <div class="form-group admin">
                                     <label>Địa chỉ email *</label>
                                     <input type="email" class="form-control" name="cust_email">
                                 </div>
@@ -102,6 +102,7 @@ if (isset($_POST['form1'])) {
     z-index: 9999;
     transform: translateY(-20px);
 }
+
 #toast.show {
     opacity: 1;
     transform: translateY(0);
@@ -113,17 +114,20 @@ if (isset($_POST['form1'])) {
     justify-content: space-between;
     align-items: center;
 }
-.col-md-4 a{
+
+.col-md-4 a {
     color: #007bff;
     font-size: 14px;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
+
 .col-md-4 a:hover {
-    color:rgb(41, 14, 133); 
+    color: rgb(41, 14, 133);
     text-decoration: underline;
 }
+
 .form-group .btn-danger {
     margin-left: auto;
 }
@@ -136,19 +140,17 @@ if (isset($_POST['form1'])) {
 
 
 .user-sidebar a:hover {
-    color:rgb(41, 14, 133); 
+    color: rgb(41, 14, 133);
     text-decoration: underline;
 }
 
 .user-sidebar a {
-    color: #007bff; 
+    color: #007bff;
     font-size: 14px;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease, text-decoration 0.3s ease;
 }
-
-
 </style>
 
 <script>

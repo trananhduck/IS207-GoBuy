@@ -11,7 +11,7 @@ $errorMsg1 = '';
 $successMsg1 = '';
 
 // Kiểm tra xem người dùng đã đăng nhập chưa
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['admin'])) {
     header('location: ../login-admin.php');
     exit;
 }
@@ -70,9 +70,9 @@ if (!isset($_SESSION['user'])) {
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../assets/uploads/<?php echo $_SESSION['user']['photo']; ?>"
+                                <img src="../assets/uploads/<?php echo $_SESSION['admin']['photo']; ?>"
                                     class="admin-image" alt="admin Image">
-                                <span class="hidden-xs"><?php echo $_SESSION['user']['full_name']; ?></span>
+                                <span class="hidden-xs"><?php echo $_SESSION['admin']['full_name']; ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="admin-footer">

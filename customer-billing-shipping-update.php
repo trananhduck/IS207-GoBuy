@@ -1,12 +1,12 @@
 <?php require_once('header.php'); ?>
 
 <?php
-// Check if the customer is logged in or not
+// Kiểm tra xem khách hàng đã đăng nhập hay chưa
 if (!isset($_SESSION['customer'])) {
     header('location: ' . BASE_URL . 'logout.php');
     exit;
 } else {
-    // If customer is logged in, but admin make him inactive, then force logout this user.
+    // Nếu khách hàng đã đăng nhập nhưng bị quản trị viên vô hiệu hóa, thì buộc đăng xuất người dùng này.
     $query = $pdo->prepare("SELECT * FROM table_customer WHERE cust_id=? AND cust_status=?");
     $query->execute(array($_SESSION['customer']['cust_id'], 0));
     $total = $query->rowCount();
@@ -20,8 +20,7 @@ if (!isset($_SESSION['customer'])) {
 <?php
 if (isset($_POST['form1'])) {
 
-
-    // update data into the database
+    // Cập nhật dữ liệu vào cơ sở dữ liệu
     $query = $pdo->prepare("UPDATE table_customer SET  
                             cust_s_name=?, 
                             cust_s_phone=?, 
@@ -95,11 +94,11 @@ if (isset($_POST['form1'])) {
                                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                 foreach ($result as $row) {
                                                 ?>
-                                                <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {
+                                                    <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {
                                                                                                             echo 'selected';
                                                                                                         } ?>>
-                                                    <?php echo $row['province_name']; ?>
-                                                </option>
+                                                        <?php echo $row['province_name']; ?>
+                                                    </option>
                                                 <?php
                                                 }
                                                 ?>
@@ -131,6 +130,5 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
-
 
 <?php require_once('footer.php'); ?>

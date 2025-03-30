@@ -20,15 +20,15 @@ if (isset($_POST['form1'])) {
             $error_message .= 'Email phải hợp lệ<br>';
         } else {
             // Lấy email hiện tại từ cơ sở dữ liệu
-            $query = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
-            $query->execute(array($_SESSION['user']['id']));
+            $query = $pdo->prepare("SELECT * FROM table_admin WHERE id=?");
+            $query->execute(array($_SESSION['admin']['id']));
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
             foreach ($result as $row) {
                 $current_email = $row['email'];
             }
 
             // Kiểm tra xem email mới có bị trùng không
-            $query = $pdo->prepare("SELECT * FROM table_user WHERE email=? and email!=?");
+            $query = $pdo->prepare("SELECT * FROM table_admin WHERE email=? and email!=?");
             $query->execute(array($_POST['email'], $current_email));
             $total = $query->rowCount();
             if ($total) {
@@ -40,12 +40,12 @@ if (isset($_POST['form1'])) {
 
     if ($valid == 1) {
         // Cập nhật thông tin vào session
-        $_SESSION['user']['full_name'] = $_POST['full_name'];
-        $_SESSION['user']['email'] = $_POST['email'];
+        $_SESSION['admin']['full_name'] = $_POST['full_name'];
+        $_SESSION['admin']['email'] = $_POST['email'];
 
         // Cập nhật dữ liệu vào database
-        $query = $pdo->prepare("UPDATE table_user SET full_name=?, email=?, phone=? WHERE id=?");
-        $query->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['user']['id']));
+        $query = $pdo->prepare("UPDATE table_admin SET full_name=?, email=?, phone=? WHERE id=?");
+        $query->execute(array($_POST['full_name'], $_POST['email'], $_POST['phone'], $_SESSION['admin']['id']));
 
         $success_message = 'Thông tin người dùng đã được cập nhật thành công.';
     }
@@ -68,18 +68,18 @@ if (isset($_POST['form2'])) {
 
     if ($valid == 1) {
         // Xóa ảnh cũ
-        if ($_SESSION['user']['photo'] != '') {
-            unlink('../assets/uploads/' . $_SESSION['user']['photo']);
+        if ($_SESSION['admin']['photo'] != '') {
+            unlink('../assets/uploads/' . $_SESSION['admin']['photo']);
         }
 
         // Cập nhật ảnh mới
-        $final_name = 'user-' . $_SESSION['user']['id'] . '.' . $ext;
+        $final_name = 'admin-' . $_SESSION['admin']['id'] . '.' . $ext;
         move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
-        $_SESSION['user']['photo'] = $final_name;
+        $_SESSION['admin']['photo'] = $final_name;
 
         // Cập nhật vào database
-        $query = $pdo->prepare("UPDATE table_user SET photo=? WHERE id=?");
-        $query->execute(array($final_name, $_SESSION['user']['id']));
+        $query = $pdo->prepare("UPDATE table_admin SET photo=? WHERE id=?");
+        $query->execute(array($final_name, $_SESSION['admin']['id']));
 
         $success_message = 'Ảnh đại diện đã được cập nhật thành công.';
     }
@@ -102,11 +102,11 @@ if (isset($_POST['form3'])) {
     }
 
     if ($valid == 1) {
-        $_SESSION['user']['password'] = md5($_POST['password']);
+        $_SESSION['admin']['password'] = md5($_POST['password']);
 
         // Cập nhật mật khẩu vào database
-        $query = $pdo->prepare("UPDATE table_user SET password=? WHERE id=?");
-        $query->execute(array(md5($_POST['password']), $_SESSION['user']['id']));
+        $query = $pdo->prepare("UPDATE table_admin SET password=? WHERE id=?");
+        $query->execute(array(md5($_POST['password']), $_SESSION['admin']['id']));
 
         $success_message = 'Mật khẩu đã được cập nhật thành công.';
     }
@@ -121,8 +121,8 @@ if (isset($_POST['form3'])) {
 
 <?php
 // Lấy thông tin người dùng từ database
-$query = $pdo->prepare("SELECT * FROM table_user WHERE id=?");
-$query->execute(array($_SESSION['user']['id']));
+$query = $pdo->prepare("SELECT * FROM table_admin WHERE id=?");
+$query->execute(array($_SESSION['admin']['id']));
 $query->rowCount();
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $row) {

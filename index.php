@@ -171,7 +171,7 @@ foreach ($result as $row) {
                     <div class="item">
                         <div class="thumb">
                             <div class="photo"
-                                style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                                style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
                             </div>
                             <div class="overlay"></div>
                         </div>
@@ -302,7 +302,7 @@ foreach ($result as $row) {
                     <div class="item">
                         <div class="thumb">
                             <div class="photo"
-                                style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                                style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
                             </div>
                             <div class="overlay"></div>
                         </div>

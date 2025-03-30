@@ -298,8 +298,10 @@ if ($successMsg1 != '') {
                     <div class="row">
                         <div class="col-md-5">
                             <ul class="prod-slider">
-                                <li style="background-image: url(assets/uploads/<?php echo $p_featured_photo; ?>);">
-                                    <a class="popup" href="assets/uploads/<?php echo $p_featured_photo; ?>"></a>
+                                <li
+                                    style="background-image: url(assets/uploads/product_photos/<?php echo $p_featured_photo; ?>);">
+                                    <a class="popup"
+                                        href="assets/uploads/product_photos/<?php echo $p_featured_photo; ?>"></a>
                                 </li>
                                 <?php
                                 $query = $pdo->prepare("SELECT * FROM table_product_photo WHERE p_id=?");
@@ -319,7 +321,7 @@ if ($successMsg1 != '') {
                             <div id="prod-pager">
                                 <a data-slide-index="0" href="">
                                     <div class="prod-pager-thumb"
-                                        style="background-image: url(assets/uploads/<?php echo $p_featured_photo; ?>">
+                                        style="background-image: url(assets/uploads/product_photos/<?php echo $p_featured_photo; ?>">
                                     </div>
                                 </a>
                                 <?php
@@ -674,7 +676,7 @@ if ($successMsg1 != '') {
                     <div class="item">
                         <div class="thumb">
                             <div class="photo"
-                                style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                                style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
                             </div>
                             <div class="overlay"></div>
                         </div>

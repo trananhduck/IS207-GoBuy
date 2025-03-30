@@ -25,51 +25,51 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['cust_name'])) {
         $valid = 0;
-        $errorMsg .= 'Tên khách hàng không được để trống' . "<br>";
+        $errorMsg .= 'Tên khách hàng không được để trống';
     }
 
     if (empty($_POST['cust_email'])) {
         $valid = 0;
-        $errorMsg .= 'Địa chỉ email không được để trống' . "<br>";
+        $errorMsg .= 'Địa chỉ email không được để trống';
     } else {
         if (filter_var($_POST['cust_email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $errorMsg .= 'Địa chỉ email phải hợp lệ' . "<br>";
+            $errorMsg .= 'Địa chỉ email phải hợp lệ';
         } else {
             $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
             $querry->execute(array($_POST['cust_email']));
             $total = $querry->rowCount();
             if ($total) {
                 $valid = 0;
-                $errorMsg .= 'Địa chỉ email đã tồn tại' . "<br>";
+                $errorMsg .= 'Địa chỉ email đã tồn tại';
             }
         }
     }
 
     if (empty($_POST['cust_phone'])) {
         $valid = 0;
-        $errorMsg .= 'Số điện thoại không được để trống' . "<br>";
+        $errorMsg .= 'Số điện thoại không được để trống';
     }
 
     if (empty($_POST['cust_province'])) {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn tỉnh/thành phố' . "<br>";
+        $errorMsg .= 'Bạn phải chọn tỉnh/thành phố';
     }
 
     if (empty($_POST['cust_district'])) {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn quận/huyện' . "<br>";
+        $errorMsg .= 'Bạn phải chọn quận/huyện';
     }
 
     if (empty($_POST['cust_address'])) {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn xã' . "<br>";
+        $errorMsg .= 'Bạn phải chọn xã';
     }
 
 
     if (empty($_POST['cust_password']) || empty($_POST['cust_re_password'])) {
         $valid = 0;
-        $errorMsg .= 'Mật khẩu không được để trống' . "<br>";
+        $errorMsg .= 'Mật khẩu không được để trống';
     } else {
         $password = $_POST['cust_password'];
         $re_password = $_POST['cust_re_password'];
@@ -77,28 +77,28 @@ if (isset($_POST['form1'])) {
         // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
         if (strlen($password) < 6) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự' . "<br>";
+            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự';
         }
 
         // Kiểm tra mật khẩu có đủ yêu cầu không
         elseif (!preg_match('/[A-Z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa';
         } elseif (!preg_match('/[a-z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường';
         } elseif (!preg_match('/\d/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số';
         } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)' . "<br>";
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)';
         }
 
         // Kiểm tra xác nhận mật khẩu
         elseif ($password !== $re_password) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu nhập lại không khớp' . "<br>";
+            $errorMsg .= 'Mật khẩu nhập lại không khớp';
         }
     }
 
@@ -106,7 +106,7 @@ if (isset($_POST['form1'])) {
     if (!empty($_POST['cust_password']) && !empty($_POST['cust_re_password'])) {
         if ($_POST['cust_password'] != $_POST['cust_re_password']) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu không khớp' . "<br>";
+            $errorMsg .= 'Mật khẩu không khớp';
         }
     }
 
@@ -175,8 +175,7 @@ if (isset($_POST['form1'])) {
 
         $subject = 'GoBuy - Registration Email Confirmation';
         $verify_link = $base_url . 'verify-customer.php?email=' . urlencode($to) . '&token=' . urlencode($token);
-        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br>
-     <a href="' . $verify_link . '">' . $verify_link . '</a>';
+        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<a href="' . $verify_link . '">' . $verify_link . '</a>';
 
 
         $mail = new PHPMailer(true);
@@ -198,7 +197,7 @@ if (isset($_POST['form1'])) {
             // Nội dung email
             $mail->isHTML(true);
             $mail->Subject = 'GoBuy - Registration Email Confirmation';
-            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<br><br><a href="' . $verify_link . '">' . $verify_link . '</a>';
+            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<a href="' . $verify_link . '">' . $verify_link . '</a>';
 
             $mail->send();
         } catch (Exception $e) {
