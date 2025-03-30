@@ -40,7 +40,7 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                         <?php
                         // Kết nối PDO (giả định $pdo đã được khai báo trước đó)
                         $adjacents = 5; // Số trang lân cận hiển thị
-                        $limit = 12; // Số lượng sản phẩm trên mỗi trang
+                        $limit = 16; // Số lượng sản phẩm trên mỗi trang
 
                         // Lấy từ khóa tìm kiếm từ request
                         $search_text = isset($_REQUEST['search_text']) ? "%" . $_REQUEST['search_text'] . "%" : "%";
@@ -105,7 +105,7 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                             }
 
                             // Nút Next
-                            $pagination .= ($page < $lastpage) ? "<a href='$targetpage&page=$next'>Next &#187;</a>" : "<span class='disabled'>Next &#187;</span>";
+                            $pagination .= ($page < $lastpage) ? "<a href='$targetpage&page=$next'>Sau &#187;</a>" : "<span class='disabled'>Sau &#187;</span>";
                             $pagination .= "</div>";
                         }
 
@@ -125,7 +125,7 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                             <div class="inner">
                                 <div class="thumb">
                                     <div class="photo"
-                                        style="background-image:url(assets/uploads/<?php echo $row['p_featured_photo']; ?>);">
+                                        style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
                                     </div>
                                     <div class="overlay"></div>
                                 </div>
@@ -134,12 +134,16 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
                                             href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
                                     </h3>
                                     <h4>
-                                        $<?php echo $row['p_current_price']; ?>
-                                        <?php if ($row['p_old_price'] != ''): ?>
-                                        <del>
-                                            $<?php echo $row['p_old_price']; ?>
-                                        </del>
+                                        <span>
+                                            <?php if ($row['p_old_price'] != ''): ?>
+                                            <del>
+                                                <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                            </del>
+                                        </span>
                                         <?php endif; ?>
+                                        <span>
+                                            <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
+                                        </span>
                                     </h4>
                                     <div class="rating">
                                         <?php
@@ -236,3 +240,6 @@ $search_text = htmlspecialchars(trim($_REQUEST['search_text']), ENT_QUOTES, 'UTF
         </div>
     </div>
 </div>
+<style>
+
+</style>

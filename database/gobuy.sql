@@ -1664,7 +1664,7 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 (2, 'Nữ', 1),
 (3, 'Trẻ em', 1),
 (4, 'Đồ điện tử', 1),
-(5, 'Đồ gia dụng', 1);
+(5, 'Khác', 1);
 
 --
 -- Indexes for dumped tables

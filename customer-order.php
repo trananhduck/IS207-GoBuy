@@ -133,10 +133,10 @@ if (!isset($_SESSION['customer'])) {
                                 foreach ($result as $row) {
                                     $tip++;
                                 ?>
-                                <tr>
-                                    <td><?php echo $tip; ?></td>
-                                    <td>
-                                        <?php
+                                    <tr>
+                                        <td><?php echo $tip; ?></td>
+                                        <td>
+                                            <?php
                                             $query1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
                                             $query1->execute(array($row['payment_id']));
                                             $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
@@ -149,14 +149,14 @@ if (!isset($_SESSION['customer'])) {
                                                 echo '<br><br>';
                                             }
                                             ?>
-                                    </td>
-                                    <td><?php echo $row['payment_date']; ?></td>
-                                    <td><?php echo $row['txnid']; ?></td>
-                                    <td><?php echo $row['paid_amount'] . 'VND'; ?></td>
-                                    <td><?php echo $row['payment_status']; ?></td>
-                                    <td><?php echo $row['payment_method']; ?></td>
-                                    <td><?php echo $row['payment_id']; ?></td>
-                                </tr>
+                                        </td>
+                                        <td><?php echo $row['payment_date']; ?></td>
+                                        <td><?php echo $row['txnid']; ?></td>
+                                        <td><?php echo $row['paid_amount'] . 'VND'; ?></td>
+                                        <td><?php echo $row['payment_status']; ?></td>
+                                        <td><?php echo $row['payment_method']; ?></td>
+                                        <td><?php echo $row['payment_id']; ?></td>
+                                    </tr>
                                 <?php
                                 }
                                 ?>
@@ -171,5 +171,5 @@ if (!isset($_SESSION['customer'])) {
             </div>
         </div>
     </div>
-
-    <?php require_once('footer.php'); ?>
+</div>
+<?php require_once('footer.php'); ?>
