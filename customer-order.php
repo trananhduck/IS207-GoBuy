@@ -20,24 +20,22 @@ if (!isset($_SESSION['customer'])) {
 <div class="page">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <?php require_once('customer-sidebar.php'); ?>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="user-content">
                     <h3><?php echo 'Lịch sử đặt hàng' ?></h3>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th><?php echo 'STT' ?></th>
-                                    <th><?php echo 'Chi tiết sản phẩm' ?></th>
-                                    <th><?php echo 'Ngày thanh toán' ?></th>
-                                    <th><?php echo 'Mã số giao dịch' ?></th>
-                                    <th><?php echo 'Số tiền' ?></th>
-                                    <th><?php echo 'Trạng thái thanh toán' ?></th>
-                                    <th><?php echo 'Phương thức thanh toán' ?></th>
-                                    <th><?php echo 'Mã số thanh toán' ?></th>
+                                    <th style="width: 5%;"><?php echo 'STT' ?></th>
+                                    <th style="width: 45%;"><?php echo 'Chi tiết đơn hàng' ?></th>
+                                    <th style="width: 15%;"><?php echo 'Ngày thanh toán' ?></th>
+                                    <th style="width: 15%;"><?php echo 'Mã số giao dịch' ?></th>
+                                    <th style="width: 10%;"><?php echo 'Tổng tiền' ?></th>
+                                    <th style="width: 10%;"><?php echo 'Trạng thái' ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -134,8 +132,8 @@ if (!isset($_SESSION['customer'])) {
                                     $tip++;
                                 ?>
                                     <tr>
-                                        <td><?php echo $tip; ?></td>
-                                        <td>
+                                        <td style="width: 5%;"><?php echo $tip; ?></td>
+                                        <td style="width: 45%;">
                                             <?php
                                             $query1 = $pdo->prepare("SELECT * FROM table_order WHERE payment_id=?");
                                             $query1->execute(array($row['payment_id']));
@@ -145,17 +143,15 @@ if (!isset($_SESSION['customer'])) {
                                                 echo '<br>Kích thước: ' . $row1['size'];
                                                 echo '<br>Màu sắc: ' . $row1['color'];
                                                 echo '<br>Số lượng: ' . $row1['quantity'];
-                                                echo '<br>Giá đơn vị: $' . $row1['unit_price'];
+                                                echo '<br>Giá đơn vị: ' . $row1['unit_price'] . 'VND';
                                                 echo '<br><br>';
                                             }
                                             ?>
                                         </td>
-                                        <td><?php echo $row['payment_date']; ?></td>
-                                        <td><?php echo $row['txnid']; ?></td>
-                                        <td><?php echo $row['paid_amount'] . 'VND'; ?></td>
-                                        <td><?php echo $row['payment_status']; ?></td>
-                                        <td><?php echo $row['payment_method']; ?></td>
-                                        <td><?php echo $row['payment_id']; ?></td>
+                                        <td style="width: 15%;"><?php echo $row['payment_date']; ?></td>
+                                        <td style="width: 15%;"><?php echo $row['txnid']; ?></td>
+                                        <td style="width: 10%;"><?php echo $row['paid_amount'] . 'VND'; ?></td>
+                                        <td style="width: 10%;"><?php echo $row['payment_status']; ?></td>
                                     </tr>
                                 <?php
                                 }

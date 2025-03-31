@@ -74,7 +74,7 @@ if (isset($_POST['form1'])) {
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="user-sidebar login">
+                <div class="account-sidebar login">
                     <ul>
                         <a href="login-admin.php">
                             Đăng nhập với tư cách admin
@@ -132,19 +132,19 @@ if (isset($_POST['form1'])) {
     margin-left: auto;
 }
 
-.user-sidebar {
+.account-sidebar {
     position: absolute;
     right: 403px;
     top: -20px;
 }
 
 
-.user-sidebar a:hover {
+.account-sidebar a:hover {
     color: rgb(41, 14, 133);
     text-decoration: underline;
 }
 
-.user-sidebar a {
+.account-sidebar a {
     color: #007bff;
     font-size: 14px;
     text-decoration: none;

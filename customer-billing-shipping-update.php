@@ -50,15 +50,19 @@ if (isset($_POST['form1'])) {
 <div class="page">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <?php require_once('customer-sidebar.php'); ?>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="user-content">
+                    <h3>
+                        <?php echo 'Cập nhật thông tin giao hàng' ?>
+                    </h3>
                     <?php
-                    if ($errorMsg != '') {
-                        echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
+                    if (!empty($errorMsg)) {
+                        echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'><ul><li>" . str_replace("<br>", "</li><li>", $errorMsg) . "</li></ul></div>";
                     }
+
                     if ($successMsg != '') {
                         echo "<div class='success' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $successMsg . "</div>";
                     }
@@ -66,64 +70,47 @@ if (isset($_POST['form1'])) {
                     <form action="" method="post">
                         <?php $csrf->echoInputField(); ?>
                         <div class="row">
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <!-- Căn giữa -->
-                                        <h3 class="text-center"><?php echo 'Cập nhật thông tin giao hàng' ?></h3>
-
-                                        <div class="form-group">
-                                            <label class="text-left"><?php echo 'Họ tên' ?></label>
-                                            <input type="text" class="form-control" name="cust_s_name"
-                                                value="<?php echo $_SESSION['customer']['cust_s_name']; ?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="text-left"><?php echo 'Số điện thoại' ?></label>
-                                            <input type="text" class="form-control" name="cust_s_phone"
-                                                value="<?php echo $_SESSION['customer']['cust_s_phone']; ?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="text-left"><?php echo 'Tỉnh/thành phố' ?></label>
-                                            <select name="cust_s_province" class="form-control">
-                                                <?php
-                                                $query = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                                $query->execute();
-                                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                                foreach ($result as $row) {
-                                                ?>
-                                                    <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {
-                                                                                                            echo 'selected';
-                                                                                                        } ?>>
-                                                        <?php echo $row['province_name']; ?>
-                                                    </option>
-                                                <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="text-left"><?php echo 'Quận/huyện' ?></label>
-                                            <input type="text" class="form-control" name="cust_s_district"
-                                                value="<?php echo $_SESSION['customer']['cust_s_district']; ?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="text-left"><?php echo 'Địa chỉ' ?></label>
-                                            <input type="text" class="form-control" name="cust_s_address"
-                                                value="<?php echo $_SESSION['customer']['cust_s_address']; ?>">
-                                        </div>
-                                        <div class="form-group text-right">
-                                            <input type="submit" class="btn btn-primary"
-                                                value="<?php echo 'Cập nhật' ?>" name="form1">
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><?php echo 'Họ tên' ?> *</label>
+                                <input type="text" class="form-control" name="cust_s_name"
+                                    value="<?php echo $_SESSION['customer']['cust_s_name']; ?>">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><?php echo 'Số điện thoại' ?> *</label>
+                                <input type="text" class="form-control" name="cust_s_phone"
+                                    value="<?php echo $_SESSION['customer']['cust_s_phone']; ?>">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><?php echo 'Tỉnh/thành phố' ?> *</label>
+                                <select name="cust_s_province" class="form-control">
+                                    <?php
+                                    $query = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
+                                    $query->execute();
+                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($result as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_s_province']) {
+                                                                                                echo 'selected';
+                                                                                            } ?>>
+                                            <?php echo $row['province_name']; ?>
+                                        </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><?php echo 'Quận/huyện' ?> *</label>
+                                <input type="text" class="form-control" name="cust_s_district"
+                                    value="<?php echo $_SESSION['customer']['cust_s_district']; ?>">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><?php echo 'Địa chỉ' ?> *</label>
+                                <input type="text" class="form-control" name="cust_s_address"
+                                    value="<?php echo $_SESSION['customer']['cust_s_address']; ?>">
                             </div>
                         </div>
+                        <input type="submit" class="btn btn-primary" value="<?php echo 'Cập nhật' ?>" name="form1">
                     </form>
                 </div>
             </div>

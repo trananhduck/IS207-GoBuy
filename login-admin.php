@@ -91,7 +91,7 @@ if (isset($_POST['form1'])) {
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="user-sidebar">
+                <div class="account-sidebar">
                     <ul>
                         <a href="login-customer.php"><?php echo 'Đăng nhập với tư cách khách hàng' ?></a>
                     </ul>
@@ -146,19 +146,19 @@ if (isset($_POST['form1'])) {
     margin-left: auto;
 }
 
-.user-sidebar {
+.account-sidebar {
     position: absolute;
     right: 403px;
     top: -20px;
 }
 
 
-.user-sidebar a:hover {
+.account-sidebar a:hover {
     color: rgb(41, 14, 133);
     text-decoration: underline;
 }
 
-.user-sidebar a {
+.account-sidebar a {
     color: #007bff;
     font-size: 14px;
     text-decoration: none;

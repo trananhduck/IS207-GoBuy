@@ -247,7 +247,7 @@ if (isset($_POST['form1'])) {
                 </form>
             </div>
             <div class="col-md-12">
-                <div class="user-sidebar">
+                <div class="account-sidebar">
                     <ul>
                         <a href="registration-customer.php"><?php echo 'Đăng ký tài khoản khách hàng' ?></a>
                     </ul>
@@ -261,82 +261,82 @@ if (isset($_POST['form1'])) {
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
-    #toast {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #333;
-        color: #fff;
-        padding: 15px 25px;
-        border-radius: 8px;
-        opacity: 0;
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        z-index: 9999;
-        transform: translateY(-20px);
-    }
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+    transform: translateY(-20px);
+}
 
-    #toast.show {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-    .form-group-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 15px;
-    }
+.form-group-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
 
-    .btn-danger {
-        width: 50%;
-        max-width: 200px;
-        text-align: center;
-    }
+.btn-danger {
+    width: 50%;
+    max-width: 200px;
+    text-align: center;
+}
 
-    .btn {
-        border-radius: 6px;
-        width: 30%;
-    }
+.btn {
+    border-radius: 6px;
+    width: 30%;
+}
 
-    .btn input {
-        position: relative;
-    }
+.btn input {
+    position: relative;
+}
 
-    .user-sidebar {
-        position: absolute;
-        bottom: -30px;
-        right: 230px;
-    }
+.account-sidebar {
+    position: absolute;
+    bottom: -30px;
+    right: 230px;
+}
 
-    .user-sidebar a {
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 12px;
-    }
+.account-sidebar a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
 
-    .user-sidebar a:hover {
-        text-decoration: underline;
-    }
+.account-sidebar a:hover {
+    text-decoration: underline;
+}
 </style>
 
 <script>
-    function showToast(message, bg = "#333") {
-        const toast = document.getElementById("toast");
-        toast.innerText = message;
-        toast.style.backgroundColor = bg;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 4000);
-    }
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
 </script>
 <script>
-    function showToast(message, bg = "#333") {
-        const toast = document.getElementById("toast");
-        toast.innerText = message;
-        toast.style.backgroundColor = bg;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 4000);
-    }
+function showToast(message, bg = "#333") {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.style.backgroundColor = bg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 4000);
+}
 </script>
 
 <?php

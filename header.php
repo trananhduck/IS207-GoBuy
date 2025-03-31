@@ -195,12 +195,17 @@ foreach ($result as $row) {
                         <?php
                         if (isset($_SESSION['customer'])) {
                         ?>
-                        <li><i class="fa fa-user"></i>
-                            <a href="customer-profile.php">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user"></i>
                                 <?php echo isset($_SESSION['customer']['cust_name']) ? $_SESSION['customer']['cust_name'] : 'Khách hàng'; ?>
+                                <i class="fa fa-angle-down"></i>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="customer-profile.php"><i class="fa fa-user"></i> Hồ sơ cá nhân</a></li>
+                                <li><a href="logout.php"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+                            </ul>
                         </li>
-                        <li><a href="logout.php"><i class="fa fa-home"></i> Đăng xuất</a></li>
                         <?php
                         } else {
                         ?>
@@ -227,21 +232,16 @@ foreach ($result as $row) {
                             </a></li>
                     </ul>
                 </div>
-
                 <div class="col-md-3 search-area">
-                    <form class="navbar-form navbar-left" role="search" action="search-result.php" method="get">
-                        <?php $csrf->echoInputField(); ?>
-                        <div class="form-group">
-                            <input type="text" class="form-control search-top"
-                                placeholder="<?php echo 'Tìm kiếm sản phẩm' ?>" name="search_text">
-                        </div>
-                        <button type="submit" class="btn btn-danger"><?php echo 'Tìm kiếm' ?></button>
-                    </form>
+                    <form class="navbar-form navbar-left" role="search" action="search-result.php" method="get"><?php $csrf->echoInputField();
+                                                                                                                ?><div
+                            class="form-group"><input type="text" class="form-control search-top"
+                                placeholder="<?php echo 'Tìm kiếm sản phẩm' ?>" name="search_text"></div><button
+                            type="submit" class="btn search-btn"><i class="fa fa-search"></i></button></form>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="nav">
         <div class="container">
             <div class="row">
@@ -249,63 +249,58 @@ foreach ($result as $row) {
                     <div class="menu-container">
                         <div class="menu">
                             <ul>
-                                <li><a href="index.php">Trang chủ</a></li>
+                                <li><a href="index.php">Trang chủ</a></li><?php $query = $pdo->prepare("SELECT * FROM table_top_category WHERE show_on_menu=1");
+                                                                            $query->execute();
+                                                                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                                <?php
-                                $query = $pdo->prepare("SELECT * FROM table_top_category WHERE show_on_menu=1");
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                ?>
-                                <li><a
-                                        href="product-category.php?id=<?php echo $row['tcat_id']; ?>&type=top-category"><?php echo $row['tcat_name']; ?></a>
-                                    <ul>
-                                        <?php
-                                            $query1 = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id=?");
-                                            $query1->execute(array($row['tcat_id']));
-                                            $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($result1 as $row1) {
-                                            ?>
-                                        <li><a
-                                                href="product-category.php?id=<?php echo $row1['mcat_id']; ?>&type=mid-category"><?php echo $row1['mcat_name']; ?></a>
-                                            <ul>
-                                                <?php
-                                                        $query2 = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id=?");
-                                                        $query2->execute(array($row1['mcat_id']));
-                                                        $result2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                                        foreach ($result2 as $row2) {
-                                                        ?>
-                                                <li><a
-                                                        href="product-category.php?id=<?php echo $row2['ecat_id']; ?>&type=end-category"><?php echo $row2['ecat_name']; ?></a>
-                                                </li>
-                                                <?php
-                                                        }
-                                                        ?>
-                                            </ul>
-                                        </li>
-                                        <?php
-                                            }
-                                            ?>
-                                    </ul>
-                                </li>
-                                <?php
-                                }
-                                ?>
+                                                                            foreach ($result as $row) {
+                                                                            ?><li><a
+                                        href="product-category.php?id=<?php echo $row['tcat_id']; ?>&type=top-category"><?php echo $row['tcat_name'];
+                                                                                                                            ?></a>
+                                    <ul><?php $query1 = $pdo->prepare("SELECT * FROM table_mid_category WHERE tcat_id=?");
+                                                                                $query1->execute(array($row['tcat_id']));
+                                                                                $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
 
-                                <?php
-                                $query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                    $about_title = $row['about_title'];
-                                    $faq_title = $row['faq_title'];
-                                    $contact_title = $row['contact_title'];
-                                    $pgallery_title = $row['pgallery_title'];
-                                }
-                                ?>
-                                <li><a href="about.php"><?php echo $about_title; ?></a></li>
-                                <li><a href="faq.php"><?php echo $faq_title; ?></a></li>
-                                <li><a href="contact.php"><?php echo $contact_title; ?></a></li>
+                                                                                foreach ($result1 as $row1) {
+                                            ?><li><a
+                                                href="product-category.php?id=<?php echo $row1['mcat_id']; ?>&type=mid-category"><?php echo $row1['mcat_name'];
+                                                                                                                                            ?></a>
+                                            <ul><?php $query2 = $pdo->prepare("SELECT * FROM table_end_category WHERE mcat_id=?");
+                                                                                    $query2->execute(array($row1['mcat_id']));
+                                                                                    $result2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+
+                                                                                    foreach ($result2 as $row2) {
+                                                        ?><li><a
+                                                        href="product-category.php?id=<?php echo $row2['ecat_id']; ?>&type=end-category"><?php echo $row2['ecat_name'];
+                                                                                                                                                        ?></a>
+                                                </li><?php
+                                                                                    }
+
+                                                                    ?></ul>
+                                        </li><?php
+                                                                                }
+
+                                                        ?></ul>
+                                </li><?php
+                                                                            }
+
+                                            ?><?php $query = $pdo->prepare("SELECT * FROM table_page WHERE id=1");
+                                                $query->execute();
+                                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                                                foreach ($result as $row) {
+                                                    $about_title = $row['about_title'];
+                                                    $faq_title = $row['faq_title'];
+                                                    $contact_title = $row['contact_title'];
+                                                    $pgallery_title = $row['pgallery_title'];
+                                                }
+
+                                                ?><li><a href="about.php"><?php echo $about_title;
+                                                                            ?></a></li>
+                                <li><a href="faq.php"><?php echo $faq_title;
+                                                            ?></a></li>
+                                <li><a href="contact.php"><?php echo $contact_title;
+                                                                ?></a></li>
                             </ul>
                         </div>
                     </div>

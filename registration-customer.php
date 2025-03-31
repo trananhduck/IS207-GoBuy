@@ -266,8 +266,8 @@ if (isset($_POST['form1'])) {
                                         $result = $querry->fetchAll(PDO::FETCH_ASSOC);
                                         foreach ($result as $row) {
                                         ?>
-                                            <option value="<?php echo $row['province_id']; ?>">
-                                                <?php echo $row['province_name']; ?></option>
+                                        <option value="<?php echo $row['province_id']; ?>">
+                                            <?php echo $row['province_name']; ?></option>
                                         <?php
                                         }
                                         ?>
@@ -304,7 +304,7 @@ if (isset($_POST['form1'])) {
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="user-sidebar">
+                <div class="account-sidebar">
                     <ul>
                         <a href="registration-admin.php"><?php echo 'Đăng ký tài khoản admin' ?></a>
                     </ul>
@@ -317,65 +317,65 @@ if (isset($_POST['form1'])) {
 <!-- Toast -->
 <div id="toast"></div>
 <style>
-    #toast {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #333;
-        color: #fff;
-        padding: 15px 25px;
-        border-radius: 8px;
-        opacity: 0;
-        transition: all 0.5s ease;
-        z-index: 9999;
-    }
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 9999;
+}
 
-    #toast.show {
-        opacity: 1;
-    }
+#toast.show {
+    opacity: 1;
+}
 
-    .form-group-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.form-group-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .btn {
-        border-radius: 6px;
-        width: 30%;
-    }
+.btn {
+    border-radius: 6px;
+    width: 30%;
+}
 
-    .btn input {
-        position: relative;
-    }
+.btn input {
+    position: relative;
+}
 
-    .user-sidebar {
-        position: absolute;
-        bottom: -30px;
-        /* Đưa xuống dưới nút */
-        right: 230px;
-        /* Nằm bên phải */
-    }
+.account-sidebar {
+    position: absolute;
+    bottom: -30px;
+    /* Đưa xuống dưới nút */
+    right: 230px;
+    /* Nằm bên phải */
+}
 
-    .user-sidebar a {
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 12px;
-    }
+.account-sidebar a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
 
-    .user-sidebar a:hover {
-        text-decoration: underline;
-    }
+.account-sidebar a:hover {
+    text-decoration: underline;
+}
 </style>
 
 <script>
-    function showToast(message, color = '#333') {
-        const toast = document.getElementById('toast');
-        toast.innerText = message;
-        toast.style.backgroundColor = color;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-    }
+function showToast(message, color = '#333') {
+    const toast = document.getElementById('toast');
+    toast.innerText = message;
+    toast.style.backgroundColor = color;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+}
 </script>
 
 <?php

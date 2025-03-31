@@ -52,7 +52,7 @@ if (isset($_POST['form1'])) {
             $_SESSION['customer']['cust_id']
         ));
 
-        $successMsg = 'Thông tin cá nhân được cập nhật thành công!';
+        $successMsg = 'Hồ sơ cá nhân được cập nhật thành công!';
 
         // Cập nhật session
         $_SESSION['customer']['cust_name'] = $_POST['cust_name'];
@@ -67,10 +67,10 @@ if (isset($_POST['form1'])) {
 <div class="page">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <?php require_once('customer-sidebar.php'); ?>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="user-content">
                     <h3>
                         <?php echo 'Cập nhật thông tin cá nhân' ?>
@@ -112,10 +112,10 @@ if (isset($_POST['form1'])) {
                                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($result as $row) {
                                     ?>
-                                    <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_province']) {
+                                        <option value="<?php echo $row['province_id']; ?>" <?php if ($row['province_id'] == $_SESSION['customer']['cust_province']) {
                                                                                                 echo 'selected';
                                                                                             } ?>>
-                                        <?php echo $row['province_name']; ?></option>
+                                            <?php echo $row['province_name']; ?></option>
                                     <?php
                                     }
                                     ?>
