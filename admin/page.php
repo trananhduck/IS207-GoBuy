@@ -8,12 +8,20 @@ if (isset($_POST['form_about'])) {
 
     if (empty($_POST['about_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tiêu đề không được để trống<br>');
+            });
+            </script>";
     }
 
     if (empty($_POST['about_content'])) {
         $valid = 0;
-        $errorMsg .= 'Nội dung không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Nội dung không được để trống<br>');
+            });
+            </script>";
     }
 
     $path = $_FILES['about_banner']['name'];
@@ -24,7 +32,11 @@ if (isset($_POST['form_about'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -45,7 +57,11 @@ if (isset($_POST['form_about'])) {
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
         }
 
-        $successMsg = 'Thông tin Trang About đã được cập nhật thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Thông tin Trang About đã được cập nhật thành công.');
+            });
+        </script>";
     }
 }
 
@@ -56,7 +72,11 @@ if (isset($_POST['form_faq'])) {
 
     if (empty($_POST['faq_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tiêu đề không được để trống<br>');
+            });
+            </script>";
     }
 
     $path = $_FILES['faq_banner']['name'];
@@ -67,7 +87,11 @@ if (isset($_POST['form_faq'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -88,7 +112,11 @@ if (isset($_POST['form_faq'])) {
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
         }
 
-        $successMsg = 'Thông tin Trang FAQ đã được cập nhật thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Thông tin Trang FAQ đã được cập nhật thành công.');
+            });
+        </script>";
     }
 }
 
@@ -99,7 +127,11 @@ if (isset($_POST['form_contact'])) {
 
     if (empty($_POST['contact_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tiêu đề không được để trống<br>');
+            });
+            </script>";
     }
 
     $path = $_FILES['contact_banner']['name'];
@@ -110,7 +142,11 @@ if (isset($_POST['form_contact'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -131,7 +167,12 @@ if (isset($_POST['form_contact'])) {
             move_uploaded_file($path_tmp, '../assets/uploads/' . $final_name);
         }
 
-        $successMsg = 'Thông tin Trang Liên Hệ đã được cập nhật thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Thông tin Trang Liên Hệ đã được cập nhật thành công.');
+            });
+        </script>";
+        
     }
 }
 ?>

@@ -6,16 +6,28 @@ if (isset($_POST['form1'])) {
     $valid = 1;
     if (empty($_POST['province_id'])) {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một tỉnh.<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn một tỉnh.<br>');
+            });
+            </script>";
     }
 
     if ($_POST['amount'] == '') {
         $valid = 0;
-        $errorMsg .= 'Số tiền không được để trống.<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Số tiền không được để trống.<br>');
+            });
+            </script>";
     } else {
         if (!is_numeric($_POST['amount'])) {
             $valid = 0;
-            $errorMsg .= 'Bạn phải nhập một số hợp lệ.<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải nhập một số hợp lệ.<br>');
+            });
+            </script>";
         }
     }
 
@@ -23,7 +35,11 @@ if (isset($_POST['form1'])) {
         $query = $pdo->prepare("INSERT INTO table_shipping_cost (province_id,amount) VALUES (?,?)");
         $query->execute(array($_POST['province_id'], $_POST['amount']));
 
-        $successMsg = 'Chi phí vận chuyển đã được thêm thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Chi phí vận chuyển đã được thêm thành công.');
+            });
+        </script>";
     }
 }
 
@@ -32,11 +48,19 @@ if (isset($_POST['form2'])) {
 
     if ($_POST['amount'] == '') {
         $valid = 0;
-        $errorMsg .= 'Số tiền không được để trống.<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Số tiền không được để trống.<br>');
+            });
+            </script>";
     } else {
         if (!is_numeric($_POST['amount'])) {
             $valid = 0;
-            $errorMsg .= 'Bạn phải nhập một số hợp lệ.<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải nhập một số hợp lệ.<br>');
+            });
+            </script>";
         }
     }
 }
@@ -145,7 +169,7 @@ if (isset($_POST['form2'])) {
                                     <td><?php echo $row['amount']; ?></td>
                                     <td>
                                         <a href="shipping-cost-edit.php?id=<?php echo $row['shipping_cost_id']; ?>"
-                                            class="btn btn-primary btn-xs">Sửa</a>
+                                            class="btn btn-primary btn-xs edit-btn">Sửa</a>
                                         <a href="#" class="btn btn-danger btn-xs"
                                             data-href="shipping-cost-delete.php?id=<?php echo $row['shipping_cost_id']; ?>"
                                             data-toggle="modal" data-target="#confirm-delete">Xóa</a>
@@ -175,10 +199,29 @@ if (isset($_POST['form2'])) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <a class="btn btn-danger btn-ok">Xóa</a>
+                <a class="btn btn-danger btn-ok" id="confirm-delete-btn">Xóa</a>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#confirm-delete-btn').click(function (e) {
+            e.preventDefault();
+            toastr.success("Xóa thành công!");
+            setTimeout(function () {
+                window.location.href = $('.btn-ok').attr('href');
+            }, 2000); // Chuyển hướng sau 2 giây
+        });
+    });
+    $(document).ready(function () {
+        $('.edit-btn').click(function (e) {
+            e.preventDefault();
+            toastr.info("Chuyển đến trang chỉnh sửa...");
+            setTimeout(() => {
+                window.location.href = $(this).attr('href');
+            }, 1500); // Chuyển hướng sau 1.5 giây
+        });
+    });
+</script>
 <?php require_once('footer.php'); ?>

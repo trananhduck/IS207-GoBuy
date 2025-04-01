@@ -6,19 +6,31 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['faq_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tiêu đề không được để trống<br>');
+            });
+            </script>";
     }
 
     if (empty($_POST['faq_content'])) {
         $valid = 0;
-        $errorMsg .= 'Nội dung không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Nội dung không được để trống<br>');
+            });
+            </script>";
     }
 
     if ($valid == 1) {
         $query = $pdo->prepare("INSERT INTO table_faq (faq_title,faq_content) VALUES (?,?)");
         $query->execute(array($_POST['faq_title'], $_POST['faq_content']));
 
-        $successMsg = 'FAQ đã được thêm thành công!';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('FAQ đã được thêm thành công!');
+            });
+        </script>";
 
         unset($_POST['faq_title']);
         unset($_POST['faq_content']);

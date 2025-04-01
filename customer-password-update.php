@@ -73,10 +73,10 @@ if (isset($_POST['form1'])) {
 <div class="page">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <?php require_once('customer-sidebar.php'); ?>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <div class="user-content">
                     <h3 class="text-center">
                         <?php echo 'Cập nhật mật khẩu' ?>

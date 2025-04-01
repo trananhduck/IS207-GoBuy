@@ -6,7 +6,11 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['tcat_name'])) {
         $valid = 0;
-        $errorMsg .= "Tên danh mục lớn không được để trống<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tên danh mục lớn không được để trống<br>');
+            });
+            </script>";
     } else {
         // Kiểm tra trùng lặp danh mục lớn
         // Lấy tên danh mục lớn hiện tại trong cơ sở dữ liệu
@@ -22,7 +26,11 @@ if (isset($_POST['form1'])) {
         $total = $query->rowCount();
         if ($total) {
             $valid = 0;
-            $errorMsg .= 'Tên danh mục lớn đã tồn tại<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tên danh mục lớn đã tồn tại<br>');
+            });
+            </script>";
         }
     }
 
@@ -31,7 +39,11 @@ if (isset($_POST['form1'])) {
         $query = $pdo->prepare("UPDATE table_top_category SET tcat_name=?,show_on_menu=? WHERE tcat_id=?");
         $query->execute(array($_POST['tcat_name'], $_POST['show_on_menu'], $_REQUEST['id']));
 
-        $successMsg = 'Danh mục lớn đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Danh mục lớn đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 ?>

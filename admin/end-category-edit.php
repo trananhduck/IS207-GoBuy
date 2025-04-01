@@ -6,17 +6,29 @@ if(isset($_POST['form1'])) {
 
     if(empty($_POST['tcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn danh mục lớn<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn danh mục lớn<br>');
+            });
+            </script>";
     }
 
     if(empty($_POST['mcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn danh mục trung gian<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn danh mục trung gian<br>');
+            });
+            </script>";
     }
 
     if(empty($_POST['ecat_name'])) {
         $valid = 0;
-        $errorMsg .= "Tên danh mục con không được để trống<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tên danh mục con không được để trống<br>');
+            });
+            </script>";
     }
 
     if($valid == 1) {    	
@@ -24,7 +36,11 @@ if(isset($_POST['form1'])) {
 		$query = $pdo->prepare("UPDATE table_end_category SET ecat_name=?,mcat_id=? WHERE ecat_id=?");
 		$query->execute(array($_POST['ecat_name'],$_POST['mcat_id'],$_REQUEST['id']));
 
-    	$successMsg = 'Danh mục con đã được cập nhật thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Danh mục con đã được cập nhật thành công.');
+            });
+        </script>";
     }
 }
 ?>

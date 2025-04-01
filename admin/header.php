@@ -24,9 +24,10 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin Panel</title>
-
+    
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, admin-scalable=no" name="viewport">
-
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/ionicons.min.css">
@@ -40,6 +41,8 @@ if (!isset($_SESSION['admin'])) {
     <link rel="stylesheet" href="css/on-off-switch.css" />
     <link rel="stylesheet" href="css/summernote.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
 </head>
 

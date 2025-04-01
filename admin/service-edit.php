@@ -6,12 +6,20 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tiêu đề không được để trống<br>');
+            });
+            </script>";
     }
 
     if (empty($_POST['content'])) {
         $valid = 0;
-        $errorMsg .= 'Nội dung không được để trống<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Nội dung không được để trống<br>');
+            });
+            </script>";
     }
 
     $path = $_FILES['photo']['name'];
@@ -22,7 +30,11 @@ if (isset($_POST['form1'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -42,7 +54,11 @@ if (isset($_POST['form1'])) {
             $query->execute(array($_POST['title'], $_POST['content'], $final_name, $_REQUEST['id']));
         }
 
-        $successMsg = 'Dịch vụ đã được cập nhật thành công!';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Dịch vụ đã được cập nhật thành công!');
+            });
+        </script>";
     }
 }
 ?>
@@ -143,3 +159,4 @@ foreach ($result as $row) {
         </div>
     </div>
 </section>
+<?php require_once('footer.php'); ?>

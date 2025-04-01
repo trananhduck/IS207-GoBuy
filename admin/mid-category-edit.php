@@ -6,19 +6,31 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['tcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn một danh mục lớn<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn một danh mục lớn<br>');
+            });
+            </script>";
     }
 
     if (empty($_POST['mcat_name'])) {
         $valid = 0;
-        $errorMsg .= "Tên danh mục trung gian không được để trống<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tên danh mục trung gian không được để trống<br>');
+            });
+            </script>";
     }
 
     if ($valid == 1) {
         // Cập nhật vào cơ sở dữ liệu
         $query = $pdo->prepare("UPDATE table_mid_category SET mcat_name=?,tcat_id=? WHERE mcat_id=?");
         $query->execute(array($_POST['mcat_name'], $_POST['tcat_id'], $_REQUEST['id']));
-        $successMsg = 'Danh mục trung gian đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Danh mục trung gian đã được cập nhật thành công.');
+        });
+    </script>";
     }
 }
 ?>

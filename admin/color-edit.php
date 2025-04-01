@@ -22,7 +22,11 @@ if (isset($_POST['form1'])) {
         $total = $query->rowCount();
         if ($total) {
             $valid = 0;
-            $errorMsg .= 'Tên màu đã tồn tại<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tên màu đã tồn tại<br>');
+            });
+            </script>";
         }
     }
 
@@ -31,7 +35,12 @@ if (isset($_POST['form1'])) {
         $query = $pdo->prepare("UPDATE table_color SET color_name=? WHERE color_id=?");
         $query->execute(array($_POST['color_name'], $_REQUEST['id']));
 
-        $successMsg = 'Màu đã được cập nhật thành công.';
+
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Màu đã được cập nhật thành công.');
+            });
+        </script>";
     }
 }
 ?>

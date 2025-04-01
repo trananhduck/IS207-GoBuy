@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     <a href="top-category-edit.php?id=<?php echo $row['tcat_id']; ?>"
-                                        class="btn btn-primary btn-xs">Sửa</a>
+                                        class="btn btn-primary btn-xs edit-btn">Sửa</a>
                                     <a href="#" class="btn btn-danger btn-xs"
                                         data-href="top-category-delete.php?id=<?php echo $row['tcat_id']; ?>"
                                         data-toggle="modal" data-target="#confirm-delete">Xóa</a>
@@ -78,11 +78,30 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <a class="btn btn-danger btn-ok">Xóa</a>
+                <a class="btn btn-danger btn-ok" id="confirm-delete-btn">Xóa</a>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#confirm-delete-btn').click(function (e) {
+            e.preventDefault();
+            toastr.success("Xóa thành công!");
+            setTimeout(function () {
+                window.location.href = $('.btn-ok').attr('href');
+            }, 2000); // Chuyển hướng sau 2 giây
+        });
+    });
+    $(document).ready(function () {
+        $('.edit-btn').click(function (e) {
+            e.preventDefault();
+            toastr.info("Chuyển đến trang chỉnh sửa...");
+            setTimeout(() => {
+                window.location.href = $(this).attr('href');
+            }, 1500); // Chuyển hướng sau 1.5 giây
+        });
+    });
+</script>
 
 <?php require_once('footer.php'); ?>

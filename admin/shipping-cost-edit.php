@@ -5,7 +5,11 @@ if(isset($_POST['form1'])) {
 	$valid = 1;
     if(empty($_POST['province_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn một tỉnh<br>";
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn một tỉnh<br>');
+            });
+            </script>";
     } else {
 		// Kiểm tra tỉnh trùng lặp
     	// tỉnh hiện tại trong cơ sở dữ liệu
@@ -20,14 +24,22 @@ if(isset($_POST['form1'])) {
     	$total = $query->rowCount();							
     	if($total) {
     		$valid = 0;
-        	$errorMsg .= 'tỉnh này đã tồn tại<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tỉnh này đã tồn tại<br>');
+            });
+            </script>";
     	}
     }
     if($valid == 1) {    	
 		// Cập nhật vào cơ sở dữ liệu
 		$query = $pdo->prepare("UPDATE table_shipping_cost SET province_id=?,amount=? WHERE shipping_cost_id=?");
 		$query->execute(array($_POST['province_id'],$_POST['amount'],$_REQUEST['id']));
-    	$successMsg = 'Cập nhật chi phí vận chuyển thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Cập nhật chi phí vận chuyển thành công.');
+            });
+        </script>";
     }
 }
 ?>

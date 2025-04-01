@@ -38,7 +38,11 @@ if (isset($_POST['form1'])) {
         $query = $pdo->prepare("UPDATE table_settings SET logo=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Cập nhật logo thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Cập nhập Logo thành công');
+            });
+        </script>";
     }
 }
 // Thay đổi Favicon
@@ -50,14 +54,22 @@ if (isset($_POST['form2'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn một ảnh<br>');
+            });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn chỉ được tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>';
-        }
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn chỉ được tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>');
+            });
+        </script>";        
+    }
     }
 
     if ($valid == 1) {
@@ -78,7 +90,11 @@ if (isset($_POST['form2'])) {
         $query = $pdo->prepare("UPDATE table_settings SET favicon=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Cập nhật favicon thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Cập nhập Favicon thành công');
+            });
+        </script>";
     }
 }
 
@@ -95,7 +111,11 @@ if (isset($_POST['form3'])) {
         $_POST['contact_map_iframe']
     ));
 
-    $successMsg = 'Cập nhật cài đặt nội dung chung thành công.';
+    echo "<script>
+            $(document).ready(function() {
+                toastr.success('Cập nhật cài đặt nội dung chung thành công.');
+            });
+        </script>";
 }
 
 // Cài đặt Email
@@ -110,7 +130,11 @@ if (isset($_POST['form4'])) {
         $_POST['forget_password_message']
     ));
 
-    $successMsg = 'Cập nhật thông tin cài đặt biểu mẫu liên hệ thành công.';
+    echo "<script>
+    $(document).ready(function() {
+        toastr.success('Cập nhật thông tin cài đặt biểu mẫu liên hệ thành công.');
+    });
+</script>";
 }
 
 // Không thể hoàn thành phần này, để lại
@@ -127,7 +151,11 @@ if (isset($_POST['form5'])) {
         $total_popular_product
     ));
 
-    $successMsg = 'Cập nhật cài đặt thanh bên thành công.';
+    echo "<script>
+    $(document).ready(function() {
+        toastr.success('Cập nhật cài đặt thanh bên thành công.');
+    });
+</script>";
 }
 
 
@@ -147,11 +175,19 @@ if (isset($_POST['form6_0'])) {
         $popular_product_on_off
     ));
 
-    $successMsg = 'Cập nhật cài đặt bật/tắt các phần thành công.';
+    echo "<script>
+    $(document).ready(function() {
+        toastr.success('Cập nhật cài đặt bật/tắt các phần thành công.');
+    });
+</script>";
 }
 
 if (isset($_POST['form6'])) {
-    $successMsg = 'Cài đặt Meta trang chủ đã được cập nhật thành công.';
+    echo "<script>
+    $(document).ready(function() {
+        toastr.success('Cài đặt Meta trang chủ đã được cập nhật thành công.');
+    });
+</script>";
 }
 
 if (isset($_POST['form6_7'])) {
@@ -160,23 +196,36 @@ if (isset($_POST['form6_7'])) {
 
     if (empty($_POST['cta_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề Kêu gọi hành động không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Tiêu đề Kêu gọi hành động không được để trống<br>');
+        });
+        </script>";
+        }
 
     if (empty($_POST['cta_content'])) {
         $valid = 0;
-        $errorMsg .= 'Nội dung Kêu gọi hành động không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Nội dung Kêu gọi hành động không được để trống<br>');
+        });
+        </script>";    }
 
     if (empty($_POST['cta_read_more_text'])) {
         $valid = 0;
-        $errorMsg .= 'Văn bản "Đọc thêm" của Kêu gọi hành động không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Văn bản 'Đọc thêm' của Kêu gọi hành động không được để trống<br>');
+        });
+        </script>";    }
 
     if (empty($_POST['cta_read_more_url'])) {
         $valid = 0;
-        $errorMsg .= 'URL "Đọc thêm" của Kêu gọi hành động không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('URL 'Đọc thêm' của Kêu gọi hành động không được để trống<br>');
+        });
+        </script>";    }
 
     $path = $_FILES['cta_photo']['name'];
     $path_tmp = $_FILES['cta_photo']['tmp_name'];
@@ -186,8 +235,11 @@ if (isset($_POST['form6_7'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
-        }
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";        }
     }
 
     if ($valid == 1) {
@@ -226,8 +278,11 @@ if (isset($_POST['form6_7'])) {
             ));
         }
 
-        $successMsg = 'Dữ liệu Kêu gọi hành động đã được cập nhật thành công.';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Dữ liệu Kêu gọi hành động đã được cập nhật thành công.');
+        });
+    </script>";    }
 }
 if (isset($_POST['form6_5'])) {
 
@@ -235,13 +290,19 @@ if (isset($_POST['form6_5'])) {
 
     if (empty($_POST['latest_product_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề Sản phẩm Mới nhất không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Tiêu đề Sản phẩm Nổi bật không được để trống<br>');
+        });
+        </script>";    }
 
     if (empty($_POST['latest_product_subtitle'])) {
         $valid = 0;
-        $errorMsg .= 'Phụ đề Sản phẩm Mới nhất không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Phụ đề Sản phẩm Nổi bật không được để trống<br>');
+        });
+        </script>";    }
 
     if ($valid == 1) {
 
@@ -249,8 +310,11 @@ if (isset($_POST['form6_5'])) {
         $query = $pdo->prepare("UPDATE table_settings SET latest_product_title=?,latest_product_subtitle=? WHERE id=1");
         $query->execute(array($_POST['latest_product_title'], $_POST['latest_product_subtitle']));
 
-        $successMsg = 'Dữ liệu Sản phẩm Mới nhất đã được cập nhật thành công.';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Dữ liệu Sản phẩm Nổi bật đã được cập nhật thành công.');
+        });
+        </script>";    }
 }
 
 if (isset($_POST['form6_6'])) {
@@ -259,13 +323,19 @@ if (isset($_POST['form6_6'])) {
 
     if (empty($_POST['popular_product_title'])) {
         $valid = 0;
-        $errorMsg .= 'Tiêu đề Sản phẩm Phổ biến không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Tiêu đề Sản phẩm Mới nhất không được để trống<br>');
+        });
+        </script>";    }
 
     if (empty($_POST['popular_product_subtitle'])) {
         $valid = 0;
-        $errorMsg .= 'Phụ đề Sản phẩm Phổ biến không được để trống<br>';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Phụ đề Sản phẩm Mới nhất không được để trống<br>');
+        });
+        </script>";    }
 
     if ($valid == 1) {
 
@@ -273,8 +343,11 @@ if (isset($_POST['form6_6'])) {
         $query = $pdo->prepare("UPDATE table_settings SET popular_product_title=?,popular_product_subtitle=? WHERE id=1");
         $query->execute(array($_POST['popular_product_title'], $_POST['popular_product_subtitle']));
 
-        $successMsg = 'Dữ liệu Sản phẩm Phổ biến đã được cập nhật thành công.';
-    }
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Dữ liệu Sản phẩm Mới nhất đã được cập nhật thành công.');
+        });
+        </script>";    }
 }
 
 if (isset($_POST['form6_3'])) {
@@ -283,7 +356,11 @@ if (isset($_POST['form6_3'])) {
     $query = $pdo->prepare("UPDATE table_settings SET newsletter_text=? WHERE id=1");
     $query->execute(array($_POST['newsletter_text']));
 
-    $successMsg = 'Nội dung Bản tin đã được cập nhật thành công.';
+    echo "<script>
+        $(document).ready(function() {
+            toastr.success('Nội dung Bản tin đã được cập nhật thành công.');
+        });
+        </script>";
 }
 if (isset($_POST['form7_1'])) {
     $valid = 1;
@@ -293,13 +370,21 @@ if (isset($_POST['form7_1'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
-    } else {
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn 1 ảnh<br>');
+        });
+        </script>";
+        } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
         }
     }
 
@@ -321,7 +406,11 @@ if (isset($_POST['form7_1'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_login=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang đăng nhập đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang đăng nhập đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 
@@ -333,13 +422,21 @@ if (isset($_POST['form7_2'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn 1 ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -361,7 +458,11 @@ if (isset($_POST['form7_2'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_registration=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang đăng ký đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang đăng kí đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 
@@ -373,13 +474,21 @@ if (isset($_POST['form7_3'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -401,7 +510,11 @@ if (isset($_POST['form7_3'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_forget_password=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang quên mật khẩu đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang quên mật khẩu đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 
@@ -413,13 +526,21 @@ if (isset($_POST['form7_4'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
         }
     }
 
@@ -441,7 +562,11 @@ if (isset($_POST['form7_4'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_reset_password=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang đặt lại mật khẩu đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang đặt lại mật khẩu đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 if (isset($_POST['form7_6'])) {
@@ -452,13 +577,21 @@ if (isset($_POST['form7_6'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
         }
     }
 
@@ -480,7 +613,11 @@ if (isset($_POST['form7_6'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_search=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang tìm kiếm đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang tìm kiếm đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 
@@ -492,14 +629,21 @@ if (isset($_POST['form7_7'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
-        }
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
     }
 
     if ($valid == 1) {
@@ -520,10 +664,14 @@ if (isset($_POST['form7_7'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_cart=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang giỏ hàng đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang giỏ hàng đã được cập nhật thành công.');
+        });
+        </script>";
+    }
     }
 }
-
 if (isset($_POST['form7_8'])) {
     $valid = 1;
 
@@ -532,13 +680,21 @@ if (isset($_POST['form7_8'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
         }
     }
 
@@ -560,7 +716,11 @@ if (isset($_POST['form7_8'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_checkout=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Banner trang thanh toán đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Banner trang thanh toán đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 if (isset($_POST['form7_9'])) {
@@ -571,13 +731,21 @@ if (isset($_POST['form7_9'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
         }
     }
 
@@ -599,7 +767,11 @@ if (isset($_POST['form7_9'])) {
         $query = $pdo->prepare("UPDATE table_settings SET banner_product_category=? WHERE id=1");
         $query->execute(array($final_name));
 
-        $successMsg = 'Ảnh banner trang danh mục sản phẩm đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Ảnh banner trang danh mục sản phẩm đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 
@@ -611,13 +783,21 @@ if (isset($_POST['form7_10'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một ảnh<br>');
+        });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+        });
+        </script>";
         }
     }
 }

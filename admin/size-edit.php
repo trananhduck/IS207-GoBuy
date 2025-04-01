@@ -22,7 +22,11 @@ if (isset($_POST['form1'])) {
         $total = $query->rowCount();
         if ($total) {
             $valid = 0;
-            $errorMsg .= 'Tên kích thước đã tồn tại<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Tên kích thước đã tồn tại<br>');
+            });
+            </script>";
         }
     }
 
@@ -31,7 +35,11 @@ if (isset($_POST['form1'])) {
         $query = $pdo->prepare("UPDATE table_size SET size_name=? WHERE size_id=?");
         $query->execute(array($_POST['size_name'], $_REQUEST['id']));
 
-        $successMsg = 'Kích thước đã được cập nhật thành công.';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Kích thước đã được cập nhật thành công.');
+            });
+        </script>";
     }
 }
 ?>

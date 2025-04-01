@@ -15,7 +15,11 @@ if (isset($_POST['form1'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -39,7 +43,11 @@ if (isset($_POST['form1'])) {
             $query->execute(array($final_name, $_POST['heading'], $_POST['content'], $_POST['button_text'], $_POST['button_url'], $_POST['position'], $_REQUEST['id']));
         }
 
-        $successMsg = 'Cập nhật slider thành công!';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.success('Cập nhật slider thành công!');
+            });
+        </script>";
     }
 }
 ?>

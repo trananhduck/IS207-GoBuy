@@ -15,7 +15,11 @@ if (isset($_POST['form1'])) {
     $query = $pdo->prepare("UPDATE table_social SET social_url=? WHERE social_name=?");
     $query->execute(array($_POST['instagram'], 'Instagram'));
 
-    $successMsg = 'Các URL mạng xã hội đã được cập nhật thành công.';
+    echo "<script>
+            $(document).ready(function() {
+                toastr.success('Các URL mạng xã hội đã được cập nhật thành công.');
+            });
+        </script>";
 }
 ?>
 
