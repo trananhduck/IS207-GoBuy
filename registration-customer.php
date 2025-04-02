@@ -22,54 +22,51 @@ foreach ($result as $row) {
 if (isset($_POST['form1'])) {
 
     $valid = 1;
+    $errorMsg = '';
 
     if (empty($_POST['cust_name'])) {
         $valid = 0;
-        $errorMsg .= 'Tên khách hàng không được để trống';
+        $errorMsg .= 'Tên khách hàng không được để trống<br>';
+    }
+
+    // Kiểm tra giới tính
+    if (empty($_POST['cust_gender'])) {
+        $valid = 0;
+        $errorMsg .= 'Vui lòng chọn giới tính<br>';
+    }
+
+    // Kiểm tra năm sinh
+    if (empty($_POST['cust_birthyear'])) {
+        $valid = 0;
+        $errorMsg .= 'Vui lòng chọn năm sinh<br>';
     }
 
     if (empty($_POST['cust_email'])) {
         $valid = 0;
-        $errorMsg .= 'Địa chỉ email không được để trống';
+        $errorMsg .= 'Địa chỉ email không được để trống<br>';
     } else {
         if (filter_var($_POST['cust_email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $errorMsg .= 'Địa chỉ email phải hợp lệ';
+            $errorMsg .= 'Địa chỉ email phải hợp lệ<br>';
         } else {
             $querry = $pdo->prepare("SELECT * FROM table_customer WHERE cust_email=?");
             $querry->execute(array($_POST['cust_email']));
             $total = $querry->rowCount();
             if ($total) {
                 $valid = 0;
-                $errorMsg .= 'Địa chỉ email đã tồn tại';
+                $errorMsg .= 'Địa chỉ email đã tồn tại<br>';
             }
         }
     }
 
     if (empty($_POST['cust_phone'])) {
         $valid = 0;
-        $errorMsg .= 'Số điện thoại không được để trống';
+        $errorMsg .= 'Số điện thoại không được để trống<br>';
     }
-
-    if (empty($_POST['cust_province'])) {
-        $valid = 0;
-        $errorMsg .= 'Bạn phải chọn tỉnh/thành phố';
-    }
-
-    if (empty($_POST['cust_district'])) {
-        $valid = 0;
-        $errorMsg .= 'Bạn phải chọn quận/huyện';
-    }
-
-    if (empty($_POST['cust_address'])) {
-        $valid = 0;
-        $errorMsg .= 'Bạn phải chọn xã';
-    }
-
 
     if (empty($_POST['cust_password']) || empty($_POST['cust_re_password'])) {
         $valid = 0;
-        $errorMsg .= 'Mật khẩu không được để trống';
+        $errorMsg .= 'Mật khẩu không được để trống<br>';
     } else {
         $password = $_POST['cust_password'];
         $re_password = $_POST['cust_re_password'];
@@ -77,36 +74,28 @@ if (isset($_POST['form1'])) {
         // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
         if (strlen($password) < 6) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự';
+            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự<br>';
         }
 
         // Kiểm tra mật khẩu có đủ yêu cầu không
         elseif (!preg_match('/[A-Z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa';
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa<br>';
         } elseif (!preg_match('/[a-z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường';
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường<br>';
         } elseif (!preg_match('/\d/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số';
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số<br>';
         } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)';
+            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)<br>';
         }
 
         // Kiểm tra xác nhận mật khẩu
         elseif ($password !== $re_password) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu nhập lại không khớp';
-        }
-    }
-
-
-    if (!empty($_POST['cust_password']) && !empty($_POST['cust_re_password'])) {
-        if ($_POST['cust_password'] != $_POST['cust_re_password']) {
-            $valid = 0;
-            $errorMsg .= 'Mật khẩu không khớp';
+            $errorMsg .= 'Mật khẩu nhập lại không khớp<br>';
         }
     }
 
@@ -121,13 +110,13 @@ if (isset($_POST['form1'])) {
                                          cust_name,
                                          cust_email,
                                          cust_phone,
-                                         cust_province,
-                                         cust_district,
-                                         cust_address,
+                                         cust_gender,
+                                         cust_birthyear,
                                          cust_s_name,
                                          cust_s_phone,
                                          cust_s_province,
                                          cust_s_district,
+                                         cust_s_ward,
                                          cust_s_address,
                                          cust_password,
                                          cust_token,
@@ -140,9 +129,9 @@ if (isset($_POST['form1'])) {
             strip_tags($_POST['cust_name']),      // Tên khách hàng
             strip_tags($_POST['cust_email']),     // Email khách hàng
             strip_tags($_POST['cust_phone']),     // Số điện thoại khách hàng
-            strip_tags($_POST['cust_province']),   // Tỉnh/thành phố
-            strip_tags($_POST['cust_district']),   //quận/huyện
-            strip_tags($_POST['cust_address']),   // địa chỉ nhà
+            strip_tags($_POST['cust_gender']),    // Giới tính
+            strip_tags($_POST['cust_birthyear']), // Năm sinh
+            '',
             '',
             '',
             '',
@@ -208,9 +197,8 @@ if (isset($_POST['form1'])) {
         unset($_POST['cust_name']);
         unset($_POST['cust_email']);
         unset($_POST['cust_phone']);
-        unset($_POST['cust_province']);
-        unset($_POST['cust_district']);
-        unset($_POST['cust_address']);
+        unset($_POST['cust_gender']);
+        unset($_POST['cust_birthyear']);
         $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra địa chỉ email của bạn để làm theo quy trình xác nhận đăng ký của bạn.';
     }
 }
@@ -233,7 +221,7 @@ if (isset($_POST['form1'])) {
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
                                 <?php
-                                if ($errorMsg != '') {
+                                if (isset($errorMsg) && $errorMsg != '') {
                                     echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
                                 }
                                 ?>
@@ -244,12 +232,33 @@ if (isset($_POST['form1'])) {
                                                                                                     } ?>">
                                 </div>
 
-                                <div class="col-md-6 form-group">
-                                    <label for=""><?php echo 'Địa chỉ email' ?> *</label>
-                                    <input type="email" class="form-control" name="cust_email" value="<?php if (isset($_POST['cust_email'])) {
-                                                                                                            echo $_POST['cust_email'];
-                                                                                                        } ?>">
+                                <div class="col-md-3 form-group">
+                                    <label for="">Giới tính *</label>
+                                    <select class="form-control" name="cust_gender">
+                                        <option value="">Chọn giới tính</option>
+                                        <option value="Nam"
+                                            <?php if (isset($_POST['cust_gender']) && $_POST['cust_gender'] == "Nam") echo "selected"; ?>>
+                                            Nam</option>
+                                        <option value="Nữ"
+                                            <?php if (isset($_POST['cust_gender']) && $_POST['cust_gender'] == "Nữ") echo "selected"; ?>>
+                                            Nữ</option>
+                                    </select>
                                 </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label for="">Năm sinh *</label>
+                                    <select class="form-control" name="cust_birthyear">
+                                        <option value="">Chọn năm</option>
+                                        <?php
+                                        for ($year = 2024; $year >= 1950; $year--) {
+                                            echo "<option value='$year'";
+                                            if (isset($_POST['cust_birthyear']) && $_POST['cust_birthyear'] == $year) echo " selected";
+                                            echo ">$year</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Số điện thoại' ?> *</label>
                                     <input type="text" class="form-control" name="cust_phone" value="<?php if (isset($_POST['cust_phone'])) {
@@ -257,35 +266,11 @@ if (isset($_POST['form1'])) {
                                                                                                         } ?>">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label for=""><?php echo 'Tỉnh/thành phố' ?> *</label>
-                                    <select name="cust_province" class="form-control select1">
-                                        <option value="">Chọn tỉnh/thành phố</option>
-                                        <?php
-                                        $querry = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                        $querry->execute();
-                                        $result = $querry->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($result as $row) {
-                                        ?>
-                                        <option value="<?php echo $row['province_id']; ?>">
-                                            <?php echo $row['province_name']; ?></option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label for=""><?php echo 'Quận/huyện' ?> *</label>
-                                    <input type="text" class="form-control" name="cust_district" value="<?php if (isset($_POST['cust_district'])) {
-                                                                                                            echo $_POST['cust_district'];
+                                    <label for=""><?php echo 'Địa chỉ email' ?> *</label>
+                                    <input type="email" class="form-control" name="cust_email" value="<?php if (isset($_POST['cust_email'])) {
+                                                                                                            echo $_POST['cust_email'];
                                                                                                         } ?>">
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label for=""><?php echo 'Xã/thị trấn' ?> *</label>
-                                    <input type="text" class="form-control" name="cust_address" value="<?php if (isset($_POST['cust_address'])) {
-                                                                                                            echo $_POST['cust_address'];
-                                                                                                        } ?>">
-                                </div>
-
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
                                     <input type="password" class="form-control" name="cust_password">
@@ -313,6 +298,7 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
+
 
 <!-- Toast -->
 <div id="toast"></div>
@@ -379,12 +365,51 @@ function showToast(message, color = '#333') {
 </script>
 
 <?php
-
-if (!empty($successMsg)) {
+if (isset($successMsg) && !empty($successMsg)) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
         showToast(" . json_encode($successMsg) . ", '#2ecc71');
     });</script>";
 }
 ?>
+<script>
+// Script khởi tạo cho trang đăng ký
+document.addEventListener('DOMContentLoaded', function() {
+    // Đảm bảo rằng API đã được khởi tạo trong header.php
+    if (typeof initializeAddressSelects === 'function') {
+        initializeAddressSelects();
+    } else {
+        console.error('API địa chỉ chưa được khởi tạo đúng cách.');
+    }
 
+    // Xử lý lỗi khi submit form
+    <?php if ($errorMsg != ''): ?>
+    // Phục hồi dữ liệu đã chọn nếu có lỗi form
+    setTimeout(function() {
+        const provinceValue =
+            "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
+        const districtValue =
+            "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
+        const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
+
+        // Hiển thị lỗi trong select
+        if (provinceValue) {
+            document.getElementById('province-select').classList.add('error-field');
+        }
+        if (districtValue) {
+            document.getElementById('district-select').classList.add('error-field');
+        }
+        if (wardValue) {
+            document.getElementById('ward-select').classList.add('error-field');
+        }
+    }, 500);
+    <?php endif; ?>
+});
+</script>
+
+<style>
+/* Thêm style cho select khi có lỗi */
+.error-field {
+    border: 1px solid #f00 !important;
+}
+</style>
 <?php require_once('footer.php'); ?>

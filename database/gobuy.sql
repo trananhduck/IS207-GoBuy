@@ -90,13 +90,13 @@ CREATE TABLE `table_customer` (
   `cust_name` varchar(100) NOT NULL,
   `cust_email` varchar(100) NOT NULL,
   `cust_phone` varchar(50) NOT NULL,
-  `cust_province` int(11) NOT NULL,
-  `cust_district` varchar(100) NOT NULL,
-  `cust_address` text NOT NULL,
+  `cust_gender` ENUM('Nam', 'Nữ') NOT NULL, 
+  `cust_birthyear` year,
   `cust_s_name` varchar(100) NOT NULL,
-  `cust_s_phone` varchar(50) NOT NULL,
+  `cust_s_phone` varchar(50) NOT NULL, 
   `cust_s_province` int(11) NOT NULL,
-  `cust_s_district` varchar(100) NOT NULL,
+  `cust_s_district` INT(11) NOT NULL,
+  `cust_s_ward` INT(11) NOT NULL, 
   `cust_s_address` text NOT NULL,
   `cust_password` varchar(100) NOT NULL,
   `cust_token` text NOT NULL,
@@ -105,15 +105,6 @@ CREATE TABLE `table_customer` (
   `cust_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `table_customer`
---
-
-INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_province`, `cust_district`, `cust_address`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_address`, `cust_password`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
-(1, 'Nguyễn Văn A', 'vana@gmail.com', '0905123456', 1, 'ABC', '123 Đường Lê Lợi', 'Nguyễn Văn A', '0905123456', 29, 'ABC', '123 Đường Lê Lợi', '5f4dcc3b5aa765d61d8327deb882cf99', 'abc123token1', '2025-02-28 10:00:00', '1746031200', 1),
-(2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '0914345678', 2, 'XYZ', '456 Đường Trần Hưng Đạo', 'Trần Thị B', '1234', 11, 'XYZ', 'DEF', '5f4dcc3b5aa765d61d8327deb882cf99', 'xyz456token2', '2025-02-28 10:10:00', '1746031800', 1);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `table_customer_message`

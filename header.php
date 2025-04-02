@@ -147,6 +147,230 @@ foreach ($result as $row) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </head>
 
+<!-- Script API địa chỉ -->
+<script>
+    // API URLs
+    const API_PROVINCES = 'https://provinces.open-api.vn/api/p/';
+    const API_DISTRICTS = 'https://provinces.open-api.vn/api/p/{province_code}?depth=2';
+    const API_WARDS = 'https://provinces.open-api.vn/api/d/{district_code}?depth=2';
+
+    // Khởi tạo dữ liệu địa chỉ
+    let provincesData = [];
+    let districtsData = {};
+    let wardsData = {};
+
+    // Hàm tải dữ liệu tỉnh/thành phố
+    function loadProvinces() {
+        return fetch(API_PROVINCES)
+            .then(response => response.json())
+            .then(data => {
+                provincesData = data;
+                return data;
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải dữ liệu tỉnh/thành phố:', error);
+                return [];
+            });
+    }
+
+    // Hàm tải dữ liệu quận/huyện theo tỉnh
+    function loadDistricts(provinceCode) {
+        const url = API_DISTRICTS.replace('{province_code}', provinceCode);
+
+        // Kiểm tra xem đã tải dữ liệu cho tỉnh này chưa
+        if (districtsData[provinceCode]) {
+            return Promise.resolve(districtsData[provinceCode]);
+        }
+
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.districts) {
+                    districtsData[provinceCode] = data.districts;
+                    return data.districts;
+                }
+                return [];
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải dữ liệu quận/huyện:', error);
+                return [];
+            });
+    }
+
+    // Hàm tải dữ liệu xã/phường theo quận/huyện
+    function loadWards(districtCode) {
+        const url = API_WARDS.replace('{district_code}', districtCode);
+
+        // Kiểm tra xem đã tải dữ liệu cho quận/huyện này chưa
+        if (wardsData[districtCode]) {
+            return Promise.resolve(wardsData[districtCode]);
+        }
+
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.wards) {
+                    wardsData[districtCode] = data.wards;
+                    return data.wards;
+                }
+                return [];
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải dữ liệu xã/phường:', error);
+                return [];
+            });
+    }
+
+    // Các hàm điền dữ liệu vào select
+    function populateProvinceSelect(selectElement) {
+        // Xóa tất cả tùy chọn hiện tại (trừ option đầu tiên)
+        selectElement.innerHTML = '<option value="">Chọn tỉnh/thành phố</option>';
+
+        // Thêm các tùy chọn mới
+        provincesData.forEach(province => {
+            const option = document.createElement('option');
+            option.value = province.code;
+            option.textContent = province.name;
+            selectElement.appendChild(option);
+        });
+    }
+
+    function populateDistrictSelect(selectElement, provinceCode) {
+        // Xóa tất cả tùy chọn hiện tại
+        selectElement.innerHTML = '<option value="">Chọn quận/huyện</option>';
+
+        // Kiểm tra xem đã có dữ liệu chưa
+        if (!districtsData[provinceCode]) {
+            return;
+        }
+
+        // Thêm các tùy chọn mới
+        districtsData[provinceCode].forEach(district => {
+            const option = document.createElement('option');
+            option.value = district.code;
+            option.textContent = district.name;
+            selectElement.appendChild(option);
+        });
+    }
+
+    function populateWardSelect(selectElement, districtCode) {
+        // Xóa tất cả tùy chọn hiện tại
+        selectElement.innerHTML = '<option value="">Chọn xã/phường</option>';
+
+        // Kiểm tra xem đã có dữ liệu chưa
+        if (!wardsData[districtCode]) {
+            return;
+        }
+
+        // Thêm các tùy chọn mới
+        wardsData[districtCode].forEach(ward => {
+            const option = document.createElement('option');
+            option.value = ward.code;
+            option.textContent = ward.name;
+            selectElement.appendChild(option);
+        });
+    }
+
+    // Khởi tạo dữ liệu mặc định khi tải trang
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tải dữ liệu tỉnh/thành phố khi trang được tải
+        loadProvinces().then(() => {
+            // Kiểm tra xem có các phần tử select trên trang không
+            const provinceSelect = document.getElementById('province-select');
+            if (provinceSelect) {
+                populateProvinceSelect(provinceSelect);
+            }
+        });
+    });
+
+    // Khởi tạo sự kiện cho form đăng ký
+    function initializeAddressSelects() {
+        const provinceSelect = document.getElementById('province-select');
+        const districtSelect = document.getElementById('district-select');
+        const wardSelect = document.getElementById('ward-select');
+
+        if (provinceSelect && districtSelect && wardSelect) {
+            // Sự kiện thay đổi tỉnh/thành phố
+            provinceSelect.addEventListener('change', function() {
+                const provinceCode = this.value;
+                const provinceName = this.options[this.selectedIndex].text;
+
+                // Cập nhật trường input ẩn
+                if (document.querySelector('input[name="cust_province"]')) {
+                    document.querySelector('input[name="cust_province"]').value = provinceName;
+                }
+
+                // Tải dữ liệu quận/huyện
+                if (provinceCode) {
+                    loadDistricts(provinceCode).then(() => {
+                        populateDistrictSelect(districtSelect, provinceCode);
+                        // Reset dữ liệu xã/phường
+                        wardSelect.innerHTML = '<option value="">Chọn xã/phường</option>';
+                        if (document.querySelector('input[name="cust_district"]')) {
+                            document.querySelector('input[name="cust_district"]').value = '';
+                        }
+                        if (document.querySelector('input[name="cust_address"]')) {
+                            document.querySelector('input[name="cust_address"]').value = '';
+                        }
+                    });
+                } else {
+                    districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+                    wardSelect.innerHTML = '<option value="">Chọn xã/phường</option>';
+                }
+            });
+
+            // Sự kiện thay đổi quận/huyện
+            districtSelect.addEventListener('change', function() {
+                const districtCode = this.value;
+                const districtName = this.options[this.selectedIndex].text;
+
+                // Cập nhật trường input ẩn
+                if (document.querySelector('input[name="cust_district"]')) {
+                    document.querySelector('input[name="cust_district"]').value = districtName;
+                }
+
+                // Tải dữ liệu xã/phường
+                if (districtCode) {
+                    loadWards(districtCode).then(() => {
+                        populateWardSelect(wardSelect, districtCode);
+                        if (document.querySelector('input[name="cust_address"]')) {
+                            document.querySelector('input[name="cust_address"]').value = '';
+                        }
+                    });
+                } else {
+                    wardSelect.innerHTML = '<option value="">Chọn xã/phường</option>';
+                }
+            });
+
+            // Sự kiện thay đổi xã/phường
+            wardSelect.addEventListener('change', function() {
+                const wardName = this.options[this.selectedIndex].text;
+
+                // Cập nhật trường input ẩn
+                if (document.querySelector('input[name="cust_address"]')) {
+                    document.querySelector('input[name="cust_address"]').value = wardName;
+                }
+            });
+
+            // Khởi tạo dữ liệu tỉnh/thành phố
+            loadProvinces().then(() => {
+                populateProvinceSelect(provinceSelect);
+            });
+        }
+    }
+
+    // Biến toàn cục để kiểm tra trang hiện tại
+    window.isRegistrationPage = false;
+
+    // Kiểm tra xem đang ở trang registration-customer.php không
+    if (window.location.href.includes('registration-customer.php')) {
+        window.isRegistrationPage = true;
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAddressSelects();
+        });
+    }
+</script>
+
 <body>
     <div class="top">
         <div class="container">
