@@ -122,76 +122,38 @@ if (isset($_POST['form1'])) {
                                 <input type="text" class="form-control" name="cust_s_phone" id="cust_s_phone"
                                     value="<?php echo isset($_SESSION['customer']['cust_s_phone']) ? $_SESSION['customer']['cust_s_phone'] : ''; ?>">
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for=""><?php echo 'Tỉnh/thành phố' ?> *</label>
-                                <select name="cust_s_province" class="form-control select-province"
-                                    id="province-select">
+                                <label for=""><?php echo 'Tỉnh/Thành phố' ?> *</label>
+                                <select name="province-select" id="province-select" class="form-control" required>
                                     <option value="">Chọn tỉnh/thành phố</option>
-                                    <?php
-                                    $query = $pdo->prepare("SELECT * FROM table_province ORDER BY province_name ASC");
-                                    $query->execute();
-                                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($result as $row) {
-                                    ?>
-                                        <option value="<?php echo $row['province_id']; ?>" <?php if (isset($_SESSION['customer']['cust_s_province']) && $row['province_id'] == $_SESSION['customer']['cust_s_province']) {
-                                                                                                echo 'selected';
-                                                                                            } ?>>
-                                            <?php echo $row['province_name']; ?>
-                                        </option>
-                                    <?php
-                                    }
-                                    ?>
                                 </select>
+                                <input type="hidden" name="cust_s_province" id="cust_s_province"
+                                    value="<?php echo isset($_SESSION['customer']['cust_s_province']) ? $_SESSION['customer']['cust_s_province'] : ''; ?>">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for=""><?php echo 'Quận/huyện' ?> *</label>
-                                <select name="cust_s_district" class="form-control select-district"
-                                    id="district-select">
+                                <label for=""><?php echo 'Quận/Huyện' ?> *</label>
+                                <select name="district-select" id="district-select" class="form-control" required>
                                     <option value="">Chọn quận/huyện</option>
-                                    <?php
-                                    if (isset($_SESSION['customer']['cust_s_province']) && !empty($_SESSION['customer']['cust_s_province'])) {
-                                        $query = $pdo->prepare("SELECT * FROM table_district WHERE province_id = ? ORDER BY district_name ASC");
-                                        $query->execute(array($_SESSION['customer']['cust_s_province']));
-                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($result as $row) {
-                                    ?>
-                                            <option value="<?php echo $row['district_id']; ?>" <?php if (isset($_SESSION['customer']['cust_s_district']) && $row['district_id'] == $_SESSION['customer']['cust_s_district']) {
-                                                                                                    echo 'selected';
-                                                                                                } ?>>
-                                                <?php echo $row['district_name']; ?>
-                                            </option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
                                 </select>
+                                <input type="hidden" name="cust_s_district" id="cust_s_district"
+                                    value="<?php echo isset($_SESSION['customer']['cust_s_district']) ? $_SESSION['customer']['cust_s_district'] : ''; ?>">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for=""><?php echo 'Xã/phường' ?> *</label>
-                                <select name="cust_s_ward" class="form-control select-ward" id="ward-select">
+                                <label for=""><?php echo 'Xã/Phường' ?> *</label>
+                                <select name="ward-select" id="ward-select" class="form-control" required>
                                     <option value="">Chọn xã/phường</option>
-                                    <?php
-                                    if (isset($_SESSION['customer']['cust_s_district']) && !empty($_SESSION['customer']['cust_s_district'])) {
-                                        $query = $pdo->prepare("SELECT * FROM table_ward WHERE district_id = ? ORDER BY ward_name ASC");
-                                        $query->execute(array($_SESSION['customer']['cust_s_district']));
-                                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach ($result as $row) {
-                                    ?>
-                                            <option value="<?php echo $row['ward_id']; ?>" <?php if (isset($_SESSION['customer']['cust_s_ward']) && $row['ward_id'] == $_SESSION['customer']['cust_s_ward']) {
-                                                                                                echo 'selected';
-                                                                                            } ?>>
-                                                <?php echo $row['ward_name']; ?>
-                                            </option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
                                 </select>
+                                <input type="hidden" name="cust_s_ward" id="cust_s_ward"
+                                    value="<?php echo isset($_SESSION['customer']['cust_s_ward']) ? $_SESSION['customer']['cust_s_ward'] : ''; ?>">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for=""><?php echo 'Địa chỉ' ?> *</label>
+                                <label for=""><?php echo 'Địa chỉ chi tiết' ?> *</label>
                                 <input type="text" class="form-control" name="cust_s_address" id="cust_s_address"
-                                    value="<?php echo isset($_SESSION['customer']['cust_s_address']) ? $_SESSION['customer']['cust_s_address'] : ''; ?>">
+                                    value="<?php echo isset($_SESSION['customer']['cust_s_address']) ? $_SESSION['customer']['cust_s_address'] : ''; ?>"
+                                    placeholder="Số nhà, tên đường, tổ, khu phố,...">
                             </div>
                         </div>
                         <input type="submit" class="btn btn-primary" value="<?php echo 'Cập nhật' ?>" name="form1">
@@ -201,12 +163,18 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
+
 <script>
-    // Script khởi tạo cho trang đăng ký
+    // Script khởi tạo cho trang cập nhật thông tin giao hàng
     document.addEventListener('DOMContentLoaded', function() {
         // Đảm bảo rằng API đã được khởi tạo trong header.php
         if (typeof initializeAddressSelects === 'function') {
             initializeAddressSelects();
+
+            // Thiết lập các giá trị đã lưu
+            setTimeout(function() {
+                setupSavedAddressValues();
+            }, 1000); // Đợi 1 giây để API load xong
         } else {
             console.error('API địa chỉ chưa được khởi tạo đúng cách.');
         }
@@ -223,6 +191,7 @@ if (isset($_POST['form1'])) {
                     "<?php echo isset($_POST['cust_s_ward']) ? $_POST['cust_s_ward'] : ''; ?>";
                 const addressValue =
                     "<?php echo isset($_POST['cust_s_address']) ? $_POST['cust_s_address'] : ''; ?>";
+
                 // Hiển thị lỗi trong select
                 if (provinceValue === '') {
                     document.getElementById('province-select').classList.add('error-field');
@@ -238,8 +207,74 @@ if (isset($_POST['form1'])) {
                 }
             }, 500);
         <?php endif; ?>
+
+        // Sự kiện thay đổi tỉnh/thành phố
+        document.getElementById('province-select').addEventListener('change', function() {
+            const provinceName = this.options[this.selectedIndex].text;
+            document.getElementById('cust_s_province').value = provinceName;
+        });
+
+        // Sự kiện thay đổi quận/huyện
+        document.getElementById('district-select').addEventListener('change', function() {
+            const districtName = this.options[this.selectedIndex].text;
+            document.getElementById('cust_s_district').value = districtName;
+        });
+
+        // Sự kiện thay đổi xã/phường
+        document.getElementById('ward-select').addEventListener('change', function() {
+            const wardName = this.options[this.selectedIndex].text;
+            document.getElementById('cust_s_ward').value = wardName;
+        });
     });
+
+    // Hàm thiết lập các giá trị đã lưu
+    function setupSavedAddressValues() {
+        const savedProvince =
+            "<?php echo isset($_SESSION['customer']['cust_s_province']) ? $_SESSION['customer']['cust_s_province'] : ''; ?>";
+        const savedDistrict =
+            "<?php echo isset($_SESSION['customer']['cust_s_district']) ? $_SESSION['customer']['cust_s_district'] : ''; ?>";
+        const savedWard =
+            "<?php echo isset($_SESSION['customer']['cust_s_ward']) ? $_SESSION['customer']['cust_s_ward'] : ''; ?>";
+
+        if (savedProvince) {
+            // Tìm tỉnh/thành phố đã lưu trong danh sách
+            const provinceSelect = document.getElementById('province-select');
+            for (let i = 0; i < provinceSelect.options.length; i++) {
+                if (provinceSelect.options[i].text === savedProvince) {
+                    provinceSelect.selectedIndex = i;
+                    const event = new Event('change');
+                    provinceSelect.dispatchEvent(event);
+
+                    // Đợi load xong quận/huyện để thiết lập giá trị
+                    setTimeout(function() {
+                        const districtSelect = document.getElementById('district-select');
+                        for (let j = 0; j < districtSelect.options.length; j++) {
+                            if (districtSelect.options[j].text === savedDistrict) {
+                                districtSelect.selectedIndex = j;
+                                districtSelect.dispatchEvent(new Event('change'));
+
+                                // Đợi load xong xã/phường để thiết lập giá trị
+                                setTimeout(function() {
+                                    const wardSelect = document.getElementById('ward-select');
+                                    for (let k = 0; k < wardSelect.options.length; k++) {
+                                        if (wardSelect.options[k].text === savedWard) {
+                                            wardSelect.selectedIndex = k;
+                                            wardSelect.dispatchEvent(new Event('change'));
+                                            break;
+                                        }
+                                    }
+                                }, 500);
+                                break;
+                            }
+                        }
+                    }, 500);
+                    break;
+                }
+            }
+        }
+    }
 </script>
+
 <style>
     /* Thêm style cho select và input khi có lỗi */
     .error-field {
