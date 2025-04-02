@@ -549,13 +549,18 @@ Responsive cho Mobile
 }
 
 .product .item {
-  border: 2px solid #e5e5e5;
+  border: 2px solid #9d9d9d;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
 }
-
+.product .item:hover {
+  transform: translateY(-5px);
+}
 .product .text {
   background: #f2f3f3;
   padding: 14px;
   overflow: hidden;
+  border-radius: 0 0 10px 10px;
 }
 
 .product .text del {
@@ -573,8 +578,8 @@ Responsive cho Mobile
 
 .product .text h3 a {
   color: #333;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 17px;
   line-height: 1.5;
 }
 
@@ -600,7 +605,7 @@ Responsive cho Mobile
 
 .product .text h4 span {
   font-size: 35px;
-  color: #d32f2f; /* Màu đỏ đậm hơn */
+  color: #d32f2f; 
   font-weight: 500;
   margin: auto;
 }
@@ -621,17 +626,154 @@ Responsive cho Mobile
   margin-bottom: 14px;
 }
 
-.product .text p a {
+/* .product .text p a {
   background: #e7a340;
   color: #fff;
   font-size: 14px;
   padding: 6px 10px;
   transition: all 0.4s ease;
-}
+} */
 .product .out-of-stock {
   width: 100%;
   text-align: center;
 }
+.product .thumb {
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+}
+.product .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+}
+.product .thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0 ;
+}
+.product h3 a {
+  color: #FFA500;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.product h3 a:hover {
+  color: #ff7300;
+}
+.product p a {
+  display: inline-block;
+  background: #FFA500;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.product p a:hover {
+  background: #ff7300;
+}
+/* .product .item {
+  background: #222;
+  border-radius: 10px;
+  padding: 15px;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.product .item:hover {
+  transform: translateY(-5px);
+}
+
+.product .thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.product .photo {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.product .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s;
+}
+
+.product .item:hover .overlay {
+  opacity: 0;
+}
+
+.product .text {
+  padding: 15px;
+  text-align: center;
+}
+
+.product h3 a {
+  color: #FFA500;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.product h3 a:hover {
+  color: #ff7300;
+}
+
+.product h4 {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.product h4 del {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.product h4 span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+.product h4 del span{
+  font-size: 14px;
+  color: #ccc;
+}
+.product .rating {
+  margin-top: 10px;
+}
+
+.product p a {
+  display: inline-block;
+  background: #FFA500;
+  color: #222;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.product p a:hover {
+  background: #ff7300;
+} */
 
 .product .out-of-stock .inner {
   display: inline-block;
@@ -648,7 +790,7 @@ Responsive cho Mobile
 }
 
 .product .text p a:hover {
-  background: #333;
+  background: #ff7300;
 }
 
 .product .item .thumb {
@@ -682,10 +824,22 @@ Responsive cho Mobile
 .product .item-product-cat {
   border: 0;
 }
-.product .item-product-cat .inner {
+/* .product .item-product-cat .inner {
   border: 2px solid #e5e5e5;
+} */
+.product .item-product-cat .inner {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;  border-radius: 10px;
+  padding: 15px;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.product .inner:hover .overlay {
+  opacity: 0;
+}
 .product .item-search-result {
   border: 0;
 }
