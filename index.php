@@ -194,64 +194,29 @@ foreach ($result as $row) {
                                         $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
                                         $query1->execute(array($row['p_id']));
                                         $tot_rating = $query1->rowCount();
+
                                         if ($tot_rating == 0) {
                                             $avg_rating = 0;
                                         } else {
                                             $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
-                                                $t_rating = $t_rating + $row1['rating'];
+                                                $t_rating += $row1['rating'];
                                             }
                                             $avg_rating = $t_rating / $tot_rating;
                                         }
-                                        ?>
-                                <?php
-                                        if ($avg_rating == 0) {
-                                            echo '';
-                                        } elseif ($avg_rating == 1.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                        } elseif ($avg_rating == 2.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                        } elseif ($avg_rating == 3.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                        } elseif ($avg_rating == 4.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        ';
-                                        } else {
-                                            for ($i = 1; $i <= 5; $i++) {
-                                        ?>
-                                <?php if ($i > $avg_rating): ?>
-                                <i class="fa fa-star-o"></i>
-                                <?php else: ?>
-                                <i class="fa fa-star"></i>
-                                <?php endif; ?>
-                                <?php
+
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $avg_rating) {
+                                                echo '<i class="fa fa-star rated"></i>';
+                                            } elseif ($i - 0.5 <= $avg_rating) {
+                                                echo '<i class="fa fa-star-half-o rated"></i>';
+                                            } else {
+                                                echo '<i class="fa fa-star-o"></i>';
                                             }
                                         }
                                         ?>
                             </div>
+
                             <?php if ($row['p_qty'] == 0): ?>
                             <div class="out-of-stock">
                                 <div class="inner">
@@ -326,60 +291,24 @@ foreach ($result as $row) {
                                         $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
                                         $query1->execute(array($row['p_id']));
                                         $tot_rating = $query1->rowCount();
+
                                         if ($tot_rating == 0) {
                                             $avg_rating = 0;
                                         } else {
                                             $result1 = $query1->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($result1 as $row1) {
-                                                $t_rating = $t_rating + $row1['rating'];
+                                                $t_rating += $row1['rating'];
                                             }
                                             $avg_rating = $t_rating / $tot_rating;
                                         }
-                                        ?>
-                                <?php
-                                        if ($avg_rating == 0) {
-                                            echo '';
-                                        } elseif ($avg_rating == 1.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                        } elseif ($avg_rating == 2.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                        } elseif ($avg_rating == 3.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                        } elseif ($avg_rating == 4.5) {
-                                            echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        ';
-                                        } else {
-                                            for ($i = 1; $i <= 5; $i++) {
-                                        ?>
-                                <?php if ($i > $avg_rating): ?>
-                                <i class="fa fa-star-o"></i>
-                                <?php else: ?>
-                                <i class="fa fa-star"></i>
-                                <?php endif; ?>
-                                <?php
+
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= $avg_rating) {
+                                                echo '<i class="fa fa-star rated"></i>';
+                                            } elseif ($i - 0.5 <= $avg_rating) {
+                                                echo '<i class="fa fa-star-half-o rated"></i>';
+                                            } else {
+                                                echo '<i class="fa fa-star-o"></i>';
                                             }
                                         }
                                         ?>

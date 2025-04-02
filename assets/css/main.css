@@ -786,7 +786,22 @@ Responsive cho Mobile
 }
 
 .product .text .rating {
-  text-align: center;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  color: rgb(227, 162, 50);
+  gap: 5px; 
+}
+
+.product .text .rating i {
+  font-size: 24px; 
+}
+
+
+.product .p-review .rating i {
+  font-size: 24px;
+  margin-right: 5px; 
+  color: rgb(227, 162, 50);
 }
 
 .product .text p a:hover {

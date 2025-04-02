@@ -353,49 +353,13 @@ if ($successMsg1 != '') {
                             <div class="p-review">
                                 <div class="rating">
                                     <?php
-                                    if ($avg_rating == 0) {
-                                        echo '';
-                                    } elseif ($avg_rating == 1.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                    } elseif ($avg_rating == 2.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                    } elseif ($avg_rating == 3.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                    } elseif ($avg_rating == 4.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        ';
-                                    } else {
-                                        for ($i = 1; $i <= 5; $i++) {
-                                    ?>
-                                            <?php if ($i > $avg_rating): ?>
-                                                <i class="fa fa-star-o"></i>
-                                            <?php else: ?>
-                                                <i class="fa fa-star"></i>
-                                            <?php endif; ?>
-                                    <?php
+                                    for ($i = 1; $i <= 5; $i++) {
+                                        if ($i <= floor($avg_rating)) {
+                                            echo '<i class="fa fa-star"></i>';
+                                        } elseif ($i - 0.5 == $avg_rating) {
+                                            echo '<i class="fa fa-star-half-o"></i>';
+                                        } else {
+                                            echo '<i class="fa fa-star-o"></i>';
                                         }
                                     }
                                     ?>
@@ -696,53 +660,18 @@ if ($successMsg1 != '') {
                                 </h4>
                                 <div class="rating">
                                     <?php
-                                    if ($avg_rating == 0) {
-                                        echo '';
-                                    } elseif ($avg_rating == 1.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                    } elseif ($avg_rating == 2.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                    } elseif ($avg_rating == 3.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        ';
-                                    } elseif ($avg_rating == 4.5) {
-                                        echo '
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        ';
-                                    } else {
-                                        for ($i = 1; $i <= 5; $i++) {
-                                    ?>
-                                            <?php if ($i > $avg_rating): ?>
-                                                <i class="fa fa-star-o"></i>
-                                            <?php else: ?>
-                                                <i class="fa fa-star"></i>
-                                            <?php endif; ?>
-                                    <?php
+                                    for ($i = 1; $i <= 5; $i++) {
+                                        if ($i <= $avg_rating) {
+                                            echo '<i class="fa fa-star rated"></i>'; // Sao đã đánh giá (màu vàng)
+                                        } elseif ($i - 0.5 <= $avg_rating) {
+                                            echo '<i class="fa fa-star-half-o rated"></i>'; // Nửa sao
+                                        } else {
+                                            echo '<i class="fa fa-star-o"></i>'; // Sao chưa đánh giá
                                         }
                                     }
                                     ?>
                                 </div>
+
                                 <p><a
                                         href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo 'Thêm vào giỏ hàng'; ?></a>
                                 </p>
