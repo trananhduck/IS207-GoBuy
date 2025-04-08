@@ -252,7 +252,8 @@ if (isset($_POST['clear_all'])) {
             <button type="submit" name="export_excel" class="btn btn-success">Xuất Excel</button>
             <input type="file" name="excel_file" id="excel_file" accept=".xlsx, .xls" style="display: none;">
             <button type="button" id="import_button" class="btn btn-success">Nhập Excel</button>
-            <button type="submit" id="import_excel" name="import_excel" class="btn btn-success" style="display: none;">Xác nhận nhập</button>
+            <button type="submit" id="import_excel" name="import_excel" class="btn btn-success"
+                style="display: none;">Xác nhận nhập</button>
         </form>
         <a href="product-add.php" class="btn btn-primary btn-sm">Thêm Sản Phẩm</a>
     </div>
@@ -297,8 +298,8 @@ if (isset($_POST['clear_all'])) {
                                     <td><img src="../assets/uploads/product_photos/<?= $row['p_featured_photo']; ?>"
                                             alt="<?= $row['p_name']; ?>" style="width:80px;"></td>
                                     <td><?= $row['p_name']; ?></td>
-                                    <td>$<?= $row['p_old_price']; ?></td>
-                                    <td>$<?= $row['p_current_price']; ?></td>
+                                    <td><?= $row['p_old_price']; ?>VND</td>
+                                    <td>$<?= $row['_current_price']; ?>VND</td>
                                     <td><?= $row['p_qty']; ?></td>
                                     <td><span class="badge"
                                             style="background-color:<?= $row['p_is_featured'] ? 'green' : 'red'; ?>;"><?= $row['p_is_featured'] ? 'Có' : 'Không'; ?></span>
