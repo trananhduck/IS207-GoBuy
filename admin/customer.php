@@ -1,6 +1,7 @@
 <?php require_once('header.php'); ?>
 <?php
-require_once '../vendor/autoload.php'; 
+require_once '../vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -8,7 +9,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
-    
+
     // Thiết lập tiêu đề cột
     $sheet->setCellValue('A1', 'ID');
     $sheet->setCellValue('B1', 'Tên Khách Hàng');
@@ -16,40 +17,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
     $sheet->setCellValue('D1', 'Số Điện Thoại');
     $sheet->setCellValue('E1', 'Tỉnh/Thành Phố');
     $sheet->setCellValue('F1', 'Quận/Huyện');
-    $sheet->setCellValue('G1', 'Địa Chỉ');
-    $sheet->setCellValue('H1', 'Trạng Thái');
-    
+    $sheet->setCellValue('G1', 'Phường/Xã');
+    $sheet->setCellValue('H1', 'Địa Chỉ');
+    $sheet->setCellValue('I1', 'Trạng Thái');
+
     // Lấy dữ liệu từ database, bao gồm cả khách hàng không hoạt động
-    $stmt = $pdo->prepare("SELECT t1.*, t2.province_name 
-                           FROM table_customer t1
-                           LEFT JOIN table_province t2 ON t1.cust_province = t2.province_id");
+    $stmt = $pdo->prepare("SELECT t1.* FROM table_customer t1");
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
     // Đổ dữ liệu vào bảng
     $rowIndex = 2;
     foreach ($rows as $row) {
         $status = ($row['cust_status'] == 1) ? 'Hoạt động' : 'Không hoạt động';
-        
+
         $sheet->setCellValue("A$rowIndex", $row['cust_id']);
-        $sheet->setCellValue("B$rowIndex", $row['cust_name']);
+        $sheet->setCellValue("B$rowIndex", $row['cust_s_name']);
         $sheet->setCellValue("C$rowIndex", $row['cust_email']);
-        $sheet->setCellValue("D$rowIndex", $row['cust_phone']);
-        $sheet->setCellValue("E$rowIndex", $row['province_name']);
-        $sheet->setCellValue("F$rowIndex", $row['cust_district']);
-        $sheet->setCellValue("G$rowIndex", $row['cust_address']);
-        $sheet->setCellValue("H$rowIndex", $status);
-        
+        $sheet->setCellValue("D$rowIndex", $row['cust_s_phone']);
+        $sheet->setCellValue("E$rowIndex", $row['cust_s_province']);
+        $sheet->setCellValue("F$rowIndex", $row['cust_s_district']);
+        $sheet->setCellValue("G$rowIndex", $row['cust_s_ward']);
+        $sheet->setCellValue("H$rowIndex", $row['cust_s_address']);
+        $sheet->setCellValue("I$rowIndex", $status);
+
         $rowIndex++;
     }
-    
+
     // Xuất file Excel
     ob_end_clean();
     ob_start();
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment; filename="customer_list.xlsx"');
     header('Cache-Control: max-age=0');
-    
+
     $writer = new Xlsx($spreadsheet);
     $writer->save('php://output');
     exit();
@@ -90,11 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
                             <?php
                             $i = 0;
                             // Truy vấn lấy danh sách khách hàng và thông tin quốc gia của họ
-                            $query = $pdo->prepare("SELECT * 
-                                                        FROM table_customer t1
-                                                        JOIN table_province t2
-                                                        ON t1.cust_province = t2.province_id
-                                                    ");
+                            $query = $pdo->prepare("SELECT * FROM table_customer");
                             $query->execute();
                             $result = $query->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($result as $row) {
@@ -106,12 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
                                                 echo 'bg-r';
                                             } ?>">
                                     <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['cust_name']; ?></td>
+                                    <td><?php echo $row['cust_s_name']; ?></td>
                                     <td><?php echo $row['cust_email']; ?></td>
                                     <td>
-                                        <?php echo $row['province_name']; ?><br>
-                                        <?php echo $row['cust_district']; ?><br>
-                                        <?php echo $row['cust_address']; ?><br>
+                                        <?php echo $row['cust_s_address']; ?>,
+                                        <?php echo $row['cust_s_ward']; ?>,
+                                        <?php echo $row['cust_s_district']; ?>,
+                                        <?php echo $row['cust_s_province']; ?>
                                     </td>
                                     <td><?php if ($row['cust_status'] == 1) {
                                             echo 'Hoạt động';
@@ -160,20 +158,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $('.confirm-btn').click(function (e) {
+    $(document).ready(function() {
+        $('.confirm-btn').click(function(e) {
             e.preventDefault();
             toastr.success("Xóa thành công!");
-            setTimeout(function () {
+            setTimeout(function() {
                 window.location.href = $('.btn-ok').attr('href');
             }, 2000); // Chuyển hướng sau 2 giây
         });
     });
-    $(document).ready(function () {
-        $('.confirm-btn').click(function (e) {
+    $(document).ready(function() {
+        $('.confirm-btn').click(function(e) {
             e.preventDefault();
             toastr.success("Cập nhập thành công!");
-            setTimeout(function () {
+            setTimeout(function() {
                 window.location.href = $('.btn-xs').attr('href');
             }, 2000); // Chuyển hướng sau 2 giây
         });

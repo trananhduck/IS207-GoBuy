@@ -56,6 +56,12 @@ if (isset($_POST['form1'])) {
     }
 
     if ($valid == 1) {
+        // Lấy tên tỉnh/huyện/xã từ các field ẩn
+        $provinceName = strip_tags($_POST['cust_s_province']);
+        $districtName = strip_tags($_POST['cust_s_district']);
+        $wardName = strip_tags($_POST['cust_s_ward']);
+        $address = strip_tags($_POST['cust_s_address']);
+
         // Cập nhật dữ liệu vào cơ sở dữ liệu
         $query = $pdo->prepare("UPDATE table_customer SET  
                                 cust_s_name=?, 
@@ -68,10 +74,10 @@ if (isset($_POST['form1'])) {
         $query->execute(array(
             strip_tags($_POST['cust_s_name']),
             strip_tags($_POST['cust_s_phone']),
-            strip_tags($_POST['cust_s_province']),
-            strip_tags($_POST['cust_s_district']),
-            strip_tags($_POST['cust_s_ward']),
-            strip_tags($_POST['cust_s_address']),
+            $provinceName,
+            $districtName,
+            $wardName,
+            $address,
             $_SESSION['customer']['cust_id']
         ));
 
@@ -80,10 +86,10 @@ if (isset($_POST['form1'])) {
         // Cập nhật thông tin vào session
         $_SESSION['customer']['cust_s_name'] = strip_tags($_POST['cust_s_name']);
         $_SESSION['customer']['cust_s_phone'] = strip_tags($_POST['cust_s_phone']);
-        $_SESSION['customer']['cust_s_province'] = strip_tags($_POST['cust_s_province']);
-        $_SESSION['customer']['cust_s_district'] = strip_tags($_POST['cust_s_district']);
-        $_SESSION['customer']['cust_s_ward'] = strip_tags($_POST['cust_s_ward']);
-        $_SESSION['customer']['cust_s_address'] = strip_tags($_POST['cust_s_address']);
+        $_SESSION['customer']['cust_s_province'] = $provinceName;
+        $_SESSION['customer']['cust_s_district'] = $districtName;
+        $_SESSION['customer']['cust_s_ward'] = $wardName;
+        $_SESSION['customer']['cust_s_address'] = $address;
     }
     error_log('Form submitted. Updated data successfully.');
 }
