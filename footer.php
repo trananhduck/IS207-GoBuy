@@ -31,7 +31,21 @@ foreach ($result as $row) {
         </div>
         <div class="footer-bottom-info">
             <p>© <?php echo htmlspecialchars($footer_copyright); ?></p>
-
+            <ul class="social">
+                <?php
+                $query = $pdo->prepare("SELECT * FROM table_social");
+                $query->execute();
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($result as $row) {
+                ?>
+                    <?php if ($row['social_url'] != ''): ?>
+                        <li><a href="<?php echo $row['social_url']; ?>"><i
+                                    class="<?php echo $row['social_icon']; ?>"></i></a></li>
+                    <?php endif; ?>
+                <?php
+                }
+                ?>
+            </ul>
         </div>
     </div>
     <a href="#" class="scrollup">

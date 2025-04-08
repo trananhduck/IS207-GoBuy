@@ -26,7 +26,7 @@ select.form-control {
   padding-top: 2px;
 }
 
-.navbar-nav > .admin-menu .admin-image {
+.navbar-nav>.admin-menu .admin-image {
   width: 30px;
   height: 30px;
   margin-top: -10px;
@@ -37,21 +37,25 @@ select.form-control {
 .login-logo {
   font-size: 20px;
 }
+
 .login-logo b {
   font-size: 28px;
 }
 
-.content-header > h1,
+.content-header>h1,
 .content-header .content-header-left h1 {
   font-family: "Roboto", sans-serif;
 }
+
 .main-header .logo {
   text-align: left;
 }
+
 .main-header .logo .logo-lg {
   font-family: "Roboto", sans-serif;
 }
-.sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
+
+.sidebar-mini.sidebar-collapse .main-header .logo>.logo-mini {
   margin-left: 0;
 }
 
@@ -86,12 +90,12 @@ select.form-control {
   padding-top: 20px;
 }
 
-.content-header > h1 {
+.content-header>h1 {
   position: relative;
   padding-left: 30px;
 }
 
-.content-header > h1:before {
+.content-header>h1:before {
   position: absolute;
   top: 0;
   left: 0;
@@ -100,14 +104,14 @@ select.form-control {
   content: "\f18e";
 }
 
-.sidebar-menu li.active > a > .pull-right-container > .fa-angle-left {
+.sidebar-menu li.active>a>.pull-right-container>.fa-angle-left {
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 
-.sidebar-menu li > a > .pull-right-container > .fa-angle-left:before {
+.sidebar-menu li>a>.pull-right-container>.fa-angle-left:before {
   content: "\f105";
 }
 
@@ -121,32 +125,39 @@ h4.modal-title {
   width: 100%;
   border: 1px solid #999999;
 }
+
 .rTableRow {
   display: table-row;
 }
+
 .rTableHeading {
   display: table-header-group;
   background-color: #ddd;
 }
+
 .rTableHead {
   width: 40%;
 }
+
 .rTableCell,
 .rTableHead {
   display: table-cell;
   padding: 3px 10px;
   border: 1px solid #999999;
 }
+
 .rTableHeading {
   display: table-header-group;
   background-color: #ddd;
   font-weight: bold;
 }
+
 .rTableFoot {
   display: table-footer-group;
   font-weight: bold;
   background-color: #ddd;
 }
+
 .rTableBody {
   display: table-row-group;
 }
@@ -154,17 +165,21 @@ h4.modal-title {
 .content-header {
   overflow: hidden;
 }
+
 .content-header .content-header-left {
   float: left;
   padding-top: 5px;
 }
+
 .content-header .content-header-right {
   float: right;
   display: flex;
 }
-.content-header .content-header-right form{
+
+.content-header .content-header-right form {
   margin-right: 4px;
 }
+
 .content-header .content-header-left h1 {
   margin-top: 0;
   margin-bottom: 0;
@@ -173,6 +188,7 @@ h4.modal-title {
   font-size: 24px;
   position: relative;
 }
+
 .content-header .content-header-left h1:before {
   position: absolute;
   top: 0;
@@ -181,6 +197,7 @@ h4.modal-title {
   font-size: 26px;
   content: "\f18e";
 }
+
 .content-header .content-header-right a {
   position: relative;
   font-size: 14px;
@@ -190,6 +207,7 @@ h4.modal-title {
 .checkbox-inline {
   padding-top: 0 !important;
 }
+
 .checkbox-content {
   float: left;
   border: 1px solid #aaa;
@@ -205,8 +223,8 @@ h4.modal-title {
   border: 0;
 }
 
-.skin-blue .sidebar-menu > li:hover > a,
-.skin-blue .sidebar-menu > li.active > a {
+.skin-blue .sidebar-menu>li:hover>a,
+.skin-blue .sidebar-menu>li.active>a {
   color: #fff;
   background: #3c8dbc;
   border-left-color: #3c8dbc;
@@ -215,9 +233,11 @@ h4.modal-title {
 .pt10 {
   padding-top: 10px;
 }
+
 .pt20 {
   padding-top: 20px;
 }
+
 .ml10 {
   margin-left: 10px;
 }
@@ -255,58 +275,97 @@ img.existing-photo {
   background-color: #131921;
 }
 
-.skin-blue .sidebar-menu > li:hover > a,
-.skin-blue .sidebar-menu > li.active > a {
+.skin-blue .sidebar-menu>li:hover>a,
+.skin-blue .sidebar-menu>li.active>a {
   background-color: #4c4c4c;
   border-left-color: #000000;
 }
 
-.nav-tabs-custom > .nav-tabs > li.active {
+.nav-tabs-custom>.nav-tabs>li.active {
   border-top-color: #333333;
 }
+
 .box.box-info {
   border-top-color: #4c4c4c;
 }
-.admin{
+
+.admin {
   margin: 0px 50px;
 }
+
 .admin-footer div {
   width: 100%;
 }
+
 .admin-footer div:first-child {
   margin-bottom: 10px;
 }
+
 .admin-footer div a {
   display: block;
 }
 
-.navbar-nav > .admin-menu > .dropdown-menu {
-  width: 150px; /* Tăng chiều rộng */
-  padding: 10px;
-  border-radius: 8px; /* Bo góc */
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng */
-  border: none;
+.dropdown-menu {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  padding: 10px 0;
+  top: 80%;
+  left: 50%!important;
+  transform: translateX(-50%);
+  display: none;
+  white-space: nowrap;
+  z-index: 1000;
 }
 
-.navbar-nav > .admin-menu > .dropdown-menu > .admin-footer a {
-  display: block;
-  text-align: center;
-  padding: 8px 12px;
-  border-radius: 6px; /* Bo góc nút */
-  color: #333;
-  font-weight: 500;
-  transition: all 0.3s ease-in-out;
+/* Mũi tên chỉ xuống */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
 }
 
-.navbar-nav > .admin-menu > .dropdown-menu > .admin-footer a:hover {
-  background-color: #007bff; /* Màu xanh khi hover */
+/* Căn giữa icon và text */
+.dropdown-menu li {
+  list-style: none;
+  text-align: left;
+}
+
+.dropdown-menu li a {
+  background-color: #fff;
+  border: #fff;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 10px; /* Khoảng cách giữa icon và text */
+  padding: 10px 15px;
+  color: #000;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+  font-size: 14px;
+}
+
+/* Hover đổi màu */
+.dropdown-menu li a:hover {
+  background-color: #fd6132;
   color: #fff;
+}
+
+/* Hiển thị dropdown khi hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 .content-header .content-header-right a {
   background-color: #333333;
   border-color: #333333;
 }
+
 .form-control:focus {
   border-color: #333333;
 }
@@ -317,7 +376,7 @@ img.existing-photo {
 }
 
 
-.sidebar-menu .treeview-menu > li > a {
+.sidebar-menu .treeview-menu>li>a {
   font-size: 12px;
 }
 
@@ -338,6 +397,7 @@ select {
 .sidebar-menu .treeview-menu {
   display: none;
 }
+
 .sidebar-menu .treeview.menu-open .treeview-menu {
   display: block;
 }

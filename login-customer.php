@@ -55,7 +55,7 @@ if (isset($_POST['form1'])) {
                         <?php $csrf->echoInputField(); ?>
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 box">
                                 <div class="form-group admin">
                                     <label>Địa chỉ email *</label>
                                     <input type="email" class="form-control" name="cust_email">
@@ -107,49 +107,92 @@ if (isset($_POST['form1'])) {
     opacity: 1;
     transform: translateY(0);
 }
+@media (max-width: 1200px) {
+    .admin-content .box {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .admin-content .box a{
+        text-align: center;
+    }
+    .account-sidebar {
+        position: relative;
+        left: auto;
+        top: -90px;
+        text-align: center;
+        margin-top: 15px;
+    }
 
-.form-group.d-flex {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .admin-content .form-control {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .btn-danger {
+        font-size: 15px;
+        padding: 12px;
+    }
+}
+@media (max-width: 992px) {
+    .admin-content .box {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .admin-content .box a{
+        text-align: right;
+    }
+    .account-sidebar {
+        position: relative;
+        left: -203px;
+        top: -130px;
+        text-align: center;
+        margin-top: 10px;
+    }
 }
 
-.col-md-4 a {
-    color: #007bff;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-}
+/* Responsive cho điện thoại */
+@media (max-width: 768px) {
+    .admin-content {
+        padding: 20px;
+    }
 
-.col-md-4 a:hover {
-    color: rgb(41, 14, 133);
-    text-decoration: underline;
-}
+    .admin-content .box {
+        padding: 15px;
+        box-shadow: none; /* Bỏ bóng trên mobile để giao diện nhẹ hơn */
+    }
+    .admin-content .box a{
+        text-align: center;
+    }
+    .admin-content .form-control {
+        font-size: 13px;
+        padding: 8px;
+    }
 
-.form-group .btn-danger {
-    margin-left: auto;
-}
+    .btn-danger {
+        font-size: 14px;
+        padding: 10px;
+    }
 
-.account-sidebar {
-    position: absolute;
-    right: 403px;
-    top: -20px;
-}
+    .form-group.d-flex {
+        flex-direction: column;
+        align-items: stretch;
+    }
 
+    .account-sidebar {
+        position: relative;
+        text-align: center;
+        left: auto;
+        top: -80px;
+        margin-top: 10px;
+    }
 
-.account-sidebar a:hover {
-    color: rgb(41, 14, 133);
-    text-decoration: underline;
-}
-
-.account-sidebar a {
-    color: #007bff;
-    font-size: 14px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+    .account-sidebar a {
+        display: block;
+        padding: 10px;
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
+    }
 }
 </style>
 

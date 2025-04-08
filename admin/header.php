@@ -76,10 +76,10 @@ if (!isset($_SESSION['admin'])) {
                             <ul class="dropdown-menu">
                                 <li class="admin-footer">
                                     <div>
-                                        <a href="profile-edit.php" class="btn btn-default btn-flat">Sửa hồ sơ</a>
+                                        <a href="profile-edit.php" class="btn btn-default btn-flat"><i class="fa fa-user"></i>Sửa hồ sơ</a>
                                     </div>
                                     <div>
-                                        <a href="logout.php" class="btn btn-default btn-flat">Đăng xuất</a>
+                                        <a href="logout.php" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i>Đăng xuất</a>
                                     </div>
                                 </li>
                             </ul>

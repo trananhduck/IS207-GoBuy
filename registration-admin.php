@@ -247,7 +247,7 @@ if (isset($_POST['form1'])) {
                 </form>
             </div>
             <div class="col-md-12">
-                <div class="account-sidebar">
+                <div class="account-sidebar res">
                     <ul>
                         <a href="registration-customer.php"><?php echo 'Đăng ký tài khoản khách hàng' ?></a>
                     </ul>

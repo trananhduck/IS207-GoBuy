@@ -1,6 +1,7 @@
 <?php require_once('header.php'); ?>
 <?php
-require_once '../vendor/autoload.php'; 
+require_once '../vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -13,12 +14,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Thiết lập tiêu đề cột
         $headers = [
-            'STT', 'Tên danh mục lớn', 'Tên danh mục trung bình', 'Tên danh mục con', 'Tên sản phẩm',
-            'Giá cũ', 'Giá hiện tại', 'Số lượng', 'Chọn kích thước', 'Chọn màu sắc',
-            'Ảnh đại diện', 'Ảnh khác', 'Mô tả', 'Mô tả ngắn', 'Tính năng',
-            'Chính sách hoàn trả', 'Có nổi bật không?', 'Có hoạt động không?'
+            'STT',
+            'Tên danh mục lớn',
+            'Tên danh mục trung bình',
+            'Tên danh mục con',
+            'Tên sản phẩm',
+            'Giá cũ',
+            'Giá hiện tại',
+            'Số lượng',
+            'Chọn kích thước',
+            'Chọn màu sắc',
+            'Ảnh đại diện',
+            'Ảnh khác',
+            'Mô tả',
+            'Mô tả ngắn',
+            'Tính năng',
+            'Chính sách hoàn trả',
+            'Có nổi bật không?',
+            'Có hoạt động không?'
         ];
-        
+
         $col = 'A';
         foreach ($headers as $header) {
             $sheet->setCellValue($col . '1', $header);
@@ -82,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sheet->setCellValue('P' . $rowIndex, $row['p_return_policy']);
             $sheet->setCellValue('Q' . $rowIndex, $row['p_is_featured'] ? 'Có' : 'Không');
             $sheet->setCellValue('R' . $rowIndex, $row['p_is_active'] ? 'Có' : 'Không');
-            
+
             $rowIndex++;
         }
 
@@ -95,100 +110,137 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $writer->save('php://output');
         exit();
     }
-// ✅ CHỨC NĂNG NHẬP EXCEL
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
-    if ($_FILES['excel_file']['error'] != 0) {
-        die("Lỗi: Vui lòng chọn file Excel hợp lệ!");
-    }
+    // ✅ CHỨC NĂNG NHẬP EXCEL
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
+        if ($_FILES['excel_file']['error'] != 0) {
+            die("Lỗi: Vui lòng chọn file Excel hợp lệ!");
+        }
 
-    $filePath = 'uploads/' . basename($_FILES['excel_file']['name']);
-    if (!move_uploaded_file($_FILES['excel_file']['tmp_name'], $filePath)) {
-        die("Lỗi: Không thể lưu file upload!");
-    }
+        $filePath = 'uploads/' . basename($_FILES['excel_file']['name']);
+        if (!move_uploaded_file($_FILES['excel_file']['tmp_name'], $filePath)) {
+            die("Lỗi: Không thể lưu file upload!");
+        }
 
-    $spreadsheet = IOFactory::load($filePath);
-    $worksheet = $spreadsheet->getActiveSheet();
-    $rows = $worksheet->toArray();
-    array_reverse($rows);
-    foreach ($rows as $index => $cells) {
-        if ($index == 0) continue;
+        $spreadsheet = IOFactory::load($filePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $rows = $worksheet->toArray();
+        array_reverse($rows);
+        foreach ($rows as $index => $cells) {
+            if ($index == 0) continue; // bỏ dòng tiêu đề
 
-        list($stt, $tenDML, $tenDMTB, $tenDMC, $tenSP, $giaCu, $giaHienTai, $soLuong, $kichthuoc, $mausac, $anhDaiDien, $anhkhac, $moTa, $moTaNgan, $tinhNang, $chinhSach, $noiBat, $hoatDong) = $cells;
+            list($stt, $tenDML, $tenDMTB, $tenDMC, $tenSP, $giaCu, $giaHienTai, $soLuong, $kichthuoc, $mausac, $anhDaiDien, $anhkhac, $moTa, $moTaNgan, $tinhNang, $chinhSach, $noiBat, $hoatDong) = $cells;
 
-        // Chuyển đổi giá trị "Có"/"Không" thành 1/0
-        $noiBat = ($noiBat == "Có") ? 1 : 0;
-        $hoatDong = ($hoatDong == "Có") ? 1 : 0;
+            // ✅ Bỏ qua nếu thiếu bất kỳ trường bắt buộc nào
+            if (
+                empty($tenDML) ||
+                empty($tenDMTB) ||
+                empty($tenDMC) ||
+                empty($tenSP) ||
+                empty($giaHienTai) ||
+                empty($soLuong)
+            ) {
+                continue;
+            }
 
-        // Tìm kiếm category ID (ecat_id) từ bảng table_end_category
-        $stmt = $pdo->prepare("SELECT ecat_id FROM table_end_category WHERE ecat_name = ?");
-        $stmt->execute([$tenDMC]);
-        $ecatID = $stmt->fetchColumn();
+            // 🔁 Chuyển đổi "Có"/"Không" thành 1/0
+            $noiBat = ($noiBat == "Có") ? 1 : 0;
+            $hoatDong = ($hoatDong == "Có") ? 1 : 0;
 
-        if (!$ecatID) continue; // Nếu không tìm thấy category thì bỏ qua dòng này
+            // 🔍 Tìm ecat_id như cũ
+            $stmt = $pdo->prepare("SELECT ecat_id FROM table_end_category WHERE ecat_name = ?");
+            $stmt->execute([$tenDMC]);
+            $ecatID = $stmt->fetchColumn();
 
-        // Thêm sản phẩm vào bảng table_product
-        $query = $pdo->prepare("INSERT INTO table_product (p_name, p_old_price, p_current_price, p_qty, p_featured_photo, p_description, p_short_description, p_feature, p_return_policy, p_is_featured, p_is_active, ecat_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->execute([$tenSP, $giaCu, $giaHienTai, $soLuong, $anhDaiDien, $moTa, $moTaNgan, $tinhNang, $chinhSach, $noiBat, $hoatDong, $ecatID]);
+            if (!$ecatID) continue;
 
-        // Lấy p_id của sản phẩm vừa thêm
-        $p_id = $pdo->lastInsertId();
+            // ✅ Gán giá trị NULL nếu các trường này trống
+            $giaCu = $giaCu ?: '';
+            $anhDaiDien = $anhDaiDien ?: '';
+            $moTa = $moTa ?: '';
+            $moTaNgan = $moTaNgan ?: '';
+            $tinhNang = $tinhNang ?: '';
+            $chinhSach = $chinhSach ?: '';
 
-        // Thêm dữ liệu vào bảng table_product_size nếu có size
-        if (!empty($kichthuoc)) {
-            $sizes = explode(',', $kichthuoc); // Nếu có nhiều size, chia thành mảng
-            foreach ($sizes as $size) {
-                $sizeStmt = $pdo->prepare("SELECT size_id FROM table_size WHERE size_name = ?");
-                $sizeStmt->execute([trim($size)]);
-                $sizeID = $sizeStmt->fetchColumn();
-                if ($sizeID) {
-                    $sizeQuery = $pdo->prepare("INSERT INTO table_product_size (size_id, p_id) VALUES (?, ?)");
-                    $sizeQuery->execute([$sizeID, $p_id]);
+            // 📥 Insert sản phẩm
+            $query = $pdo->prepare("INSERT INTO table_product (
+            p_name, p_old_price, p_current_price, p_qty, p_featured_photo,
+            p_description, p_short_description, p_feature, p_return_policy,
+            p_is_featured, p_is_active, ecat_id
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+            $query->execute([
+                $tenSP,
+                $giaCu,
+                $giaHienTai,
+                $soLuong,
+                $anhDaiDien,
+                $moTa,
+                $moTaNgan,
+                $tinhNang,
+                $chinhSach,
+                $noiBat,
+                $hoatDong,
+                $ecatID
+            ]);
+
+            // Lấy p_id của sản phẩm vừa thêm
+            $p_id = $pdo->lastInsertId();
+
+            // Thêm dữ liệu vào bảng table_product_size nếu có size
+            if (!empty($kichthuoc)) {
+                $sizes = explode(',', $kichthuoc); // Nếu có nhiều size, chia thành mảng
+                foreach ($sizes as $size) {
+                    $sizeStmt = $pdo->prepare("SELECT size_id FROM table_size WHERE size_name = ?");
+                    $sizeStmt->execute([trim($size)]);
+                    $sizeID = $sizeStmt->fetchColumn();
+                    if ($sizeID) {
+                        $sizeQuery = $pdo->prepare("INSERT INTO table_product_size (size_id, p_id) VALUES (?, ?)");
+                        $sizeQuery->execute([$sizeID, $p_id]);
+                    }
                 }
+            }
+
+            // Thêm dữ liệu vào bảng table_product_color nếu có màu sắc
+            if (!empty($mausac)) {
+                $colors = explode(',', $mausac); // Nếu có nhiều màu, chia thành mảng
+                foreach ($colors as $color) {
+                    $colorStmt = $pdo->prepare("SELECT color_id FROM table_color WHERE color_name = ?");
+                    $colorStmt->execute([trim($color)]);
+                    $colorID = $colorStmt->fetchColumn();
+                    if ($colorID) {
+                        $colorQuery = $pdo->prepare("INSERT INTO table_product_color (color_id, p_id) VALUES (?, ?)");
+                        $colorQuery->execute([$colorID, $p_id]);
+                    }
+                }
+            }
+
+            // Thêm ảnh vào bảng table_product_photo nếu có ảnh khác
+            if (!empty($anhkhac)) {
+                $photoQuery = $pdo->prepare("INSERT INTO table_product_photo (photo, p_id) VALUES (?, ?)");
+                $photoQuery->execute([$anhkhac, $p_id]);
             }
         }
 
-        // Thêm dữ liệu vào bảng table_product_color nếu có màu sắc
-        if (!empty($mausac)) {
-            $colors = explode(',', $mausac); // Nếu có nhiều màu, chia thành mảng
-            foreach ($colors as $color) {
-                $colorStmt = $pdo->prepare("SELECT color_id FROM table_color WHERE color_name = ?");
-                $colorStmt->execute([trim($color)]);
-                $colorID = $colorStmt->fetchColumn();
-                if ($colorID) {
-                    $colorQuery = $pdo->prepare("INSERT INTO table_product_color (color_id, p_id) VALUES (?, ?)");
-                    $colorQuery->execute([$colorID, $p_id]);
-                }
-            }
-        }
-
-        // Thêm ảnh vào bảng table_product_photo nếu có ảnh khác
-        if (!empty($anhkhac)) {
-            $photoQuery = $pdo->prepare("INSERT INTO table_product_photo (photo, p_id) VALUES (?, ?)");
-            $photoQuery->execute([$anhkhac, $p_id]);
-        }
+        echo "<script>localStorage.setItem('toastMessage', 'Nhập thành công'); window.location.href='product.php';</script>";
     }
-
-    echo "<script>localStorage.setItem('toastMessage', 'Nhập thành công'); window.location.href='product.php';</script>";
-}
 }
 ?>
 <?php
-    if (isset($_POST['clear_all'])) {
-        try {
-            $pdo->beginTransaction();
-            $pdo->exec("DELETE FROM table_product_photo");
-            $pdo->exec("DELETE FROM table_product_size");
-            $pdo->exec("DELETE FROM table_product_color");
-            $pdo->exec("DELETE FROM table_product");
-            $pdo->commit();
-            echo "<script>localStorage.setItem('toastMessage', 'Đã xóa toàn bộ dữ liệu!'); window.location.href='product.php';</script>";
-            exit;
-
-        } catch (Exception $e) {
-            $pdo->rollBack();
-            echo "<script>showToast('error', 'Lỗi khi xóa dữ liệu!');</script>";
-        }
+if (isset($_POST['clear_all'])) {
+    try {
+        $pdo->beginTransaction();
+        $pdo->exec("DELETE FROM table_product_photo");
+        $pdo->exec("DELETE FROM table_product_size");
+        $pdo->exec("DELETE FROM table_product_color");
+        $pdo->exec("DELETE FROM table_product");
+        $pdo->commit();
+        echo "<script>localStorage.setItem('toastMessage', 'Đã xóa toàn bộ dữ liệu!'); window.location.href='product.php';</script>";
+        exit;
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        echo "<script>showToast('error', 'Lỗi khi xóa dữ liệu!');</script>";
     }
+}
 ?>
 <section class="content-header">
     <div class="content-header-left">
@@ -293,12 +345,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $('#confirm-delete').on('show.bs.modal', function (e) {
+    $(document).ready(function() {
+        $('#confirm-delete').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
         });
 
-        $('.btn-ok').click(function (e) {
+        $('.btn-ok').click(function(e) {
             e.preventDefault();
             let deleteUrl = $(this).attr('href');
             $('#confirm-delete').modal('hide');
@@ -308,8 +360,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
             }, 2000);
         });
     });
-    $(document).ready(function () {
-        $('.edit-btn').click(function (e) {
+    $(document).ready(function() {
+        $('.edit-btn').click(function(e) {
             e.preventDefault();
             toastr.info("Chuyển đến trang chỉnh sửa...");
             setTimeout(() => {
@@ -326,7 +378,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
             document.getElementById("import_excel").click();
         }
     });
-    document.getElementById("clear_all").addEventListener("click", function () {
+    document.getElementById("clear_all").addEventListener("click", function() {
         if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm không?")) {
             let form = document.createElement("form");
             form.method = "POST";
@@ -346,6 +398,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
             localStorage.removeItem('toastMessage'); // Xóa sau khi hiển thị để tránh hiển thị lại khi tải lại trang
         }
     };
+
     function showToast(type, message) {
         toastr.options = {
             "closeButton": true,
@@ -364,7 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        
+
         if (type === 'success') {
             toastr.success(message);
         } else if (type === 'error') {

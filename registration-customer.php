@@ -289,7 +289,7 @@ if (isset($_POST['form1'])) {
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="account-sidebar">
+                <div class="account-sidebar res">
                     <ul>
                         <a href="registration-admin.php"><?php echo 'Đăng ký tài khoản admin' ?></a>
                     </ul>
@@ -322,8 +322,16 @@ if (isset($_POST['form1'])) {
 
 .form-group-btn {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.btn-danger {
+    width: 50%;
+    max-width: 200px;
+    text-align: center;
 }
 
 .btn {
@@ -338,9 +346,7 @@ if (isset($_POST['form1'])) {
 .account-sidebar {
     position: absolute;
     bottom: -30px;
-    /* Đưa xuống dưới nút */
     right: 230px;
-    /* Nằm bên phải */
 }
 
 .account-sidebar a {

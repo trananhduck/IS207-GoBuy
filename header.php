@@ -372,39 +372,7 @@ foreach ($result as $row) {
 </script>
 
 <body>
-    <div class="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="left">
-                        <ul>
-                            <li><i class="fa fa-phone"></i> <?php echo $contact_phone; ?></li>
-                            <li><i class="fa fa-envelope-o"></i> <?php echo $contact_email; ?></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="right">
-                        <ul>
-                            <?php
-                            $query = $pdo->prepare("SELECT * FROM table_social");
-                            $query->execute();
-                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($result as $row) {
-                            ?>
-                                <?php if ($row['social_url'] != ''): ?>
-                                    <li><a href="<?php echo $row['social_url']; ?>"><i
-                                                class="<?php echo $row['social_icon']; ?>"></i></a></li>
-                                <?php endif; ?>
-                            <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 
     <div class="header">
@@ -421,7 +389,13 @@ foreach ($result as $row) {
                         ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-user"></i>
+                                    <?php if (!empty($_SESSION['customer']['cust_photo'])): ?>
+                                        <img src="assets/uploads/<?php echo $_SESSION['customer']['cust_photo']; ?>"
+                                            alt="Profile Photo" class="user-profile-image"
+                                            style="width: 25px; height: 25px; border-radius: 50%; margin-right: 5px;">
+                                    <?php else: ?>
+                                        <i class="fa fa-user"></i>
+                                    <?php endif; ?>
                                     <?php echo isset($_SESSION['customer']['cust_name']) ? $_SESSION['customer']['cust_name'] : 'Khách hàng'; ?>
                                     <i class="fa fa-angle-down"></i>
                                 </a>

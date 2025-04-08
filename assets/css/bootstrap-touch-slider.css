@@ -115,17 +115,17 @@
 
 /*---------- INDICATORS CONTROL ----------*/
 .indicators-line > .carousel-indicators{
-    right: 45%;
+    /* right: 45%;
     bottom: 3%;
     left: auto;
     width: 90%;
-    height: 20px;
+    height: 20px; */
     font-size: 0;
-    overflow-x: auto;
+    /* overflow-x: auto;
     text-align: right;
     overflow-y: hidden;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 10px; */
     padding-top: 1px;
     white-space: nowrap;
 }

@@ -99,6 +99,7 @@ CREATE TABLE `table_customer` (
   `cust_s_ward` INT(11) NOT NULL, 
   `cust_s_address` text NOT NULL,
   `cust_password` varchar(100) NOT NULL,
+  `cust_photo` text NOT NULL,
   `cust_token` text NOT NULL,
   `cust_datetime` varchar(100) NOT NULL,
   `cust_timestamp` varchar(100) NOT NULL,
@@ -372,6 +373,13 @@ INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
 (5, 'Photo 5', 'photo-5.jpg'),
 (6, 'Photo 6', 'photo-6.jpg');
 
+--
+CREATE TABLE `table_photo_rating` (
+  `id` int(11) NOT NULL,
+  `caption` text NOT NULL,
+  `photo_rating` text NOT NULL,
+  `p_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 -- --------------------------------------------------------
 
 --
@@ -1727,6 +1735,7 @@ ALTER TABLE `table_payment`
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
+
 --
 -- Indexes for table `table_product`
 --
@@ -1811,6 +1820,11 @@ ALTER TABLE `table_social`
 ALTER TABLE `table_top_category`
   ADD PRIMARY KEY (`tcat_id`);
 
+--
+--
+--
+ALTER TABLE `table_photo_rating`
+  ADD PRIMARY KEY (`id`);
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -1928,7 +1942,11 @@ ALTER TABLE `table_settings`
 --
 ALTER TABLE `table_shipping_cost`
   MODIFY `shipping_cost_id` int(11) NOT NULL AUTO_INCREMENT;
-
+-- 
+--
+--
+ALTER TABLE `table_photo_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `table_shipping_cost_all`
 --
@@ -1959,6 +1977,7 @@ ALTER TABLE `table_social`
 ALTER TABLE `table_top_category`
   MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
