@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 30, 2025 at 04:38 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th4 05, 2025 lúc 05:05 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gobuy`
+-- Cơ sở dữ liệu: `gobuy`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_admin`
+-- Cấu trúc bảng cho bảng `table_admin`
 --
 
 CREATE TABLE `table_admin` (
@@ -41,7 +41,7 @@ CREATE TABLE `table_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_admin`
+-- Đang đổ dữ liệu cho bảng `table_admin`
 --
 
 INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `token`, `datetime`, `timestamp`, `status`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `pho
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_color`
+-- Cấu trúc bảng cho bảng `table_color`
 --
 
 CREATE TABLE `table_color` (
@@ -64,7 +64,7 @@ CREATE TABLE `table_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_color`
+-- Đang đổ dữ liệu cho bảng `table_color`
 --
 
 INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_customer`
+-- Cấu trúc bảng cho bảng `table_customer`
 --
 
 CREATE TABLE `table_customer` (
@@ -90,13 +90,13 @@ CREATE TABLE `table_customer` (
   `cust_name` varchar(100) NOT NULL,
   `cust_email` varchar(100) NOT NULL,
   `cust_phone` varchar(50) NOT NULL,
-  `cust_gender` ENUM('Nam', 'Nữ') NOT NULL, 
-  `cust_birthyear` year,
+  `cust_gender` enum('Nam','Nữ') NOT NULL,
+  `cust_birthyear` year(4) DEFAULT NULL,
   `cust_s_name` varchar(100) NOT NULL,
-  `cust_s_phone` varchar(50) NOT NULL, 
+  `cust_s_phone` varchar(50) NOT NULL,
   `cust_s_province` int(11) NOT NULL,
-  `cust_s_district` INT(11) NOT NULL,
-  `cust_s_ward` INT(11) NOT NULL, 
+  `cust_s_district` int(11) NOT NULL,
+  `cust_s_ward` int(11) NOT NULL,
   `cust_s_address` text NOT NULL,
   `cust_password` varchar(100) NOT NULL,
   `cust_photo` text NOT NULL,
@@ -106,9 +106,17 @@ CREATE TABLE `table_customer` (
   `cust_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Đang đổ dữ liệu cho bảng `table_customer`
+--
+
+INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_gender`, `cust_birthyear`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_ward`, `cust_s_address`, `cust_password`, `cust_photo`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
+(11, 'Nguyễn abc', 'tungsida8@gmail.com', '0946403788', 'Nam', '2010', '', '', 0, 0, 0, '', '099e3aa828cfe4e6eb238ad186352252', 'Screenshot 2025-04-03 231838.png', '', '2025-04-04 09:18:09', '1743733089', 1);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `table_customer_message`
+-- Cấu trúc bảng cho bảng `table_customer_message`
 --
 
 CREATE TABLE `table_customer_message` (
@@ -122,7 +130,7 @@ CREATE TABLE `table_customer_message` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_end_category`
+-- Cấu trúc bảng cho bảng `table_end_category`
 --
 
 CREATE TABLE `table_end_category` (
@@ -132,7 +140,7 @@ CREATE TABLE `table_end_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_end_category`
+-- Đang đổ dữ liệu cho bảng `table_end_category`
 --
 
 INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
@@ -216,7 +224,7 @@ INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_faq`
+-- Cấu trúc bảng cho bảng `table_faq`
 --
 
 CREATE TABLE `table_faq` (
@@ -226,7 +234,7 @@ CREATE TABLE `table_faq` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_faq`
+-- Đang đổ dữ liệu cho bảng `table_faq`
 --
 
 INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
@@ -239,7 +247,7 @@ INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_mid_category`
+-- Cấu trúc bảng cho bảng `table_mid_category`
 --
 
 CREATE TABLE `table_mid_category` (
@@ -249,7 +257,7 @@ CREATE TABLE `table_mid_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_mid_category`
+-- Đang đổ dữ liệu cho bảng `table_mid_category`
 --
 
 INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
@@ -272,7 +280,7 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_order`
+-- Cấu trúc bảng cho bảng `table_order`
 --
 
 CREATE TABLE `table_order` (
@@ -289,7 +297,7 @@ CREATE TABLE `table_order` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_page`
+-- Cấu trúc bảng cho bảng `table_page`
 --
 
 CREATE TABLE `table_page` (
@@ -310,7 +318,7 @@ CREATE TABLE `table_page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_page`
+-- Đang đổ dữ liệu cho bảng `table_page`
 --
 
 INSERT INTO `table_page` (`id`, `about_title`, `about_content`, `about_banner`, `about_meta_title`, `faq_title`, `faq_banner`, `faq_meta_title`, `contact_title`, `contact_banner`, `contact_meta_title`, `pgallery_title`, `pgallery_banner`, `pgallery_meta_title`) VALUES
@@ -319,7 +327,7 @@ INSERT INTO `table_page` (`id`, `about_title`, `about_content`, `about_banner`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_payment`
+-- Cấu trúc bảng cho bảng `table_payment`
 --
 
 CREATE TABLE `table_payment` (
@@ -342,7 +350,7 @@ CREATE TABLE `table_payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `table_payment`
+-- Đang đổ dữ liệu cho bảng `table_payment`
 --
 
 INSERT INTO `table_payment` (`id`, `customer_id`, `customer_name`, `customer_email`, `payment_date`, `txnid`, `paid_amount`, `card_number`, `card_cvv`, `card_month`, `card_year`, `bank_transaction_info`, `payment_method`, `payment_status`, `shipping_status`, `payment_id`) VALUES
@@ -352,7 +360,7 @@ INSERT INTO `table_payment` (`id`, `customer_id`, `customer_name`, `customer_ema
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_photo`
+-- Cấu trúc bảng cho bảng `table_photo`
 --
 
 CREATE TABLE `table_photo` (
@@ -362,7 +370,7 @@ CREATE TABLE `table_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_photo`
+-- Đang đổ dữ liệu cho bảng `table_photo`
 --
 
 INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
@@ -373,17 +381,54 @@ INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
 (5, 'Photo 5', 'photo-5.jpg'),
 (6, 'Photo 6', 'photo-6.jpg');
 
+-- --------------------------------------------------------
+
 --
+-- Cấu trúc bảng cho bảng `table_photo_rating`
+--
+
 CREATE TABLE `table_photo_rating` (
   `id` int(11) NOT NULL,
+  `rt_id` int(11) NOT NULL,
   `caption` text NOT NULL,
   `photo_rating` text NOT NULL,
   `p_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Đang đổ dữ liệu cho bảng `table_photo_rating`
+--
+
+INSERT INTO `table_photo_rating` (`id`, `rt_id`, `caption`, `photo_rating`, `p_id`) VALUES
+(1, 143, 'Review image', '1743733212_Screenshot 2025-01-01 214559.png', 125),
+(2, 143, 'Review image', '1743733212_Screenshot 2025-01-01 214636.png', 125),
+(3, 143, 'Review image', '1743733212_Screenshot 2025-01-01 215021.png', 125),
+(4, 143, 'Review image', '1743733212_Screenshot 2025-01-02 150359.png', 125),
+(5, 144, 'Review image', '1743733262_Screenshot 2025-01-01 214559.png', 125),
+(6, 144, 'Review image', '1743733262_Screenshot 2025-01-01 214636.png', 125),
+(7, 144, 'Review image', '1743733262_Screenshot 2025-01-01 215021.png', 125),
+(8, 144, 'Review image', '1743733262_Screenshot 2025-01-02 150359.png', 125),
+(9, 145, 'Review image', '1743733280_Screenshot 2025-01-07 153551.png', 2),
+(10, 146, 'Review image', '1743733615_Screenshot 2025-01-07 153551.png', 2),
+(11, 147, 'Review image', '1743734148_Screenshot 2025-01-01 215021.png', 38),
+(12, 147, 'Review image', '1743734148_Screenshot 2025-01-02 150359.png', 38),
+(13, 147, 'Review image', '1743734148_Screenshot 2025-01-02 153253.png', 38),
+(14, 147, 'Review image', '1743734148_Screenshot 2025-01-03 161629.png', 38),
+(15, 148, 'Review image', '1743734225_Screenshot 2025-01-01 215021.png', 38),
+(16, 148, 'Review image', '1743734225_Screenshot 2025-01-02 150359.png', 38),
+(17, 148, 'Review image', '1743734225_Screenshot 2025-01-02 153253.png', 38),
+(18, 148, 'Review image', '1743734225_Screenshot 2025-01-03 161629.png', 38),
+(19, 149, 'Review image', '1743734287_Screenshot 2025-01-01 214942.png', 126),
+(20, 150, 'Review image', '1743734395_Screenshot 2025-01-01 214942.png', 126),
+(21, 151, 'Review image', '1743734414_Screenshot 2025-01-01 214942.png', 5),
+(22, 152, 'Review image', '1743734444_Screenshot 2025-01-01 214942.png', 5),
+(23, 153, 'Review image', '1743734630_Screenshot 2025-01-01 214942.png', 5),
+(24, 154, 'Review image', '1743734671_Screenshot 2025-01-01 214942.png', 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product`
+-- Cấu trúc bảng cho bảng `table_product`
 --
 
 CREATE TABLE `table_product` (
@@ -404,7 +449,7 @@ CREATE TABLE `table_product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_product`
+-- Đang đổ dữ liệu cho bảng `table_product`
 --
 
 INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_order`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
@@ -555,7 +600,7 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_color`
+-- Cấu trúc bảng cho bảng `table_product_color`
 --
 
 CREATE TABLE `table_product_color` (
@@ -565,7 +610,7 @@ CREATE TABLE `table_product_color` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_product_color`
+-- Đang đổ dữ liệu cho bảng `table_product_color`
 --
 
 INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
@@ -793,7 +838,7 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_photo`
+-- Cấu trúc bảng cho bảng `table_product_photo`
 --
 
 CREATE TABLE `table_product_photo` (
@@ -803,7 +848,7 @@ CREATE TABLE `table_product_photo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_product_photo`
+-- Đang đổ dữ liệu cho bảng `table_product_photo`
 --
 
 INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
@@ -952,7 +997,7 @@ INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_product_size`
+-- Cấu trúc bảng cho bảng `table_product_size`
 --
 
 CREATE TABLE `table_product_size` (
@@ -962,7 +1007,7 @@ CREATE TABLE `table_product_size` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_product_size`
+-- Đang đổ dữ liệu cho bảng `table_product_size`
 --
 
 INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
@@ -1182,7 +1227,7 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_province`
+-- Cấu trúc bảng cho bảng `table_province`
 --
 
 CREATE TABLE `table_province` (
@@ -1191,7 +1236,7 @@ CREATE TABLE `table_province` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `table_province`
+-- Đang đổ dữ liệu cho bảng `table_province`
 --
 
 INSERT INTO `table_province` (`province_id`, `province_name`) VALUES
@@ -1262,7 +1307,7 @@ INSERT INTO `table_province` (`province_id`, `province_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_rating`
+-- Cấu trúc bảng cho bảng `table_rating`
 --
 
 CREATE TABLE `table_rating` (
@@ -1270,154 +1315,168 @@ CREATE TABLE `table_rating` (
   `p_id` int(11) NOT NULL,
   `cust_id` int(11) NOT NULL,
   `comment` text NOT NULL,
-  `rating` int(11) NOT NULL
+  `rating` int(11) NOT NULL,
+  `review_time` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-INSERT INTO `table_rating` (`rt_id`, `p_id`, `cust_id`, `comment`, `rating`) VALUES
-(1, 1, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(2, 2, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(3, 3, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(4, 4, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(5, 5, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(6, 6, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(7, 7, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(8, 8, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(9, 9, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(10, 10, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(11, 11, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(12, 12, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(13, 13, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(14, 14, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(15, 15, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(16, 16, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(17, 17, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(18, 18, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(19, 19, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(20, 20, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(21, 21, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(22, 22, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(23, 23, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(24, 24, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(25, 25, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(26, 26, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(27, 27, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(28, 28, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(29, 29, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(30, 30, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(31, 31, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(32, 32, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(33, 33, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(34, 34, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(35, 35, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(36, 36, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(37, 37, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(38, 38, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(39, 39, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(40, 40, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(41, 41, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(42, 42, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(43, 43, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(44, 44, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(45, 45, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(46, 46, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(47, 47, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(48, 48, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(49, 49, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(50, 50, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(51, 51, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(52, 52, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(53, 53, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(54, 54, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(55, 55, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(56, 56, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(57, 57, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(58, 58, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(59, 59, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(60, 60, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(61, 61, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(62, 62, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(63, 63, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(64, 64, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(65, 65, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(66, 66, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(67, 67, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(68, 68, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(69, 69, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(70, 70, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(71, 71, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(72, 72, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(73, 73, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(74, 74, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(75, 75, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(76, 76, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(77, 77, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(78, 78, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(79, 79, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(80, 80, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(81, 81, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(82, 82, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(83, 83, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(84, 84, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(85, 85, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(86, 86, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(87, 87, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(88, 88, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(89, 89, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(90, 90, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(91, 91, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(92, 92, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(93, 93, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(94, 94, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(95, 95, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(96, 96, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(97, 97, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(98, 98, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(99, 99, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(100, 100, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(101, 101, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(102, 102, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(103, 103, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(104, 104, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(105, 105, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(106, 106, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(107, 107, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(108, 108, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(109, 109, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(110, 110, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(111, 111, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(112, 112, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(113, 113, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(114, 114, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(115, 115, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(116, 116, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(117, 117, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(118, 118, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(119, 119, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(120, 120, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(121, 121, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(122, 122, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(123, 123, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(124, 124, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(125, 125, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(126, 126, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(127, 127, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(128, 128, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(129, 129, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5),
-(130, 130, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(131, 131, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(132, 132, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(133, 133, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(134, 134, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(135, 135, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3),
-(136, 136, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(137, 137, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2),
-(138, 138, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(139, 139, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4),
-(140, 140, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1),
-(141, 141, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4);
+
+--
+-- Đang đổ dữ liệu cho bảng `table_rating`
+--
+
+INSERT INTO `table_rating` (`rt_id`, `p_id`, `cust_id`, `comment`, `rating`, `review_time`) VALUES
+(1, 1, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(2, 2, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(3, 3, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(4, 4, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(5, 5, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(6, 6, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(7, 7, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(8, 8, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(9, 9, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(10, 10, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(11, 11, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(12, 12, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(13, 13, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(14, 14, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(15, 15, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(16, 16, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(17, 17, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(18, 18, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(19, 19, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(20, 20, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(21, 21, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(22, 22, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(23, 23, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(24, 24, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(25, 25, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(26, 26, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(27, 27, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(28, 28, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(29, 29, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(30, 30, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(31, 31, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(32, 32, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(33, 33, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(34, 34, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(35, 35, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(36, 36, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(37, 37, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(38, 38, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(39, 39, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(40, 40, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(41, 41, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(42, 42, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(43, 43, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(44, 44, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(45, 45, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(46, 46, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(47, 47, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(48, 48, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(49, 49, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(50, 50, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(51, 51, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(52, 52, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(53, 53, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(54, 54, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(55, 55, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(56, 56, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(57, 57, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(58, 58, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(59, 59, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(60, 60, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(61, 61, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(62, 62, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(63, 63, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(64, 64, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(65, 65, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(66, 66, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(67, 67, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(68, 68, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(69, 69, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(70, 70, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(71, 71, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(72, 72, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(73, 73, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(74, 74, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(75, 75, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(76, 76, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(77, 77, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(78, 78, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(79, 79, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(80, 80, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(81, 81, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(82, 82, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(83, 83, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(84, 84, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(85, 85, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(86, 86, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(87, 87, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(88, 88, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(89, 89, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(90, 90, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(91, 91, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(92, 92, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(93, 93, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(94, 94, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(95, 95, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(96, 96, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(97, 97, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(98, 98, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(99, 99, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(100, 100, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(101, 101, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(102, 102, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(103, 103, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(104, 104, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(105, 105, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(106, 106, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(107, 107, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(108, 108, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(109, 109, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(110, 110, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(111, 111, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(112, 112, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(113, 113, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(114, 114, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(115, 115, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(116, 116, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(117, 117, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(118, 118, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(119, 119, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(120, 120, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(121, 121, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(122, 122, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(123, 123, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(124, 124, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(125, 125, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(126, 126, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(127, 127, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(128, 128, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(129, 129, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 5, '2025-04-04 09:19:46'),
+(130, 130, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(131, 131, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(132, 132, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(133, 133, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(134, 134, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(135, 135, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 3, '2025-04-04 09:19:46'),
+(136, 136, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(137, 137, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 2, '2025-04-04 09:19:46'),
+(138, 138, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(139, 139, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(140, 140, 2, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 1, '2025-04-04 09:19:46'),
+(141, 141, 1, 'Sản phẩm ở mức chấp nhận được, đáp ứng nhu cầu cơ bản nhưng vẫn còn một số điểm cần cải thiện để tốt hơn.', 4, '2025-04-04 09:19:46'),
+(148, 38, 11, 'ok', 5, '0000-00-00 00:00:00'),
+(149, 126, 11, 'ok', 5, '0000-00-00 00:00:00'),
+(150, 126, 11, 'ok', 5, '0000-00-00 00:00:00'),
+(151, 5, 11, 'a', 5, '0000-00-00 00:00:00'),
+(152, 5, 11, 'a', 5, '2025-04-04 09:40:44'),
+(153, 5, 11, 'a', 5, '2025-04-04 09:43:50'),
+(154, 2, 11, 'abc', 5, '2025-04-04 09:44:31');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_service`
+-- Cấu trúc bảng cho bảng `table_service`
 --
 
 CREATE TABLE `table_service` (
@@ -1428,7 +1487,7 @@ CREATE TABLE `table_service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_service`
+-- Đang đổ dữ liệu cho bảng `table_service`
 --
 
 INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
@@ -1444,7 +1503,7 @@ INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_settings`
+-- Cấu trúc bảng cho bảng `table_settings`
 --
 
 CREATE TABLE `table_settings` (
@@ -1494,16 +1553,16 @@ CREATE TABLE `table_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_settings`
+-- Đang đổ dữ liệu cho bảng `table_settings`
 --
 
-INSERT INTO `table_settings` (`id`, `logo`, `favicon`, `footer_about`, `footer_copyright`, `contact_address`, `contact_email`, `contact_phone`, `contact_map_iframe`, `receive_email`, `receive_email_subject`, `receive_email_thank_you_message`, `forget_password_message`, `total_latest_product`, `total_popular_product`, `total_featured_product` ,`meta_title`, `banner_login`, `banner_registration`, `banner_forget_password`, `banner_reset_password`, `banner_search`, `banner_cart`, `banner_checkout`, `banner_product_category`, `cta_title`, `cta_content`, `cta_read_more_text`, `cta_read_more_url`, `cta_photo`, `latest_product_title`, `latest_product_subtitle`, `popular_product_title`, `popular_product_subtitle`, `bank_public_key`, `bank_secret_key`, `bank_detail`, `before_head`, `after_body`, `before_body`, `service_on_off`, `latest_product_on_off`, `popular_product_on_off`) VALUES
-(1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Khu phố 6, P.Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 6, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm nổi bật', 'Sản phẩm nổi bật dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '',1, 1, 1);
+INSERT INTO `table_settings` (`id`, `logo`, `favicon`, `footer_about`, `footer_copyright`, `contact_address`, `contact_email`, `contact_phone`, `contact_map_iframe`, `receive_email`, `receive_email_subject`, `receive_email_thank_you_message`, `forget_password_message`, `total_latest_product`, `total_popular_product`, `total_featured_product`, `meta_title`, `banner_login`, `banner_registration`, `banner_forget_password`, `banner_reset_password`, `banner_search`, `banner_cart`, `banner_checkout`, `banner_product_category`, `cta_title`, `cta_content`, `cta_read_more_text`, `cta_read_more_url`, `cta_photo`, `latest_product_title`, `latest_product_subtitle`, `popular_product_title`, `popular_product_subtitle`, `bank_public_key`, `bank_secret_key`, `bank_detail`, `before_head`, `after_body`, `before_body`, `service_on_off`, `latest_product_on_off`, `popular_product_on_off`) VALUES
+(1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Khu phố 6, P.Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 6, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm nổi bật', 'Sản phẩm nổi bật dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_shipping_cost`
+-- Cấu trúc bảng cho bảng `table_shipping_cost`
 --
 
 CREATE TABLE `table_shipping_cost` (
@@ -1515,7 +1574,7 @@ CREATE TABLE `table_shipping_cost` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_shipping_cost_all`
+-- Cấu trúc bảng cho bảng `table_shipping_cost_all`
 --
 
 CREATE TABLE `table_shipping_cost_all` (
@@ -1524,7 +1583,7 @@ CREATE TABLE `table_shipping_cost_all` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_shipping_cost_all`
+-- Đang đổ dữ liệu cho bảng `table_shipping_cost_all`
 --
 
 INSERT INTO `table_shipping_cost_all` (`sca_id`, `amount`) VALUES
@@ -1533,7 +1592,7 @@ INSERT INTO `table_shipping_cost_all` (`sca_id`, `amount`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_size`
+-- Cấu trúc bảng cho bảng `table_size`
 --
 
 CREATE TABLE `table_size` (
@@ -1542,7 +1601,7 @@ CREATE TABLE `table_size` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_size`
+-- Đang đổ dữ liệu cho bảng `table_size`
 --
 
 INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
@@ -1597,7 +1656,7 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_slider`
+-- Cấu trúc bảng cho bảng `table_slider`
 --
 
 CREATE TABLE `table_slider` (
@@ -1611,7 +1670,7 @@ CREATE TABLE `table_slider` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_slider`
+-- Đang đổ dữ liệu cho bảng `table_slider`
 --
 
 INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, `button_url`, `position`) VALUES
@@ -1622,7 +1681,7 @@ INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_social`
+-- Cấu trúc bảng cho bảng `table_social`
 --
 
 CREATE TABLE `table_social` (
@@ -1633,7 +1692,7 @@ CREATE TABLE `table_social` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_social`
+-- Đang đổ dữ liệu cho bảng `table_social`
 --
 
 INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_icon`) VALUES
@@ -1645,7 +1704,7 @@ INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_ic
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_top_category`
+-- Cấu trúc bảng cho bảng `table_top_category`
 --
 
 CREATE TABLE `table_top_category` (
@@ -1655,7 +1714,7 @@ CREATE TABLE `table_top_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Dumping data for table `table_top_category`
+-- Đang đổ dữ liệu cho bảng `table_top_category`
 --
 
 INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
@@ -1666,318 +1725,319 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 (5, 'Khác', 1);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `table_admin`
+-- Chỉ mục cho bảng `table_admin`
 --
 ALTER TABLE `table_admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_color`
+-- Chỉ mục cho bảng `table_color`
 --
 ALTER TABLE `table_color`
   ADD PRIMARY KEY (`color_id`);
 
 --
--- Indexes for table `table_customer`
+-- Chỉ mục cho bảng `table_customer`
 --
 ALTER TABLE `table_customer`
   ADD PRIMARY KEY (`cust_id`);
 
 --
--- Indexes for table `table_customer_message`
+-- Chỉ mục cho bảng `table_customer_message`
 --
 ALTER TABLE `table_customer_message`
   ADD PRIMARY KEY (`customer_message_id`);
 
 --
--- Indexes for table `table_end_category`
+-- Chỉ mục cho bảng `table_end_category`
 --
 ALTER TABLE `table_end_category`
   ADD PRIMARY KEY (`ecat_id`);
 
 --
--- Indexes for table `table_faq`
+-- Chỉ mục cho bảng `table_faq`
 --
 ALTER TABLE `table_faq`
   ADD PRIMARY KEY (`faq_id`);
 
 --
--- Indexes for table `table_mid_category`
+-- Chỉ mục cho bảng `table_mid_category`
 --
 ALTER TABLE `table_mid_category`
   ADD PRIMARY KEY (`mcat_id`);
 
 --
--- Indexes for table `table_order`
+-- Chỉ mục cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_page`
+-- Chỉ mục cho bảng `table_page`
 --
 ALTER TABLE `table_page`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_payment`
+-- Chỉ mục cho bảng `table_payment`
 --
 ALTER TABLE `table_payment`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_photo`
+-- Chỉ mục cho bảng `table_photo`
 --
 ALTER TABLE `table_photo`
   ADD PRIMARY KEY (`id`);
 
+--
+-- Chỉ mục cho bảng `table_photo_rating`
+--
+ALTER TABLE `table_photo_rating`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product`
+-- Chỉ mục cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   ADD PRIMARY KEY (`p_id`);
 
 --
--- Indexes for table `table_product_color`
+-- Chỉ mục cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_product_photo`
+-- Chỉ mục cho bảng `table_product_photo`
 --
 ALTER TABLE `table_product_photo`
   ADD PRIMARY KEY (`pp_id`);
 
 --
--- Indexes for table `table_product_size`
+-- Chỉ mục cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_province`
+-- Chỉ mục cho bảng `table_province`
 --
 ALTER TABLE `table_province`
   ADD PRIMARY KEY (`province_id`);
 
 --
--- Indexes for table `table_rating`
+-- Chỉ mục cho bảng `table_rating`
 --
 ALTER TABLE `table_rating`
   ADD PRIMARY KEY (`rt_id`);
 
 --
--- Indexes for table `table_service`
+-- Chỉ mục cho bảng `table_service`
 --
 ALTER TABLE `table_service`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_settings`
+-- Chỉ mục cho bảng `table_settings`
 --
 ALTER TABLE `table_settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_shipping_cost`
+-- Chỉ mục cho bảng `table_shipping_cost`
 --
 ALTER TABLE `table_shipping_cost`
   ADD PRIMARY KEY (`shipping_cost_id`);
 
 --
--- Indexes for table `table_shipping_cost_all`
+-- Chỉ mục cho bảng `table_shipping_cost_all`
 --
 ALTER TABLE `table_shipping_cost_all`
   ADD PRIMARY KEY (`sca_id`);
 
 --
--- Indexes for table `table_size`
+-- Chỉ mục cho bảng `table_size`
 --
 ALTER TABLE `table_size`
   ADD PRIMARY KEY (`size_id`);
 
 --
--- Indexes for table `table_slider`
+-- Chỉ mục cho bảng `table_slider`
 --
 ALTER TABLE `table_slider`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `table_social`
+-- Chỉ mục cho bảng `table_social`
 --
 ALTER TABLE `table_social`
   ADD PRIMARY KEY (`social_id`);
 
 --
--- Indexes for table `table_top_category`
+-- Chỉ mục cho bảng `table_top_category`
 --
 ALTER TABLE `table_top_category`
   ADD PRIMARY KEY (`tcat_id`);
 
 --
---
---
-ALTER TABLE `table_photo_rating`
-  ADD PRIMARY KEY (`id`);
---
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `table_admin`
+-- AUTO_INCREMENT cho bảng `table_admin`
 --
 ALTER TABLE `table_admin`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `table_color`
+-- AUTO_INCREMENT cho bảng `table_color`
 --
 ALTER TABLE `table_color`
   MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT for table `table_customer`
+-- AUTO_INCREMENT cho bảng `table_customer`
 --
 ALTER TABLE `table_customer`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `table_customer_message`
+-- AUTO_INCREMENT cho bảng `table_customer_message`
 --
 ALTER TABLE `table_customer_message`
   MODIFY `customer_message_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `table_end_category`
+-- AUTO_INCREMENT cho bảng `table_end_category`
 --
 ALTER TABLE `table_end_category`
   MODIFY `ecat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
--- AUTO_INCREMENT for table `table_faq`
+-- AUTO_INCREMENT cho bảng `table_faq`
 --
 ALTER TABLE `table_faq`
   MODIFY `faq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `table_mid_category`
+-- AUTO_INCREMENT cho bảng `table_mid_category`
 --
 ALTER TABLE `table_mid_category`
   MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `table_order`
+-- AUTO_INCREMENT cho bảng `table_order`
 --
 ALTER TABLE `table_order`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `table_page`
+-- AUTO_INCREMENT cho bảng `table_page`
 --
 ALTER TABLE `table_page`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `table_payment`
+-- AUTO_INCREMENT cho bảng `table_payment`
 --
 ALTER TABLE `table_payment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `table_photo`
+-- AUTO_INCREMENT cho bảng `table_photo`
 --
 ALTER TABLE `table_photo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `table_product`
+-- AUTO_INCREMENT cho bảng `table_photo_rating`
+--
+ALTER TABLE `table_photo_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT cho bảng `table_product`
 --
 ALTER TABLE `table_product`
   MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
--- AUTO_INCREMENT for table `table_product_color`
+-- AUTO_INCREMENT cho bảng `table_product_color`
 --
 ALTER TABLE `table_product_color`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
--- AUTO_INCREMENT for table `table_product_photo`
+-- AUTO_INCREMENT cho bảng `table_product_photo`
 --
 ALTER TABLE `table_product_photo`
   MODIFY `pp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
--- AUTO_INCREMENT for table `table_product_size`
+-- AUTO_INCREMENT cho bảng `table_product_size`
 --
 ALTER TABLE `table_product_size`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
--- AUTO_INCREMENT for table `table_rating`
+-- AUTO_INCREMENT cho bảng `table_rating`
 --
 ALTER TABLE `table_rating`
-  MODIFY `rt_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
--- AUTO_INCREMENT for table `table_service`
+-- AUTO_INCREMENT cho bảng `table_service`
 --
 ALTER TABLE `table_service`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `table_settings`
+-- AUTO_INCREMENT cho bảng `table_settings`
 --
 ALTER TABLE `table_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `table_shipping_cost`
+-- AUTO_INCREMENT cho bảng `table_shipping_cost`
 --
 ALTER TABLE `table_shipping_cost`
   MODIFY `shipping_cost_id` int(11) NOT NULL AUTO_INCREMENT;
--- 
+
 --
---
-ALTER TABLE `table_photo_rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `table_shipping_cost_all`
+-- AUTO_INCREMENT cho bảng `table_shipping_cost_all`
 --
 ALTER TABLE `table_shipping_cost_all`
   MODIFY `sca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `table_size`
+-- AUTO_INCREMENT cho bảng `table_size`
 --
 ALTER TABLE `table_size`
   MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT for table `table_slider`
+-- AUTO_INCREMENT cho bảng `table_slider`
 --
 ALTER TABLE `table_slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `table_social`
+-- AUTO_INCREMENT cho bảng `table_social`
 --
 ALTER TABLE `table_social`
   MODIFY `social_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `table_top_category`
+-- AUTO_INCREMENT cho bảng `table_top_category`
 --
 ALTER TABLE `table_top_category`
   MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
