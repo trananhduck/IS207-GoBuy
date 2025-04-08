@@ -189,12 +189,16 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                                         <span>
                                             <?php if ($row['p_old_price'] != ''): ?>
                                             <del>
-                                                <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                                <?php echo number_format($row['p_old_price'], 0, ',', ','); ?><span
+                                                    class="vnd">
+                                                    VND</span>
                                             </del>
+                                            <?php endif; ?>
                                         </span>
-                                        <?php endif; ?>
                                         <span>
-                                            <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
+                                            <?php echo number_format($row['p_current_price'], 0, ',', ','); ?><span
+                                                class="vnd">
+                                                VND</span>
                                         </span>
                                     </h4>
                                     <div class="rating">
