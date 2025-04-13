@@ -108,11 +108,15 @@ if (isset($_POST['form1'])) {
                     </h3>
                     <?php
                     if (!empty($errorMsg)) {
-                        echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'><ul><li>" . str_replace("<br>", "</li><li>", $errorMsg) . "</li></ul></div>";
+                        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+                            showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
+                        });</script>";
                     }
 
                     if (!empty($successMsg)) {
-                        echo "<div class='success' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $successMsg . "</div>";
+                        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+                            showToast(" . json_encode(strip_tags($successMsg)) . ", '#27ae60');
+                        });</script>";
                     }
                     ?>
                     <form action="" method="post">
@@ -169,7 +173,26 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
-
+<div id="toast"></div>
+<style>
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
 <script>
     // Script khởi tạo cho trang cập nhật thông tin giao hàng
     document.addEventListener('DOMContentLoaded', function() {
@@ -278,6 +301,13 @@ if (isset($_POST['form1'])) {
                 }
             }
         }
+    }
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
     }
 </script>
 

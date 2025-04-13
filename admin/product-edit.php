@@ -6,32 +6,56 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['tcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn một danh mục cấp cao<br>";
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một danh mục cấp cao<br>');
+        });
+        </script>";
     }
 
     if (empty($_POST['mcat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn một danh mục cấp trung<br>";
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một danh mục cấp trung<br>');
+        });
+        </script>";
     }
 
     if (empty($_POST['ecat_id'])) {
         $valid = 0;
-        $errorMsg .= "Bạn phải chọn một danh mục cấp cuối<br>";
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Bạn phải chọn một danh mục cấp cuối<br>');
+        });
+        </script>";
     }
 
     if (empty($_POST['p_name'])) {
         $valid = 0;
-        $errorMsg .= "Tên sản phẩm không được để trống<br>";
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Tên sản phẩm không được để trống<br>');
+        });
+        </script>";
     }
 
     if (empty($_POST['p_current_price'])) {
         $valid = 0;
-        $errorMsg .= "Giá hiện tại không được để trống<br>";
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Giá hiện tại không được để trống<br>');
+        });
+        </script>";
     }
 
     if (empty($_POST['p_qty'])) {
         $valid = 0;
-        $errorMsg .= "Số lượng không được để trống<br>";
+        echo "<script>
+        $(document).ready(function() {
+            toastr.error('Số lượng không được để trống<br>');
+        });
+        </script>";
     }
 
     $path = $_FILES['p_featured_photo']['name'];
@@ -42,7 +66,11 @@ if (isset($_POST['form1'])) {
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') { // Kiểm tra định dạng ảnh hợp lệ
             $valid = 0;
-            $errorMsg .= 'Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải tải lên tệp jpg, jpeg, gif hoặc png<br>');
+            });
+            </script>";
         }
     }
 
@@ -179,8 +207,11 @@ if (isset($_POST['form1'])) {
             $query = $pdo->prepare("DELETE FROM table_product_color WHERE p_id=?");
             $query->execute(array($_REQUEST['id']));
         }
-
-        $successMsg = 'Sản phẩm đã được cập nhật thành công.';
+        echo "<script>
+        $(document).ready(function() {
+            toastr.success('Sản phẩm đã được cập nhật thành công.');
+        });
+        </script>";
     }
 }
 ?>
@@ -550,8 +581,8 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-3 control-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success pull-left" name="form1">Cập nhật</button>
+                            <div class="col-sm-11">
+                                <button type="submit" class="btn btn-success pull-right" name="form1">Cập nhật</button>
                             </div>
                         </div>
 

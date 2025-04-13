@@ -38,7 +38,9 @@ if (isset($_POST['form1'])) {
                     $errorMsg .= 'Xin lỗi! Tài khoản của bạn không hoạt động.' . '<br>';
                 } else {
                     $_SESSION['admin'] = $row;
-                    header("location: " . BASE_URL . "admin/service.php");
+                    $_SESSION['success_message'] = 'Chào mừng admin đã đăng nhập thành công!';
+                    header("location: " . BASE_URL . "admin/index.php");
+                    exit;
                 }
             }
         }

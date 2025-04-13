@@ -148,7 +148,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                             </tr>
                             <?php
                             $query = $pdo->prepare("SELECT * FROM table_shipping_cost WHERE province_id=?");
-                            $query->execute(array($_SESSION['customer']['cust_province']));
+                            $query->execute(array($_SESSION['customer']['cust_s_province']));
                             $total = $query->rowCount();
                             if ($total) {
                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -199,16 +199,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                                     </tr>
                                     <tr>
                                         <td><?php echo 'Tỉnh/thành phố' ?></td>
-                                        <td>
-                                            <?php
-                                            $query = $pdo->prepare("SELECT * FROM table_province WHERE province_id=?");
-                                            $query->execute(array($_SESSION['customer']['cust_s_province']));
-                                            $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach ($result as $row) {
-                                                echo $row['province_name'];
-                                            }
-                                            ?>
-                                        </td>
+                                        <td><?php echo $_SESSION['customer']['cust_s_province']; ?></td>
                                     </tr>
                                     <tr>
                                         <td><?php echo 'Quận/huyện' ?></td>

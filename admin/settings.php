@@ -10,13 +10,21 @@ if (isset($_POST['form1'])) {
 
     if ($path == '') {
         $valid = 0;
-        $errorMsg .= 'Bạn phải chọn một ảnh<br>';
+        echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn phải chọn một ảnh<br>');
+            });
+        </script>";
     } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
             $valid = 0;
-            $errorMsg .= 'Bạn chỉ được tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>';
+            echo "<script>
+            $(document).ready(function() {
+                toastr.error('Bạn chỉ được tải lên tệp có định dạng jpg, jpeg, gif hoặc png<br>');
+            });
+        </script>";
         }
     }
 
@@ -413,7 +421,13 @@ if (isset($_POST['form7_1'])) {
         </script>";
     }
 }
-
+if(isset($_POST['form9'])){
+    echo "<script>
+        $(document).ready(function() {
+            toastr.success('Cập nhập thông tin ngân hàng thành công.');
+        });
+        </script>";
+}
 if (isset($_POST['form7_2'])) {
     $valid = 1;
 
@@ -990,8 +1004,8 @@ foreach ($result as $row) {
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form3">Cập
+                                        <div class="col-sm-9">
+                                            <button type="submit" class="btn btn-success pull-right" name="form3">Cập
                                                 nhật</button>
                                         </div>
                                     </div>
@@ -1035,8 +1049,8 @@ foreach ($result as $row) {
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-3 control-label"></label>
-                                        <div class="col-sm-5">
-                                            <button type="submit" class="btn btn-success pull-left" name="form4">Cập
+                                        <div class="col-sm-8">
+                                            <button type="submit" class="btn btn-success pull-right" name="form4">Cập
                                                 nhật</button>
                                         </div>
                                     </div>
@@ -1390,8 +1404,8 @@ foreach ($result as $row) {
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form9">Cập
+                                        <div class="col-sm-5">
+                                            <button type="submit" class="btn btn-success pull-right" name="form9">Cập
                                                 nhật</button>
                                         </div>
                                     </div>
@@ -1405,4 +1419,4 @@ foreach ($result as $row) {
         </div>
     </div>
 </section>
-<?php require_once('footer.php'); ?>
+<?php require_once('footer.php'); ?>v

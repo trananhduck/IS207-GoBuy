@@ -57,7 +57,10 @@ if (isset($_POST['form2'])) {
     $path = $_FILES['photo']['name'];
     $path_tmp = $_FILES['photo']['tmp_name'];
 
-    if ($path != '') {
+    if ($path == '') {
+        $valid = 0;
+        $errorMsg .= 'Bạn chưa chọn ảnh đại diện<br>';
+    } else {
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $file_name = basename($path, '.' . $ext);
         if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg' && $ext != 'gif') {
@@ -115,7 +118,19 @@ if (isset($_POST['form3'])) {
     }
 }
 ?>
+<?php
+if (!empty($errorMsg)) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
+    });</script>";
+}
 
+if (!empty($successMsg)) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
+        showToast(" . json_encode(strip_tags($successMsg)) . ", '#27ae60');
+    });</script>";
+}
+?>
 <section class="content-header">
     <div class="content-header-left">
         <h1>Chỉnh sửa hồ sơ</h1>
@@ -188,8 +203,8 @@ foreach ($result as $row) {
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form1">Cập
+                                        <div class="col-sm-4">
+                                            <button type="submit" class="btn btn-success pull-right" name="form1">Cập
                                                 nhật thông tin</button>
                                         </div>
                                     </div>
@@ -209,8 +224,8 @@ foreach ($result as $row) {
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form2">Cập
+                                        <div class="col-sm-4">
+                                            <button type="submit" class="btn btn-success pull-right" name="form2">Cập
                                                 nhật ảnh</button>
                                         </div>
                                     </div>
@@ -236,8 +251,8 @@ foreach ($result as $row) {
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label"></label>
-                                        <div class="col-sm-6">
-                                            <button type="submit" class="btn btn-success pull-left" name="form3">Cập
+                                        <div class="col-sm-4">
+                                            <button type="submit" class="btn btn-success pull-right" name="form3">Cập
                                                 nhật mật khẩu</button>
                                         </div>
                                     </div>
@@ -250,6 +265,33 @@ foreach ($result as $row) {
         </div>
     </div>
 </section>
-
-
+<div id="toast"></div>
+<style>
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<script>
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+    }
+</script>
 <?php require_once('footer.php'); ?>

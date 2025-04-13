@@ -341,14 +341,6 @@ foreach ($result as $row) {
     </div>
 <?php endif; ?>
 
-
-
-
-
-
-<?php require_once('footer.php'); ?>
-
-
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
@@ -365,7 +357,7 @@ foreach ($result as $row) {
         z-index: 9999;
         transform: translateY(-20px);
     }
-
+    
     #toast.show {
         opacity: 1;
         transform: translateY(0);
@@ -373,7 +365,7 @@ foreach ($result as $row) {
 </style>
 
 <script>
-    function showToast(message, bg = "#333") {
+    function showToast(message, bg = "#27ae60") {
         const toast = document.getElementById("toast");
         toast.innerText = message;
         toast.style.backgroundColor = bg;
@@ -385,10 +377,10 @@ foreach ($result as $row) {
 <?php
 if (isset($_SESSION['success_message'])) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
-        showToast(" . json_encode($_SESSION['success_message']) . ", '#2ecc71');
-    });</script>";
-    unset($_SESSION['success_message']);
-}
-?>
+        showToast(" . json_encode($_SESSION['success_message']) . ", '#27ae60');
+        });</script>";
+        unset($_SESSION['success_message']);
+    }
+    ?>
 
 <?php require_once('footer.php'); ?>

@@ -196,15 +196,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }, 2000);
         });
     });
-    $(document).ready(function () {
-        $('.edit-btn').click(function (e) {
-            e.preventDefault();
-            toastr.info("Chuyển đến trang chỉnh sửa...");
-            setTimeout(() => {
-                window.location.href = $(this).attr('href');
-            }, 1500); // Chuyển hướng sau 1.5 giây
-        });
-    });
     document.getElementById("import_button").addEventListener("click", function() {
         document.getElementById("excel_file").click();
     });

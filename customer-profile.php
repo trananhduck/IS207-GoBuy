@@ -160,11 +160,15 @@ if (isset($_POST['form1'])) {
                     <h3>Cập nhật thông tin cá nhân</h3>
                     <?php
                     if (!empty($errorMsg)) {
-                        echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'><ul><li>" . str_replace("<br>", "</li><li>", $errorMsg) . "</li></ul></div>";
+                        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+                            showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
+                        });</script>";
                     }
 
                     if (!empty($successMsg)) {
-                        echo "<div class='success' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $successMsg . "</div>";
+                        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+                            showToast(" . json_encode(strip_tags($successMsg)) . ", '#27ae60');
+                        });</script>";
                     }
                     ?>
                     <form action="" method="post" enctype="multipart/form-data">
@@ -235,8 +239,8 @@ if (isset($_POST['form1'])) {
                                         <input type="text" class="form-control" name="cust_phone"
                                             value="<?php echo isset($customer['cust_phone']) ? htmlspecialchars($customer['cust_phone']) : ''; ?>">
                                     </div>
-                                    <div class="col-md-12 mt-3">
-                                        <input type="submit" class="btn btn-primary" value="Cập nhật" name="form1">
+                                    <div class="col-md-12 mt-3 btn-confirm">
+                                        <input type="submit" class="btn btn-danger" value="Cập nhật" name="form1">
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +251,26 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
-
+<div id="toast"></div>
+<style>
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
 <!-- Thêm CSS cho ảnh đại diện responsive -->
 <style>
     .avatar-container {
@@ -302,6 +325,14 @@ if (isset($_POST['form1'])) {
 
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
     }
 </script>
 

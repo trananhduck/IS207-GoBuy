@@ -1,16 +1,15 @@
-<?php require_once('header.php'); ?>
+<?php 
+session_start();
+require_once('header.php'); ?>
 
 <?php
 if (!isset($_REQUEST['email']) || !isset($_REQUEST['token'])) {
-    header('Location: ' . BASE_URL);
+    $_SESSION['error_message'] = 'Thiếu thông tin xác minh.';
+    header('Location: ' . BASE_URL . 'login-admin.php');
     exit;
 }
 
-$errorMsg = '';
-$successMsg = '';
-
 try {
-    // Kiểm tra đầu vào hợp lệ
     $email = filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL);
     $token = $_REQUEST['token'];
 
@@ -18,7 +17,6 @@ try {
         throw new Exception('Dữ liệu không hợp lệ.');
     }
 
-    // Kiểm tra token trong cơ sở dữ liệu
     $query = $pdo->prepare("SELECT token FROM table_admin WHERE email = ? AND status = 0");
     $query->execute([$email]);
     $result = $query->fetch(PDO::FETCH_ASSOC);
@@ -31,14 +29,18 @@ try {
         throw new Exception('Mã xác minh không hợp lệ.');
     }
 
-    // Xác minh thành công, cập nhật trạng thái tài khoản
+    // Cập nhật trạng thái tài khoản
     $query = $pdo->prepare("UPDATE table_admin SET token = '', status = 1 WHERE email = ?");
     $query->execute([$email]);
 
-    $successMsg = '<p style="color:green;">Xác minh email thành công! Bạn có thể đăng nhập với tư cách admin ngay bây giờ.</p>
-                   <p><a href="' . BASE_URL . 'login-admin.php" style="color:#167ac6;font-weight:bold;">Bấm vào đây để đăng nhập với tư cách admin</a></p>';
+    $_SESSION['success_message'] = 'Xác minh email thành công! Bạn có thể đăng nhập với tư cách admin ngay bây giờ.';
+    header('Location: ' . BASE_URL . 'index.php');
+    exit;
+
 } catch (Exception $e) {
-    $errorMsg = '<p style="color:red;">' . htmlspecialchars($e->getMessage()) . '</p>';
+    $_SESSION['error_message'] = $e->getMessage();
+    header('Location: ' . BASE_URL . 'index.php');
+    exit;
 }
 ?>
 

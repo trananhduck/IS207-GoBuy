@@ -59,11 +59,15 @@ if (isset($_POST['form1'])) {
 
     <?php if ($allow_update == 0): ?>
         <script>
-            alert('<?php echo $errorMsg; ?>');
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
+            });
         </script>
     <?php else: ?>
         <script>
-            alert('All Items Quantity Update is Successful!');
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast("All Items Quantity Update is Successful!", '#27ae60');
+            });
         </script>
     <?php endif; ?>
 <?php
@@ -163,31 +167,31 @@ if (isset($_POST['form1'])) {
 
                                 <?php
                                 $arr_cart_p_id = $arr_cart_p_id ?? [];
-                                for ($i = 1; $i <= count($arr_cart_p_id); $i++): ?>
+                                for ($i = 1; $i <= count($arr_cart_p_id); $i++):
+                                    $row_total_price = $arr_cart_p_current_price[$i] * $arr_cart_p_qty[$i];
+                                    $table_total_price += $row_total_price;
+                                ?>
                                     <tr>
                                         <td><?php echo $i; ?></td>
                                         <td>
-                                            <img src="assets/uploads/product_photos/<?php echo $arr_cart_p_featured_photo[$i]; ?>"
-                                                alt="">
+                                            <img src="assets/uploads/product_photos/<?php echo $arr_cart_p_featured_photo[$i]; ?>" alt="">
                                         </td>
                                         <td><?php echo $arr_cart_p_name[$i]; ?></td>
                                         <td><?php echo $arr_cart_size_name[$i]; ?></td>
                                         <td><?php echo $arr_cart_color_name[$i]; ?></td>
-                                        <td><?php echo $arr_cart_p_current_price[$i]; ?><?php echo 'VND'; ?></td>
+                                        <td class="product-price" data-index="<?php echo $i; ?>"><?php echo $arr_cart_p_current_price[$i]; ?>VND</td>
                                         <td>
                                             <input type="hidden" name="product_id[]" value="<?php echo $arr_cart_p_id[$i]; ?>">
-                                            <input type="hidden" name="product_name[]"
-                                                value="<?php echo $arr_cart_p_name[$i]; ?>">
-                                            <input type="number" class="input-text qty text" step="1" min="1" max=""
-                                                name="quantity[]" value="<?php echo $arr_cart_p_qty[$i]; ?>" title="Qty"
-                                                size="4" pattern="[0-9]*" inputmode="numeric">
+                                            <input type="hidden" name="product_name[]" value="<?php echo $arr_cart_p_name[$i]; ?>">
+                                            <input type="number"
+                                                class="input-text qty text quantity-input"
+                                                step="1" min="1"
+                                                name="quantity[]"
+                                                value="<?php echo $arr_cart_p_qty[$i]; ?>"
+                                                data-index="<?php echo $i; ?>">
                                         </td>
-                                        <td class="text-right">
-                                            <?php
-                                            $row_total_price = $arr_cart_p_current_price[$i] * $arr_cart_p_qty[$i];
-                                            $table_total_price = $table_total_price + $row_total_price;
-                                            ?>
-                                            <?php echo $row_total_price; ?><?php echo 'VND'; ?>
+                                        <td class="text-right item-total" id="item-total-<?php echo $i; ?>">
+                                            <?php echo $row_total_price; ?> VND
                                         </td>
                                         <td class="text-center">
                                             <a onclick="return confirmDelete();"
@@ -198,8 +202,7 @@ if (isset($_POST['form1'])) {
                                 <?php endfor; ?>
                                 <tr>
                                     <th colspan="7" class="total-text">Total</th>
-                                    <th class="total-amount"><?php echo $table_total_price; ?><?php echo 'VND'; ?>
-                                    </th>
+                                    <th class="total-amount"><span id="cart-total"><?php echo $table_total_price; ?></span> VND</th>
                                     <th></th>
                                 </tr>
                             </table>
@@ -219,5 +222,55 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
+<div id="toast"></div>
+<style>
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
 
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<script>
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('input', function() {
+            const index = this.dataset.index;
+            const qty = parseInt(this.value) || 0;
+
+            const priceElement = document.querySelector(`.product-price[data-index="${index}"]`);
+            const price = parseInt(priceElement.textContent) || 0;
+
+            const itemTotal = qty * price;
+            document.getElementById(`item-total-${index}`).textContent = itemTotal + ' VND';
+
+            let total = 0;
+            document.querySelectorAll('.item-total').forEach(el => {
+                const text = el.textContent.replace(' VND', '');
+                total += parseInt(text) || 0;
+            });
+
+            document.getElementById('cart-total').textContent = total;
+        });
+    });
+
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+    }
+</script>
 <?php require_once('footer.php'); ?>

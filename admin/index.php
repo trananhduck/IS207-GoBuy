@@ -204,41 +204,47 @@ $total_order_complete_shipping_pending = $query->rowCount();
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 9999;
-    transform: translateY(-20px);
-}
-
-#toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
+    
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 
 <script>
-function showToast(message, bg = "#333") {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.style.backgroundColor = bg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 4000);
-}
+    function showToast(message, bg = "#27ae60") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+    }
 </script>
 
 <?php
 if (isset($_SESSION['success_message'])) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
-        showToast(" . json_encode($_SESSION['success_message']) . ", '#2ecc71');
-    });</script>";
-    unset($_SESSION['success_message']);
-}
+        showToast(" . json_encode($_SESSION['success_message']) . ", '#27ae60');
+        });</script>";
+        unset($_SESSION['success_message']);
+    }
+    if (isset($_SESSION['error_message'])) {
+        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+            showToast(" . json_encode($_SESSION['error_message']) . ", '#e74c3c');
+            });</script>";
+            unset($_SESSION['error_message']);
+        }
 ?>

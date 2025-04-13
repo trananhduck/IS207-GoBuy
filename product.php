@@ -118,9 +118,9 @@ if (isset($_POST['form_add_to_cart'])) {
     if ($_POST['p_qty'] > $current_p_qty):
         $temp_msg = 'Xin lỗi, chúng tôi chỉ có ' . $current_p_qty . ' món trong kho';
 ?>
-<script type="text/javascript">
-alert('<?php echo $temp_msg; ?>');
-</script>
+        <script type="text/javascript">
+            alert('<?php echo $temp_msg; ?>');
+        </script>
 <?php
     else:
         if (isset($_SESSION['cart_p_id'])) {
@@ -296,15 +296,20 @@ if (isset($_POST['form_review'])) {
 }
 ?>
 <?php
-if ($errorMsg1 != '') {
-    echo "<script>alert('" . $errorMsg1 . "');</script>";
+if (!empty($errorMsg1)) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showToast(" . json_encode(strip_tags($errorMsg1)) . ", '#e74c3c');
+        });
+    </script>";
 }
 
-if ($successMsg1 != '') {
+if (!empty($successMsg1)) {
     echo "<script>
-            alert('" . $successMsg1 . "');
-            window.location.href = 'product.php?id=" . $_REQUEST['id'] . "'; // Chuyển hướng đến trang product.php
-          </script>";
+        document.addEventListener('DOMContentLoaded', function() {
+            showToast(" . json_encode(strip_tags($successMsg1)) . ", '#27ae60');
+        });
+    </script>";
 }
 ?>
 
@@ -348,11 +353,11 @@ if ($successMsg1 != '') {
                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
-                                <li
-                                    style="background-image: url(assets/uploads/product_photos/<?php echo $row['photo']; ?>);">
-                                    <a class="popup"
-                                        href="assets/uploads/product_photos/<?php echo $row['photo']; ?>"></a>
-                                </li>
+                                    <li
+                                        style="background-image: url(assets/uploads/product_photos/<?php echo $row['photo']; ?>);">
+                                        <a class="popup"
+                                            href="assets/uploads/product_photos/<?php echo $row['photo']; ?>"></a>
+                                    </li>
                                 <?php
                                 }
                                 ?>
@@ -370,11 +375,11 @@ if ($successMsg1 != '') {
                                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($result as $row) {
                                 ?>
-                                <a data-slide-index="<?php echo $i; ?>" href="">
-                                    <div class="prod-pager-thumb"
-                                        style="background-image: url(assets/uploads/product_photos/<?php echo $row['photo']; ?>">
-                                    </div>
-                                </a>
+                                    <a data-slide-index="<?php echo $i; ?>" href="">
+                                        <div class="prod-pager-thumb"
+                                            style="background-image: url(assets/uploads/product_photos/<?php echo $row['photo']; ?>">
+                                        </div>
+                                    </a>
                                 <?php
                                     $i++;
                                 }
@@ -409,47 +414,47 @@ if ($successMsg1 != '') {
                                 <div class="p-quantity">
                                     <div class="row">
                                         <?php if (isset($size)): ?>
-                                        <div class="col-md-4 mb-3">
-                                            <?php echo 'Chọn kích thước'; ?> <br>
-                                            <select name="size_id" class="form-control select2" style="width:100%;">
-                                                <?php
+                                            <div class="col-md-4 mb-3">
+                                                <?php echo 'Chọn kích thước'; ?> <br>
+                                                <select name="size_id" class="form-control select2" style="width:100%;">
+                                                    <?php
                                                     $query = $pdo->prepare("SELECT * FROM table_size");
                                                     $query->execute();
                                                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                     foreach ($result as $row) {
                                                         if (in_array($row['size_id'], $size)) {
                                                     ?>
-                                                <option value="<?php echo $row['size_id']; ?>">
-                                                    <?php echo $row['size_name']; ?>
-                                                </option>
-                                                <?php
+                                                            <option value="<?php echo $row['size_id']; ?>">
+                                                                <?php echo $row['size_name']; ?>
+                                                            </option>
+                                                    <?php
                                                         }
                                                     }
                                                     ?>
-                                            </select>
-                                        </div>
+                                                </select>
+                                            </div>
                                         <?php endif; ?>
 
                                         <?php if (isset($color)): ?>
-                                        <div class="col-md-4 mb-3">
-                                            <?php echo 'Chọn màu'; ?> <br>
-                                            <select name="color_id" class="form-control select2" style="width:100%;">
-                                                <?php
+                                            <div class="col-md-4 mb-3">
+                                                <?php echo 'Chọn màu'; ?> <br>
+                                                <select name="color_id" class="form-control select2" style="width:100%;">
+                                                    <?php
                                                     $query = $pdo->prepare("SELECT * FROM table_color");
                                                     $query->execute();
                                                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                                                     foreach ($result as $row) {
                                                         if (in_array($row['color_id'], $color)) {
                                                     ?>
-                                                <option value="<?php echo $row['color_id']; ?>">
-                                                    <?php echo $row['color_name']; ?>
-                                                </option>
-                                                <?php
+                                                            <option value="<?php echo $row['color_id']; ?>">
+                                                                <?php echo $row['color_name']; ?>
+                                                            </option>
+                                                    <?php
                                                         }
                                                     }
                                                     ?>
-                                            </select>
-                                        </div>
+                                                </select>
+                                            </div>
                                         <?php endif; ?>
 
                                         <div class="col-md-4 mb-3">
@@ -465,8 +470,8 @@ if ($successMsg1 != '') {
                                     <span style="font-size:20px; color: #000"><?php echo 'Giá sản phẩm'; ?></span><br>
                                     <span>
                                         <?php if ($p_old_price != ''): ?>
-                                        <del><?php echo number_format($p_old_price, 0, ',', ','); ?><span class="vnd">
-                                                VND</span></del>
+                                            <del><?php echo number_format($p_old_price, 0, ',', ','); ?><span class="vnd">
+                                                    VND</span></del>
                                         <?php endif; ?>
                                         <?php echo number_format($p_current_price, 0, ',', ',');  ?><span class="vnd">
                                             VND</span>
@@ -561,67 +566,67 @@ if ($successMsg1 != '') {
                                             foreach ($result as $row) {
                                                 $j++;
                                         ?>
-                                        <div class="mb_10"><b><u><?php echo 'Review'; ?>
-                                                    <?php echo $j; ?></u></b>
-                                        </div>
-                                        <div class="review-container">
-                                            <div class="review-wrapper">
-                                                <!-- Avatar -->
-                                                <div class="review-avatar">
-                                                    <img src="assets/uploads/<?php echo $_SESSION['customer']['cust_photo']; ?>"
-                                                        alt="Profile Photo" class="user-profile-image zoomable-image">
+                                                <div class="mb_10"><b><u><?php echo 'Review'; ?>
+                                                            <?php echo $j; ?></u></b>
                                                 </div>
-
-                                                <!-- Nội dung đánh giá -->
-                                                <div class="review-content-box">
-                                                    <div class="review-header">
-                                                        <div class="review-name-time">
-                                                            <span
-                                                                class="review-name"><?php echo $row['cust_name']; ?></span>
-                                                            <span
-                                                                class="review-time"><?php echo $row['review_time']; ?></span>
+                                                <div class="review-container">
+                                                    <div class="review-wrapper">
+                                                        <!-- Avatar -->
+                                                        <div class="review-avatar">
+                                                            <img src="assets/uploads/<?php echo $_SESSION['customer']['cust_photo']; ?>"
+                                                                alt="Profile Photo" class="user-profile-image zoomable-image">
                                                         </div>
-                                                    </div>
 
-                                                    <div class="review-rating">
-                                                        <?php for ($i = 1; $i <= 5; $i++) : ?>
-                                                        <?php if ($i <= $row['rating']) : ?>
-                                                        <i class="fa fa-star"></i>
-                                                        <?php else : ?>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <?php endif; ?>
-                                                        <?php endfor; ?>
-                                                    </div>
+                                                        <!-- Nội dung đánh giá -->
+                                                        <div class="review-content-box">
+                                                            <div class="review-header">
+                                                                <div class="review-name-time">
+                                                                    <span
+                                                                        class="review-name"><?php echo $row['cust_name']; ?></span>
+                                                                    <span
+                                                                        class="review-time"><?php echo $row['review_time']; ?></span>
+                                                                </div>
+                                                            </div>
 
-                                                    <div class="review-comment"><?php echo $row['comment']; ?></div>
+                                                            <div class="review-rating">
+                                                                <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                                                    <?php if ($i <= $row['rating']) : ?>
+                                                                        <i class="fa fa-star"></i>
+                                                                    <?php else : ?>
+                                                                        <i class="fa fa-star-o"></i>
+                                                                    <?php endif; ?>
+                                                                <?php endfor; ?>
+                                                            </div>
 
-                                                    <div class="review-images">
-                                                        <?php
+                                                            <div class="review-comment"><?php echo $row['comment']; ?></div>
+
+                                                            <div class="review-images">
+                                                                <?php
                                                                 $stmt = $pdo->prepare("SELECT photo_rating FROM table_photo_rating WHERE rt_id=?");
                                                                 $stmt->execute([$row['rt_id']]);
                                                                 $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                                 ?>
-                                                        <?php if (!empty($images)): ?>
-                                                        <?php foreach ($images as $img): ?>
-                                                        <img class="review-img zoomable-image"
-                                                            src="assets/uploads/review/<?php echo $img['photo_rating']; ?>"
-                                                            alt="Ảnh đánh giá">
-                                                        <?php endforeach; ?>
-                                                        <?php endif; ?>
+                                                                <?php if (!empty($images)): ?>
+                                                                    <?php foreach ($images as $img): ?>
+                                                                        <img class="review-img zoomable-image"
+                                                                            src="assets/uploads/review/<?php echo $img['photo_rating']; ?>"
+                                                                            alt="Ảnh đánh giá">
+                                                                    <?php endforeach; ?>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div id="lightbox-overlay" style="display: none; position: fixed; top: 0; left: 0;
+                                                <div id="lightbox-overlay" style="display: none; position: fixed; top: 0; left: 0;
     width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);
     justify-content: center; align-items: center; z-index: 9999;">
 
-                                            <span id="lightbox-close" style="position: absolute; top: 20px; right: 40px; color: #fff;
+                                                    <span id="lightbox-close" style="position: absolute; top: 20px; right: 40px; color: #fff;
         font-size: 40px; cursor: pointer;">&times;</span>
 
-                                            <img id="lightbox-img" src="" alt="Full Image"
-                                                style="max-width: 90%; max-height: 90%;">
-                                        </div>
+                                                    <img id="lightbox-img" src="" alt="Full Image"
+                                                        style="max-width: 90%; max-height: 90%;">
+                                                </div>
                                         <?php
                                             }
                                         } else {
@@ -631,50 +636,55 @@ if ($successMsg1 != '') {
 
                                         <h2><?php echo 'Đưa ra đánh giá'; ?></h2>
                                         <?php
-                                        if ($errorMsg != '') {
-                                            echo "<script>alert('" . $errorMsg . "')</script>";
+                                        if (!empty($errorMsg)) {
+                                            echo "<script>document.addEventListener('DOMContentLoaded', function() {
+                                                showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
+                                            });</script>";
                                         }
-                                        if ($successMsg != '') {
-                                            echo "<script>alert('" . $successMsg . "')</script>";
+
+                                        if (!empty($successMsg)) {
+                                            echo "<script>document.addEventListener('DOMContentLoaded', function() {
+                                                showToast(" . json_encode(strip_tags($successMsg)) . ", '#27ae60');
+                                            });</script>";
                                         }
                                         ?>
                                         <?php if (isset($_SESSION['customer'])): ?>
-                                        <?php
+                                            <?php
                                             $query = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=? AND cust_id=?");
                                             $query->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
                                             $total = $query->rowCount();
                                             ?>
-                                        <?php if ($total == 0): ?>
-                                        <form action="" method="post" enctype="multipart/form-data">
-                                            <div class="rating-section">
-                                                <input type="radio" name="rating" class="rating" value="1">
-                                                <input type="radio" name="rating" class="rating" value="2">
-                                                <input type="radio" name="rating" class="rating" value="3">
-                                                <input type="radio" name="rating" class="rating" value="4">
-                                                <input type="radio" name="rating" class="rating" value="5">
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea name="comment" class="form-control" cols="30" rows="10"
-                                                    placeholder="Write your comment (optional)"
-                                                    style="height:100px;"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Chọn ảnh đánh giá:</label>
-                                                <input type="file" name="review_images[]" id="image-upload" multiple
-                                                    accept="image/*">
-                                            </div>
-                                            <div id="preview-images"></div>
-                                            <input type="submit" class="btn btn-default" name="form_review"
-                                                value="<?php echo 'Gửi đánh giá'; ?>">
-                                        </form>
+                                            <?php if ($total == 0): ?>
+                                                <form action="" method="post" enctype="multipart/form-data">
+                                                    <div class="rating-section">
+                                                        <input type="radio" name="rating" class="rating" value="1">
+                                                        <input type="radio" name="rating" class="rating" value="2">
+                                                        <input type="radio" name="rating" class="rating" value="3">
+                                                        <input type="radio" name="rating" class="rating" value="4">
+                                                        <input type="radio" name="rating" class="rating" value="5">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea name="comment" class="form-control" cols="30" rows="10"
+                                                            placeholder="Write your comment (optional)"
+                                                            style="height:100px;"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Chọn ảnh đánh giá:</label>
+                                                        <input type="file" name="review_images[]" id="image-upload" multiple
+                                                            accept="image/*">
+                                                    </div>
+                                                    <div id="preview-images"></div>
+                                                    <input type="submit" class="btn btn-default" name="form_review"
+                                                        value="<?php echo 'Gửi đánh giá'; ?>">
+                                                </form>
+                                            <?php else: ?>
+                                                <span style="color:red;"><?php echo 'Bạn đã đưa ra đánh giá'; ?></span>
+                                            <?php endif; ?>
                                         <?php else: ?>
-                                        <span style="color:red;"><?php echo 'Bạn đã đưa ra đánh giá'; ?></span>
-                                        <?php endif; ?>
-                                        <?php else: ?>
-                                        <p class="error">
-                                            <?php echo 'Bạn phải đăng nhập để đánh giá'; ?> <br>
-                                            <a href="login-customer.php" class="btn"><?php echo 'Đăng nhập'; ?></a>
-                                        </p>
+                                            <p class="error">
+                                                <?php echo 'Bạn phải đăng nhập để đánh giá'; ?> <br>
+                                                <a href="login-customer.php" class="btn"><?php echo 'Đăng nhập'; ?></a>
+                                            </p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -708,30 +718,30 @@ if ($successMsg1 != '') {
                     $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($result as $row) {
                     ?>
-                    <div class="item">
-                        <div class="thumb">
-                            <div class="photo"
-                                style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
+                        <div class="item">
+                            <div class="thumb">
+                                <div class="photo"
+                                    style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
+                                </div>
+                                <div class="overlay"></div>
                             </div>
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="text">
-                            <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
-                            </h3>
-                            <h4>
-                                <span>
-                                    <?php if ($row['p_old_price'] != ''): ?>
-                                    <del>
-                                        <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
-                                    </del>
-                                </span>
+                            <div class="text">
+                                <h3><a href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
+                                </h3>
+                                <h4>
+                                    <span>
+                                        <?php if ($row['p_old_price'] != ''): ?>
+                                            <del>
+                                                <?php echo $row['p_old_price']; ?><span class="vnd">VND</span>
+                                            </del>
+                                    </span>
                                 <?php endif; ?>
                                 <span>
                                     <?php echo $row['p_current_price']; ?><span class="vnd">VND</span>
                                 </span>
-                            </h4>
-                            <div class="rating">
-                                <?php
+                                </h4>
+                                <div class="rating">
+                                    <?php
                                     if ($avg_rating == 0) {
                                         echo '';
                                     } elseif ($avg_rating == 1.5) {
@@ -769,21 +779,21 @@ if ($successMsg1 != '') {
                                     } else {
                                         for ($i = 1; $i <= 5; $i++) {
                                     ?>
-                                <?php if ($i > $avg_rating): ?>
-                                <i class="fa fa-star-o"></i>
-                                <?php else: ?>
-                                <i class="fa fa-star"></i>
-                                <?php endif; ?>
-                                <?php
+                                            <?php if ($i > $avg_rating): ?>
+                                                <i class="fa fa-star-o"></i>
+                                            <?php else: ?>
+                                                <i class="fa fa-star"></i>
+                                            <?php endif; ?>
+                                    <?php
                                         }
                                     }
                                     ?>
+                                </div>
+                                <p><a
+                                        href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo 'Thêm vào giỏ hàng'; ?></a>
+                                </p>
                             </div>
-                            <p><a
-                                    href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo 'Thêm vào giỏ hàng'; ?></a>
-                            </p>
                         </div>
-                    </div>
                     <?php
                     }
                     ?>
@@ -792,48 +802,68 @@ if ($successMsg1 != '') {
         </div>
     </div>
 </div>
+<div id="toast"></div>
+<style>
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
+    }
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
 <script>
-function bindLightboxEvents() {
-    const zoomableImages = document.querySelectorAll(".zoomable-image");
-    const lightbox = document.getElementById('lightbox-overlay');
-    const lightboxImg = document.getElementById('lightbox-img');
+    function bindLightboxEvents() {
+        const zoomableImages = document.querySelectorAll(".zoomable-image");
+        const lightbox = document.getElementById('lightbox-overlay');
+        const lightboxImg = document.getElementById('lightbox-img');
 
-    zoomableImages.forEach(img => {
-        img.addEventListener("click", function() {
-            lightboxImg.src = this.src;
-            lightbox.classList.add('show');
-            lightboxImg.style.transform = 'scale(1.1)';
+        zoomableImages.forEach(img => {
+            img.addEventListener("click", function() {
+                lightboxImg.src = this.src;
+                lightbox.classList.add('show');
+                lightboxImg.style.transform = 'scale(1.1)';
+            });
         });
-    });
-}
+    }
 
-document.addEventListener("DOMContentLoaded", function() {
-    bindLightboxEvents();
+    document.addEventListener("DOMContentLoaded", function() {
+        bindLightboxEvents();
 
-    document.getElementById("lightbox-close").addEventListener("click", function() {
-        document.getElementById("lightbox-overlay").classList.remove('show');
-        document.getElementById("lightbox-img").style.transform = 'scale(1)';
-    });
-
-    document.getElementById("lightbox-overlay").addEventListener("click", function(event) {
-        if (event.target === this) {
-            this.classList.remove('show');
+        document.getElementById("lightbox-close").addEventListener("click", function() {
+            document.getElementById("lightbox-overlay").classList.remove('show');
             document.getElementById("lightbox-img").style.transform = 'scale(1)';
-        }
-    });
+        });
 
-    // Gắn lại sự kiện sau khi người dùng post đánh giá mới
-    const reviewForm = document.getElementById("review-form");
-    if (reviewForm) {
-        reviewForm.addEventListener("submit", function(event) {
-            event.preventDefault();
+        document.getElementById("lightbox-overlay").addEventListener("click", function(event) {
+            if (event.target === this) {
+                this.classList.remove('show');
+                document.getElementById("lightbox-img").style.transform = 'scale(1)';
+            }
+        });
 
-            const comment = document.querySelector("textarea[name='comment']").value;
-            const rating = document.querySelector("input[name='rating']:checked")?.value || "0";
-            const previewImages = document.getElementById("preview-images").innerHTML;
-            const reviewSection = document.getElementById("review-section");
+        // Gắn lại sự kiện sau khi người dùng post đánh giá mới
+        const reviewForm = document.getElementById("review-form");
+        if (reviewForm) {
+            reviewForm.addEventListener("submit", function(event) {
+                event.preventDefault();
 
-            const newReview = `
+                const comment = document.querySelector("textarea[name='comment']").value;
+                const rating = document.querySelector("input[name='rating']:checked")?.value || "0";
+                const previewImages = document.getElementById("preview-images").innerHTML;
+                const reviewSection = document.getElementById("review-section");
+
+                const newReview = `
                     <div class='review'>
                         <p><strong>⭐ ${rating} sao</strong></p>
                         <p>${comment}</p>
@@ -841,13 +871,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 `;
 
-            reviewSection.innerHTML = newReview + reviewSection.innerHTML;
+                reviewSection.innerHTML = newReview + reviewSection.innerHTML;
 
-            reviewForm.reset();
-            document.getElementById("preview-images").innerHTML = "";
-            bindLightboxEvents(); // Gắn lại sự kiện cho ảnh mới
-        });
+                reviewForm.reset();
+                document.getElementById("preview-images").innerHTML = "";
+                bindLightboxEvents(); // Gắn lại sự kiện cho ảnh mới
+            });
+        }
+    });
+
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
     }
-});
 </script>
 <?php require_once('footer.php'); ?>

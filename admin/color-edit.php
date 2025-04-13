@@ -105,8 +105,8 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group">
                             <label for="" class="col-sm-2 control-label"></label>
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-success pull-left" name="form1">Cập nhật</button>
+                            <div class="col-sm-4">
+                                <button type="submit" class="btn btn-success pull-right" name="form1">Cập nhật</button>
                             </div>
                         </div>
                     </div>

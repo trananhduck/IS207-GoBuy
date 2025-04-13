@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
                                             class="btn btn-success btn-xs confirm-btn">Thay đổi Trạng thái</a>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-danger btn-xs"
+                                        <a href="#" class="btn btn-danger"
                                             data-href="customer-delete.php?id=<?php echo $row['cust_id']; ?>"
                                             data-toggle="modal" data-target="#confirm-delete">Xóa</a>
                                     </td>
@@ -152,14 +152,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['export_excel'])) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                <a class="btn btn-danger btn-ok confirm-btn">Xóa</a>
+                <a class="btn btn-danger btn-ok confirm-btn-xoa">Xóa</a>
             </div>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function() {
-        $('.confirm-btn').click(function(e) {
+        $('.confirm-btn-xoa').click(function(e) {
             e.preventDefault();
             toastr.success("Xóa thành công!");
             setTimeout(function() {
