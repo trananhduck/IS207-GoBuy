@@ -49,12 +49,12 @@ if (isset($_POST['form1'])) {
         }
         if ($table_quantity[$temp_index] < $arr2[$i]) {
             $allow_update = 0;
-            $errorMsg .= '"' . $arr2[$i] . '" items are not available for "' . $arr3[$i] . '"\n';
+            $errorMsg .= '"' . $arr2[$i] . '" sản phẩm không có sẵn "' . $arr3[$i] . '"\n';
         } else {
             $_SESSION['cart_p_qty'][$i] = $arr2[$i];
         }
     }
-    $errorMsg .= '\nOther items quantity are updated successfully!';
+    $errorMsg .= '\nSản phẩm đã được cập nhập số lượng';
 ?>
 
     <?php if ($allow_update == 0): ?>
@@ -66,7 +66,7 @@ if (isset($_POST['form1'])) {
     <?php else: ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                showToast("All Items Quantity Update is Successful!", '#27ae60');
+                showToast("Tất cả sản phẩm đã được cập nhập thành công", '#27ae60');
             });
         </script>
     <?php endif; ?>
