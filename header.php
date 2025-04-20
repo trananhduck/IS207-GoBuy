@@ -416,12 +416,10 @@ foreach ($result as $row) {
                         <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Giỏ hàng (
                                 <?php
                                 $table_total_price = 0;
-                                $arr_cart_p_qty = isset($_SESSION['cart_p_qty']) ? $_SESSION['cart_p_qty'] : [];
-                                $arr_cart_p_current_price = isset($_SESSION['cart_p_current_price']) ? $_SESSION['cart_p_current_price'] : [];
-
-                                if (!empty($arr_cart_p_qty) && !empty($arr_cart_p_current_price)) {
-                                    foreach ($arr_cart_p_qty as $index => $qty) {
-                                        $table_total_price += $qty * ($arr_cart_p_current_price[$index] ?? 0);
+                                if (isset($_SESSION['cart_p_qty']) && isset($_SESSION['cart_p_current_price'])) {
+                                    foreach ($_SESSION['cart_p_qty'] as $index => $qty) {
+                                        $price = isset($_SESSION['cart_p_current_price'][$index]) ? $_SESSION['cart_p_current_price'][$index] : 0;
+                                        $table_total_price += $qty * $price;
                                     }
                                 }
 

@@ -87,7 +87,7 @@ $transfer_content = "Thanh toán đơn hàng " . $order_code;
 
 $bank_id = "MB";
 $account_no = "0946403788";
-$qr_data = "https://img.vietqr.io/image/$bank_id-{$account_no}-compact.png?amount=$final_total&addInfo=" . urlencode($transfer_content);
+$qr_data = "https://img.vietqr.io/image/$bank_id-{$account_no}-compact2.png?amount=$final_total&addInfo=" . urlencode($transfer_content);
 ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {

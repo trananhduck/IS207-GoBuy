@@ -74,23 +74,6 @@ foreach ($result as $row) {
     $color[] = $row['color_id'];
 }
 
-
-// if (isset($_POST['form_review'])) {
-
-//     $query = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=? AND cust_id=?");
-//     $query->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id']));
-//     $total = $query->rowCount();
-
-//     if ($total) {
-//         $errorMsg = 'Bạn đã đưa ra đánh giá!';
-//     }
-//     } else {
-//         $query = $pdo->prepare("INSERT INTO table_rating (p_id,cust_id,comment,rating) VALUES (?,?,?,?)");
-//         $query->execute(array($_REQUEST['id'], $_SESSION['customer']['cust_id'], $_POST['comment'], $_POST['rating']));
-//         $successMsg = 'Đánh giá của bạn đã được gửi thành công!';
-//     }
-// }
-
 // Lấy trung bình đánh giá cho sản phẩm
 $t_rating = 0;
 $query = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
@@ -167,7 +150,7 @@ if (isset($_POST['form_add_to_cart'])) {
                 }
             }
             if ($added == 1) {
-                $errorMsg1 = 'Sản phẩm này đã được thêm vào giỏ hàng.';
+                $_SESSION['toast_error']= 'Sản phẩm này đã được thêm vào giỏ hàng. Vui lòng cập nhập số lượng trong giỏ hàng!';
             } else {
 
                 $i = 0;
@@ -215,7 +198,7 @@ if (isset($_POST['form_add_to_cart'])) {
                 $_SESSION['cart_p_name'][$new_key] = $_POST['p_name'];
                 $_SESSION['cart_p_featured_photo'][$new_key] = $_POST['p_featured_photo'];
 
-                $successMsg1 = 'Sản phẩm được thêm vào giỏ hàng thành công!';
+                $_SESSION['toast_success'] = 'Sản phẩm được thêm vào giỏ hàng thành công!';
             }
         } else {
 
@@ -258,9 +241,11 @@ if (isset($_POST['form_add_to_cart'])) {
             $_SESSION['cart_p_name'][1] = $_POST['p_name'];
             $_SESSION['cart_p_featured_photo'][1] = $_POST['p_featured_photo'];
 
-            $successMsg1 = 'Product is added to the cart successfully!';
+            $_SESSION['toast_success'] = 'Sản phẩm được thêm vào giỏ hàng thành công!';
         }
     endif;
+    header("Location: ".$_SERVER['REQUEST_URI']);
+    exit;
 }
 ?>
 <?php
@@ -296,20 +281,22 @@ if (isset($_POST['form_review'])) {
 }
 ?>
 <?php
-if (!empty($errorMsg1)) {
+if (!empty($_SESSION['toast_error'])) {
     echo "<script>
         document.addEventListener('DOMContentLoaded', function() {
-            showToast(" . json_encode(strip_tags($errorMsg1)) . ", '#e74c3c');
+            showToast(" . json_encode(strip_tags($_SESSION['toast_error'])) . ", '#e74c3c');
         });
     </script>";
+    unset($_SESSION['toast_error']);
 }
 
-if (!empty($successMsg1)) {
+if (!empty($_SESSION['toast_success'])) {
     echo "<script>
         document.addEventListener('DOMContentLoaded', function() {
-            showToast(" . json_encode(strip_tags($successMsg1)) . ", '#27ae60');
+            showToast(" . json_encode(strip_tags($_SESSION['toast_success'])) . ", '#27ae60');
         });
     </script>";
+    unset($_SESSION['toast_success']);
 }
 ?>
 
