@@ -895,7 +895,7 @@ Responsive cho Mobile
 .product .thumb {
   position: relative;
   overflow: hidden;
-  border-radius: 10px 10px 0 0;
+  border-radius: 8px 8px 0 0;
 }
 
 .product h3 a {
