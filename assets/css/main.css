@@ -1882,3 +1882,32 @@ div.pagination span.disabled {
   transform: translateY(-3px);
   box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.5);
 }
+@media (max-width: 767px) {
+  .service .row > div:nth-child(2n+1) {
+      clear: both;
+  }
+}
+@media (max-width: 767px) {
+  .cart table td,
+  .cart table th {
+      font-size: 13px;
+      white-space: nowrap;
+      vertical-align: middle;
+      text-align: center;
+  }
+
+  .cart img {
+      max-width: 60px;
+      height: auto;
+  }
+
+  .cart-buttons ul {
+      padding-left: 0;
+      text-align: center;
+  }
+
+  .cart-buttons li {
+      display: block;
+      margin-bottom: 10px;
+  }
+}

@@ -126,14 +126,14 @@ foreach ($result as $row) {
                 $result = $query->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($result as $row) {
                 ?>
-                    <div class="col-md-3">
+                    <div class="col-xs-6 col-sm-6 col-md-3" style="margin-bottom: 30px;">
                         <div class="item">
-                            <div class="photo"><img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
-                                    alt="<?php echo $row['title']; ?>"></div>
+                            <div class="photo">
+                                <img src="assets/uploads/<?php echo $row['photo']; ?>" width="150px"
+                                    alt="<?php echo $row['title']; ?>">
+                            </div>
                             <h3><?php echo $row['title']; ?></h3>
-                            <p>
-                                <?php echo nl2br($row['content']); ?>
-                            </p>
+                            <p><?php echo nl2br($row['content']); ?></p>
                         </div>
                     </div>
                 <?php
@@ -357,7 +357,7 @@ foreach ($result as $row) {
         z-index: 9999;
         transform: translateY(-20px);
     }
-    
+
     #toast.show {
         opacity: 1;
         transform: translateY(0);
@@ -379,8 +379,8 @@ if (isset($_SESSION['success_message'])) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
         showToast(" . json_encode($_SESSION['success_message']) . ", '#27ae60');
         });</script>";
-        unset($_SESSION['success_message']);
-    }
-    ?>
+    unset($_SESSION['success_message']);
+}
+?>
 
 <?php require_once('footer.php'); ?>
