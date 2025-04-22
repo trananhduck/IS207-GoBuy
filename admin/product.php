@@ -293,30 +293,30 @@ if (isset($_POST['clear_all'])) {
                             foreach ($result as $row) {
                                 $i++;
                             ?>
-                                <tr>
-                                    <td><?= $i; ?></td>
-                                    <td><img src="../assets/uploads/product_photos/<?= $row['p_featured_photo']; ?>"
-                                            alt="<?= $row['p_name']; ?>" style="width:80px;"></td>
-                                    <td><?= $row['p_name']; ?></td>
-                                    <td><?= $row['p_old_price']; ?>VND</td>
-                                    <td>$<?= $row['_current_price']; ?>VND</td>
-                                    <td><?= $row['p_qty']; ?></td>
-                                    <td><span class="badge"
-                                            style="background-color:<?= $row['p_is_featured'] ? 'green' : 'red'; ?>;"><?= $row['p_is_featured'] ? 'Có' : 'Không'; ?></span>
-                                    </td>
-                                    <td><span class="badge"
-                                            style="background-color:<?= $row['p_is_active'] ? 'green' : 'red'; ?>;"><?= $row['p_is_active'] ? 'Có' : 'Không'; ?></span>
-                                    </td>
-                                    <td><?= $row['tcat_name']; ?><br><?= $row['mcat_name']; ?><br><?= $row['ecat_name']; ?>
-                                    </td>
-                                    <td>
-                                        <a href="product-edit.php?id=<?= $row['p_id']; ?>"
-                                            class="btn btn-primary btn-xs edit-btn">Sửa</a>
-                                        <a href="#" class="btn btn-danger btn-xs"
-                                            data-href="product-delete.php?id=<?= $row['p_id']; ?>" data-toggle="modal"
-                                            data-target="#confirm-delete">Xóa</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?= $i; ?></td>
+                                <td><img src="../assets/uploads/product_photos/<?= $row['p_featured_photo']; ?>"
+                                        alt="<?= $row['p_name']; ?>" style="width:80px;"></td>
+                                <td><?= $row['p_name']; ?></td>
+                                <td><?= $row['p_old_price']; ?>VND</td>
+                                <td><?= $row['p_current_price']; ?>VND</td>
+                                <td><?= $row['p_qty']; ?></td>
+                                <td><span class="badge"
+                                        style="background-color:<?= $row['p_is_featured'] ? 'green' : 'red'; ?>;"><?= $row['p_is_featured'] ? 'Có' : 'Không'; ?></span>
+                                </td>
+                                <td><span class="badge"
+                                        style="background-color:<?= $row['p_is_active'] ? 'green' : 'red'; ?>;"><?= $row['p_is_active'] ? 'Có' : 'Không'; ?></span>
+                                </td>
+                                <td><?= $row['tcat_name']; ?><br><?= $row['mcat_name']; ?><br><?= $row['ecat_name']; ?>
+                                </td>
+                                <td>
+                                    <a href="product-edit.php?id=<?= $row['p_id']; ?>"
+                                        class="btn btn-primary btn-xs edit-btn">Sửa</a>
+                                    <a href="#" class="btn btn-danger btn-xs"
+                                        data-href="product-delete.php?id=<?= $row['p_id']; ?>" data-toggle="modal"
+                                        data-target="#confirm-delete">Xóa</a>
+                                </td>
+                            </tr>
                             <?php } ?>
                         </tbody>
                     </table>
@@ -346,88 +346,88 @@ if (isset($_POST['clear_all'])) {
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#confirm-delete').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        });
-
-        $('.btn-ok').click(function(e) {
-            e.preventDefault();
-            let deleteUrl = $(this).attr('href');
-            $('#confirm-delete').modal('hide');
-            toastr.success('Sản phẩm đã bị xóa!');
-            setTimeout(() => {
-                window.location.href = deleteUrl;
-            }, 2000);
-        });
-    });
-    $(document).ready(function() {
-        $('.edit-btn').click(function(e) {
-            e.preventDefault();
-            toastr.info("Chuyển đến trang chỉnh sửa...");
-            setTimeout(() => {
-                window.location.href = $(this).attr('href');
-            }, 1500); // Chuyển hướng sau 1.5 giây
-        });
-    });
-    document.getElementById("import_button").addEventListener("click", function() {
-        document.getElementById("excel_file").click();
+$(document).ready(function() {
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
     });
 
-    document.getElementById("excel_file").addEventListener("change", function() {
-        if (this.files.length > 0) {
-            document.getElementById("import_excel").click();
-        }
+    $('.btn-ok').click(function(e) {
+        e.preventDefault();
+        let deleteUrl = $(this).attr('href');
+        $('#confirm-delete').modal('hide');
+        toastr.success('Sản phẩm đã bị xóa!');
+        setTimeout(() => {
+            window.location.href = deleteUrl;
+        }, 2000);
     });
-    document.getElementById("clear_all").addEventListener("click", function() {
-        if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm không?")) {
-            let form = document.createElement("form");
-            form.method = "POST";
-            let input = document.createElement("input");
-            input.type = "hidden";
-            input.name = "clear_all";
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-        }
+});
+$(document).ready(function() {
+    $('.edit-btn').click(function(e) {
+        e.preventDefault();
+        toastr.info("Chuyển đến trang chỉnh sửa...");
+        setTimeout(() => {
+            window.location.href = $(this).attr('href');
+        }, 1500); // Chuyển hướng sau 1.5 giây
     });
-    window.onload = function() {
-        let message = localStorage.getItem('toastMessage');
-        if (message) {
-            console.log(message);
-            toastr.success(message);
-            localStorage.removeItem('toastMessage'); // Xóa sau khi hiển thị để tránh hiển thị lại khi tải lại trang
-        }
+});
+document.getElementById("import_button").addEventListener("click", function() {
+    document.getElementById("excel_file").click();
+});
+
+document.getElementById("excel_file").addEventListener("change", function() {
+    if (this.files.length > 0) {
+        document.getElementById("import_excel").click();
+    }
+});
+document.getElementById("clear_all").addEventListener("click", function() {
+    if (confirm("Bạn có chắc chắn muốn xóa tất cả sản phẩm không?")) {
+        let form = document.createElement("form");
+        form.method = "POST";
+        let input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "clear_all";
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+});
+window.onload = function() {
+    let message = localStorage.getItem('toastMessage');
+    if (message) {
+        console.log(message);
+        toastr.success(message);
+        localStorage.removeItem('toastMessage'); // Xóa sau khi hiển thị để tránh hiển thị lại khi tải lại trang
+    }
+};
+
+function showToast(type, message) {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "3000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
     };
 
-    function showToast(type, message) {
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": true,
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "3000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-
-        if (type === 'success') {
-            toastr.success(message);
-        } else if (type === 'error') {
-            toastr.error(message);
-        } else if (type === 'info') {
-            toastr.info(message);
-        } else if (type === 'warning') {
-            toastr.warning(message);
-        }
+    if (type === 'success') {
+        toastr.success(message);
+    } else if (type === 'error') {
+        toastr.error(message);
+    } else if (type === 'info') {
+        toastr.info(message);
+    } else if (type === 'warning') {
+        toastr.warning(message);
     }
+}
 </script>
 <?php require_once('footer.php'); ?>
