@@ -57,19 +57,19 @@ if (isset($_POST['form1'])) {
     $errorMsg .= '\nSản phẩm đã được cập nhập số lượng';
 ?>
 
-    <?php if ($allow_update == 0): ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
-            });
-        </script>
-    <?php else: ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                showToast("Tất cả sản phẩm đã được cập nhập thành công", '#27ae60');
-            });
-        </script>
-    <?php endif; ?>
+<?php if ($allow_update == 0): ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    showToast(" . json_encode(strip_tags($errorMsg)) . ", '#e74c3c');
+});
+</script>
+<?php else: ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    showToast("Tất cả sản phẩm đã được cập nhập thành công", '#27ae60');
+});
+</script>
+<?php endif; ?>
 <?php
 
 }
