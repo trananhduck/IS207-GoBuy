@@ -30,20 +30,23 @@ $query->execute();
 $available_shipping = $query->rowCount();
 
 $query = $pdo->prepare("SELECT * FROM table_payment WHERE payment_status=?");
-$query->execute(array('Đã hoàn thành'));
+$query->execute(array('Completed'));
 $total_order_completed = $query->rowCount();
 
 $query = $pdo->prepare("SELECT * FROM table_payment WHERE shipping_status=?");
-$query->execute(array('Đã hoàng thành'));
+$query->execute(array('Completed'));
 $total_shipping_completed = $query->rowCount();
 
 $query = $pdo->prepare("SELECT * FROM table_payment WHERE payment_status=?");
-$query->execute(array('Chưa xử lý'));
+$query->execute(array('Pending'));
 $total_order_pending = $query->rowCount();
 
 $query = $pdo->prepare("SELECT * FROM table_payment WHERE payment_status=? AND shipping_status=?");
-$query->execute(array('Đã hoàn thành', 'Chưa xử lý'));
+$query->execute(array('Completed', 'Pending'));
 $total_order_complete_shipping_pending = $query->rowCount();
+$query = $pdo->prepare("SELECT * FROM table_payment WHERE payment_status=? AND shipping_status=?");
+$query->execute(array('Completed', 'Completed'));
+$total_order_complete_complete = $query->rowCount();
 ?>
 
 <section class="content">
@@ -82,7 +85,7 @@ $total_order_complete_shipping_pending = $query->rowCount();
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3><?php echo $total_order_completed; ?></h3>
+                    <h3><?php echo $total_order_complete_complete; ?></h3>
 
                     <p>Đơn hàng đã hoàn thành</p>
                 </div>
@@ -142,7 +145,7 @@ $total_order_complete_shipping_pending = $query->rowCount();
             <!-- small box -->
             <div class="small-box bg-teal">
                 <div class="inner">
-                    <h3><?php echo $available_shipping; ?></h3>
+                    <h3><?php echo $total_order_completed; ?></h3>
 
                     <p>Đơn hàng đã thanh toán</p>
                 </div>
