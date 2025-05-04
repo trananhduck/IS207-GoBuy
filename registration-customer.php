@@ -271,9 +271,12 @@ if (isset($_POST['form1'])) {
                                                                                                             echo $_POST['cust_email'];
                                                                                                         } ?>">
                                 </div>
-                                <div class="col-md-6 form-group">
+                                <div class="col-md-6 form-group position-relative">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control" name="cust_password">
+                                    <input type="password" class="form-control password-input" name="cust_password" id="cust_password">
+                                    <span class="toggle-password" onclick="togglePasswordCust()" style="right: 15px;">
+                                        👁️
+                                    </span>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Nhập lại mật khẩu' ?> *</label>
@@ -303,70 +306,77 @@ if (isset($_POST['form1'])) {
 <!-- Toast -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: all 0.5s ease;
-    z-index: 9999;
-}
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: all 0.5s ease;
+        z-index: 9999;
+    }
 
-#toast.show {
-    opacity: 1;
-}
+    #toast.show {
+        opacity: 1;
+    }
 
-.form-group-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 15px;
-}
+    .form-group-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+    }
 
-.btn-danger {
-    width: 50%;
-    max-width: 200px;
-    text-align: center;
-}
+    .btn-danger {
+        width: 50%;
+        max-width: 200px;
+        text-align: center;
+    }
 
-.btn {
-    border-radius: 6px;
-    width: 30%;
-}
+    .btn {
+        border-radius: 6px;
+        width: 30%;
+    }
 
-.btn input {
-    position: relative;
-}
+    .btn input {
+        position: relative;
+    }
 
-.account-sidebar {
-    position: absolute;
-    bottom: -30px;
-    right: 230px;
-}
+    .account-sidebar.res {
+        position: absolute;
+        bottom: -30px;
+        right: 230px;
+    }
 
-.account-sidebar a {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 12px;
-}
+    .account-sidebar a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+    }
 
-.account-sidebar a:hover {
-    text-decoration: underline;
-}
+    .account-sidebar a:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <script>
-function showToast(message, color = '#333') {
-    const toast = document.getElementById('toast');
-    toast.innerText = message;
-    toast.style.backgroundColor = color;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+    function showToast(message, color = '#333') {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.style.backgroundColor = color;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+    function togglePasswordCust() {
+    const passwordInput = document.getElementById("cust_password");
+    const toggleIcon = document.querySelector(".toggle-password");
+    const isPassword = passwordInput.getAttribute("type") === "password";
+    passwordInput.setAttribute("type", isPassword ? "text" : "password");
+    toggleIcon.textContent = isPassword ? "🙈" : "👁️";
 }
 </script>
 
@@ -378,44 +388,44 @@ if (isset($successMsg) && !empty($successMsg)) {
 }
 ?>
 <script>
-// Script khởi tạo cho trang đăng ký
-document.addEventListener('DOMContentLoaded', function() {
-    // Đảm bảo rằng API đã được khởi tạo trong header.php
-    if (typeof initializeAddressSelects === 'function') {
-        initializeAddressSelects();
-    } else {
-        console.error('API địa chỉ chưa được khởi tạo đúng cách.');
-    }
+    // Script khởi tạo cho trang đăng ký
+    document.addEventListener('DOMContentLoaded', function() {
+        // Đảm bảo rằng API đã được khởi tạo trong header.php
+        if (typeof initializeAddressSelects === 'function') {
+            initializeAddressSelects();
+        } else {
+            console.error('API địa chỉ chưa được khởi tạo đúng cách.');
+        }
 
-    // Xử lý lỗi khi submit form
-    <?php if ($errorMsg != ''): ?>
-    // Phục hồi dữ liệu đã chọn nếu có lỗi form
-    setTimeout(function() {
-        const provinceValue =
-            "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
-        const districtValue =
-            "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
-        const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
+        // Xử lý lỗi khi submit form
+        <?php if ($errorMsg != ''): ?>
+            // Phục hồi dữ liệu đã chọn nếu có lỗi form
+            setTimeout(function() {
+                const provinceValue =
+                    "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
+                const districtValue =
+                    "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
+                const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
 
-        // Hiển thị lỗi trong select
-        if (provinceValue) {
-            document.getElementById('province-select').classList.add('error-field');
-        }
-        if (districtValue) {
-            document.getElementById('district-select').classList.add('error-field');
-        }
-        if (wardValue) {
-            document.getElementById('ward-select').classList.add('error-field');
-        }
-    }, 500);
-    <?php endif; ?>
-});
+                // Hiển thị lỗi trong select
+                if (provinceValue) {
+                    document.getElementById('province-select').classList.add('error-field');
+                }
+                if (districtValue) {
+                    document.getElementById('district-select').classList.add('error-field');
+                }
+                if (wardValue) {
+                    document.getElementById('ward-select').classList.add('error-field');
+                }
+            }, 500);
+        <?php endif; ?>
+    });
 </script>
 
 <style>
-/* Thêm style cho select khi có lỗi */
-.error-field {
-    border: 1px solid #f00 !important;
-}
+    /* Thêm style cho select khi có lỗi */
+    .error-field {
+        border: 1px solid #f00 !important;
+    }
 </style>
 <?php require_once('footer.php'); ?>

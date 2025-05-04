@@ -77,9 +77,12 @@ if (isset($_POST['form1'])) {
                                     <label for=""><?php echo 'Địa chỉ email' ?> *</label>
                                     <input type="email" class="form-control" name="email">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group position-relative">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="password" class="form-control password-input" name="password" id="admin_password">
+                                    <span class="toggle-password" onclick="togglePassword()">
+                                        👁️
+                                    </span>
                                 </div>
                                 <div class="form-group d-flex">
                                     <label for=""></label>
@@ -105,122 +108,138 @@ if (isset($_POST['form1'])) {
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 9999;
-    transform: translateY(-20px);
-}
-
-#toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (max-width: 1200px) {
-    .admin-content .box {
-        max-width: 100%;
-        margin: 0 auto;
-    }
-    .admin-content .box a{
-        text-align: center;
-    }
-    .account-sidebar {
-        position: relative;
-        left: auto;
-        top: -90px;
-        text-align: center;
-        margin-top: 15px;
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
     }
 
-    .admin-content .form-control {
-        font-size: 15px;
-        padding: 10px;
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    .btn-danger {
-        font-size: 15px;
-        padding: 12px;
-    }
-}
-@media (max-width: 992px) {
-    .admin-content .box {
-        max-width: 90%;
-        margin: 0 auto;
-    }
-    .admin-content .box a{
-        text-align: right;
-    }
-    .account-sidebar {
-        position: relative;
-        left: -203px;
-        top: -130px;
-        text-align: center;
-        margin-top: 10px;
-    }
-}
+    @media (max-width: 1200px) {
+        .admin-content .box {
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
-/* Responsive cho điện thoại */
-@media (max-width: 768px) {
-    .admin-content {
-        padding: 20px;
-    }
+        .admin-content .box a {
+            text-align: center;
+        }
 
-    .admin-content .box {
-        padding: 15px;
-        box-shadow: none; /* Bỏ bóng trên mobile để giao diện nhẹ hơn */
-    }
-    .admin-content .box a{
-        text-align: center;
-    }
-    .admin-content .form-control {
-        font-size: 13px;
-        padding: 8px;
+        .account-sidebar.login {
+            position: relative;
+            left: auto;
+            top: -90px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .admin-content .form-control {
+            font-size: 15px;
+            padding: 10px;
+        }
+
+        .btn-danger {
+            font-size: 15px;
+            padding: 12px;
+        }
     }
 
-    .btn-danger {
-        font-size: 14px;
-        padding: 10px;
+    @media (max-width: 992px) {
+        .admin-content .box {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .admin-content .box a {
+            text-align: right;
+        }
+
+        .account-sidebar.login {
+            position: relative;
+            left: -180px;
+            top: -130px;
+            text-align: center;
+            margin-top: 10px;
+        }
     }
 
-    .form-group.d-flex {
-        flex-direction: column;
-        align-items: stretch;
-    }
+    /* Responsive cho điện thoại */
+    @media (max-width: 768px) {
+        .admin-content {
+            padding: 20px;
+        }
 
-    .account-sidebar {
-        position: relative;
-        text-align: center;
-        left: auto;
-        top: -80px;
-        margin-top: 10px;
-    }
+        .admin-content .box {
+            padding: 15px;
+            box-shadow: none;
+            /* Bỏ bóng trên mobile để giao diện nhẹ hơn */
+        }
 
-    .account-sidebar a {
-        display: block;
-        padding: 10px;
-        font-size: 13px;
-        width: 100%;
-        text-align: center;
+        .admin-content .box a {
+            text-align: center;
+        }
+
+        .admin-content .form-control {
+            font-size: 13px;
+            padding: 8px;
+        }
+
+        .btn-danger {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .form-group.d-flex {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .account-sidebar.login {
+            position: relative;
+            text-align: center;
+            left: auto;
+            top: -80px;
+            margin-top: 10px;
+        }
+
+        .account-sidebar a {
+            display: block;
+            padding: 10px;
+            font-size: 13px;
+            width: 100%;
+            text-align: center;
+        }
     }
-}
 </style>
 
 <script>
-function showToast(message, bg = "#333") {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.style.backgroundColor = bg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 4000);
-}
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+    }
+
+    function togglePassword() {
+        const passwordInput = document.getElementById("admin_password");
+        const toggleIcon = document.querySelector(".toggle-password");
+        const isPassword = passwordInput.getAttribute("type") === "password";
+        passwordInput.setAttribute("type", isPassword ? "text" : "password");
+        toggleIcon.textContent = isPassword ? "🙈" : "👁️";
+    }
 </script>
 
 <?php

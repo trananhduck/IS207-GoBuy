@@ -1911,3 +1911,21 @@ div.pagination span.disabled {
       margin-bottom: 10px;
   }
 }
+.position-relative {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 40px; /* chừa khoảng cho icon */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 43px;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #888;
+  z-index: 10;
+}
