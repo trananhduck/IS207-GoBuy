@@ -48,7 +48,7 @@ if (isset($_POST['form1'])) {
         $order_data = $query->fetch(PDO::FETCH_ASSOC);
 
         $payment_details = "";
-        if ($order_data['payment_method'] == 'Ngân hàng') {
+        if ($order_data['payment_method'] == 'Bank Transfer') {
             $payment_details = "Mã giao dịch: " . $order_data['txnid'] . "<br>";
         }
 
@@ -236,7 +236,7 @@ if ($successMsg != '') {
                                         ?>
                                 </td>
                                 <td>
-                                    <?php if ($row['payment_method'] == 'Ngân hàng'): ?>
+                                    <?php if ($row['payment_method'] == 'Bank Transfer'): ?>
                                     <b>Phương thức thanh toán:</b>
                                     <?php echo '<span style="color:red;"><b>' . $row['payment_method'] . '</b></span>'; ?><br>
                                     <b>Id thanh toán:</b> <?php echo $row['payment_id']; ?><br>

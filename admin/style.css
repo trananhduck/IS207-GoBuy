@@ -401,3 +401,35 @@ select {
 .sidebar-menu .treeview.menu-open .treeview-menu {
   display: block;
 }
+.chart-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Giúp responsive nếu thu nhỏ */
+  gap: 20px;
+  margin: 20px auto;
+}
+
+.chart-box {
+  flex: 1 1 48%;
+  height: 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.chart-box:hover {
+  transform: translateY(-3px);
+}
+
+.chart-box h4 {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #333;
+}
+#orderChart{
+  margin-left: 160px;
+}

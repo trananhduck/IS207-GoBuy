@@ -200,3 +200,4 @@ if (!isset($_SESSION['admin'])) {
         </aside>
         <div class="content-wrapper">
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

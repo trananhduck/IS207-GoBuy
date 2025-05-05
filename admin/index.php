@@ -1,5 +1,28 @@
 <?php require_once('header.php'); ?>
+<?php
+// Tạo mảng dữ liệu biểu đồ
 
+// 1. Doanh thu 7 ngày gần nhất
+$revenue_data = [];
+$date_labels = [];
+for ($i = 6; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $stmt = $pdo->prepare("SELECT SUM(paid_amount) AS total FROM table_payment WHERE payment_date LIKE ?");
+    $stmt->execute(["$date%"]);
+    $row = $stmt->fetch();
+    $revenue_data[] = $row['total'] ?? 0;
+    $date_labels[] = $date;
+}
+
+// 2. Trạng thái đơn hàng
+$stmt = $pdo->query("SELECT shipping_status, COUNT(*) AS total FROM table_payment GROUP BY shipping_status");
+$order_statuses = [];
+$order_counts = [];
+while ($row = $stmt->fetch()) {
+    $order_statuses[] = $row['shipping_status'];
+    $order_counts[] = $row['total'];
+}
+?>
 <section class="content-header">
     <h1>Thông tin</h1>
 </section>
@@ -202,7 +225,16 @@ $total_order_complete_complete = $query->rowCount();
         </div>
 
     </div>
-
+    <div class="chart-row">
+        <div class="chart-box">
+            <h4>Biểu đồ doanh thu 7 ngày</h4>
+            <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h4>Tình trạng giao hàng</h4>
+            <canvas id="orderChart"></canvas>
+        </div>
+    </div>
 </section>
 <!-- Toast Container -->
 <div id="toast"></div>
@@ -220,7 +252,7 @@ $total_order_complete_complete = $query->rowCount();
         z-index: 9999;
         transform: translateY(-20px);
     }
-    
+
     #toast.show {
         opacity: 1;
         transform: translateY(0);
@@ -235,6 +267,46 @@ $total_order_complete_complete = $query->rowCount();
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 4000);
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        const orderCtx = document.getElementById('orderChart').getContext('2d');
+
+        new Chart(revenueCtx, {
+            type: 'bar',
+            data: {
+                labels: <?= json_encode($date_labels) ?>,
+                datasets: [{
+                    label: 'Doanh thu (VNĐ)',
+                    data: <?= json_encode($revenue_data) ?>,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            }
+        });
+
+        new Chart(orderCtx, {
+            type: 'pie',
+            data: {
+                labels: <?= json_encode($order_statuses) ?>,
+                datasets: [{
+                    label: 'Số đơn hàng',
+                    data: <?= json_encode($order_counts) ?>,
+                    backgroundColor: ['#00a65a', '#f39c12', '#00c0ef']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right', // 👈 CHÚ THÍCH BÊN PHẢI
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    }
+                }
+            }
+        });
+    });
 </script>
 
 <?php
@@ -242,12 +314,12 @@ if (isset($_SESSION['success_message'])) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
         showToast(" . json_encode($_SESSION['success_message']) . ", '#27ae60');
         });</script>";
-        unset($_SESSION['success_message']);
-    }
-    if (isset($_SESSION['error_message'])) {
-        echo "<script>document.addEventListener('DOMContentLoaded', function() {
+    unset($_SESSION['success_message']);
+}
+if (isset($_SESSION['error_message'])) {
+    echo "<script>document.addEventListener('DOMContentLoaded', function() {
             showToast(" . json_encode($_SESSION['error_message']) . ", '#e74c3c');
             });</script>";
-            unset($_SESSION['error_message']);
-        }
+    unset($_SESSION['error_message']);
+}
 ?>
