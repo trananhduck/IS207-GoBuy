@@ -430,6 +430,6 @@ select {
   margin-bottom: 15px;
   color: #333;
 }
-#orderChart{
+#orderChart,#ageChart,#categoryChart{
   margin-left: 160px;
 }

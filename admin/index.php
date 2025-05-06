@@ -22,6 +22,62 @@ while ($row = $stmt->fetch()) {
     $order_statuses[] = $row['shipping_status'];
     $order_counts[] = $row['total'];
 }
+
+$age_groups = [
+    'Dưới 18' => 0,
+    '18-25' => 0,
+    '26-35' => 0,
+    '36-50' => 0,
+    'Trên 50' => 0
+];
+
+$sql = "
+    SELECT 
+        YEAR(CURDATE()) - c.cust_birthyear AS age
+    FROM table_customer c
+    JOIN table_payment p ON c.cust_id = p.customer_id
+    WHERE c.cust_birthyear IS NOT NULL
+";
+$stmt = $pdo->query($sql);
+while ($row = $stmt->fetch()) {
+    $age = (int)$row['age'];
+
+    if ($age < 18) {
+        $age_groups['Dưới 18']++;
+    } elseif ($age <= 25) {
+        $age_groups['18-25']++;
+    } elseif ($age <= 35) {
+        $age_groups['26-35']++;
+    } elseif ($age <= 50) {
+        $age_groups['36-50']++;
+    } else {
+        $age_groups['Trên 50']++;
+    }
+}
+
+$age_labels = array_keys($age_groups);
+$age_counts = array_values($age_groups);
+
+$top_categories = [];
+$category_orders = [];
+
+$sql = "
+    SELECT 
+        t.tcat_name, 
+        COALESCE(SUM(o.quantity), 0) AS total_order
+    FROM table_top_category t
+    LEFT JOIN table_mid_category m ON t.tcat_id = m.tcat_id
+    LEFT JOIN table_end_category e ON m.mcat_id = e.mcat_id
+    LEFT JOIN table_product p ON e.ecat_id = p.ecat_id
+    LEFT JOIN table_order o ON p.p_id = o.product_id
+    GROUP BY t.tcat_id, t.tcat_name
+    ORDER BY total_order DESC
+";
+$stmt = $pdo->query($sql);
+while ($row = $stmt->fetch()) {
+    $top_categories[] = $row['tcat_name'];
+    $category_orders[] = (int)$row['total_order'];
+}
 ?>
 <section class="content-header">
     <h1>Thông tin</h1>
@@ -235,6 +291,16 @@ $total_order_complete_complete = $query->rowCount();
             <canvas id="orderChart"></canvas>
         </div>
     </div>
+    <div class="chart-row">
+        <div class="chart-box">
+            <h4>Phân bố độ tuổi khách hàng</h4>
+            <canvas id="ageChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <h4>Danh mục lớn bán chạy</h4>
+            <canvas id="categoryChart"></canvas>
+        </div>
+    </div>
 </section>
 <!-- Toast Container -->
 <div id="toast"></div>
@@ -298,6 +364,60 @@ $total_order_complete_complete = $query->rowCount();
                 plugins: {
                     legend: {
                         position: 'right', // 👈 CHÚ THÍCH BÊN PHẢI
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    }
+                }
+            }
+        });
+        const ageCtx = document.getElementById('ageChart').getContext('2d');
+        const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+
+        new Chart(ageCtx, {
+            type: 'pie',
+            data: {
+                labels: <?= json_encode($age_labels) ?>,
+                datasets: [{
+                    label: 'Tỷ lệ khách hàng theo độ tuổi',
+                    data: <?= json_encode($age_counts) ?>,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(categoryCtx, {
+            type: 'pie',
+            data: {
+                labels: <?= json_encode($top_categories) ?>,
+                datasets: [{
+                    label: 'Tổng số đơn hàng theo danh mục',
+                    data: <?= json_encode($category_orders) ?>,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
                         labels: {
                             boxWidth: 20,
                             padding: 15
