@@ -69,7 +69,12 @@ if (!isset($_SESSION['admin'])) {
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
                             <?php
-                            $adminPhoto = !empty($_SESSION['admin']['photo']) ? $_SESSION['admin']['photo'] : 'default-image.jpg';
+                            $photo = isset($_SESSION['admin']['photo']) ? trim($_SESSION['admin']['photo']) : '';
+                            if ($photo === '' || $photo === 'default.jpg') {
+                                $adminPhoto = 'default-avatar.jpg';
+                            } else {
+                                $adminPhoto = $photo;
+                            }
                             ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../assets/uploads/<?php echo $adminPhoto; ?>" class="admin-image"

@@ -220,11 +220,6 @@ if (isset($_POST['form1'])) {
                         <div class="row">
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
-                                <?php
-                                if (isset($errorMsg) && $errorMsg != '') {
-                                    echo "<div class='error' style='padding: 10px;background:#f1f1f1;margin-bottom:20px;'>" . $errorMsg . "</div>";
-                                }
-                                ?>
                                 <div class="col-md-6 form-group">
                                     <label for=""><?php echo 'Tên đầy đủ' ?> *</label>
                                     <input type="text" class="form-control" name="cust_name" value="<?php if (isset($_POST['cust_name'])) {
@@ -321,13 +316,50 @@ if (isset($_POST['form1'])) {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #333;
-        color: #fff;
-        padding: 15px 25px;
-        border-radius: 8px;
-        opacity: 0;
-        transition: all 0.5s ease;
         z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .toast-message {
+        background-color: #f44336;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 15px;
+        min-width: 250px;
+        max-width: 300px;
+        opacity: 1;
+        transform: translateX(30px);
+        animation: fadeInSlide 0.4s ease forwards;
+        position: relative;
+    }
+
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeOutSlide {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateX(30px);
+        }
     }
 
     #toast.show {
@@ -375,12 +407,20 @@ if (isset($_POST['form1'])) {
 </style>
 
 <script>
-    function showToast(message, color = '#333') {
-        const toast = document.getElementById('toast');
-        toast.innerText = message;
-        toast.style.backgroundColor = color;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
+    function showToast(message, background = '#f44336') {
+        const container = document.getElementById('toast');
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.style.backgroundColor = background;
+        toast.textContent = message;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
+            setTimeout(() => toast.remove(), 500);
+        }, 2500);
     }
 
     function togglePassword(inputId, iconElement) {
@@ -400,6 +440,19 @@ if (isset($successMsg) && !empty($successMsg)) {
         document.addEventListener('DOMContentLoaded', function() {
             showToast(" . json_encode($successMsg) . ", '#2ecc71');
         });
+    </script>";
+}
+if (isset($errorMsg) && !empty($errorMsg)) {
+    $errors = array_filter(array_map('trim', explode('<br>', $errorMsg)));
+
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {";
+
+    foreach ($errors as $msg) {
+        echo "showToast(" . json_encode($msg) . ");";
+    }
+
+    echo "});
     </script>";
 }
 ?>
@@ -438,11 +491,4 @@ if (isset($successMsg) && !empty($successMsg)) {
         <?php endif; ?>
     });
 </script>
-
-<style>
-    /* Thêm style cho select khi có lỗi */
-    .error-field {
-        border: 1px solid #f00 !important;
-    }
-</style>
 <?php require_once('footer.php'); ?>

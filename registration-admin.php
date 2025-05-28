@@ -25,57 +25,57 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['full_name'])) {
         $valid = 0;
-        $errorMsg .= "Tên admin không được để trống\n";
+        $errorMsg .= "Tên admin không được để trống <br>";
     }
 
     if (empty($_POST['email'])) {
         $valid = 0;
-        $errorMsg .= "Địa chỉ email không được để trống\n";
+        $errorMsg .= "Địa chỉ email không được để trống <br>";
     } else {
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $errorMsg .= "Địa chỉ email phải hợp lệ\n";
+            $errorMsg .= "Địa chỉ email phải hợp lệ <br>";
         } else {
             $query = $pdo->prepare("SELECT * FROM table_admin WHERE email=?");
             $query->execute(array($_POST['email']));
             $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
-                $errorMsg .= "Địa chỉ email đã tồn tại\n";
+                $errorMsg .= "Địa chỉ email đã tồn tại <br>";
             }
         }
     }
 
     if (empty($_POST['phone'])) {
         $valid = 0;
-        $errorMsg .= "Số điện thoại không được để trống\n";
+        $errorMsg .= "Số điện thoại không được để trống <br>";
     }
 
     if (empty($_POST['password']) || empty($_POST['re_password'])) {
         $valid = 0;
-        $errorMsg .= "Mật khẩu không được để trống\n";
+        $errorMsg .= "Mật khẩu không được để trống <br>";
     } else {
         $password = $_POST['password'];
         $re_password = $_POST['re_password'];
 
         if (strlen($password) < 6) {
             $valid = 0;
-            $errorMsg .= "Mật khẩu phải có ít nhất 6 ký tự\n";
+            $errorMsg .= "Mật khẩu phải có ít nhất 6 ký tự <br>";
         } elseif (!preg_match('/[A-Z]/', $password)) {
             $valid = 0;
-            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ cái viết hoa\n";
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ cái viết hoa <br>";
         } elseif (!preg_match('/[a-z]/', $password)) {
             $valid = 0;
-            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ cái viết thường\n";
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ cái viết thường <br>";
         } elseif (!preg_match('/\d/', $password)) {
             $valid = 0;
-            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ số\n";
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ số <br>";
         } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
             $valid = 0;
-            $errorMsg .= "Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)\n";
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...) <br>";
         } elseif ($password !== $re_password) {
             $valid = 0;
-            $errorMsg .= "Mật khẩu nhập lại không khớp\n";
+            $errorMsg .= "Mật khẩu nhập lại không khớp <br>";
         }
     }
 
@@ -262,14 +262,50 @@ if (isset($_POST['form1'])) {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #333;
-        color: #fff;
-        padding: 15px 25px;
-        border-radius: 8px;
-        opacity: 0;
-        transition: opacity 0.5s ease, transform 0.5s ease;
         z-index: 9999;
-        transform: translateY(-20px);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .toast-message {
+        background-color: #f44336;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 15px;
+        min-width: 250px;
+        max-width: 300px;
+        opacity: 0;
+        transform: translateX(30px);
+        animation: fadeInSlide 0.4s ease forwards;
+        position: relative;
+    }
+
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeOutSlide {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateX(30px);
+        }
     }
 
     #toast.show {
@@ -318,12 +354,20 @@ if (isset($_POST['form1'])) {
 </style>
 
 <script>
-    function showToast(message, bg = "#333") {
-        const toast = document.getElementById("toast");
-        toast.innerHTML = message.replace(/\n/g, "<br>");
-        toast.style.backgroundColor = bg;
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 4000);
+    function showToast(message, background = '#f44336') {
+        const container = document.getElementById('toast');
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.style.backgroundColor = background;
+        toast.textContent = message;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
+            setTimeout(() => toast.remove(), 500);
+        }, 2500);
     }
 
     function togglePassword(el) {
@@ -340,11 +384,21 @@ if (isset($_POST['form1'])) {
 
 
 <?php
-if (!empty($errorMsg)) {
-    echo "<script>document.addEventListener('DOMContentLoaded', function() {
-        showToast(" . json_encode($errorMsg) . ", '#e74c3c');
-    });</script>";
+if (isset($errorMsg) && !empty($errorMsg)) {
+    // Tách chuỗi lỗi theo dấu xuống dòng  <br>
+    $errors = array_filter(array_map('trim', explode(" <br>", $errorMsg)));
+
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {";
+
+    foreach ($errors as $msg) {
+        echo "showToast(" . json_encode($msg) . ");";
+    }
+
+    echo "});
+    </script>";
 }
+
 if (!empty($successMsg)) {
     echo "<script>document.addEventListener('DOMContentLoaded', function() {
         showToast(" . json_encode($successMsg) . ", '#2ecc71');
