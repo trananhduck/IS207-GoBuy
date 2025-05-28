@@ -175,7 +175,7 @@ if (isset($_POST['form1'])) {
             $mail->Host       = 'smtp.gmail.com'; // SMTP của Gmail
             $mail->SMTPAuth   = true;
             $mail->Username   = 'taduc0508@gmail.com'; // Thay bằng email 
-            $mail->Password   = 'ikwz kgyi hcby stai'; // Dùng App Password nếu bật 2FA
+            $mail->Password   = 'rnxm lczq zhop hsdt'; // Dùng App Password nếu bật 2FA
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
@@ -273,19 +273,30 @@ if (isset($_POST['form1'])) {
                                 </div>
                                 <div class="col-md-6 form-group position-relative">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control password-input" name="cust_password" id="cust_password">
-                                    <span class="toggle-password" onclick="togglePasswordCust()" style="right: 15px;">
-                                        👁️
+                                    <input type="password" class="form-control password-input" name="cust_password"
+                                        id="cust_password">
+                                    <span class="toggle-password" onclick="togglePassword('cust_password', this)"
+                                        style="right: 25px; position: absolute; cursor: pointer;">
+                                        <i class="fa fa-eye"></i>
                                     </span>
                                 </div>
-                                <div class="col-md-6 form-group">
+
+                                <div class="col-md-6 form-group position-relative">
                                     <label for=""><?php echo 'Nhập lại mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control" name="cust_re_password">
+                                    <input type="password" class="form-control" name="cust_re_password"
+                                        id="cust_re_password">
+                                    <span class="toggle-password" onclick="togglePassword('cust_re_password', this)"
+                                        style="right: 25px; position: absolute; cursor: pointer;">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
                                 </div>
+
+
                                 <div class="col-md-12 form-group-btn">
                                     <input type="submit" class="btn btn-danger" value="<?php echo 'Đăng ký' ?>"
                                         name="form1">
                                 </div>
+
                             </div>
                         </div>
                     </form>
@@ -371,22 +382,28 @@ if (isset($_POST['form1'])) {
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 4000);
     }
-    function togglePasswordCust() {
-    const passwordInput = document.getElementById("cust_password");
-    const toggleIcon = document.querySelector(".toggle-password");
-    const isPassword = passwordInput.getAttribute("type") === "password";
-    passwordInput.setAttribute("type", isPassword ? "text" : "password");
-    toggleIcon.textContent = isPassword ? "🙈" : "👁️";
-}
+
+    function togglePassword(inputId, iconElement) {
+        const input = document.getElementById(inputId);
+        const icon = iconElement.querySelector("i");
+        const isPassword = input.type === "password";
+
+        input.type = isPassword ? "text" : "password";
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+    }
 </script>
 
 <?php
 if (isset($successMsg) && !empty($successMsg)) {
-    echo "<script>document.addEventListener('DOMContentLoaded', function() {
-        showToast(" . json_encode($successMsg) . ", '#2ecc71');
-    });</script>";
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showToast(" . json_encode($successMsg) . ", '#2ecc71');
+        });
+    </script>";
 }
 ?>
+
 <script>
     // Script khởi tạo cho trang đăng ký
     document.addEventListener('DOMContentLoaded', function() {

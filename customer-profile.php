@@ -183,8 +183,8 @@ if (isset($_POST['form1'])) {
                                         <img src="<?php echo BASE_URL; ?>assets/uploads/<?php echo $customer['cust_photo']; ?>"
                                             alt="Avatar" class="profile-avatar">
                                     <?php else: ?>
-                                        <img src="<?php echo BASE_URL; ?>assets/img/default-avatar.jpg" alt="Default Avatar"
-                                            class="profile-avatar">
+                                        <img src="<?php echo BASE_URL; ?>assets/uploads/default-avatar.jpg"
+                                            alt="Default Avatar" class="profile-avatar">
                                     <?php endif; ?>
                                 </div>
                                 <div class="text-center mb-4">
@@ -266,6 +266,7 @@ if (isset($_POST['form1'])) {
         z-index: 9999;
         transform: translateY(-20px);
     }
+
     #toast.show {
         opacity: 1;
         transform: translateY(0);

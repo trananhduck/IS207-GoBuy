@@ -366,7 +366,7 @@ INSERT INTO `table_page` (
 <p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📞</span> Kết nối với chúng tôi<o:p></o:p></b></p>
 
 <p class=\"MsoNormal\">Bạn cần hỗ trợ hoặc có thắc mắc về sản phẩm? Đừng ngần ngại liên hệ:<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📧</span> Email: support@gobuy.vn<br>
+<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📧</span> Email: taduc0508@gmail.com<br>
 <span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📍</span> Địa chỉ: Thủ Đức, TP. Hồ Chí Minh<o:p></o:p></p>
 
 <p class=\"MsoNormal\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✨</span> <b>GoBuy – Mua gì cũng có, giao tận tay!</b><o:p></o:p></p>
@@ -1726,8 +1726,8 @@ CREATE TABLE `table_slider` (
 --
 
 INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, `button_url`, `position`) VALUES
-(1, 'slider-1.png', 'Welcome to Shọppe', 'Cửa hàng phụ kiện mới nhất cho nam', 'Xem phụ kiện cho nam', '#', 'Center'),
-(2, 'slider-2.jpg', 'Giảm giá 50% cho tất cả sản phẩm', 'Mua nhanh đi không hết bây giờ.', 'Xem thêm', '#', 'Center'),
+(1, 'slider-1.png', 'Welcome to GoBuy', 'Cửa hàng phụ kiện mới nhất cho nam', 'Xem phụ kiện cho nam', '#', 'Center'),
+(2, 'slider-2.png', 'Giảm giá 1000% cho tất cả sản phẩm', 'Mua nhanh đi không hết bây giờ.', 'Xem thêm', '#', 'Center'),
 (3, 'slider-3.png', 'Hỗ trợ 24/7', 'Đội ngũ nhân viên cam kết phục vụ tận tình.', 'Xem thêm', '#', 'Right');
 
 -- --------------------------------------------------------

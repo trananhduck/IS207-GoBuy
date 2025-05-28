@@ -79,10 +79,12 @@ if (isset($_POST['form1'])) {
                                 </div>
                                 <div class="form-group position-relative">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control password-input" name="password" id="admin_password">
-                                    <span class="toggle-password" onclick="togglePassword()">
-                                        👁️
+                                    <input type="password" class="form-control password-input" name="password"
+                                        id="admin_password">
+                                    <span class="toggle-password" onclick="togglePassword()" style="cursor: pointer;">
+                                        <i class="fa fa-eye"></i>
                                     </span>
+
                                 </div>
                                 <div class="form-group d-flex">
                                     <label for=""></label>
@@ -235,10 +237,13 @@ if (isset($_POST['form1'])) {
 
     function togglePassword() {
         const passwordInput = document.getElementById("admin_password");
-        const toggleIcon = document.querySelector(".toggle-password");
+        const toggleIcon = document.querySelector(".toggle-password i");
+
         const isPassword = passwordInput.getAttribute("type") === "password";
         passwordInput.setAttribute("type", isPassword ? "text" : "password");
-        toggleIcon.textContent = isPassword ? "🙈" : "👁️";
+
+        toggleIcon.classList.toggle("fa-eye", !isPassword); // khi đang hiện thì đổi về mắt mở
+        toggleIcon.classList.toggle("fa-eye-slash", isPassword); // khi đang ẩn thì đổi về mắt đóng
     }
 </script>
 

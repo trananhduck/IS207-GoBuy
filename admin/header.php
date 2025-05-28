@@ -24,9 +24,9 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin Panel</title>
-    
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, admin-scalable=no" name="viewport">
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -68,18 +68,23 @@ if (!isset($_SESSION['admin'])) {
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown admin admin-menu">
+                            <?php
+                            $adminPhoto = !empty($_SESSION['admin']['photo']) ? $_SESSION['admin']['photo'] : 'default-image.jpg';
+                            ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../assets/uploads/<?php echo $_SESSION['admin']['photo']; ?>"
-                                    class="admin-image" alt="admin Image">
+                                <img src="../assets/uploads/<?php echo $adminPhoto; ?>" class="admin-image"
+                                    alt="admin Image">
                                 <span class="hidden-xs"><?php echo $_SESSION['admin']['full_name']; ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="admin-footer">
                                     <div>
-                                        <a href="profile-edit.php" class="btn btn-default btn-flat"><i class="fa fa-user"></i>Sửa hồ sơ</a>
+                                        <a href="profile-edit.php" class="btn btn-default btn-flat"><i
+                                                class="fa fa-user"></i>Sửa hồ sơ</a>
                                     </div>
                                     <div>
-                                        <a href="logout.php" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i>Đăng xuất</a>
+                                        <a href="logout.php" class="btn btn-default btn-flat"><i
+                                                class="fa fa-sign-out"></i>Đăng xuất</a>
                                     </div>
                                 </li>
                             </ul>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once('header.php'); ?>
 
@@ -36,7 +36,6 @@ try {
     $_SESSION['success_message'] = 'Xác minh email thành công! Bạn có thể đăng nhập với tư cách admin ngay bây giờ.';
     header('Location: ' . BASE_URL . 'index.php');
     exit;
-
 } catch (Exception $e) {
     $_SESSION['error_message'] = $e->getMessage();
     header('Location: ' . BASE_URL . 'index.php');
@@ -62,4 +61,4 @@ try {
     </div>
 </div>
 
-<?php require_once('footer.php'); ?>
+<!-- ... -->

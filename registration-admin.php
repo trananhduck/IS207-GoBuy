@@ -25,71 +25,57 @@ if (isset($_POST['form1'])) {
 
     if (empty($_POST['full_name'])) {
         $valid = 0;
-        $errorMsg .= 'Tên admin không được để trống';
+        $errorMsg .= "Tên admin không được để trống\n";
     }
 
     if (empty($_POST['email'])) {
         $valid = 0;
-        $errorMsg .= 'Địa chỉ email không được để trống';
+        $errorMsg .= "Địa chỉ email không được để trống\n";
     } else {
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
             $valid = 0;
-            $errorMsg .= 'Địa chỉ email phải hợp lệ';
+            $errorMsg .= "Địa chỉ email phải hợp lệ\n";
         } else {
             $query = $pdo->prepare("SELECT * FROM table_admin WHERE email=?");
             $query->execute(array($_POST['email']));
             $total = $query->rowCount();
             if ($total) {
                 $valid = 0;
-                $errorMsg .= 'Địa chỉ email đã tồn tại';
+                $errorMsg .= "Địa chỉ email đã tồn tại\n";
             }
         }
     }
 
     if (empty($_POST['phone'])) {
         $valid = 0;
-        $errorMsg .= 'Số điện thoại không được để trống';
+        $errorMsg .= "Số điện thoại không được để trống\n";
     }
 
     if (empty($_POST['password']) || empty($_POST['re_password'])) {
         $valid = 0;
-        $errorMsg .= 'Mật khẩu không được để trống';
+        $errorMsg .= "Mật khẩu không được để trống\n";
     } else {
         $password = $_POST['password'];
         $re_password = $_POST['re_password'];
 
-        // Kiểm tra độ dài mật khẩu (tối thiểu 6, khuyến nghị 12-16)
         if (strlen($password) < 6) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải có ít nhất 6 ký tự';
-        }
-
-        // Kiểm tra mật khẩu có đủ yêu cầu không
-        elseif (!preg_match('/[A-Z]/', $password)) {
+            $errorMsg .= "Mật khẩu phải có ít nhất 6 ký tự\n";
+        } elseif (!preg_match('/[A-Z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa';
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ cái viết hoa\n";
         } elseif (!preg_match('/[a-z]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ cái viết thường';
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ cái viết thường\n";
         } elseif (!preg_match('/\d/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một chữ số';
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một chữ số\n";
         } elseif (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?]/', $password)) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)';
-        }
-
-        // Kiểm tra xác nhận mật khẩu
-        elseif ($password !== $re_password) {
+            $errorMsg .= "Mật khẩu phải chứa ít nhất một ký tự đặc biệt (!@#$%^&*...)\n";
+        } elseif ($password !== $re_password) {
             $valid = 0;
-            $errorMsg .= 'Mật khẩu nhập lại không khớp';
-        }
-    }
-
-    if (!empty($_POST['password']) && !empty($_POST['re_password'])) {
-        if ($_POST['password'] != $_POST['re_password']) {
-            $valid = 0;
-            $errorMsg .= 'Mật khẩu không khớp';
+            $errorMsg .= "Mật khẩu nhập lại không khớp\n";
         }
     }
 
@@ -155,7 +141,7 @@ if (isset($_POST['form1'])) {
             $mail->Host       = 'smtp.gmail.com'; // SMTP của Gmail
             $mail->SMTPAuth   = true;
             $mail->Username   = 'taduc0508@gmail.com'; // Thay bằng email 
-            $mail->Password   = 'ikwz kgyi hcby stai'; // Dùng App Password nếu bật 2FA
+            $mail->Password   = 'rnxm lczq zhop hsdt'; // Dùng App Password nếu bật 2FA
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
@@ -221,22 +207,30 @@ if (isset($_POST['form1'])) {
                                 </div>
 
                                 <div class="col-md-6 form-group">
-                                    <label for=""><?php echo 'Ảnh đại diện' ?> *</label>
+                                    <label for=""><?php echo 'Ảnh đại diện' ?></label>
                                     <input type="file" class="form-control" name="avatar">
                                 </div>
 
                                 <div class="col-md-6 form-group position-relative">
                                     <label for=""><?php echo 'Mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control password-input" name="password" id="password">
-                                    <span class="toggle-password" onclick="togglePassword(this)" style="right: 15px;">
-                                        👁️
+                                    <input type="password" class="form-control password-input" name="password"
+                                        id="password">
+                                    <span class="toggle-password" onclick="togglePassword(this)"
+                                        style="right: 25px; cursor: pointer;">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+
+                                </div>
+
+                                <div class="col-md-6 form-group position-relative">
+                                    <label for=""><?php echo 'Nhập lại mật khẩu' ?> *</label>
+                                    <input type="password" class="form-control password-input" name="re_password">
+                                    <span class="toggle-password" onclick="togglePassword(this)"
+                                        style="right: 25px; cursor: pointer;">
+                                        <i class="fa fa-eye"></i>
                                     </span>
                                 </div>
 
-                                <div class="col-md-6 form-group">
-                                    <label for=""><?php echo 'Nhập lại mật khẩu' ?> *</label>
-                                    <input type="password" class="form-control" name="re_password">
-                                </div>
 
                                 <div class="col-md-6 form-group-btn">
                                     <label for=""></label>
@@ -326,18 +320,24 @@ if (isset($_POST['form1'])) {
 <script>
     function showToast(message, bg = "#333") {
         const toast = document.getElementById("toast");
-        toast.innerText = message;
+        toast.innerHTML = message.replace(/\n/g, "<br>");
         toast.style.backgroundColor = bg;
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 4000);
     }
+
     function togglePassword(el) {
-    const input = el.previousElementSibling;
-    const isPassword = input.getAttribute("type") === "password";
-    input.setAttribute("type", isPassword ? "text" : "password");
-    el.textContent = isPassword ? "🙈" : "👁️";
-}
+        const input = el.previousElementSibling;
+        const icon = el.querySelector("i");
+        const isPassword = input.getAttribute("type") === "password";
+
+        input.setAttribute("type", isPassword ? "text" : "password");
+
+        icon.classList.toggle("fa-eye", !isPassword);
+        icon.classList.toggle("fa-eye-slash", isPassword);
+    }
 </script>
+
 
 <?php
 if (!empty($errorMsg)) {

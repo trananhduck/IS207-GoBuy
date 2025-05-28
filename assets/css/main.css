@@ -1670,9 +1670,9 @@ div.pagination {
 div.pagination a {
   padding: 8px 12px;
   margin: 0 3px;
-  border: 1px solid #2563EB;
+  border: 1px solid #f75b18ff;
   text-decoration: none;
-  background-color: #1E3A8A;
+  background-color: #ef6b3b;
   color: #fff;
   font-weight: 500;
   display: inline-block;
@@ -1683,10 +1683,10 @@ div.pagination a {
 
 div.pagination a:hover,
 div.pagination a:active {
-  border: 1px solid #2563EB;
-  background-color: #2563EB;
+  border: 1px solid #eb6025;
+  background-color: #fd6624;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 8px rgba(235, 126, 9, 0.3);
 }
 
 div.pagination span.current {
@@ -1881,6 +1881,10 @@ div.pagination span.disabled {
   background: #f67336;
   transform: translateY(-3px);
   box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.btn .btn-primary{
+  
 }
 @media (max-width: 767px) {
   .service .row > div:nth-child(2n+1) {

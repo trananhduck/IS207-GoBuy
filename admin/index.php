@@ -132,6 +132,50 @@ $total_order_complete_complete = $query->rowCount();
     <div class="row">
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
+            <div class="small-box bg-olive">
+                <div class="inner">
+                    <h3><?php echo $total_top_category; ?></h3>
+
+                    <p>Danh mục lớn</p>
+                </div>
+                <div class="icon">
+                    <i class="ionicons ion-arrow-up-b"></i>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue">
+                <div class="inner">
+                    <h3><?php echo $total_mid_category; ?></h3>
+
+                    <p>Danh mục trung bình</p>
+                </div>
+                <div class="icon">
+                    <i class="ionicons ion-android-menu"></i>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-maroon">
+                <div class="inner">
+                    <h3><?php echo $total_end_category; ?></h3>
+
+                    <p>Danh mục nhỏ</p>
+                </div>
+                <div class="icon">
+                    <i class="ionicons ion-arrow-down-b"></i>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
             <div class="small-box bg-primary">
                 <div class="inner">
                     <h3><?php echo $total_product; ?></h3>
@@ -175,20 +219,6 @@ $total_order_complete_complete = $query->rowCount();
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-                <div class="inner">
-                    <h3><?php echo $total_shipping_completed; ?></h3>
-
-                    <p>Hàng đã giao</p>
-                </div>
-                <div class="icon">
-                    <i class="ionicons ion-checkmark-circled"></i>
-                </div>
-
-            </div>
-        </div>
 
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
@@ -219,67 +249,6 @@ $total_order_complete_complete = $query->rowCount();
 
             </div>
         </div>
-
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-teal">
-                <div class="inner">
-                    <h3><?php echo $total_order_completed; ?></h3>
-
-                    <p>Đơn hàng đã thanh toán</p>
-                </div>
-                <div class="icon">
-                    <i class="ionicons ion-location"></i>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-olive">
-                <div class="inner">
-                    <h3><?php echo $total_top_category; ?></h3>
-
-                    <p>Danh mục lớn</p>
-                </div>
-                <div class="icon">
-                    <i class="ionicons ion-arrow-up-b"></i>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-blue">
-                <div class="inner">
-                    <h3><?php echo $total_mid_category; ?></h3>
-
-                    <p>Danh mục trung bình</p>
-                </div>
-                <div class="icon">
-                    <i class="ionicons ion-android-menu"></i>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-maroon">
-                <div class="inner">
-                    <h3><?php echo $total_end_category; ?></h3>
-
-                    <p>Danh mục nhỏ</p>
-                </div>
-                <div class="icon">
-                    <i class="ionicons ion-arrow-down-b"></i>
-                </div>
-
-            </div>
-        </div>
-
     </div>
     <div class="chart-row">
         <div class="chart-box">

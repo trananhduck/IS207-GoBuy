@@ -70,7 +70,7 @@ if (isset($_POST['form1'])) {
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'taduc0508@gmail.com'; // Thay bằng email thật
-            $mail->Password   = 'ikwz kgyi hcby stai'; // App Password của Gmail
+            $mail->Password   = 'rnxm lczq zhop hsdt'; // App Password của Gmail
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
@@ -118,10 +118,12 @@ if (isset($_POST['form1'])) {
                                     <label for="">Địa chỉ Email *</label>
                                     <input type="email" class="form-control" name="cust_email" required>
                                 </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary" value="Submit" name="form1">
+
+                                <div class="form-group clearfix">
+                                    <a href="login-customer.php" class="pull-left" style="color:#e4144d;">Quay lại trang
+                                        đăng nhập</a>
+                                    <input type="submit" class="btn btn-primary pull-right" value="Gửi" name="form1">
                                 </div>
-                                <a href="login-customer.php" style="color:#e4144d;">Quay lại trang đăng nhập</a>
                             </div>
                         </div>
                     </form>
@@ -130,5 +132,3 @@ if (isset($_POST['form1'])) {
         </div>
     </div>
 </div>
-
-<?php require_once('footer.php'); ?>
