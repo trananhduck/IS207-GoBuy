@@ -143,7 +143,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                                 </tr>
                             <?php endfor; ?>
                             <tr>
-                                <th colspan="7" class="total-text"><?php echo 'Sub Total' ?></th>
+                                <th colspan="7" class="total-text"><?php echo 'Tổng tiền hàng' ?></th>
                                 <th class="total-amount"><?php echo $table_total_price; ?><?php echo ' VND' ?></th>
                             </tr>
                             <?php
@@ -169,7 +169,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                                 <td class="total-amount"><?php echo $shipping_cost; ?><?php echo ' VND' ?></td>
                             </tr>
                             <tr>
-                                <th colspan="7" class="total-text"><?php echo 'Tổng' ?></th>
+                                <th colspan="7" class="total-text"><?php echo 'Tổng tiền phải trả' ?></th>
                                 <th class="total-amount">
                                     <?php
                                     $final_total = $table_total_price + $shipping_cost;
@@ -181,104 +181,83 @@ if (!isset($_SESSION['cart_p_id'])) {
                     </div>
 
 
+                    <div class="row">
+                        <!-- Địa chỉ giao hàng -->
+                        <div class="col-md-6">
+                            <h3 class="special">Địa chỉ giao hàng</h3>
+                            <table class="table table-responsive table-bordered table-hover table-striped bill-address">
+                                <tr>
+                                    <td>Họ và tên</td>
+                                    <td><?php echo $_SESSION['customer']['cust_s_name']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại</td>
+                                    <td><?php echo $_SESSION['customer']['cust_s_phone']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Tỉnh/thành phố</td>
+                                    <td><?php echo $_SESSION['customer']['cust_s_province']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Quận/huyện</td>
+                                    <td><?php echo $_SESSION['customer']['cust_s_district']; ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ</td>
+                                    <td><?php echo nl2br($_SESSION['customer']['cust_s_address']); ?></td>
+                                </tr>
+                            </table>
+                        </div>
 
-                    <div class="billing-address">
-                        <div class="row">
+                        <!-- Phương thức thanh toán -->
+                        <div class="col-md-6">
+                            <h3 class="special">Chọn phương thức thanh toán</h3>
 
-                            <div class="col-md-6">
-                                <h3 class="special"><?php echo 'Địa chỉ giao hàng' ?></h3>
-                                <table class="table table-responsive table-bordered table-hover table-striped bill-address">
-                                    <tr>
-                                        <td><?php echo 'Họ và tên' ?></td>
-                                        <td><?php echo $_SESSION['customer']['cust_s_name']; ?></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo 'Số điện thoại' ?></td>
-                                        <td><?php echo $_SESSION['customer']['cust_s_phone']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo 'Tỉnh/thành phố' ?></td>
-                                        <td><?php echo $_SESSION['customer']['cust_s_province']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo 'Quận/huyện' ?></td>
-                                        <td><?php echo $_SESSION['customer']['cust_s_district']; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><?php echo 'Địa chỉ' ?></td>
-                                        <td>
-                                            <?php echo nl2br($_SESSION['customer']['cust_s_address']); ?>
-                                        </td>
-                                    </tr>
+                            <?php
+                            $checkout_access = 1;
+                            if (
+                                ($_SESSION['customer']['cust_s_name'] == '') ||
+                                ($_SESSION['customer']['cust_s_phone'] == '') ||
+                                ($_SESSION['customer']['cust_s_province'] == '') ||
+                                ($_SESSION['customer']['cust_s_address'] == '') ||
+                                ($_SESSION['customer']['cust_s_district'] == '')
+                            ) {
+                                $checkout_access = 0;
+                            }
+                            ?>
 
-                                </table>
-                            </div>
+                            <?php if ($checkout_access == 0): ?>
+                                <div style="color:red;font-size:16px;margin-bottom:20px;">
+                                    Bạn phải điền đầy đủ thông tin giao hàng từ bảng điều khiển của bạn
+                                    để thanh toán đơn hàng. Vui lòng điền đầy đủ thông tin vào <a
+                                        href="customer-billing-shipping-update.php"
+                                        style="color:red;text-decoration:underline;">link này</a>.
+                                </div>
+                            <?php else: ?>
+                                <div class="form-group">
+                                    <label>Chọn phương thức thanh toán *</label>
+                                    <select name="payment_method" class="form-control select2" id="advFieldsStatus">
+                                        <option value="">Chọn 1 phương thức</option>
+                                        <option value="Bank">Ngân hàng</option>
+                                    </select>
+                                </div>
+
+                                <form class="Bank" action="<?php echo BASE_URL; ?>payment/Bank/payment-process.php"
+                                    method="post" id="Bank_form" target="_blank">
+                                    <input type="hidden" name="final_total" value="<?php echo $final_total; ?>">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Thanh toán ngay" name="form1">
+                                    </div>
+                                </form>
+                            <?php endif; ?>
                         </div>
                     </div>
-
 
 
                     <div class="cart-buttons">
                         <ul>
                             <li><a href="cart.php" class="btn btn-primary"><?php echo 'Quay về giỏ hàng' ?></a></li>
                         </ul>
-                    </div>
-
-                    <div class="clear"></div>
-                    <h3 class="special"><?php echo 'Chọn phương thức thanh toán' ?></h3>
-                    <div class="row">
-
-                        <?php
-                        $checkout_access = 1;
-                        if (
-                            ($_SESSION['customer']['cust_s_name'] == '') ||
-                            ($_SESSION['customer']['cust_s_phone'] == '') ||
-                            ($_SESSION['customer']['cust_s_province'] == '') ||
-                            ($_SESSION['customer']['cust_s_address'] == '') ||
-                            ($_SESSION['customer']['cust_s_district'] == '')
-                        ) {
-                            $checkout_access = 0;
-                        }
-                        ?>
-                        <?php if ($checkout_access == 0): ?>
-                            <div class="col-md-12">
-                                <div style="color:red;font-size:22px;margin-bottom:50px;">
-
-                                    Bạn phải điền đầy đủ thông tin giao hàng từ bảng điều khiển của bạn
-                                    để thanh toán đơn hàng. Vui lòng điền đầy đủ thông tin vào <a
-                                        href="customer-billing-shipping-update.php"
-                                        style="color:red;text-decoration:underline;">link này</a>.
-                                </div>
-                            </div>
-                        <?php else: ?>
-                            <div class="col-md-4">
-
-                                <div class="row">
-
-                                    <div class="col-md-12 form-group">
-                                        <label for=""><?php echo 'Chọn phương thức thanh toán' ?> *</label>
-                                        <select name="payment_method" class="form-control select2" id="advFieldsStatus">
-                                            <option value=""><?php echo 'Chọn 1 phương thức' ?></option>
-                                            <option value="Bank"><?php echo 'Ngân hàng' ?></option>
-                                        </select>
-                                    </div>
-                                    <form class="Bank" action="<?php echo BASE_URL; ?>payment/Bank/payment-process.php"
-                                        method="post" id="Bank_form" target="_blank">
-                                        <input type="hidden" name="cmd" value="_xclick" />
-                                        <input type="hidden" name="no_note" value="1" />
-                                        <input type="hidden" name="lc" value="UK" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
-                                        <input type="hidden" name="final_total" value="<?php echo $final_total; ?>">
-                                        <div class="col-md-12 form-group">
-                                            <input type="submit" class="btn btn-primary" value="<?php echo 'Thanh toán ngay' ?>"
-                                                name="form1">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>
