@@ -188,6 +188,7 @@ if (isset($_POST['form1'])) {
         z-index: 9999;
         transform: translateY(-20px);
     }
+
     #toast.show {
         opacity: 1;
         transform: translateY(0);
@@ -302,6 +303,7 @@ if (isset($_POST['form1'])) {
             }
         }
     }
+
     function showToast(message, bg = "#333") {
         const toast = document.getElementById("toast");
         toast.innerText = message;

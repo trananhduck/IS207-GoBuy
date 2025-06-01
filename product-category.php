@@ -149,7 +149,7 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                         }
 
                         if ($product_count == 0) {
-                            echo '<div class="pl_15">' . 'Không có sản phẩm nào' . '</div>';
+                            echo '<div style="display:flex; justify-content:center; align-items:center; height:300px; font-size:24px; font-weight:bold; color:#555;">Không có sản phẩm nào</div>';
                         } else {
                             // Thiết lập phân trang
                             $adjacents = 5; // Số trang lân cận hiển thị
@@ -173,36 +173,36 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
 
                             foreach ($current_page_products as $row) {
                         ?>
-                        <div class="col-md-4 item item-product-cat">
-                            <div class="inner">
-                                <div class="thumb">
-                                    <div class="photo"
-                                        style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
-                                    </div>
-                                    <div class="overlay"></div>
-                                </div>
-                                <div class="text">
-                                    <h3><a
-                                            href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
-                                    </h3>
-                                    <h4>
-                                        <span>
-                                            <?php if ($row['p_old_price'] != ''): ?>
-                                            <del>
-                                                <?php echo number_format($row['p_old_price'], 0, ',', ','); ?><span
-                                                    class="vnd">
-                                                    VND</span>
-                                            </del>
-                                            <?php endif; ?>
-                                        </span>
-                                        <span>
-                                            <?php echo number_format($row['p_current_price'], 0, ',', ','); ?><span
-                                                class="vnd">
-                                                VND</span>
-                                        </span>
-                                    </h4>
-                                    <div class="rating">
-                                        <?php
+                                <div class="col-md-4 item item-product-cat">
+                                    <div class="inner">
+                                        <div class="thumb">
+                                            <div class="photo"
+                                                style="background-image:url(assets/uploads/product_photos/<?php echo $row['p_featured_photo']; ?>);">
+                                            </div>
+                                            <div class="overlay"></div>
+                                        </div>
+                                        <div class="text">
+                                            <h3><a
+                                                    href="product.php?id=<?php echo $row['p_id']; ?>"><?php echo $row['p_name']; ?></a>
+                                            </h3>
+                                            <h4>
+                                                <span>
+                                                    <?php if ($row['p_old_price'] != ''): ?>
+                                                        <del>
+                                                            <?php echo number_format($row['p_old_price'], 0, ',', ','); ?><span
+                                                                class="vnd">
+                                                                VND</span>
+                                                        </del>
+                                                    <?php endif; ?>
+                                                </span>
+                                                <span>
+                                                    <?php echo number_format($row['p_current_price'], 0, ',', ','); ?><span
+                                                        class="vnd">
+                                                        VND</span>
+                                                </span>
+                                            </h4>
+                                            <div class="rating">
+                                                <?php
                                                 $t_rating = 0;
                                                 $query1 = $pdo->prepare("SELECT * FROM table_rating WHERE p_id=?");
                                                 $query1->execute(array($row['p_id']));
@@ -228,22 +228,22 @@ if (!isset($_REQUEST['id']) || !isset($_REQUEST['type'])) {
                                                     }
                                                 }
                                                 ?>
-                                    </div>
+                                            </div>
 
-                                    <?php if ($row['p_qty'] == 0): ?>
-                                    <div class="out-of-stock">
-                                        <div class="inner">
-                                            Hết hàng
+                                            <?php if ($row['p_qty'] == 0): ?>
+                                                <div class="out-of-stock">
+                                                    <div class="inner">
+                                                        Hết hàng
+                                                    </div>
+                                                </div>
+                                            <?php else: ?>
+                                                <p><a href="product.php?id=<?php echo $row['p_id']; ?>"></i>
+                                                        <?php echo 'Xem sản phẩm' ?></a>
+                                                </p>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
-                                    <?php else: ?>
-                                    <p><a href="product.php?id=<?php echo $row['p_id']; ?>"></i>
-                                            <?php echo 'Xem sản phẩm' ?></a>
-                                    </p>
-                                    <?php endif; ?>
                                 </div>
-                            </div>
-                        </div>
                         <?php
                             }
 

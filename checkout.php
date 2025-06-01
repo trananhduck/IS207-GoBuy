@@ -156,12 +156,7 @@ if (!isset($_SESSION['cart_p_id'])) {
                                     $shipping_cost = $row['amount'];
                                 }
                             } else {
-                                $query = $pdo->prepare("SELECT * FROM table_shipping_cost_all WHERE sca_id=1");
-                                $query->execute();
-                                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) {
-                                    $shipping_cost = $row['amount'];
-                                }
+                                $shipping_cost = 100;
                             }
                             ?>
                             <tr>
