@@ -180,7 +180,7 @@ if (isset($_POST['form1'])) {
             $mail->Port       = 587;
 
             // Cấu hình người gửi & người nhận
-            $mail->setFrom('your-email@gmail.com', 'Your Name');
+            $mail->setFrom('your-email@gmail.com', 'GoBuy');
             $mail->addAddress($to); // Gửi đến email khách hàng
 
             // Nội dung email
@@ -312,126 +312,126 @@ if (isset($_POST['form1'])) {
 <!-- Toast -->
 <div id="toast"></div>
 <style>
-    #toast {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
-    .toast-message {
-        background-color: #f44336;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 15px;
-        min-width: 250px;
-        max-width: 300px;
-        opacity: 1;
+.toast-message {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+    min-width: 250px;
+    max-width: 300px;
+    opacity: 1;
+    transform: translateX(30px);
+    animation: fadeInSlide 0.4s ease forwards;
+    position: relative;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
         transform: translateX(30px);
-        animation: fadeInSlide 0.4s ease forwards;
-        position: relative;
     }
 
-    @keyframes fadeInSlide {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes fadeOutSlide {
-        from {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        to {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-    }
-
-    #toast.show {
+    to {
         opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutSlide {
+    from {
+        opacity: 1;
+        transform: translateX(0);
     }
 
-    .form-group-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 15px;
+    to {
+        opacity: 0;
+        transform: translateX(30px);
     }
+}
 
-    .btn-danger {
-        width: 50%;
-        max-width: 200px;
-        text-align: center;
-    }
+#toast.show {
+    opacity: 1;
+}
 
-    .btn {
-        border-radius: 6px;
-        width: 30%;
-    }
+.form-group-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
 
-    .btn input {
-        position: relative;
-    }
+.btn-danger {
+    width: 50%;
+    max-width: 200px;
+    text-align: center;
+}
 
-    .account-sidebar.res {
-        position: absolute;
-        bottom: -30px;
-        right: 230px;
-    }
+.btn {
+    border-radius: 6px;
+    width: 30%;
+}
 
-    .account-sidebar a {
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 12px;
-    }
+.btn input {
+    position: relative;
+}
 
-    .account-sidebar a:hover {
-        text-decoration: underline;
-    }
+.account-sidebar.res {
+    position: absolute;
+    bottom: -30px;
+    right: 230px;
+}
+
+.account-sidebar a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.account-sidebar a:hover {
+    text-decoration: underline;
+}
 </style>
 
 <script>
-    function showToast(message, background = '#f44336') {
-        const container = document.getElementById('toast');
+function showToast(message, background = '#f44336') {
+    const container = document.getElementById('toast');
 
-        const toast = document.createElement('div');
-        toast.className = 'toast-message';
-        toast.style.backgroundColor = background;
-        toast.textContent = message;
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.style.backgroundColor = background;
+    toast.textContent = message;
 
-        container.appendChild(toast);
+    container.appendChild(toast);
 
-        setTimeout(() => {
-            toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
-            setTimeout(() => toast.remove(), 500);
-        }, 2500);
-    }
+    setTimeout(() => {
+        toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
+        setTimeout(() => toast.remove(), 500);
+    }, 2500);
+}
 
-    function togglePassword(inputId, iconElement) {
-        const input = document.getElementById(inputId);
-        const icon = iconElement.querySelector("i");
-        const isPassword = input.type === "password";
+function togglePassword(inputId, iconElement) {
+    const input = document.getElementById(inputId);
+    const icon = iconElement.querySelector("i");
+    const isPassword = input.type === "password";
 
-        input.type = isPassword ? "text" : "password";
-        icon.classList.toggle("fa-eye");
-        icon.classList.toggle("fa-eye-slash");
-    }
+    input.type = isPassword ? "text" : "password";
+    icon.classList.toggle("fa-eye");
+    icon.classList.toggle("fa-eye-slash");
+}
 </script>
 
 <?php
@@ -458,37 +458,37 @@ if (isset($errorMsg) && !empty($errorMsg)) {
 ?>
 
 <script>
-    // Script khởi tạo cho trang đăng ký
-    document.addEventListener('DOMContentLoaded', function() {
-        // Đảm bảo rằng API đã được khởi tạo trong header.php
-        if (typeof initializeAddressSelects === 'function') {
-            initializeAddressSelects();
-        } else {
-            console.error('API địa chỉ chưa được khởi tạo đúng cách.');
+// Script khởi tạo cho trang đăng ký
+document.addEventListener('DOMContentLoaded', function() {
+    // Đảm bảo rằng API đã được khởi tạo trong header.php
+    if (typeof initializeAddressSelects === 'function') {
+        initializeAddressSelects();
+    } else {
+        console.error('API địa chỉ chưa được khởi tạo đúng cách.');
+    }
+
+    // Xử lý lỗi khi submit form
+    <?php if ($errorMsg != ''): ?>
+    // Phục hồi dữ liệu đã chọn nếu có lỗi form
+    setTimeout(function() {
+        const provinceValue =
+            "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
+        const districtValue =
+            "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
+        const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
+
+        // Hiển thị lỗi trong select
+        if (provinceValue) {
+            document.getElementById('province-select').classList.add('error-field');
         }
-
-        // Xử lý lỗi khi submit form
-        <?php if ($errorMsg != ''): ?>
-            // Phục hồi dữ liệu đã chọn nếu có lỗi form
-            setTimeout(function() {
-                const provinceValue =
-                    "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
-                const districtValue =
-                    "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
-                const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
-
-                // Hiển thị lỗi trong select
-                if (provinceValue) {
-                    document.getElementById('province-select').classList.add('error-field');
-                }
-                if (districtValue) {
-                    document.getElementById('district-select').classList.add('error-field');
-                }
-                if (wardValue) {
-                    document.getElementById('ward-select').classList.add('error-field');
-                }
-            }, 500);
-        <?php endif; ?>
-    });
+        if (districtValue) {
+            document.getElementById('district-select').classList.add('error-field');
+        }
+        if (wardValue) {
+            document.getElementById('ward-select').classList.add('error-field');
+        }
+    }, 500);
+    <?php endif; ?>
+});
 </script>
 <?php require_once('footer.php'); ?>

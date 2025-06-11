@@ -146,7 +146,7 @@ if (isset($_POST['form1'])) {
             $mail->Port       = 587;
 
             // Cấu hình người gửi & người nhận
-            $mail->setFrom('your-email@gmail.com', 'Your Name');
+            $mail->setFrom('your-email@gmail.com', 'GoBuy');
             $mail->addAddress($to); // Gửi đến email admin
 
             // Nội dung email
