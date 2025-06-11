@@ -1,16 +1,32 @@
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 05, 2025 lúc 05:05 AM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jun 11, 2025 at 12:48 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `gobuy`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_admin`
+--
+
 CREATE TABLE `table_admin` (
   `id` int(10) NOT NULL,
   `full_name` varchar(100) NOT NULL,
@@ -23,10 +39,53 @@ CREATE TABLE `table_admin` (
   `timestamp` varchar(100) NOT NULL,
   `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_admin`
+--
+
+INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `token`, `datetime`, `timestamp`, `status`) VALUES
+(1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'xxxx', '23-2-2025', '25-2-2025', 0),
+(2, 'thu', 'ebedangiu2111@gmail.com', '+84774048884', 'fe9e27dd7bf526b57d69d3bd9fac33dc', 'default.jpg', '', '2025-03-26 01:46:19', '1742971579', 1),
+(3, 'thu', 'thupii@gmail.com', '+84774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '5d393e2a2f8f455f5a42aac1f0f262e7', '2025-03-28 10:33:05', '1743132785', 0),
+(4, 'thu', 'thupii2111@gmai.com', '+84 774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '59b68bb5c6b2cd89190ee8edd5209d42', '2025-03-28 10:33:50', '1743132830', 0),
+(6, 'Duc Anh Tran', 'anhduc9b1cva@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', 'f15eb404154b96a49aa2bc2b36a6759a', '2025-03-30 09:16:40', '1743301000', 0),
+(7, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', '4ea87a999c60e96ab60230cb4ac34413', 'default.jpg', '', '2025-06-11 04:53:32', '1749635612', 1),
+(8, 'Duc Anh Tran', 'gobuyservice123@gmail.com', '0344377104', '4ea87a999c60e96ab60230cb4ac34413', 'default.jpg', '', '2025-06-11 05:32:39', '1749637959', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_color`
+--
+
 CREATE TABLE `table_color` (
   `color_id` int(11) NOT NULL,
   `color_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_color`
+--
+
+INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
+(1, 'Đỏ'),
+(2, 'Xanh dương'),
+(3, 'Xanh lá'),
+(4, 'Vàng'),
+(5, 'Đen'),
+(6, 'Trắng'),
+(7, 'Tím'),
+(8, 'Cam'),
+(9, 'Hồng'),
+(10, 'Nâu');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_customer`
+--
+
 CREATE TABLE `table_customer` (
   `cust_id` int(11) NOT NULL,
   `cust_name` varchar(100) NOT NULL,
@@ -47,6 +106,23 @@ CREATE TABLE `table_customer` (
   `cust_timestamp` varchar(100) NOT NULL,
   `cust_status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_customer`
+--
+
+INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_gender`, `cust_birthyear`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_ward`, `cust_s_address`, `cust_password`, `cust_photo`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
+(11, 'Nguyễn abc', 'tungsida8@gmail.com', '0946403788', 'Nam', '2010', '', '', '0', '0', '0', '', '099e3aa828cfe4e6eb238ad186352252', 'Screenshot 2025-04-03 231838.png', '', '2025-04-04 09:18:09', '1743733089', 1),
+(12, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', 'Nam', '2010', 'Trần Anh Đức', '0344377104', 'Tỉnh Vĩnh Phúc', 'Thành phố Phúc Yên', 'Phường Phúc Thắng', 'ABC', '4ea87a999c60e96ab60230cb4ac34413', '', '', '2025-06-10 08:02:42', '1749517362', 1),
+(13, 'Nguyễn Thị B', 'anhduc9b1cva@gmail.com', '0344377104', 'Nữ', '2008', 'Nguyễn Thị B', '0344377104', 'Tỉnh Bắc Giang', 'Huyện Tân Yên', 'Xã Liên Chung', 'adasda', '4ea87a999c60e96ab60230cb4ac34413', '', '', '2025-06-11 05:17:22', '1749637042', 1),
+(14, 'Sơn Tùng M-TP', '23520316@gm.uit.edu.vn', '0344377104', 'Nam', '1967', 'Sơn Tùng M-TP', '0344377104', 'Tỉnh Hà Giang', 'Huyện Mèo Vạc', 'Xã Nậm Ban', 'ABC', '4ea87a999c60e96ab60230cb4ac34413', '', '', '2025-06-11 05:21:22', '1749637282', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_customer_message`
+--
+
 CREATE TABLE `table_customer_message` (
   `customer_message_id` int(11) NOT NULL,
   `subject` text NOT NULL,
@@ -55,412 +131,35 @@ CREATE TABLE `table_customer_message` (
   `cust_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `table_customer_message`
+--
+
+INSERT INTO `table_customer_message` (`customer_message_id`, `subject`, `message`, `order_detail`, `cust_id`) VALUES
+(1, 'abc', '123', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Duc Anh Tran<br>Email khách hàng: taduc0508@gmail.com<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:15:41<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN6849574d8d7d7<br><br>Số tiền thanh toán: 257980.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Completed<br>Mã thanh toán: PAY_6849574d8b0c5<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 122<br>Giá đơn vị: 230<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Giày búp bê bé gái<br>Kích thước: Free Size<br>Màu sắc: Trắng<br>Số lượng: 199<br>Giá đơn vị: 350<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Thiết bị làm mát laptop<br>Kích thước: 720x500<br>Màu sắc: Xanh dương<br>Số lượng: 132<br>Giá đơn vị: 850<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br>', 12),
+(2, 'đâ', 'ada', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Sơn Tùng M-TP<br>Email khách hàng: 23520316@gm.uit.edu.vn<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:23:33<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN68495925157f9<br><br>Số tiền thanh toán: 255690.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Pending<br>Mã thanh toán: PAY_6849592512159<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Kem chống hăm<br>Kích thước: 720x500<br>Màu sắc: <br>Số lượng: 23<br>Giá đơn vị: 540<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 5</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 16<br>Giá đơn vị: 230<br>', 14),
+(3, 'abc', '2133', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Duc Anh Tran<br>Email khách hàng: taduc0508@gmail.com<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:15:41<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN6849574d8d7d7<br><br>Số tiền thanh toán: 257980.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Completed<br>Mã thanh toán: PAY_6849574d8b0c5<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 122<br>Giá đơn vị: 230<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Giày búp bê bé gái<br>Kích thước: Free Size<br>Màu sắc: Trắng<br>Số lượng: 199<br>Giá đơn vị: 350<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Thiết bị làm mát laptop<br>Kích thước: 720x500<br>Màu sắc: Xanh dương<br>Số lượng: 132<br>Giá đơn vị: 850<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br>', 12),
+(4, 'vdv', 'gd', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Sơn Tùng M-TP<br>Email khách hàng: 23520316@gm.uit.edu.vn<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:23:33<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN68495925157f9<br><br>Số tiền thanh toán: 255690.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Pending<br>Mã thanh toán: PAY_6849592512159<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Kem chống hăm<br>Kích thước: 720x500<br>Màu sắc: <br>Số lượng: 23<br>Giá đơn vị: 540<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 5</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 16<br>Giá đơn vị: 230<br>', 14),
+(5, 'vdv', 'gd', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Sơn Tùng M-TP<br>Email khách hàng: 23520316@gm.uit.edu.vn<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:23:33<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN68495925157f9<br><br>Số tiền thanh toán: 255690.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Pending<br>Mã thanh toán: PAY_6849592512159<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Kem chống hăm<br>Kích thước: 720x500<br>Màu sắc: <br>Số lượng: 23<br>Giá đơn vị: 540<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 5</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 16<br>Giá đơn vị: 230<br>', 14),
+(6, 'áad', 'adad', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Sơn Tùng M-TP<br>Email khách hàng: 23520316@gm.uit.edu.vn<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:23:33<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN68495925157f9<br><br>Số tiền thanh toán: 255690.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Pending<br>Mã thanh toán: PAY_6849592512159<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Kem chống hăm<br>Kích thước: 720x500<br>Màu sắc: <br>Số lượng: 23<br>Giá đơn vị: 540<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Bàn phím bluetooth<br>Kích thước: 720x500<br>Màu sắc: Đen<br>Số lượng: 133<br>Giá đơn vị: 720<br><br><b><u>Sản phẩm thứ 5</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 16<br>Giá đơn vị: 230<br>', 14),
+(7, 'HELLOOOO', 'ABC', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Duc Anh Tran<br>Email khách hàng: taduc0508@gmail.com<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:15:41<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN6849574d8d7d7<br><br>Số tiền thanh toán: 257980.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Completed<br>Mã thanh toán: PAY_6849574d8b0c5<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 122<br>Giá đơn vị: 230<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Giày búp bê bé gái<br>Kích thước: Free Size<br>Màu sắc: Trắng<br>Số lượng: 199<br>Giá đơn vị: 350<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Thiết bị làm mát laptop<br>Kích thước: 720x500<br>Màu sắc: Xanh dương<br>Số lượng: 132<br>Giá đơn vị: 850<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br>', 12),
+(8, 'HELLOOOO', 'ABC', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Duc Anh Tran<br>Email khách hàng: taduc0508@gmail.com<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:15:41<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN6849574d8d7d7<br><br>Số tiền thanh toán: 257980.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Completed<br>Mã thanh toán: PAY_6849574d8b0c5<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 122<br>Giá đơn vị: 230<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Giày búp bê bé gái<br>Kích thước: Free Size<br>Màu sắc: Trắng<br>Số lượng: 199<br>Giá đơn vị: 350<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Thiết bị làm mát laptop<br>Kích thước: 720x500<br>Màu sắc: Xanh dương<br>Số lượng: 132<br>Giá đơn vị: 850<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br>', 12),
+(9, 'HELLOOOO', 'ABC', '<h3>Chi tiết đơn hàng:</h3>Tên khách hàng: Duc Anh Tran<br>Email khách hàng: taduc0508@gmail.com<br>Phương thức thanh toán: Bank Transfer<br>Ngày thanh toán: 2025-06-11 17:15:41<br>Chi tiết thanh toán: <br>Mã giao dịch: TXN6849574d8d7d7<br><br>Số tiền thanh toán: 257980.00<br>Trạng thái thanh toán: Completed<br>Trạng thái giao hàng: Completed<br>Mã thanh toán: PAY_6849574d8b0c5<br><br><b><u>Sản phẩm thứ 1</u></b><br>Tên sản phẩm: Dép Hello Kitty<br>Kích thước: 35<br>Màu sắc: Hồng<br>Số lượng: 122<br>Giá đơn vị: 230<br><br><b><u>Sản phẩm thứ 2</u></b><br>Tên sản phẩm: Giày búp bê bé gái<br>Kích thước: Free Size<br>Màu sắc: Trắng<br>Số lượng: 199<br>Giá đơn vị: 350<br><br><b><u>Sản phẩm thứ 3</u></b><br>Tên sản phẩm: Thiết bị làm mát laptop<br>Kích thước: 720x500<br>Màu sắc: Xanh dương<br>Số lượng: 132<br>Giá đơn vị: 850<br><br><b><u>Sản phẩm thứ 4</u></b><br>Tên sản phẩm: Áo polo nam ngắn tay<br>Kích thước: L<br>Màu sắc: Đen<br>Số lượng: 123<br>Giá đơn vị: 390<br>', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_end_category`
+--
+
 CREATE TABLE `table_end_category` (
   `ecat_id` int(11) NOT NULL,
   `ecat_name` text NOT NULL,
   `mcat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_faq` (
-  `faq_id` int(11) NOT NULL,
-  `faq_title` text NOT NULL,
-  `faq_content` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_mid_category` (
-  `mcat_id` int(11) NOT NULL,
-  `mcat_name` text NOT NULL,
-  `tcat_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_order` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `product_name` text NOT NULL,
-  `size` varchar(100) NOT NULL,
-  `color` varchar(100) NOT NULL,
-  `quantity` varchar(50) NOT NULL,
-  `unit_price` varchar(50) NOT NULL,
-  `payment_id` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
-CREATE TABLE `table_page` (
-  `id` int(11) NOT NULL,
-  `about_title` text NOT NULL,
-  `about_content` text NOT NULL,
-  `about_banner` text NOT NULL,
-  `about_meta_title` text NOT NULL,
-  `faq_title` text NOT NULL,
-  `faq_banner` text NOT NULL,
-  `faq_meta_title` text NOT NULL,
-  `contact_title` text NOT NULL,
-  `contact_banner` text NOT NULL,
-  `contact_meta_title` text NOT NULL,
-  `pgallery_title` text NOT NULL,
-  `pgallery_banner` text NOT NULL,
-  `pgallery_meta_title` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_payment` (
-  `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `customer_email` varchar(255) NOT NULL,
-  `payment_date` datetime NOT NULL,
-  `txnid` varchar(255) NOT NULL,
-  `paid_amount` decimal(10,2) NOT NULL,
-  `card_number` varchar(50) NOT NULL,
-  `card_cvv` varchar(10) NOT NULL,
-  `card_month` varchar(10) NOT NULL,
-  `card_year` varchar(10) NOT NULL,
-  `bank_transaction_info` text NOT NULL,
-  `payment_method` varchar(20) NOT NULL,
-  `payment_status` varchar(25) NOT NULL,
-  `shipping_status` varchar(20) NOT NULL,
-  `payment_id` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-CREATE TABLE `table_photo` (
-  `id` int(11) NOT NULL,
-  `caption` text NOT NULL,
-  `photo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_photo_rating` (
-  `id` int(11) NOT NULL,
-  `rt_id` int(11) NOT NULL,
-  `caption` text NOT NULL,
-  `photo_rating` text NOT NULL,
-  `p_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_product` (
-  `p_id` int(11) NOT NULL,
-  `p_name` text NOT NULL,
-  `p_old_price` varchar(10) NOT NULL,
-  `p_current_price` varchar(10) NOT NULL,
-  `p_qty` int(10) NOT NULL,
-  `p_featured_photo` text NOT NULL,
-  `p_description` text NOT NULL,
-  `p_short_description` text NOT NULL,
-  `p_feature` text NOT NULL,
-  `p_return_policy` text NOT NULL,
-  `p_total_order` int(11) NOT NULL,
-  `p_is_featured` int(1) NOT NULL,
-  `p_is_active` int(1) NOT NULL,
-  `ecat_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_product_photo` (
-  `pp_id` int(11) NOT NULL,
-  `photo` text NOT NULL,
-  `p_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_product_color` (
-  `id` int(11) NOT NULL,
-  `color_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_product_size` (
-  `id` int(11) NOT NULL,
-  `size_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_province` (
-  `province_id` int(11) NOT NULL,
-  `province_name` varchar(100) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-CREATE TABLE `table_rating` (
-  `rt_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL,
-  `cust_id` int(11) NOT NULL,
-  `comment` text NOT NULL,
-  `rating` int(11) NOT NULL,
-  `review_time` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_service` (
-  `id` int(11) NOT NULL,
-  `title` text NOT NULL,
-  `content` text NOT NULL,
-  `photo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
-CREATE TABLE `table_settings` (
-  `id` int(11) NOT NULL,
-  `logo` text NOT NULL,
-  `favicon` text NOT NULL,
-  `footer_about` text NOT NULL,
-  `footer_copyright` text NOT NULL,
-  `contact_address` text NOT NULL,
-  `contact_email` text NOT NULL,
-  `contact_phone` text NOT NULL,
-  `contact_map_iframe` text NOT NULL,
-  `receive_email` text NOT NULL,
-  `receive_email_subject` text NOT NULL,
-  `receive_email_thank_you_message` text NOT NULL,
-  `forget_password_message` text NOT NULL,
-  `total_latest_product` int(11) NOT NULL,
-  `total_popular_product` int(11) NOT NULL,
-  `total_featured_product` int(11) NOT NULL,
-  `meta_title` text NOT NULL,
-  `banner_login` text NOT NULL,
-  `banner_registration` text NOT NULL,
-  `banner_forget_password` text NOT NULL,
-  `banner_reset_password` text NOT NULL,
-  `banner_search` text NOT NULL,
-  `banner_cart` text NOT NULL,
-  `banner_checkout` text NOT NULL,
-  `banner_product_category` text NOT NULL,
-  `cta_title` text NOT NULL,
-  `cta_content` text NOT NULL,
-  `cta_read_more_text` text NOT NULL,
-  `cta_read_more_url` text NOT NULL,
-  `cta_photo` text NOT NULL,
-  `latest_product_title` text NOT NULL,
-  `latest_product_subtitle` text NOT NULL,
-  `popular_product_title` text NOT NULL,
-  `popular_product_subtitle` text NOT NULL,
-  `bank_public_key` text NOT NULL,
-  `bank_secret_key` text NOT NULL,
-  `bank_detail` text NOT NULL,
-  `before_head` text NOT NULL,
-  `after_body` text NOT NULL,
-  `before_body` text NOT NULL,
-  `service_on_off` int(11) NOT NULL,
-  `latest_product_on_off` int(11) NOT NULL,
-  `popular_product_on_off` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_shipping_cost` (
-  `shipping_cost_id` int(11) NOT NULL,
-  `province_id` int(11) NOT NULL,
-  `amount` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_size` (
-  `size_id` int(11) NOT NULL,
-  `size_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_slider` (
-  `id` int(11) NOT NULL,
-  `photo` text NOT NULL,
-  `heading` text NOT NULL,
-  `content` text NOT NULL,
-  `button_text` text NOT NULL,
-  `button_url` text NOT NULL,
-  `position` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_social` (
-  `social_id` int(11) NOT NULL,
-  `social_name` varchar(30) NOT NULL,
-  `social_url` text NOT NULL,
-  `social_icon` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-CREATE TABLE `table_top_category` (
-  `tcat_id` int(11) NOT NULL,
-  `tcat_name` text NOT NULL,
-  `show_on_menu` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-ALTER TABLE `table_admin`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_color`
-  ADD PRIMARY KEY (`color_id`);
-ALTER TABLE `table_customer`
-  ADD PRIMARY KEY (`cust_id`);
-ALTER TABLE `table_customer_message`
-  ADD PRIMARY KEY (`customer_message_id`);
-ALTER TABLE `table_end_category`
-  ADD PRIMARY KEY (`ecat_id`);
-ALTER TABLE `table_faq`
-  ADD PRIMARY KEY (`faq_id`);
-ALTER TABLE `table_mid_category`
-  ADD PRIMARY KEY (`mcat_id`);
-ALTER TABLE `table_order`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_page`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_payment`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_photo`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_photo_rating`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_product`
-  ADD PRIMARY KEY (`p_id`);
-ALTER TABLE `table_product_color`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_product_photo`
-  ADD PRIMARY KEY (`pp_id`);
-ALTER TABLE `table_product_size`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_province`
-  ADD PRIMARY KEY (`province_id`);
-ALTER TABLE `table_rating`
-  ADD PRIMARY KEY (`rt_id`);
-ALTER TABLE `table_service`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_settings`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_shipping_cost`
-  ADD PRIMARY KEY (`shipping_cost_id`);
-ALTER TABLE `table_size`
-  ADD PRIMARY KEY (`size_id`);
-ALTER TABLE `table_slider`
-  ADD PRIMARY KEY (`id`);
-ALTER TABLE `table_social`
-  ADD PRIMARY KEY (`social_id`);
-ALTER TABLE `table_top_category`
-  ADD PRIMARY KEY (`tcat_id`);
-ALTER TABLE `table_admin`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-ALTER TABLE `table_color`
-  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-ALTER TABLE `table_customer`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-ALTER TABLE `table_customer_message`
-  MODIFY `customer_message_id` int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `table_end_category`
-  MODIFY `ecat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
-ALTER TABLE `table_faq`
-  MODIFY `faq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-ALTER TABLE `table_mid_category`
-  MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-ALTER TABLE `table_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-ALTER TABLE `table_page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-ALTER TABLE `table_payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-ALTER TABLE `table_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-ALTER TABLE `table_photo_rating`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-ALTER TABLE `table_product`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
-ALTER TABLE `table_product_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
-ALTER TABLE `table_product_photo`
-  MODIFY `pp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
-ALTER TABLE `table_product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
-ALTER TABLE `table_rating`
-  MODIFY `rt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
-ALTER TABLE `table_service`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-ALTER TABLE `table_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-ALTER TABLE `table_shipping_cost`
-  MODIFY `shipping_cost_id` int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `table_size`
-  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
-ALTER TABLE `table_slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-ALTER TABLE `table_social`
-  MODIFY `social_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-ALTER TABLE `table_top_category`
-  MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
-ALTER TABLE `table_customer_message`
-  ADD CONSTRAINT `fk_customer_message_cust`
-  FOREIGN KEY (`cust_id`) REFERENCES `table_customer` (`cust_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_end_category`
-  ADD CONSTRAINT `fk_end_category_mid`
-  FOREIGN KEY (`mcat_id`) REFERENCES `table_mid_category` (`mcat_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_mid_category`
-  ADD CONSTRAINT `fk_mid_category_top`
-  FOREIGN KEY (`tcat_id`) REFERENCES `table_top_category` (`tcat_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_payment`
-  ADD CONSTRAINT `fk_payment_customer`
-  FOREIGN KEY (`customer_id`) REFERENCES `table_customer` (`cust_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_photo_rating`
-  ADD CONSTRAINT `fk_photo_rating_rating`
-  FOREIGN KEY (`rt_id`) REFERENCES `table_rating` (`rt_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_photo_rating_product`
-  FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_product`
-  ADD CONSTRAINT `fk_product_end_category`
-  FOREIGN KEY (`ecat_id`) REFERENCES `table_end_category` (`ecat_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_product_color`
-  ADD CONSTRAINT `fk_product_color_color`
-  FOREIGN KEY (`color_id`) REFERENCES `table_color` (`color_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_product_color_product`
-  FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_product_photo`
-  ADD CONSTRAINT `fk_product_photo_product`
-  FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_product_size`
-  ADD CONSTRAINT `fk_product_size_size`
-  FOREIGN KEY (`size_id`) REFERENCES `table_size` (`size_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_product_size_product`
-  FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `table_shipping_cost`
-  ADD CONSTRAINT `fk_shipping_cost_province`
-  FOREIGN KEY (`province_id`) REFERENCES `table_province` (`province_id`)
-  ON DELETE CASCADE ON UPDATE CASCADE;
-
-
-INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `photo`, `token`, `datetime`, `timestamp`, `status`) VALUES
-(1, 'admin', 'admin@mail.com', '7777777777', 'd00f5d5217896fb7fd601412cb890830', 'admin-1.png', 'xxxx', '23-2-2025', '25-2-2025', 0),
-(2, 'thu', 'ebedangiu2111@gmail.com', '+84774048884', 'fe9e27dd7bf526b57d69d3bd9fac33dc', 'default.jpg', '', '2025-03-26 01:46:19', '1742971579', 1),
-(3, 'thu', 'thupii@gmail.com', '+84774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '5d393e2a2f8f455f5a42aac1f0f262e7', '2025-03-28 10:33:05', '1743132785', 0),
-(4, 'thu', 'thupii2111@gmai.com', '+84 774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '59b68bb5c6b2cd89190ee8edd5209d42', '2025-03-28 10:33:50', '1743132830', 0),
-(5, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', '84e39cd756c73f70b52ba50a71278b15', '2025-03-30 09:16:26', '1743300986', 1),
-(6, 'Duc Anh Tran', 'anhduc9b1cva@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', 'f15eb404154b96a49aa2bc2b36a6759a', '2025-03-30 09:16:40', '1743301000', 0);
-
--- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_color`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_color`
---
-
-INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
-(1, 'Đỏ'),
-(2, 'Xanh dương'),
-(3, 'Xanh lá'),
-(4, 'Vàng'),
-(5, 'Đen'),
-(6, 'Trắng'),
-(7, 'Tím'),
-(8, 'Cam'),
-(9, 'Hồng'),
-(10, 'Nâu');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_customer`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_customer`
---
-
-INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_gender`, `cust_birthyear`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_ward`, `cust_s_address`, `cust_password`, `cust_photo`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
-(11, 'Nguyễn abc', 'tungsida8@gmail.com', '0946403788', 'Nam', '2010', '', '', 0, 0, 0, '', '099e3aa828cfe4e6eb238ad186352252', 'Screenshot 2025-04-03 231838.png', '', '2025-04-04 09:18:09', '1743733089', 1);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_customer_message`
---
-
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_end_category`
---
-
---
--- Đang đổ dữ liệu cho bảng `table_end_category`
+-- Dumping data for table `table_end_category`
 --
 
 INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
@@ -542,12 +241,17 @@ INSERT INTO `table_end_category` (`ecat_id`, `ecat_name`, `mcat_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_faq`
+-- Table structure for table `table_faq`
 --
 
+CREATE TABLE `table_faq` (
+  `faq_id` int(11) NOT NULL,
+  `faq_title` text NOT NULL,
+  `faq_content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_faq`
+-- Dumping data for table `table_faq`
 --
 
 INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
@@ -560,12 +264,17 @@ INSERT INTO `table_faq` (`faq_id`, `faq_title`, `faq_content`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_mid_category`
+-- Table structure for table `table_mid_category`
 --
 
+CREATE TABLE `table_mid_category` (
+  `mcat_id` int(11) NOT NULL,
+  `mcat_name` text NOT NULL,
+  `tcat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_mid_category`
+-- Dumping data for table `table_mid_category`
 --
 
 INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
@@ -588,99 +297,157 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_order`
+-- Table structure for table `table_order`
 --
 
+CREATE TABLE `table_order` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` text NOT NULL,
+  `size` varchar(100) NOT NULL,
+  `color` varchar(100) NOT NULL,
+  `quantity` varchar(50) NOT NULL,
+  `unit_price` varchar(50) NOT NULL,
+  `payment_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_order`
+--
+
+INSERT INTO `table_order` (`id`, `product_id`, `product_name`, `size`, `color`, `quantity`, `unit_price`, `payment_id`) VALUES
+(4, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_684953cc3f2e6'),
+(5, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_684953cc3f2e6'),
+(6, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_684953cc3f2e6'),
+(7, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_684953cc3f2e6'),
+(8, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_684954c5ae8b6'),
+(9, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_684954c5ae8b6'),
+(10, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_684954c5ae8b6'),
+(11, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_684954c5ae8b6'),
+(12, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_68495690d496d'),
+(13, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_68495690d496d'),
+(14, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_68495690d496d'),
+(15, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495690d496d'),
+(16, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_6849569dd76a2'),
+(17, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_6849569dd76a2'),
+(18, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_6849569dd76a2'),
+(19, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849569dd76a2'),
+(20, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_68495736b4b01'),
+(21, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_68495736b4b01'),
+(22, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_68495736b4b01'),
+(23, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495736b4b01'),
+(24, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_6849574d8b0c5'),
+(25, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_6849574d8b0c5'),
+(26, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_6849574d8b0c5'),
+(27, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849574d8b0c5'),
+(28, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_68495833b968e'),
+(29, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495833b968e'),
+(30, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495833b968e'),
+(31, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495833b968e'),
+(32, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849583d5e43e'),
+(33, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849583d5e43e'),
+(34, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849583d5e43e'),
+(35, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849583d5e43e'),
+(36, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849584ab50c9'),
+(37, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849584ab50c9'),
+(38, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849584ab50c9'),
+(39, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849584ab50c9'),
+(40, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_68495903f17a1'),
+(41, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495903f17a1'),
+(42, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495903f17a1'),
+(43, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495903f17a1'),
+(44, 94, 'Dép Hello Kitty', '35', 'Hồng', '16', '230', 'PAY_68495903f17a1'),
+(45, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849590d91378'),
+(46, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849590d91378'),
+(47, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849590d91378'),
+(48, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849590d91378'),
+(49, 94, 'Dép Hello Kitty', '35', 'Hồng', '16', '230', 'PAY_6849590d91378'),
+(50, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849592512159'),
+(51, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849592512159'),
+(52, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849592512159'),
+(53, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849592512159'),
+(54, 94, 'Dép Hello Kitty', '35', 'Hồng', '16', '230', 'PAY_6849592512159');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_page`
+-- Table structure for table `table_page`
 --
 
+CREATE TABLE `table_page` (
+  `id` int(11) NOT NULL,
+  `about_title` text NOT NULL,
+  `about_content` text NOT NULL,
+  `about_banner` text NOT NULL,
+  `about_meta_title` text NOT NULL,
+  `faq_title` text NOT NULL,
+  `faq_banner` text NOT NULL,
+  `faq_meta_title` text NOT NULL,
+  `contact_title` text NOT NULL,
+  `contact_banner` text NOT NULL,
+  `contact_meta_title` text NOT NULL,
+  `pgallery_title` text NOT NULL,
+  `pgallery_banner` text NOT NULL,
+  `pgallery_meta_title` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
--- Đang đổ dữ liệu cho bảng `table_page`
+-- Dumping data for table `table_page`
 --
 
-INSERT INTO `table_page` (
-  `id`, `about_title`, `about_content`, `about_banner`, `about_meta_title`,
-  `faq_title`, `faq_banner`, `faq_meta_title`,
-  `contact_title`, `contact_banner`, `contact_meta_title`,
-  `pgallery_title`, `pgallery_banner`, `pgallery_meta_title`
-) VALUES
-(1, 'Về GoBuy', 
-'<div><p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🛒</span> Giới thiệu về GoBuy<o:p></o:p></b></p>
-
-<p class=\"MsoNormal\"><b>Mua sắm dễ dàng – Trải nghiệm tuyệt vời<o:p></o:p></b></p>
-
-<p class=\"MsoNormal\">Chào mừng bạn đến với <b>GoBuy</b> – nền tảng mua sắm trực tuyến đa dạng và tiện lợi, nơi bạn có thể tìm thấy mọi thứ bạn cần, từ đồ gia dụng, thời trang, đồ công nghệ đến sản phẩm chăm sóc sức khỏe.<o:p></o:p></p>
-
-<p class=\"MsoNormal\">Chúng tôi không chỉ cung cấp hàng ngàn sản phẩm chính hãng mà còn mang đến trải nghiệm mua sắm thông minh, an toàn và nhanh chóng.<o:p></o:p></p>
-
-<div class=\"MsoNormal\" align=\"center\" style=\"text-align:center\">
-<hr size=\"2\" width=\"100%\" align=\"center\">
-</div>
-
-<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🚀</span> Tầm nhìn của GoBuy<o:p></o:p></b></p>
-
-<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🌐</span> Kết nối mọi nhu cầu:</b> Dù bạn ở bất cứ đâu, GoBuy đều sẵn sàng phục vụ.<br>
-<b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🎯</span> Đa dạng – Chính hãng:</b> Chúng tôi hợp tác với hàng trăm thương hiệu uy tín để mang đến sản phẩm chất lượng.<br>
-<b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">💼</span> Dịch vụ chuyên nghiệp:</b> Đội ngũ hỗ trợ thân thiện, sẵn sàng giải đáp 24/7.<o:p></o:p></p>
-
-<div class=\"MsoNormal\" align=\"center\" style=\"text-align:center\">
-<hr size=\"2\" width=\"100%\" align=\"center\">
-</div>
-
-<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">💎</span> Lý do chọn GoBuy?<o:p></o:p></b></p>
-
-<p class=\"MsoNormal\">
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Giá cả cạnh tranh:</b> Khuyến mãi mỗi ngày, ưu đãi hấp dẫn.<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Giao hàng toàn quốc:</b> Nhanh chóng – đúng hẹn – an toàn.<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Thanh toán tiện lợi:</b> COD, chuyển khoản, ví điện tử.<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Chính sách đổi trả rõ ràng:</b> Hỗ trợ đổi trả dễ dàng trong vòng 7 ngày.<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Bảo mật tuyệt đối:</b> Cam kết bảo vệ thông tin khách hàng.<o:p></o:p></p>
-
-<div class=\"MsoNormal\" align=\"center\" style=\"text-align:center\">
-<hr size=\"2\" width=\"100%\" align=\"center\">
-</div>
-
-<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📞</span> Kết nối với chúng tôi<o:p></o:p></b></p>
-
-<p class=\"MsoNormal\">Bạn cần hỗ trợ hoặc có thắc mắc về sản phẩm? Đừng ngần ngại liên hệ:<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📧</span> Email: taduc0508@gmail.com<br>
-<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📍</span> Địa chỉ: Thủ Đức, TP. Hồ Chí Minh<o:p></o:p></p>
-
-<p class=\"MsoNormal\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✨</span> <b>GoBuy – Mua gì cũng có, giao tận tay!</b><o:p></o:p></p>
-</div>', 
-'about-banner.jpg', 'Giới thiệu GoBuy',
-'Câu hỏi thường gặp', 'faq-banner.jpg', 'Câu hỏi thường gặp',
-'Liên hệ', 'contact-banner.jpg', 'Liên hệ',
-'', '', '');
+INSERT INTO `table_page` (`id`, `about_title`, `about_content`, `about_banner`, `about_meta_title`, `faq_title`, `faq_banner`, `faq_meta_title`, `contact_title`, `contact_banner`, `contact_meta_title`, `pgallery_title`, `pgallery_banner`, `pgallery_meta_title`) VALUES
+(1, 'Về GoBuy', '<div><p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🛒</span> Giới thiệu về GoBuy<o:p></o:p></b></p>\r\n\r\n<p class=\"MsoNormal\"><b>Mua sắm dễ dàng – Trải nghiệm tuyệt vời<o:p></o:p></b></p>\r\n\r\n<p class=\"MsoNormal\">Chào mừng bạn đến với <b>GoBuy</b> – nền tảng mua sắm trực tuyến đa dạng và tiện lợi, nơi bạn có thể tìm thấy mọi thứ bạn cần, từ đồ gia dụng, thời trang, đồ công nghệ đến sản phẩm chăm sóc sức khỏe.<o:p></o:p></p>\r\n\r\n<p class=\"MsoNormal\">Chúng tôi không chỉ cung cấp hàng ngàn sản phẩm chính hãng mà còn mang đến trải nghiệm mua sắm thông minh, an toàn và nhanh chóng.<o:p></o:p></p>\r\n\r\n<div class=\"MsoNormal\" align=\"center\" style=\"text-align:center\">\r\n<hr size=\"2\" width=\"100%\" align=\"center\">\r\n</div>\r\n\r\n<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🚀</span> Tầm nhìn của GoBuy<o:p></o:p></b></p>\r\n\r\n<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🌐</span> Kết nối mọi nhu cầu:</b> Dù bạn ở bất cứ đâu, GoBuy đều sẵn sàng phục vụ.<br>\r\n<b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">🎯</span> Đa dạng – Chính hãng:</b> Chúng tôi hợp tác với hàng trăm thương hiệu uy tín để mang đến sản phẩm chất lượng.<br>\r\n<b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">💼</span> Dịch vụ chuyên nghiệp:</b> Đội ngũ hỗ trợ thân thiện, sẵn sàng giải đáp 24/7.<o:p></o:p></p>\r\n\r\n<div class=\"MsoNormal\" align=\"center\" style=\"text-align:center\">\r\n<hr size=\"2\" width=\"100%\" align=\"center\">\r\n</div>\r\n\r\n<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">💎</span> Lý do chọn GoBuy?<o:p></o:p></b></p>\r\n\r\n<p class=\"MsoNormal\">\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Giá cả cạnh tranh:</b> Khuyến mãi mỗi ngày, ưu đãi hấp dẫn.<br>\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Giao hàng toàn quốc:</b> Nhanh chóng – đúng hẹn – an toàn.<br>\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Thanh toán tiện lợi:</b> COD, chuyển khoản, ví điện tử.<br>\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Chính sách đổi trả rõ ràng:</b> Hỗ trợ đổi trả dễ dàng trong vòng 7 ngày.<br>\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✅</span> <b>Bảo mật tuyệt đối:</b> Cam kết bảo vệ thông tin khách hàng.<o:p></o:p></p>\r\n\r\n<div class=\"MsoNormal\" align=\"center\" style=\"text-align:center\">\r\n<hr size=\"2\" width=\"100%\" align=\"center\">\r\n</div>\r\n\r\n<p class=\"MsoNormal\"><b><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📞</span> Kết nối với chúng tôi<o:p></o:p></b></p>\r\n\r\n<p class=\"MsoNormal\">Bạn cần hỗ trợ hoặc có thắc mắc về sản phẩm? Đừng ngần ngại liên hệ:<br>\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📧</span> Email: taduc0508@gmail.com<br>\r\n<span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">📍</span> Địa chỉ: Thủ Đức, TP. Hồ Chí Minh<o:p></o:p></p>\r\n\r\n<p class=\"MsoNormal\"><span style=\"font-family:&quot;Segoe UI Emoji&quot;,sans-serif;\">✨</span> <b>GoBuy – Mua gì cũng có, giao tận tay!</b><o:p></o:p></p>\r\n</div>', 'about-banner.jpg', 'Giới thiệu GoBuy', 'Câu hỏi thường gặp', 'faq-banner.jpg', 'Câu hỏi thường gặp', 'Liên hệ', 'contact-banner.jpg', 'Liên hệ', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_payment`
+-- Table structure for table `table_payment`
 --
 
+CREATE TABLE `table_payment` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `customer_email` varchar(255) NOT NULL,
+  `payment_date` datetime NOT NULL,
+  `txnid` varchar(255) NOT NULL,
+  `paid_amount` decimal(10,2) NOT NULL,
+  `card_number` varchar(50) NOT NULL,
+  `card_cvv` varchar(10) NOT NULL,
+  `card_month` varchar(10) NOT NULL,
+  `card_year` varchar(10) NOT NULL,
+  `bank_transaction_info` text NOT NULL,
+  `payment_method` varchar(20) NOT NULL,
+  `payment_status` varchar(25) NOT NULL,
+  `shipping_status` varchar(20) NOT NULL,
+  `payment_id` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `table_payment`
+-- Dumping data for table `table_payment`
 --
 
 INSERT INTO `table_payment` (`id`, `customer_id`, `customer_name`, `customer_email`, `payment_date`, `txnid`, `paid_amount`, `card_number`, `card_cvv`, `card_month`, `card_year`, `bank_transaction_info`, `payment_method`, `payment_status`, `shipping_status`, `payment_id`) VALUES
 (1, 1, 'Nguyễn Văn A', 'vana@gmail.com', '2025-02-28 11:00:00', 'TXN123456A', 500000.00, '4111111111111111', '123', '02', '2028', 'Bank XYZ - Successful', 'Bank Deposit', 'Completed', 'Pending', 'PAYID123A'),
-(2, 2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 750000.00, '5555555555554444', '456', '05', '2029', 'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B');
+(2, 2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 750000.00, '5555555555554444', '456', '05', '2029', 'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B'),
+(3, 12, 'Duc Anh Tran', 'taduc0508@gmail.com', '2025-06-11 17:15:41', 'TXN6849574d8d7d7', 257980.00, 'UNKNOWN', '***', '06', '2025', '89376164213-Thanh toan don hang ISTN4C-CHUYEN TIEN-OQCH91789355-MOMO89376164213MOMO', 'Bank Transfer', 'Completed', 'Completed', 'PAY_6849574d8b0c5'),
+(4, 13, 'Nguyễn Thị B', 'anhduc9b1cva@gmail.com', '2025-06-11 17:19:54', 'TXN6849584ab7452', 252010.00, 'UNKNOWN', '***', '06', '2025', '89376164213-Thanh toan don hang 9F4EVR-CHUYEN TIEN-OQCH91789355-MOMO89376164213MOMO', 'Bank Transfer', 'Completed', 'Pending', 'PAY_6849584ab50c9'),
+(5, 14, 'Sơn Tùng M-TP', '23520316@gm.uit.edu.vn', '2025-06-11 17:23:33', 'TXN68495925157f9', 255690.00, 'UNKNOWN', '***', '06', '2025', '89376164213-Thanh toan don hang FUX1PJ-CHUYEN TIEN-OQCH91789355-MOMO89376164213MOMO', 'Bank Transfer', 'Completed', 'Pending', 'PAY_6849592512159');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_photo`
+-- Table structure for table `table_photo`
 --
 
+CREATE TABLE `table_photo` (
+  `id` int(11) NOT NULL,
+  `caption` text NOT NULL,
+  `photo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_photo`
+-- Dumping data for table `table_photo`
 --
 
 INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
@@ -694,12 +461,19 @@ INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_photo_rating`
+-- Table structure for table `table_photo_rating`
 --
 
+CREATE TABLE `table_photo_rating` (
+  `id` int(11) NOT NULL,
+  `rt_id` int(11) NOT NULL,
+  `caption` text NOT NULL,
+  `photo_rating` text NOT NULL,
+  `p_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_photo_rating`
+-- Dumping data for table `table_photo_rating`
 --
 
 INSERT INTO `table_photo_rating` (`id`, `rt_id`, `caption`, `photo_rating`, `p_id`) VALUES
@@ -731,12 +505,28 @@ INSERT INTO `table_photo_rating` (`id`, `rt_id`, `caption`, `photo_rating`, `p_i
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product`
+-- Table structure for table `table_product`
 --
 
+CREATE TABLE `table_product` (
+  `p_id` int(11) NOT NULL,
+  `p_name` text NOT NULL,
+  `p_old_price` varchar(10) NOT NULL,
+  `p_current_price` varchar(10) NOT NULL,
+  `p_qty` int(10) NOT NULL,
+  `p_featured_photo` text NOT NULL,
+  `p_description` text NOT NULL,
+  `p_short_description` text NOT NULL,
+  `p_feature` text NOT NULL,
+  `p_return_policy` text NOT NULL,
+  `p_total_order` int(11) NOT NULL,
+  `p_is_featured` int(1) NOT NULL,
+  `p_is_active` int(1) NOT NULL,
+  `ecat_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product`
+-- Dumping data for table `table_product`
 --
 
 INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_order`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
@@ -887,12 +677,17 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_color`
+-- Table structure for table `table_product_color`
 --
 
+CREATE TABLE `table_product_color` (
+  `id` int(11) NOT NULL,
+  `color_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_color`
+-- Dumping data for table `table_product_color`
 --
 
 INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
@@ -1120,12 +915,17 @@ INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_photo`
+-- Table structure for table `table_product_photo`
 --
 
+CREATE TABLE `table_product_photo` (
+  `pp_id` int(11) NOT NULL,
+  `photo` text NOT NULL,
+  `p_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_photo`
+-- Dumping data for table `table_product_photo`
 --
 
 INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
@@ -1274,12 +1074,17 @@ INSERT INTO `table_product_photo` (`pp_id`, `photo`, `p_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_product_size`
+-- Table structure for table `table_product_size`
 --
 
+CREATE TABLE `table_product_size` (
+  `id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_product_size`
+-- Dumping data for table `table_product_size`
 --
 
 INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
@@ -1496,6 +1301,20 @@ INSERT INTO `table_product_size` (`id`, `size_id`, `p_id`) VALUES
 (227, 29, 4),
 (228, 26, 136);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_province`
+--
+
+CREATE TABLE `table_province` (
+  `province_id` int(11) NOT NULL,
+  `province_name` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `table_province`
+--
 
 INSERT INTO `table_province` (`province_id`, `province_name`) VALUES
 (1, 'An Giang'),
@@ -1565,12 +1384,20 @@ INSERT INTO `table_province` (`province_id`, `province_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_rating`
+-- Table structure for table `table_rating`
 --
 
+CREATE TABLE `table_rating` (
+  `rt_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `cust_id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `rating` int(11) NOT NULL,
+  `review_time` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_rating`
+-- Dumping data for table `table_rating`
 --
 
 INSERT INTO `table_rating` (`rt_id`, `p_id`, `cust_id`, `comment`, `rating`, `review_time`) VALUES
@@ -1726,11 +1553,18 @@ INSERT INTO `table_rating` (`rt_id`, `p_id`, `cust_id`, `comment`, `rating`, `re
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_service`
+-- Table structure for table `table_service`
 --
 
+CREATE TABLE `table_service` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `content` text NOT NULL,
+  `photo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
--- Đang đổ dữ liệu cho bảng `table_service`
+-- Dumping data for table `table_service`
 --
 
 INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
@@ -1746,17 +1580,79 @@ INSERT INTO `table_service` (`id`, `title`, `content`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_settings`
+-- Table structure for table `table_settings`
 --
 
+CREATE TABLE `table_settings` (
+  `id` int(11) NOT NULL,
+  `logo` text NOT NULL,
+  `favicon` text NOT NULL,
+  `footer_about` text NOT NULL,
+  `footer_copyright` text NOT NULL,
+  `contact_address` text NOT NULL,
+  `contact_email` text NOT NULL,
+  `contact_phone` text NOT NULL,
+  `contact_map_iframe` text NOT NULL,
+  `receive_email` text NOT NULL,
+  `receive_email_subject` text NOT NULL,
+  `receive_email_thank_you_message` text NOT NULL,
+  `forget_password_message` text NOT NULL,
+  `total_latest_product` int(11) NOT NULL,
+  `total_popular_product` int(11) NOT NULL,
+  `total_featured_product` int(11) NOT NULL,
+  `meta_title` text NOT NULL,
+  `banner_login` text NOT NULL,
+  `banner_registration` text NOT NULL,
+  `banner_forget_password` text NOT NULL,
+  `banner_reset_password` text NOT NULL,
+  `banner_search` text NOT NULL,
+  `banner_cart` text NOT NULL,
+  `banner_checkout` text NOT NULL,
+  `banner_product_category` text NOT NULL,
+  `cta_title` text NOT NULL,
+  `cta_content` text NOT NULL,
+  `cta_read_more_text` text NOT NULL,
+  `cta_read_more_url` text NOT NULL,
+  `cta_photo` text NOT NULL,
+  `latest_product_title` text NOT NULL,
+  `latest_product_subtitle` text NOT NULL,
+  `popular_product_title` text NOT NULL,
+  `popular_product_subtitle` text NOT NULL,
+  `bank_public_key` text NOT NULL,
+  `bank_secret_key` text NOT NULL,
+  `bank_detail` text NOT NULL,
+  `before_head` text NOT NULL,
+  `after_body` text NOT NULL,
+  `before_body` text NOT NULL,
+  `service_on_off` int(11) NOT NULL,
+  `latest_product_on_off` int(11) NOT NULL,
+  `popular_product_on_off` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
--- Đang đổ dữ liệu cho bảng `table_settings`
+-- Dumping data for table `table_settings`
 --
 
 INSERT INTO `table_settings` (`id`, `logo`, `favicon`, `footer_about`, `footer_copyright`, `contact_address`, `contact_email`, `contact_phone`, `contact_map_iframe`, `receive_email`, `receive_email_subject`, `receive_email_thank_you_message`, `forget_password_message`, `total_latest_product`, `total_popular_product`, `total_featured_product`, `meta_title`, `banner_login`, `banner_registration`, `banner_forget_password`, `banner_reset_password`, `banner_search`, `banner_cart`, `banner_checkout`, `banner_product_category`, `cta_title`, `cta_content`, `cta_read_more_text`, `cta_read_more_url`, `cta_photo`, `latest_product_title`, `latest_product_subtitle`, `popular_product_title`, `popular_product_subtitle`, `bank_public_key`, `bank_secret_key`, `bank_detail`, `before_head`, `after_body`, `before_body`, `service_on_off`, `latest_product_on_off`, `popular_product_on_off`) VALUES
 (1, 'logo.png', 'favicon.png', 'Đây là một website bán hàng, đồ án môn học IS207 tại UIT', 'GoBuy - Duck123', 'Khu phố 6, P.Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Minh', 'taduc0508@gmail.com', '0123456789', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.738228322354!2d106.80321571480056!3d10.870084060477334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527c1c6e8b1b9%3A0x3a8e6e5c6f5e6b8a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjhu41uZyB0aW4g4oCTIMSQSCBRR00gVGjhu6cgUXXhuq1jIEdpYSBUcC5ISQ!5e0!3m2!1svi!2s!4v1616581234567\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'taduc0508@gmail.com', 'Email messages from GoBuy visitors', 'Cảm ơn bạn đã gửi email. Chúng tôi sẽ liên hệ với bạn sớm.', 'Một liên kết xác nhận đã được gửi đến địa chỉ email của bạn. Bạn sẽ nhận được thông tin đặt lại mật khẩu trong đó.', 6, 8, 6, 'GoBuy', 'banner_login.jpg', 'banner_registration.jpg', 'banner_forget_password.jpg', 'banner_reset_password.jpg', 'banner_search.jpg', 'banner_cart.jpg', 'banner_checkout.jpg', 'banner_product_category.jpg', 'Chào mừng đến với GoBuy', 'GoBuy - nền tảng thương mại điện tử đáng tin cậy! Khám phá hàng ngàn sản phẩm chất lượng với giá tốt nhất, cùng những ưu đãi hấp dẫn mỗi ngày. Mua sắm dễ dàng, thanh toán an toàn, giao hàng nhanh chóng!', 'Xem thêm', '#', 'cta.jpg', 'Sản phẩm mới nhất', 'Danh sách những sản phẩm mới nhất', 'Sẩn phẩm nổi bật', 'Sản phẩm nổi bật dựa trên lựa chọn của khách hàng', 'xxxxxx', 'yyyyyy', 'Bank Name: AAAAAAA\r\nAccount Number: 1234567\r\nBranch Name: AAAAAA', '', '', '', 1, 1, 1);
 
-INSERT INTO table_shipping_cost (shipping_cost_id, province_id, amount) VALUES
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_shipping_cost`
+--
+
+CREATE TABLE `table_shipping_cost` (
+  `shipping_cost_id` int(11) NOT NULL,
+  `province_id` int(11) NOT NULL,
+  `amount` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_shipping_cost`
+--
+
+INSERT INTO `table_shipping_cost` (`shipping_cost_id`, `province_id`, `amount`) VALUES
 (1, 1, '489'),
 (2, 2, '261'),
 (3, 3, '329'),
@@ -1821,6 +1717,20 @@ INSERT INTO table_shipping_cost (shipping_cost_id, province_id, amount) VALUES
 (62, 62, '242'),
 (63, 63, '356');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_size`
+--
+
+CREATE TABLE `table_size` (
+  `size_id` int(11) NOT NULL,
+  `size_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `table_size`
+--
 
 INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 (1, 'XS'),
@@ -1874,12 +1784,21 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_slider`
+-- Table structure for table `table_slider`
 --
 
+CREATE TABLE `table_slider` (
+  `id` int(11) NOT NULL,
+  `photo` text NOT NULL,
+  `heading` text NOT NULL,
+  `content` text NOT NULL,
+  `button_text` text NOT NULL,
+  `button_url` text NOT NULL,
+  `position` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_slider`
+-- Dumping data for table `table_slider`
 --
 
 INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, `button_url`, `position`) VALUES
@@ -1890,12 +1809,18 @@ INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_social`
+-- Table structure for table `table_social`
 --
 
+CREATE TABLE `table_social` (
+  `social_id` int(11) NOT NULL,
+  `social_name` varchar(30) NOT NULL,
+  `social_url` text NOT NULL,
+  `social_icon` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_social`
+-- Dumping data for table `table_social`
 --
 
 INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_icon`) VALUES
@@ -1907,12 +1832,17 @@ INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_ic
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_top_category`
+-- Table structure for table `table_top_category`
 --
 
+CREATE TABLE `table_top_category` (
+  `tcat_id` int(11) NOT NULL,
+  `tcat_name` text NOT NULL,
+  `show_on_menu` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
--- Đang đổ dữ liệu cho bảng `table_top_category`
+-- Dumping data for table `table_top_category`
 --
 
 INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
@@ -1922,4 +1852,383 @@ INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 (4, 'Đồ điện tử', 1),
 (5, 'Khác', 1);
 
-SET FOREIGN_KEY_CHECKS = 1;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `table_admin`
+--
+ALTER TABLE `table_admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_color`
+--
+ALTER TABLE `table_color`
+  ADD PRIMARY KEY (`color_id`);
+
+--
+-- Indexes for table `table_customer`
+--
+ALTER TABLE `table_customer`
+  ADD PRIMARY KEY (`cust_id`);
+
+--
+-- Indexes for table `table_customer_message`
+--
+ALTER TABLE `table_customer_message`
+  ADD PRIMARY KEY (`customer_message_id`),
+  ADD KEY `fk_customer_message_cust` (`cust_id`);
+
+--
+-- Indexes for table `table_end_category`
+--
+ALTER TABLE `table_end_category`
+  ADD PRIMARY KEY (`ecat_id`),
+  ADD KEY `fk_end_category_mid` (`mcat_id`);
+
+--
+-- Indexes for table `table_faq`
+--
+ALTER TABLE `table_faq`
+  ADD PRIMARY KEY (`faq_id`);
+
+--
+-- Indexes for table `table_mid_category`
+--
+ALTER TABLE `table_mid_category`
+  ADD PRIMARY KEY (`mcat_id`),
+  ADD KEY `fk_mid_category_top` (`tcat_id`);
+
+--
+-- Indexes for table `table_order`
+--
+ALTER TABLE `table_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_page`
+--
+ALTER TABLE `table_page`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_payment`
+--
+ALTER TABLE `table_payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_payment_customer` (`customer_id`);
+
+--
+-- Indexes for table `table_photo`
+--
+ALTER TABLE `table_photo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_photo_rating`
+--
+ALTER TABLE `table_photo_rating`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_photo_rating_rating` (`rt_id`),
+  ADD KEY `fk_photo_rating_product` (`p_id`);
+
+--
+-- Indexes for table `table_product`
+--
+ALTER TABLE `table_product`
+  ADD PRIMARY KEY (`p_id`),
+  ADD KEY `fk_product_end_category` (`ecat_id`);
+
+--
+-- Indexes for table `table_product_color`
+--
+ALTER TABLE `table_product_color`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_product_color_color` (`color_id`),
+  ADD KEY `fk_product_color_product` (`p_id`);
+
+--
+-- Indexes for table `table_product_photo`
+--
+ALTER TABLE `table_product_photo`
+  ADD PRIMARY KEY (`pp_id`),
+  ADD KEY `fk_product_photo_product` (`p_id`);
+
+--
+-- Indexes for table `table_product_size`
+--
+ALTER TABLE `table_product_size`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_product_size_size` (`size_id`),
+  ADD KEY `fk_product_size_product` (`p_id`);
+
+--
+-- Indexes for table `table_province`
+--
+ALTER TABLE `table_province`
+  ADD PRIMARY KEY (`province_id`);
+
+--
+-- Indexes for table `table_rating`
+--
+ALTER TABLE `table_rating`
+  ADD PRIMARY KEY (`rt_id`);
+
+--
+-- Indexes for table `table_service`
+--
+ALTER TABLE `table_service`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_settings`
+--
+ALTER TABLE `table_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_shipping_cost`
+--
+ALTER TABLE `table_shipping_cost`
+  ADD PRIMARY KEY (`shipping_cost_id`),
+  ADD KEY `fk_shipping_cost_province` (`province_id`);
+
+--
+-- Indexes for table `table_size`
+--
+ALTER TABLE `table_size`
+  ADD PRIMARY KEY (`size_id`);
+
+--
+-- Indexes for table `table_slider`
+--
+ALTER TABLE `table_slider`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_social`
+--
+ALTER TABLE `table_social`
+  ADD PRIMARY KEY (`social_id`);
+
+--
+-- Indexes for table `table_top_category`
+--
+ALTER TABLE `table_top_category`
+  ADD PRIMARY KEY (`tcat_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `table_admin`
+--
+ALTER TABLE `table_admin`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `table_color`
+--
+ALTER TABLE `table_color`
+  MODIFY `color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `table_customer`
+--
+ALTER TABLE `table_customer`
+  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `table_customer_message`
+--
+ALTER TABLE `table_customer_message`
+  MODIFY `customer_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `table_end_category`
+--
+ALTER TABLE `table_end_category`
+  MODIFY `ecat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `table_faq`
+--
+ALTER TABLE `table_faq`
+  MODIFY `faq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `table_mid_category`
+--
+ALTER TABLE `table_mid_category`
+  MODIFY `mcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `table_order`
+--
+ALTER TABLE `table_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `table_page`
+--
+ALTER TABLE `table_page`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `table_payment`
+--
+ALTER TABLE `table_payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `table_photo`
+--
+ALTER TABLE `table_photo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `table_photo_rating`
+--
+ALTER TABLE `table_photo_rating`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `table_product`
+--
+ALTER TABLE `table_product`
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+
+--
+-- AUTO_INCREMENT for table `table_product_color`
+--
+ALTER TABLE `table_product_color`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+
+--
+-- AUTO_INCREMENT for table `table_product_photo`
+--
+ALTER TABLE `table_product_photo`
+  MODIFY `pp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+
+--
+-- AUTO_INCREMENT for table `table_product_size`
+--
+ALTER TABLE `table_product_size`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+
+--
+-- AUTO_INCREMENT for table `table_rating`
+--
+ALTER TABLE `table_rating`
+  MODIFY `rt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+
+--
+-- AUTO_INCREMENT for table `table_service`
+--
+ALTER TABLE `table_service`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `table_settings`
+--
+ALTER TABLE `table_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `table_shipping_cost`
+--
+ALTER TABLE `table_shipping_cost`
+  MODIFY `shipping_cost_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `table_size`
+--
+ALTER TABLE `table_size`
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `table_slider`
+--
+ALTER TABLE `table_slider`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `table_social`
+--
+ALTER TABLE `table_social`
+  MODIFY `social_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `table_top_category`
+--
+ALTER TABLE `table_top_category`
+  MODIFY `tcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `table_end_category`
+--
+ALTER TABLE `table_end_category`
+  ADD CONSTRAINT `fk_end_category_mid` FOREIGN KEY (`mcat_id`) REFERENCES `table_mid_category` (`mcat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_mid_category`
+--
+ALTER TABLE `table_mid_category`
+  ADD CONSTRAINT `fk_mid_category_top` FOREIGN KEY (`tcat_id`) REFERENCES `table_top_category` (`tcat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_payment`
+--
+ALTER TABLE `table_payment`
+  ADD CONSTRAINT `fk_payment_customer` FOREIGN KEY (`customer_id`) REFERENCES `table_customer` (`cust_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_photo_rating`
+--
+ALTER TABLE `table_photo_rating`
+  ADD CONSTRAINT `fk_photo_rating_product` FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_photo_rating_rating` FOREIGN KEY (`rt_id`) REFERENCES `table_rating` (`rt_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_product`
+--
+ALTER TABLE `table_product`
+  ADD CONSTRAINT `fk_product_end_category` FOREIGN KEY (`ecat_id`) REFERENCES `table_end_category` (`ecat_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_product_color`
+--
+ALTER TABLE `table_product_color`
+  ADD CONSTRAINT `fk_product_color_color` FOREIGN KEY (`color_id`) REFERENCES `table_color` (`color_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_product_color_product` FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_product_photo`
+--
+ALTER TABLE `table_product_photo`
+  ADD CONSTRAINT `fk_product_photo_product` FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_product_size`
+--
+ALTER TABLE `table_product_size`
+  ADD CONSTRAINT `fk_product_size_product` FOREIGN KEY (`p_id`) REFERENCES `table_product` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_product_size_size` FOREIGN KEY (`size_id`) REFERENCES `table_size` (`size_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `table_shipping_cost`
+--
+ALTER TABLE `table_shipping_cost`
+  ADD CONSTRAINT `fk_shipping_cost_province` FOREIGN KEY (`province_id`) REFERENCES `table_province` (`province_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
