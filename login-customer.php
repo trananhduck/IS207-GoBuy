@@ -24,7 +24,9 @@ if (isset($_POST['form1'])) {
             $_SESSION['error_message'] = 'Địa chỉ email không khớp.';
         } else {
             $row = $query->fetch(PDO::FETCH_ASSOC);
-            if ($row['cust_password'] != md5($cust_password)) {
+
+            // Kiểm tra mật khẩu sử dụng password_verify thay vì md5
+            if (!password_verify($cust_password, $row['cust_password'])) {
                 $_SESSION['error_message'] = 'Mật khẩu không khớp.';
             } elseif ($row['cust_status'] == 0) {
                 $_SESSION['error_message'] = 'Tài khoản của bạn chưa được kích hoạt. Vui lòng kiểm tra email hoặc liên hệ quản trị viên.';
@@ -37,6 +39,7 @@ if (isset($_POST['form1'])) {
         }
     }
 }
+
 ?>
 
 <div class="page-banner"
@@ -94,144 +97,144 @@ if (isset($_POST['form1'])) {
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 9999;
-    transform: translateY(-20px);
-}
-
-#toast.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@media (max-width: 1200px) {
-    .admin-content .box {
-        max-width: 100%;
-        margin: 0 auto;
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px 25px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+        transform: translateY(-20px);
     }
 
-    .admin-content .box a {
-        text-align: center;
+    #toast.show {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    .account-sidebar.login {
-        position: relative;
-        left: 120px;
-        top: -100px;
-        margin-top: 15px;
+    @media (max-width: 1200px) {
+        .admin-content .box {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .admin-content .box a {
+            text-align: center;
+        }
+
+        .account-sidebar.login {
+            position: relative;
+            left: 120px;
+            top: -100px;
+            margin-top: 15px;
+        }
+
+        .admin-content .form-control {
+            font-size: 15px;
+            padding: 10px;
+        }
+
+        .btn-danger {
+            font-size: 15px;
+            padding: 12px;
+        }
     }
 
-    .admin-content .form-control {
-        font-size: 15px;
-        padding: 10px;
+    @media (max-width: 992px) {
+        .admin-content .box {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .admin-content .box a {
+            text-align: right;
+        }
+
+        .account-sidebar.login {
+            position: relative;
+            left: -195px;
+            top: -130px;
+            text-align: center;
+            margin-top: 10px;
+        }
     }
 
-    .btn-danger {
-        font-size: 15px;
-        padding: 12px;
-    }
-}
+    /* Responsive cho điện thoại */
+    @media (max-width: 768px) {
+        .admin-content {
+            padding: 20px;
+        }
 
-@media (max-width: 992px) {
-    .admin-content .box {
-        max-width: 90%;
-        margin: 0 auto;
-    }
+        .admin-content .box {
+            padding: 15px;
+            box-shadow: none;
+            /* Bỏ bóng trên mobile để giao diện nhẹ hơn */
+        }
 
-    .admin-content .box a {
-        text-align: right;
-    }
+        .admin-content .box a {
+            text-align: center;
+        }
 
-    .account-sidebar.login {
-        position: relative;
-        left: -195px;
-        top: -130px;
-        text-align: center;
-        margin-top: 10px;
-    }
-}
+        .admin-content .form-control {
+            font-size: 13px;
+            padding: 8px;
+        }
 
-/* Responsive cho điện thoại */
-@media (max-width: 768px) {
-    .admin-content {
-        padding: 20px;
-    }
+        .btn-danger {
+            font-size: 14px;
+            padding: 10px;
+        }
 
-    .admin-content .box {
-        padding: 15px;
-        box-shadow: none;
-        /* Bỏ bóng trên mobile để giao diện nhẹ hơn */
-    }
+        .form-group.d-flex {
+            flex-direction: column;
+            align-items: stretch;
+        }
 
-    .admin-content .box a {
-        text-align: center;
-    }
+        .account-sidebar.login {
+            position: relative;
+            text-align: center;
+            left: auto;
+            top: -80px;
+            margin-top: 10px;
+        }
 
-    .admin-content .form-control {
-        font-size: 13px;
-        padding: 8px;
+        .account-sidebar a {
+            display: block;
+            padding: 10px;
+            font-size: 13px;
+            width: 100%;
+            text-align: center;
+        }
     }
-
-    .btn-danger {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .form-group.d-flex {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .account-sidebar.login {
-        position: relative;
-        text-align: center;
-        left: auto;
-        top: -80px;
-        margin-top: 10px;
-    }
-
-    .account-sidebar a {
-        display: block;
-        padding: 10px;
-        font-size: 13px;
-        width: 100%;
-        text-align: center;
-    }
-}
 </style>
 
 <script>
-function showToast(message, bg = "#333") {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.style.backgroundColor = bg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 4000);
-}
-
-function togglePassword() {
-    const input = document.getElementById("cust_password");
-    const icon = document.querySelector(".toggle-password i");
-
-    if (input.type === "password") {
-        input.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-    } else {
-        input.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+    function showToast(message, bg = "#333") {
+        const toast = document.getElementById("toast");
+        toast.innerText = message;
+        toast.style.backgroundColor = bg;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
     }
-}
+
+    function togglePassword() {
+        const input = document.getElementById("cust_password");
+        const icon = document.querySelector(".toggle-password i");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
 </script>
 
 <?php

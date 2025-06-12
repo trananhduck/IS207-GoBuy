@@ -81,91 +81,81 @@ if (isset($_POST['form1'])) {
 
     if ($valid == 1) {
 
-        $token = md5(time());
+        $token = md5(time()); // vẫn có thể dùng md5 ở đây vì chỉ là token xác nhận, không phải mật khẩu
         $datetime = date('Y-m-d h:i:s');
         $timestamp = time();
+
         // Kiểm tra ảnh, đặt giá trị mặc định nếu không có
         $photo = isset($_POST['photo']) ? $_POST['photo'] : 'default.jpg';
 
+        // ======= BẢO MẬT MẬT KHẨU BẰNG password_hash() =========
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
         //Lưu vào DB
         $query = $pdo->prepare("INSERT INTO table_admin (
-                                        full_name,
-                                        email,
-                                        phone,
-                                        password,
-                                        photo, 
-                                        token,
-                                        datetime,
-                                        timestamp,
-                                        status
-                                    ) VALUES (?,?,?,?,?,?,?,?,?)");
+                                    full_name,
+                                    email,
+                                    phone,
+                                    password,
+                                    photo, 
+                                    token,
+                                    datetime,
+                                    timestamp,
+                                    status
+                                ) VALUES (?,?,?,?,?,?,?,?,?)");
+
         $query->execute(array(
-            // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
-            strip_tags($_POST['full_name']),  // Tên admin
-            strip_tags($_POST['email']),     // Email admin
-            strip_tags($_POST['phone']),     // Số điện thoại admin
-            // Mã hóa mật khẩu bằng MD5 
-            md5($_POST['password']),
+            strip_tags($_POST['full_name']),
+            strip_tags($_POST['email']),
+            strip_tags($_POST['phone']),
+            $hashed_password, // THAY md5 bằng password_hash
             $photo,
-            // Token dùng để xác thực (có thể là token đăng ký hoặc xác nhận email)
             $token,
-
-            // Thời gian đăng ký admin
-            $datetime,   // Định dạng thời gian
-            $timestamp,  // Timestamp (số nguyên)
-            0 //tài khoản chưa được kích hoạt
-
+            $datetime,
+            $timestamp,
+            0 // tài khoản chưa kích hoạt
         ));
 
         // Kiểm tra xem đang chạy trên localhost hay server thật
         if ($_SERVER['HTTP_HOST'] == 'localhost') {
             $base_url = 'http://localhost/IS207-GoBuy/';
         } else {
-            $base_url = BASE_URL; // Dùng BASE_URL bình thường nếu chạy trên server
+            $base_url = BASE_URL;
         }
 
         // Gửi email xác nhận tài khoản
         $to = $_POST['email'];
-
-        $subject = 'GoBuy - Admin Registration Email Confirmation';
         $verify_link = $base_url . 'verify-admin.php?email=' . urlencode($to) . '&token=' . urlencode($token);
-        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '
-    <a href="' . $verify_link . '">' . $verify_link . '</a>';
-
 
         $mail = new PHPMailer(true);
 
         try {
-            // Cấu hình SMTP
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; // SMTP của Gmail
+            $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'taduc0508@gmail.com'; // Thay bằng email 
-            $mail->Password   = 'rnxm lczq zhop hsdt'; // Dùng App Password nếu bật 2FA
+            $mail->Username   = 'taduc0508@gmail.com';
+            $mail->Password   = 'rnxm lczq zhop hsdt';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            // Cấu hình người gửi & người nhận
             $mail->setFrom('your-email@gmail.com', 'GoBuy');
-            $mail->addAddress($to); // Gửi đến email admin
+            $mail->addAddress($to);
 
-            // Nội dung email
             $mail->isHTML(true);
             $mail->Subject = 'GoBuy - Registration Email Confirmation';
-            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<a href="' . $verify_link . '">' . $verify_link . '</a>';
+            $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' .
+                '<a href="' . $verify_link . '">' . $verify_link . '</a>';
 
             $mail->send();
-            // echo 'Email xác nhận đã được gửi!';
         } catch (Exception $e) {
-            // echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
+            // Log lỗi nếu cần
         }
-
 
         unset($_POST['full_name']);
         unset($_POST['email']);
         unset($_POST['phone']);
 
-        $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra địa chỉ email của bạn để làm theo quy trình xác nhận đăng ký của bạn.';
+        $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra email để xác nhận tài khoản.';
     }
 }
 ?>
@@ -258,128 +248,128 @@ if (isset($_POST['form1'])) {
 <!-- Toast Container -->
 <div id="toast"></div>
 <style>
-    #toast {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
-    .toast-message {
-        background-color: #f44336;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        font-family: 'Segoe UI', sans-serif;
-        font-size: 15px;
-        min-width: 250px;
-        max-width: 300px;
+.toast-message {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+    min-width: 250px;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInSlide 0.4s ease forwards;
+    position: relative;
+}
+
+@keyframes fadeInSlide {
+    from {
         opacity: 0;
         transform: translateX(30px);
-        animation: fadeInSlide 0.4s ease forwards;
-        position: relative;
     }
 
-    @keyframes fadeInSlide {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes fadeOutSlide {
-        from {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        to {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-    }
-
-    #toast.show {
+    to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutSlide {
+    from {
+        opacity: 1;
+        transform: translateX(0);
     }
 
-    .form-group-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 15px;
+    to {
+        opacity: 0;
+        transform: translateX(30px);
     }
+}
 
-    .btn-danger {
-        width: 50%;
-        max-width: 200px;
-        text-align: center;
-    }
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-    .btn {
-        border-radius: 6px;
-        width: 30%;
-    }
+.form-group-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
 
-    .btn input {
-        position: relative;
-    }
+.btn-danger {
+    width: 50%;
+    max-width: 200px;
+    text-align: center;
+}
 
-    .account-sidebar {
-        position: absolute;
-        bottom: -30px;
-        right: 230px;
-    }
+.btn {
+    border-radius: 6px;
+    width: 30%;
+}
 
-    .account-sidebar a {
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 12px;
-    }
+.btn input {
+    position: relative;
+}
 
-    .account-sidebar a:hover {
-        text-decoration: underline;
-    }
+.account-sidebar {
+    position: absolute;
+    bottom: -30px;
+    right: 230px;
+}
+
+.account-sidebar a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.account-sidebar a:hover {
+    text-decoration: underline;
+}
 </style>
 
 <script>
-    function showToast(message, background = '#f44336') {
-        const container = document.getElementById('toast');
+function showToast(message, background = '#f44336') {
+    const container = document.getElementById('toast');
 
-        const toast = document.createElement('div');
-        toast.className = 'toast-message';
-        toast.style.backgroundColor = background;
-        toast.textContent = message;
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.style.backgroundColor = background;
+    toast.textContent = message;
 
-        container.appendChild(toast);
+    container.appendChild(toast);
 
-        setTimeout(() => {
-            toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
-            setTimeout(() => toast.remove(), 500);
-        }, 2500);
-    }
+    setTimeout(() => {
+        toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
+        setTimeout(() => toast.remove(), 500);
+    }, 2500);
+}
 
-    function togglePassword(el) {
-        const input = el.previousElementSibling;
-        const icon = el.querySelector("i");
-        const isPassword = input.getAttribute("type") === "password";
+function togglePassword(el) {
+    const input = el.previousElementSibling;
+    const icon = el.querySelector("i");
+    const isPassword = input.getAttribute("type") === "password";
 
-        input.setAttribute("type", isPassword ? "text" : "password");
+    input.setAttribute("type", isPassword ? "text" : "password");
 
-        icon.classList.toggle("fa-eye", !isPassword);
-        icon.classList.toggle("fa-eye-slash", isPassword);
-    }
+    icon.classList.toggle("fa-eye", !isPassword);
+    icon.classList.toggle("fa-eye-slash", isPassword);
+}
 </script>
 
 

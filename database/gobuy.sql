@@ -406,9 +406,9 @@ INSERT INTO `table_admin` (`id`, `full_name`, `email`, `phone`, `password`, `pho
 (2, 'thu', 'ebedangiu2111@gmail.com', '+84774048884', 'fe9e27dd7bf526b57d69d3bd9fac33dc', 'default.jpg', '', '2025-03-26 01:46:19', '1742971579', 1),
 (3, 'thu', 'thupii@gmail.com', '+84774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '5d393e2a2f8f455f5a42aac1f0f262e7', '2025-03-28 10:33:05', '1743132785', 0),
 (4, 'thu', 'thupii2111@gmai.com', '+84 774048884', 'c4ca4238a0b923820dcc509a6f75849b', 'default.jpg', '59b68bb5c6b2cd89190ee8edd5209d42', '2025-03-28 10:33:50', '1743132830', 0),
-(5, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', '84e39cd756c73f70b52ba50a71278b15', '2025-03-30 09:16:26', '1743300986', 1),
-(6, 'Duc Anh Tran', 'anhduc9b1cva@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', 'f15eb404154b96a49aa2bc2b36a6759a', '2025-03-30 09:16:40', '1743301000', 0);
-
+(6, 'Duc Anh Tran', 'anhduc9b1cva@gmail.com', '0344377104', '900150983cd24fb0d6963f7d28e17f72', 'default.jpg', 'f15eb404154b96a49aa2bc2b36a6759a', '2025-03-30 09:16:40', '1743301000', 0),
+(7, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', '4ea87a999c60e96ab60230cb4ac34413', 'default.jpg', '', '2025-06-11 04:53:32', '1749635612', 1),
+(8, 'Duc Anh Tran', 'gobuyservice123@gmail.com', '0344377104', '4ea87a999c60e96ab60230cb4ac34413', 'default.jpg', '', '2025-06-11 05:32:39', '1749637959', 1);
 -- --------------------------------------------------------
 
 --
@@ -443,9 +443,12 @@ INSERT INTO `table_color` (`color_id`, `color_name`) VALUES
 -- Đang đổ dữ liệu cho bảng `table_customer`
 --
 
-INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_gender`, `cust_birthyear`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_ward`, `cust_s_address`, `cust_password`, `cust_photo`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
-(11, 'Nguyễn abc', 'tungsida8@gmail.com', '0946403788', 'Nam', '2010', '', '', 0, 0, 0, '', '099e3aa828cfe4e6eb238ad186352252', 'Screenshot 2025-04-03 231838.png', '', '2025-04-04 09:18:09', '1743733089', 1);
 
+INSERT INTO `table_customer` (`cust_id`, `cust_name`, `cust_email`, `cust_phone`, `cust_gender`, `cust_birthyear`, `cust_s_name`, `cust_s_phone`, `cust_s_province`, `cust_s_district`, `cust_s_ward`, `cust_s_address`, `cust_password`, `cust_photo`, `cust_token`, `cust_datetime`, `cust_timestamp`, `cust_status`) VALUES
+(11, 'Nguyễn abc', 'tungsida8@gmail.com', '0946403788', 'Nam', '2010', '', '', '0', '0', '0', '', '099e3aa828cfe4e6eb238ad186352252', 'Screenshot 2025-04-03 231838.png', '', '2025-04-04 09:18:09', '1743733089', 1),
+(12, 'Duc Anh Tran', 'taduc0508@gmail.com', '0344377104', 'Nam', '2010', 'Trần Anh Đức', '0344377104', 'Tỉnh Vĩnh Phúc', 'Thành phố Phúc Yên', 'Phường Phúc Thắng', 'ABC', '4ea87a999c60e96ab60230cb4ac34413', '', '', '2025-06-10 08:02:42', '1749517362', 1),
+(13, 'Nguyễn Thị B', 'anhduc9b1cva@gmail.com', '0344377104', 'Nữ', '2008', 'Nguyễn Thị B', '0344377104', 'Tỉnh Bắc Giang', 'Huyện Tân Yên', 'Xã Liên Chung', 'adasda', '4ea87a999c60e96ab60230cb4ac34413', '', '', '2025-06-11 05:17:22', '1749637042', 1),
+(14, 'Sơn Tùng M-TP', '23520316@gm.uit.edu.vn', '0344377104', 'Nam', '1967', 'Sơn Tùng M-TP', '0344377104', 'Tỉnh Hà Giang', 'Huyện Mèo Vạc', 'Xã Nậm Ban', 'ABC', '4ea87a999c60e96ab60230cb4ac34413', '', '', '2025-06-11 05:21:22', '1749637282', 1);
 -- --------------------------------------------------------
 
 --
@@ -585,12 +588,58 @@ INSERT INTO `table_mid_category` (`mcat_id`, `mcat_name`, `tcat_id`) VALUES
 (16, 'Sức khỏe', 5),
 (17, 'Đồ gia dụng', 5);
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_order`
---
-
+INSERT INTO `table_order` (`id`, `product_id`, `product_name`, `size`, `color`, `quantity`, `unit_price`, `payment_id`) VALUES
+(4, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_684953cc3f2e6'),
+(5, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_684953cc3f2e6'),
+(6, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_684953cc3f2e6'),
+(7, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_684953cc3f2e6'),
+(8, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_684954c5ae8b6'),
+(9, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_684954c5ae8b6'),
+(10, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_684954c5ae8b6'),
+(11, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_684954c5ae8b6'),
+(12, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_68495690d496d'),
+(13, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_68495690d496d'),
+(14, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_68495690d496d'),
+(15, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495690d496d'),
+(16, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_6849569dd76a2'),
+(17, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_6849569dd76a2'),
+(18, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_6849569dd76a2'),
+(19, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849569dd76a2'),
+(20, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_68495736b4b01'),
+(21, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_68495736b4b01'),
+(22, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_68495736b4b01'),
+(23, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495736b4b01'),
+(24, 94, 'Dép Hello Kitty', '35', 'Hồng', '122', '230', 'PAY_6849574d8b0c5'),
+(25, 125, 'Giày búp bê bé gái', 'Free Size', 'Trắng', '199', '350', 'PAY_6849574d8b0c5'),
+(26, 2, 'Thiết bị làm mát laptop', '720x500', 'Xanh dương', '132', '850', 'PAY_6849574d8b0c5'),
+(27, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849574d8b0c5'),
+(28, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_68495833b968e'),
+(29, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495833b968e'),
+(30, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495833b968e'),
+(31, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495833b968e'),
+(32, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849583d5e43e'),
+(33, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849583d5e43e'),
+(34, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849583d5e43e'),
+(35, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849583d5e43e'),
+(36, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849584ab50c9'),
+(37, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849584ab50c9'),
+(38, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849584ab50c9'),
+(39, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849584ab50c9'),
+(40, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_68495903f17a1'),
+(41, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495903f17a1'),
+(42, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_68495903f17a1'),
+(43, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_68495903f17a1'),
+(44, 94, 'Dép Hello Kitty', '35', 'Hồng', '16', '230', 'PAY_68495903f17a1'),
+(45, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849590d91378'),
+(46, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849590d91378'),
+(47, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849590d91378'),
+(48, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849590d91378'),
+(49, 94, 'Dép Hello Kitty', '35', 'Hồng', '16', '230', 'PAY_6849590d91378'),
+(50, 39, 'Kem chống hăm', '720x500', '', '23', '540', 'PAY_6849592512159'),
+(51, 6, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849592512159'),
+(52, 58, 'Áo polo nam ngắn tay', 'L', 'Đen', '123', '390', 'PAY_6849592512159'),
+(53, 5, 'Bàn phím bluetooth', '720x500', 'Đen', '133', '720', 'PAY_6849592512159'),
+(54, 94, 'Dép Hello Kitty', '35', 'Hồng', '16', '230', 'PAY_6849592512159');
 
 -- --------------------------------------------------------
 
@@ -660,17 +709,15 @@ INSERT INTO `table_page` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `table_payment`
---
-
-
---
 -- Đang đổ dữ liệu cho bảng `table_payment`
 --
 
 INSERT INTO `table_payment` (`id`, `customer_id`, `customer_name`, `customer_email`, `payment_date`, `txnid`, `paid_amount`, `card_number`, `card_cvv`, `card_month`, `card_year`, `bank_transaction_info`, `payment_method`, `payment_status`, `shipping_status`, `payment_id`) VALUES
 (1, 1, 'Nguyễn Văn A', 'vana@gmail.com', '2025-02-28 11:00:00', 'TXN123456A', 500000.00, '4111111111111111', '123', '02', '2028', 'Bank XYZ - Successful', 'Bank Deposit', 'Completed', 'Pending', 'PAYID123A'),
-(2, 2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 750000.00, '5555555555554444', '456', '05', '2029', 'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B');
+(2, 2, 'Trần Thị B', 'anhduc9b1cva@gmail.com', '2025-02-28 11:15:00', 'TXN789101B', 750000.00, '5555555555554444', '456', '05', '2029', 'Bank ABC - Successful', 'Bank Deposit', 'Completed', 'Completed', 'PAYID456B'),
+(3, 12, 'Duc Anh Tran', 'taduc0508@gmail.com', '2025-06-11 17:15:41', 'TXN6849574d8d7d7', 257980.00, 'UNKNOWN', '***', '06', '2025', '89376164213-Thanh toan don hang ISTN4C-CHUYEN TIEN-OQCH91789355-MOMO89376164213MOMO', 'Bank Transfer', 'Completed', 'Completed', 'PAY_6849574d8b0c5'),
+(4, 13, 'Nguyễn Thị B', 'anhduc9b1cva@gmail.com', '2025-06-11 17:19:54', 'TXN6849584ab7452', 252010.00, 'UNKNOWN', '***', '06', '2025', '89376164213-Thanh toan don hang 9F4EVR-CHUYEN TIEN-OQCH91789355-MOMO89376164213MOMO', 'Bank Transfer', 'Completed', 'Pending', 'PAY_6849584ab50c9'),
+(5, 14, 'Sơn Tùng M-TP', '23520316@gm.uit.edu.vn', '2025-06-11 17:23:33', 'TXN68495925157f9', 255690.00, 'UNKNOWN', '***', '06', '2025', '89376164213-Thanh toan don hang FUX1PJ-CHUYEN TIEN-OQCH91789355-MOMO89376164213MOMO', 'Bank Transfer', 'Completed', 'Pending', 'PAY_6849592512159');
 
 -- --------------------------------------------------------
 
@@ -691,53 +738,6 @@ INSERT INTO `table_photo` (`id`, `caption`, `photo`) VALUES
 (5, 'Photo 5', 'photo-5.jpg'),
 (6, 'Photo 6', 'photo-6.jpg');
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_photo_rating`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_photo_rating`
---
-
-INSERT INTO `table_photo_rating` (`id`, `rt_id`, `caption`, `photo_rating`, `p_id`) VALUES
-(1, 143, 'Review image', '1743733212_Screenshot 2025-01-01 214559.png', 125),
-(2, 143, 'Review image', '1743733212_Screenshot 2025-01-01 214636.png', 125),
-(3, 143, 'Review image', '1743733212_Screenshot 2025-01-01 215021.png', 125),
-(4, 143, 'Review image', '1743733212_Screenshot 2025-01-02 150359.png', 125),
-(5, 144, 'Review image', '1743733262_Screenshot 2025-01-01 214559.png', 125),
-(6, 144, 'Review image', '1743733262_Screenshot 2025-01-01 214636.png', 125),
-(7, 144, 'Review image', '1743733262_Screenshot 2025-01-01 215021.png', 125),
-(8, 144, 'Review image', '1743733262_Screenshot 2025-01-02 150359.png', 125),
-(9, 145, 'Review image', '1743733280_Screenshot 2025-01-07 153551.png', 2),
-(10, 146, 'Review image', '1743733615_Screenshot 2025-01-07 153551.png', 2),
-(11, 147, 'Review image', '1743734148_Screenshot 2025-01-01 215021.png', 38),
-(12, 147, 'Review image', '1743734148_Screenshot 2025-01-02 150359.png', 38),
-(13, 147, 'Review image', '1743734148_Screenshot 2025-01-02 153253.png', 38),
-(14, 147, 'Review image', '1743734148_Screenshot 2025-01-03 161629.png', 38),
-(15, 148, 'Review image', '1743734225_Screenshot 2025-01-01 215021.png', 38),
-(16, 148, 'Review image', '1743734225_Screenshot 2025-01-02 150359.png', 38),
-(17, 148, 'Review image', '1743734225_Screenshot 2025-01-02 153253.png', 38),
-(18, 148, 'Review image', '1743734225_Screenshot 2025-01-03 161629.png', 38),
-(19, 149, 'Review image', '1743734287_Screenshot 2025-01-01 214942.png', 126),
-(20, 150, 'Review image', '1743734395_Screenshot 2025-01-01 214942.png', 126),
-(21, 151, 'Review image', '1743734414_Screenshot 2025-01-01 214942.png', 5),
-(22, 152, 'Review image', '1743734444_Screenshot 2025-01-01 214942.png', 5),
-(23, 153, 'Review image', '1743734630_Screenshot 2025-01-01 214942.png', 5),
-(24, 154, 'Review image', '1743734671_Screenshot 2025-01-01 214942.png', 2);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_product`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_product`
---
 
 INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`, `p_qty`, `p_featured_photo`, `p_description`, `p_short_description`, `p_feature`, `p_return_policy`, `p_total_order`, `p_is_featured`, `p_is_active`, `ecat_id`) VALUES
 (1, 'Bộ PC Gaming', '950', '850', 20, 'product-featured-1.jpg', '<p>Linh kiện máy tính chất lượng cao, đảm bảo hiệu suất mạnh mẽ và độ bền vượt trội. Phù hợp cho cả người dùng phổ thông và game thủ, hỗ trợ nâng cấp hệ thống một cách dễ dàng.</p><p><br></p>', '<p>\"Nâng cấp máy tính của bạn với linh kiện chất lượng cao, giá siêu hấp dẫn!\"</p><div><br></div>', '<p>Hiệu suất ổn định: Đáp ứng nhu cầu từ làm việc, giải trí đến chơi game chuyên nghiệp.</p><p>Tương thích cao: Dễ dàng lắp đặt, phù hợp với nhiều dòng máy.</p><p>Chất liệu bền bỉ: Linh kiện chính hãng, tuổi thọ cao.</p><p>Tiết kiệm năng lượng: Hoạt động hiệu quả, giảm tiêu thụ điện năng.</p><div><br></div>', '<p>Hỗ trợ đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm cần nguyên vẹn, đầy đủ hộp, phụ kiện và hóa đơn khi đổi trả.</p><p>Không áp dụng đổi trả với sản phẩm đã qua sử dụng hoặc hư hỏng do lỗi người dùng.</p><div><br></div>', 0, 0, 1, 67),
@@ -884,16 +884,6 @@ INSERT INTO `table_product` (`p_id`, `p_name`, `p_old_price`, `p_current_price`,
 (140, 'Bộ quần áo cộc tay bé trai', '300', '250', 300, 'product-featured-140.jpg', '<p>Quần áo bé trai thoải mái, năng động, thiết kế đáng yêu phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, an toàn cho làn da nhạy cảm của bé, giúp bé luôn dễ chịu và vui chơi thoải mái.</p><div><br></div>', '<p>\"Trang phục bé trai năng động - Quần áo bé trai cá tính, thoải mái, cho bé tự tin khám phá và vui chơi cả ngày!\"</p><div><br></div>', '<p>Chất liệu cao cấp: Cotton thoáng mát, thấm hút mồ hôi tốt.</p><p>Kiểu dáng đa dạng: Từ năng động đến lịch sự, phù hợp đi học, đi chơi.</p><p>Đường may chắc chắn: Bền đẹp, không gây kích ứng da.</p><p>Dễ giặt, nhanh khô: Giữ form dáng tốt sau nhiều lần giặt.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 26),
 (141, 'Bộ đồ bé trai sát nách mùa hè', '300', '250', 340, 'product-featured-141.jpg', '<p>Quần áo bé trai thoải mái, năng động, thiết kế đáng yêu phù hợp cho mọi hoạt động hàng ngày. Chất liệu mềm mại, an toàn cho làn da nhạy cảm của bé, giúp bé luôn dễ chịu và vui chơi thoải mái.</p><div><br></div>', '<p>\"Trang phục bé trai năng động - Quần áo bé trai cá tính, thoải mái, cho bé tự tin khám phá và vui chơi cả ngày!\"</p>', '<p>Chất liệu cao cấp: Cotton thoáng mát, thấm hút mồ hôi tốt.</p><p>Kiểu dáng đa dạng: Từ năng động đến lịch sự, phù hợp đi học, đi chơi.</p><p>Đường may chắc chắn: Bền đẹp, không gây kích ứng da.</p><p>Dễ giặt, nhanh khô: Giữ form dáng tốt sau nhiều lần giặt.</p><div><br></div>', '<p>Đổi trả trong 7 ngày nếu sản phẩm bị lỗi từ nhà sản xuất.</p><p>Sản phẩm phải chưa qua sử dụng, còn tem mác và hóa đơn mua hàng.</p><p>Không áp dụng đổi trả với sản phẩm khuyến mãi hoặc đặt may theo yêu cầu.</p><div><br></div>', 0, 0, 1, 26);
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_product_color`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_product_color`
---
 
 INSERT INTO `table_product_color` (`id`, `color_id`, `p_id`) VALUES
 (1, 1, 1),
@@ -1871,32 +1861,11 @@ INSERT INTO `table_size` (`size_id`, `size_name`) VALUES
 (46, '22 Plus'),
 (47, '24 Plus');
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_slider`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_slider`
---
-
 INSERT INTO `table_slider` (`id`, `photo`, `heading`, `content`, `button_text`, `button_url`, `position`) VALUES
-(1, 'slider-1.png', 'Welcome to GoBuy', 'Cửa hàng phụ kiện mới nhất cho nam', 'Xem phụ kiện cho nam', '#', 'Center'),
+(1, 'slider-1.png', 'Welcome to GoBuy', 'Cửa hàng phụ kiện mới nhất cho nam', 'Xem phụ kiện cho nam', 'http://localhost/IS207-GoBuy/product-category.php?id=1&type=top-category', 'Center'),
 (2, 'slider-2.png', 'Giảm giá 1000% cho tất cả sản phẩm', 'Mua nhanh đi không hết bây giờ.', 'Xem thêm', '#', 'Center'),
-(3, 'slider-3.png', 'Hỗ trợ 24/7', 'Đội ngũ nhân viên cam kết phục vụ tận tình.', 'Xem thêm', '#', 'Right');
+(3, 'slider-3.png', 'Hỗ trợ 24/7', 'Đội ngũ nhân viên cam kết phục vụ tận tình.', 'Xem thêm', 'http://localhost/IS207-GoBuy/contact.php', 'Right');
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_social`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_social`
---
 
 INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_icon`) VALUES
 (1, 'Facebook', 'https://www.facebook.com/#', 'fa fa-facebook'),
@@ -1904,16 +1873,6 @@ INSERT INTO `table_social` (`social_id`, `social_name`, `social_url`, `social_ic
 (3, 'YouTube', 'https://www.youtube.com/#', 'fa fa-youtube'),
 (4, 'Instagram', 'https://www.instagram.com/#', 'fa fa-instagram');
 
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `table_top_category`
---
-
-
---
--- Đang đổ dữ liệu cho bảng `table_top_category`
---
 
 INSERT INTO `table_top_category` (`tcat_id`, `tcat_name`, `show_on_menu`) VALUES
 (1, 'Nam', 1),

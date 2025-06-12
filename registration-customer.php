@@ -101,89 +101,79 @@ if (isset($_POST['form1'])) {
 
     if ($valid == 1) {
 
-        $token = md5(time());
+        // Tạo token ngẫu nhiên an toàn
+        $token = bin2hex(random_bytes(16));
+
+        // Mã hóa mật khẩu an toàn
+        $hashed_password = password_hash($_POST['cust_password'], PASSWORD_DEFAULT);
+
         $cust_datetime = date('Y-m-d h:i:s');
         $cust_timestamp = time();
 
-        //Lưu vào DB
+        // Lưu vào DB
         $querry = $pdo->prepare("INSERT INTO table_customer (
-                                         cust_name,
-                                         cust_email,
-                                         cust_phone,
-                                         cust_gender,
-                                         cust_birthyear,
-                                         cust_s_name,
-                                         cust_s_phone,
-                                         cust_s_province,
-                                         cust_s_district,
-                                         cust_s_ward,
-                                         cust_s_address,
-                                         cust_password,
-                                         cust_token,
-                                         cust_datetime,
-                                         cust_timestamp,
-                                         cust_status
-                                     ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                     cust_name,
+                                     cust_email,
+                                     cust_phone,
+                                     cust_gender,
+                                     cust_birthyear,
+                                     cust_s_name,
+                                     cust_s_phone,
+                                     cust_s_province,
+                                     cust_s_district,
+                                     cust_s_ward,
+                                     cust_s_address,
+                                     cust_password,
+                                     cust_token,
+                                     cust_datetime,
+                                     cust_timestamp,
+                                     cust_status
+                                 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
         $querry->execute(array(
-            // Loại bỏ các thẻ HTML khỏi dữ liệu nhập vào để tránh XSS (Cross-Site Scripting)
-            strip_tags($_POST['cust_name']),      // Tên khách hàng
-            strip_tags($_POST['cust_email']),     // Email khách hàng
-            strip_tags($_POST['cust_phone']),     // Số điện thoại khách hàng
-            strip_tags($_POST['cust_gender']),    // Giới tính
-            strip_tags($_POST['cust_birthyear']), // Năm sinh
+            strip_tags($_POST['cust_name']),
+            strip_tags($_POST['cust_email']),
+            strip_tags($_POST['cust_phone']),
+            strip_tags($_POST['cust_gender']),
+            strip_tags($_POST['cust_birthyear']),
             '',
             '',
             '',
             '',
             '',
-            '',
-            // Mã hóa mật khẩu bằng MD5 
-            md5($_POST['cust_password']),
-
-            // Token dùng để xác thực (có thể là token đăng ký hoặc xác nhận email)
-            $token,
-
-            // Thời gian đăng ký khách hàng
-            $cust_datetime,   // Định dạng thời gian
-            $cust_timestamp,  // Timestamp (số nguyên)
-
-            // Giá trị 0, có thể dùng để đánh dấu trạng thái tài khoản (ví dụ: 0 = chưa kích hoạt)
+            '',  // Các thông tin địa chỉ trống
+            $hashed_password,        // Mật khẩu đã mã hóa bằng password_hash
+            $token,                  // Token ngẫu nhiên an toàn
+            $cust_datetime,
+            $cust_timestamp,
             0
         ));
-
 
         // Kiểm tra xem đang chạy trên localhost hay server thật
         if ($_SERVER['HTTP_HOST'] == 'localhost') {
             $base_url = 'http://localhost/IS207-GoBuy/';
         } else {
-            $base_url = BASE_URL; // Dùng BASE_URL bình thường nếu chạy trên server
+            $base_url = BASE_URL;
         }
 
         // Gửi email xác nhận tài khoản
         $to = $_POST['cust_email'];
-
-        $subject = 'GoBuy - Registration Email Confirmation';
         $verify_link = $base_url . 'verify-customer.php?email=' . urlencode($to) . '&token=' . urlencode($token);
-        $message = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<a href="' . $verify_link . '">' . $verify_link . '</a>';
-
 
         $mail = new PHPMailer(true);
 
         try {
-            // Cấu hình SMTP
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; // SMTP của Gmail
+            $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'taduc0508@gmail.com'; // Thay bằng email 
-            $mail->Password   = 'rnxm lczq zhop hsdt'; // Dùng App Password nếu bật 2FA
+            $mail->Username   = 'taduc0508@gmail.com';
+            $mail->Password   = 'rnxm lczq zhop hsdt';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            // Cấu hình người gửi & người nhận
             $mail->setFrom('your-email@gmail.com', 'GoBuy');
-            $mail->addAddress($to); // Gửi đến email khách hàng
+            $mail->addAddress($to);
 
-            // Nội dung email
             $mail->isHTML(true);
             $mail->Subject = 'GoBuy - Registration Email Confirmation';
             $mail->Body    = 'Cảm ơn bạn đã đăng ký! Tài khoản của bạn đã được tạo. Để kích hoạt tài khoản của bạn, hãy click vào link bên dưới: ' . '<a href="' . $verify_link . '">' . $verify_link . '</a>';
@@ -193,12 +183,12 @@ if (isset($_POST['form1'])) {
             // echo "Gửi email thất bại. Lỗi: {$mail->ErrorInfo}";
         }
 
-
         unset($_POST['cust_name']);
         unset($_POST['cust_email']);
         unset($_POST['cust_phone']);
         unset($_POST['cust_gender']);
         unset($_POST['cust_birthyear']);
+
         $successMsg = 'Đăng ký của bạn đã hoàn tất. Vui lòng kiểm tra địa chỉ email của bạn để làm theo quy trình xác nhận đăng ký của bạn.';
     }
 }
@@ -312,126 +302,126 @@ if (isset($_POST['form1'])) {
 <!-- Toast -->
 <div id="toast"></div>
 <style>
-#toast {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.toast-message {
-    background-color: #f44336;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 15px;
-    min-width: 250px;
-    max-width: 300px;
-    opacity: 1;
-    transform: translateX(30px);
-    animation: fadeInSlide 0.4s ease forwards;
-    position: relative;
-}
-
-@keyframes fadeInSlide {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
+    #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
     }
 
-    to {
+    .toast-message {
+        background-color: #f44336;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 15px;
+        min-width: 250px;
+        max-width: 300px;
         opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeOutSlide {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    to {
-        opacity: 0;
         transform: translateX(30px);
+        animation: fadeInSlide 0.4s ease forwards;
+        position: relative;
     }
-}
 
-#toast.show {
-    opacity: 1;
-}
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
 
-.form-group-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 15px;
-}
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
 
-.btn-danger {
-    width: 50%;
-    max-width: 200px;
-    text-align: center;
-}
+    @keyframes fadeOutSlide {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-.btn {
-    border-radius: 6px;
-    width: 30%;
-}
+        to {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+    }
 
-.btn input {
-    position: relative;
-}
+    #toast.show {
+        opacity: 1;
+    }
 
-.account-sidebar.res {
-    position: absolute;
-    bottom: -30px;
-    right: 230px;
-}
+    .form-group-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+    }
 
-.account-sidebar a {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 12px;
-}
+    .btn-danger {
+        width: 50%;
+        max-width: 200px;
+        text-align: center;
+    }
 
-.account-sidebar a:hover {
-    text-decoration: underline;
-}
+    .btn {
+        border-radius: 6px;
+        width: 30%;
+    }
+
+    .btn input {
+        position: relative;
+    }
+
+    .account-sidebar.res {
+        position: absolute;
+        bottom: -30px;
+        right: 230px;
+    }
+
+    .account-sidebar a {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .account-sidebar a:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <script>
-function showToast(message, background = '#f44336') {
-    const container = document.getElementById('toast');
+    function showToast(message, background = '#f44336') {
+        const container = document.getElementById('toast');
 
-    const toast = document.createElement('div');
-    toast.className = 'toast-message';
-    toast.style.backgroundColor = background;
-    toast.textContent = message;
+        const toast = document.createElement('div');
+        toast.className = 'toast-message';
+        toast.style.backgroundColor = background;
+        toast.textContent = message;
 
-    container.appendChild(toast);
+        container.appendChild(toast);
 
-    setTimeout(() => {
-        toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
-        setTimeout(() => toast.remove(), 500);
-    }, 2500);
-}
+        setTimeout(() => {
+            toast.style.animation = 'fadeOutSlide 0.5s ease forwards';
+            setTimeout(() => toast.remove(), 500);
+        }, 2500);
+    }
 
-function togglePassword(inputId, iconElement) {
-    const input = document.getElementById(inputId);
-    const icon = iconElement.querySelector("i");
-    const isPassword = input.type === "password";
+    function togglePassword(inputId, iconElement) {
+        const input = document.getElementById(inputId);
+        const icon = iconElement.querySelector("i");
+        const isPassword = input.type === "password";
 
-    input.type = isPassword ? "text" : "password";
-    icon.classList.toggle("fa-eye");
-    icon.classList.toggle("fa-eye-slash");
-}
+        input.type = isPassword ? "text" : "password";
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
+    }
 </script>
 
 <?php
@@ -458,37 +448,37 @@ if (isset($errorMsg) && !empty($errorMsg)) {
 ?>
 
 <script>
-// Script khởi tạo cho trang đăng ký
-document.addEventListener('DOMContentLoaded', function() {
-    // Đảm bảo rằng API đã được khởi tạo trong header.php
-    if (typeof initializeAddressSelects === 'function') {
-        initializeAddressSelects();
-    } else {
-        console.error('API địa chỉ chưa được khởi tạo đúng cách.');
-    }
+    // Script khởi tạo cho trang đăng ký
+    document.addEventListener('DOMContentLoaded', function() {
+        // Đảm bảo rằng API đã được khởi tạo trong header.php
+        if (typeof initializeAddressSelects === 'function') {
+            initializeAddressSelects();
+        } else {
+            console.error('API địa chỉ chưa được khởi tạo đúng cách.');
+        }
 
-    // Xử lý lỗi khi submit form
-    <?php if ($errorMsg != ''): ?>
-    // Phục hồi dữ liệu đã chọn nếu có lỗi form
-    setTimeout(function() {
-        const provinceValue =
-            "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
-        const districtValue =
-            "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
-        const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
+        // Xử lý lỗi khi submit form
+        <?php if ($errorMsg != ''): ?>
+            // Phục hồi dữ liệu đã chọn nếu có lỗi form
+            setTimeout(function() {
+                const provinceValue =
+                    "<?php echo isset($_POST['cust_province']) ? $_POST['cust_province'] : ''; ?>";
+                const districtValue =
+                    "<?php echo isset($_POST['cust_district']) ? $_POST['cust_district'] : ''; ?>";
+                const wardValue = "<?php echo isset($_POST['cust_address']) ? $_POST['cust_address'] : ''; ?>";
 
-        // Hiển thị lỗi trong select
-        if (provinceValue) {
-            document.getElementById('province-select').classList.add('error-field');
-        }
-        if (districtValue) {
-            document.getElementById('district-select').classList.add('error-field');
-        }
-        if (wardValue) {
-            document.getElementById('ward-select').classList.add('error-field');
-        }
-    }, 500);
-    <?php endif; ?>
-});
+                // Hiển thị lỗi trong select
+                if (provinceValue) {
+                    document.getElementById('province-select').classList.add('error-field');
+                }
+                if (districtValue) {
+                    document.getElementById('district-select').classList.add('error-field');
+                }
+                if (wardValue) {
+                    document.getElementById('ward-select').classList.add('error-field');
+                }
+            }, 500);
+        <?php endif; ?>
+    });
 </script>
 <?php require_once('footer.php'); ?>

@@ -14,24 +14,22 @@ if (isset($_POST['form1'])) {
     if (empty($_POST['email']) || empty($_POST['password'])) {
         $errorMsg = 'Email và mật khẩu không thể để trống' . '<br>';
     } else {
-
         $email = strip_tags($_POST['email']);
         $password = strip_tags($_POST['password']);
 
         $query = $pdo->prepare("SELECT * FROM table_admin WHERE email=?");
-        $query->execute(array($email));
+        $query->execute([$email]);
         $total = $query->rowCount();
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row) {
-            $status = $row['status'];
-            $row_password = $row['password'];
-        }
 
         if ($total == 0) {
             $errorMsg .= 'Địa chỉ email không khớp.' . '<br>';
         } else {
-            //using MD5 form
-            if ($row_password != md5($password)) {
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+            $status = $row['status'];
+            $row_password = $row['password'];
+
+            // So sánh mật khẩu bằng password_verify
+            if (!password_verify($password, $row_password)) {
                 $errorMsg .= 'Mật khẩu không khớp' . '<br>';
             } else {
                 if ($status == 0) {
@@ -46,6 +44,7 @@ if (isset($_POST['form1'])) {
         }
     }
 }
+
 ?>
 
 <div class="page-banner"
