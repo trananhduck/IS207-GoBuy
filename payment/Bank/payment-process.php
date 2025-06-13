@@ -21,6 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ");
         $stmt->execute([$product_id, $product_name, $size, $color, $quantity, $unit_price, $payment_id]);
+        $updateQtyStmt = $pdo->prepare("UPDATE table_product SET p_qty = p_qty - ? WHERE p_id = ?");
+        $updateQtyStmt->execute([$quantity, $product_id]);
     }
 
     // Nếu thanh toán được gửi đi

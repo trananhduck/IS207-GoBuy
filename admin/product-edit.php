@@ -116,23 +116,35 @@ if (isset($_POST['form1'])) {
         }
 
         if ($path == '') {  // Nếu không có ảnh sản phẩm nổi bật mới
-            $query = $pdo->prepare("UPDATE table_product SET 
-                                    p_name=?, 
-                                    p_old_price=?, 
-                                    p_current_price=?, 
-                                    p_qty=?,
-                                    p_description=?,
-                                    p_short_description=?,
-                                    p_feature=?,
-                                    p_return_policy=?,
-                                    p_is_featured=?,
-                                    p_is_active=?,
-                                    ecat_id=?
-                                    WHERE p_id=?");
-            $query->execute(array(
-                $_POST['p_name'],
+            $statement = $pdo->prepare("SELECT ecat_id FROM table_product WHERE p_id = ?");
+            $statement->execute([$_REQUEST['id']]);
+            $ecat_id = $statement->fetchColumn();
+
+            // Cập nhật giá cho tất cả sản phẩm cùng ecat_id
+            $updatePrices = $pdo->prepare("UPDATE table_product SET 
+                                p_old_price = ?, 
+                                p_current_price = ? 
+                                WHERE ecat_id = ?");
+            $updatePrices->execute([
                 $_POST['p_old_price'],
                 $_POST['p_current_price'],
+                $ecat_id
+            ]);
+
+            // Cập nhật các thông tin khác chỉ cho sản phẩm đang chỉnh sửa
+            $query = $pdo->prepare("UPDATE table_product SET 
+                        p_name=?, 
+                        p_qty=?,
+                        p_description=?,
+                        p_short_description=?,
+                        p_feature=?,
+                        p_return_policy=?,
+                        p_is_featured=?,
+                        p_is_active=?,
+                        ecat_id=?
+                        WHERE p_id=?");
+            $query->execute(array(
+                $_POST['p_name'],
                 $_POST['p_qty'],
                 $_POST['p_description'],
                 $_POST['p_short_description'],
