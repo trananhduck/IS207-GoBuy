@@ -16,10 +16,10 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_POST['message'])) {
     $userMessage = trim($_POST['message']);
     $response = processChatbotMessage($userMessage);
-    
+
     // Log the conversation
     logMessageToDB($userMessage, $response);
-    
+
     // Return JSON response
     header('Content-Type: application/json');
     echo json_encode([
@@ -34,20 +34,21 @@ if (isset($_POST['message'])) {
  * @param string $userMessage Tin nhắn của người dùng.
  * @param string $botReply Phản hồi của bot.
  */
-function logMessageToDB($userMessage, $botReply) {
+function logMessageToDB($userMessage, $botReply)
+{
     global $pdo;
     try {
         // Sử dụng bảng mới 'table_chatbot_messages' như đã thêm
         $stmt = $pdo->prepare("INSERT INTO table_chatbot_messages (user_message, bot_reply, created_at, cust_id) VALUES (:msg, :reply, NOW(), :cust_id)");
-        
+
         // Hoặc nếu bạn muốn sử dụng bảng 'table_customer_message' đã có và thêm cột:
         // $stmt = $pdo->prepare("INSERT INTO table_customer_message (subject, message, user_message, bot_reply, created_at, cust_id) VALUES ('Chatbot', '', :msg, :reply, NOW(), :cust_id)");
-        
+
         $custId = null;
         if (isset($_SESSION['customer']) && !empty($_SESSION['customer'])) {
             $custId = $_SESSION['customer']['cust_id'];
         }
-        
+
         $stmt->execute([
             ':msg' => $userMessage,
             ':reply' => $botReply,
@@ -63,7 +64,8 @@ function logMessageToDB($userMessage, $botReply) {
  * @param string $message Tin nhắn từ người dùng.
  * @return string Phản hồi của chatbot.
  */
-function processChatbotMessage($message) {
+function processChatbotMessage($message)
+{
     global $pdo;
 
     error_log("Received message: " . $message);
@@ -75,14 +77,18 @@ function processChatbotMessage($message) {
 
     $lowerMessage = mb_strtolower($message, 'UTF-8');
 
+    // --- BƯỚC 1: BỔ SUNG - BẢO VỆ CỤM TỪ GHÉP TRƯỚC KHI XỬ LÝ REGEX ---
+    $protectedMessage = protectCompoundPhrases($lowerMessage);
+
     // --- LOGIC MỚI/CẢI THIỆN: XỬ LÝ Ý ĐỊNH MUA QUẦN ÁO (TÁCH QUẦN VÀ ÁO, CHỈ TÌM TRONG P_NAME) ---
-    if ((strpos($lowerMessage, 'mua quần áo') !== false) ||
-        (preg_match('/muốn\s+mua\s+quần\s+áo/iu', $lowerMessage))) {
+    if ((strpos($protectedMessage, 'mua quần áo') !== false) ||
+        (preg_match('/muốn\s+mua\s+quần\s+áo/iu', $protectedMessage))
+    ) {
 
         // Tìm sản phẩm quần và áo có rating cao, CHỈ TÌM TRONG P_NAME (tham số `true` ở cuối)
         // Lấy tối đa 3 sản phẩm cho mỗi loại
-        $pantsProducts = searchCategoryProducts('quần', 3, true); 
-        $shirtProducts = searchCategoryProducts('áo', 3, true);   
+        $pantsProducts = searchCategoryProducts('quần', 3, true);
+        $shirtProducts = searchCategoryProducts('áo', 3, true);
 
         $responseParts = [];
         $foundAnyProduct = false; // Cờ để đảm bảo lời giới thiệu chung chỉ xuất hiện một lần
@@ -92,7 +98,7 @@ function processChatbotMessage($message) {
             if (!$foundAnyProduct) { // Chỉ thêm lời giới thiệu chung nếu đây là lần đầu tìm thấy sản phẩm
                 $responseParts[] = "Dưới đây là những sản phẩm quần áo được đánh giá cao trong cửa hàng của chúng tôi:\n\n";
             }
-            $responseParts[] = "## Quần:\n"; // Tiêu đề riêng biệt
+            $responseParts[] = "Sản phẩm Quần:\n"; // Tiêu đề riêng biệt
             foreach ($pantsProducts as $product) {
                 $formattedPrice = number_format($product['p_current_price'], 0, ',', '.');
                 $ratingInfo = isset($product['avg_rating']) ?
@@ -114,7 +120,7 @@ function processChatbotMessage($message) {
             } else if (count($pantsProducts) > 0) { // Nếu đã có phần quần, thêm dòng trống ngăn cách
                 $responseParts[] = "\n";
             }
-            $responseParts[] = "## Áo:\n"; // Tiêu đề riêng biệt
+            $responseParts[] = "Sản phẩm Áo:\n"; // Tiêu đề riêng biệt
             foreach ($shirtProducts as $product) {
                 $formattedPrice = number_format($product['p_current_price'], 0, ',', '.');
                 $ratingInfo = isset($product['avg_rating']) ?
@@ -138,58 +144,76 @@ function processChatbotMessage($message) {
             return "Xin lỗi, tôi không tìm thấy sản phẩm quần hoặc áo nào phù hợp với yêu cầu của bạn hiện tại.";
         }
     }
-        
-    // --- LOGIC HIỆN TẠI: XỬ LÝ Ý ĐỊNH MUA HÀNG CHUNG (BAO GỒM "MÁY TÍNH") ---
+
+    // --- LOGIC HIỆN TẠI: XỬ LÝ Ý ĐỊNH MUA HÀNG CHUNG - SỬ DỤNG PROTECTED MESSAGE ---
     // Regex tìm kiếm các cụm từ như "mua [sản phẩm]", "muốn mua [sản phẩm]"
     $buyRegex = '/(?:muốn\s+)?mua\s+(.*?)(?:\s+(?:được\s+không|không|nhé|ạ|à))?$/iu';
 
-    if (preg_match($buyRegex, $lowerMessage, $match)) {
+    if (preg_match($buyRegex, $protectedMessage, $match)) {
         $searchString = trim($match[1]);
-    
+
         // Loại bỏ các từ phổ biến ở cuối không phải là tên sản phẩm
-        $searchString = preg_replace('/(được không|không|nhé|ạ|à)$/i', '', $searchString);
+        $searchString = preg_replace('/(được không|không|nhé|à)$/i', '', $searchString);
         $searchString = trim($searchString);
-    
+
         if ($searchString && $searchString != "đồ") { // Nếu người dùng chỉ rõ sản phẩm (không phải chỉ "đồ")
-            // Tách chuỗi tìm kiếm thành các sản phẩm riêng lẻ (nếu có)
-            $productNames = explode(' ', $searchString);
-            $filteredProducts = [];
-        
-            // Lọc bỏ các từ nối và từ điển thông dụng
-            $stopWords = ['và', 'với', 'cùng', 'hoặc', 'hay', 'những', 'các', 'một', 'hai', 'ba', 'bốn', 'năm', 'cái', 'chiếc'];
-            foreach ($productNames as $word) {
-                if (!in_array(mb_strtolower($word, 'UTF-8'), $stopWords) && mb_strlen($word, 'UTF-8') > 1) {
-                    $filteredProducts[] = $word;
-                }
+
+            // --- BƯỚC 2: KHÔI PHỤC CỤM TỪ GHÉP VÀ XỬ LÝ ---
+            $restoredSearchString = restoreCompoundPhrases($searchString);
+
+            // Kiểm tra xem có phải cụm từ nguyên vẹn không (không tách thành từ riêng lẻ)
+            $isCompoundPhrase = strpos($searchString, '_SPACE_') !== false;
+
+            if ($isCompoundPhrase) {
+                // Nếu là cụm từ ghép, tìm kiếm nguyên cụm
+                $productNames = [$restoredSearchString];
+            } else {
+                // Tách chuỗi tìm kiếm thành các sản phẩm riêng lẻ (nếu có)
+                $productNames = explode(' ', $restoredSearchString);
             }
-        
+
+            $filteredProducts = [];
+
+            // Lọc bỏ các từ nối và từ điển thông dụng (chỉ khi không phải cụm từ ghép)
+            if (!$isCompoundPhrase) {
+                $stopWords = ['và', 'với', 'cùng', 'hoặc', 'hay', 'những', 'các', 'một', 'hai', 'ba', 'bốn', 'năm', 'cái', 'chiếc'];
+                foreach ($productNames as $word) {
+                    $trimmedWord = trim($word);
+                    if (!in_array(mb_strtolower($trimmedWord, 'UTF-8'), $stopWords) && mb_strlen($trimmedWord, 'UTF-8') > 1) {
+                        $filteredProducts[] = $trimmedWord;
+                    }
+                }
+            } else {
+                $filteredProducts = $productNames;
+            }
+
             // Nếu không có sản phẩm nào sau khi lọc, sử dụng chuỗi ban đầu
             if (empty($filteredProducts)) {
-                $filteredProducts = [$searchString]; 
+                $filteredProducts = [$restoredSearchString];
             }
-        
+
             $allResults = [];
             $response = "";
-        
+
             // Tìm kiếm từng sản phẩm (ví dụ: nếu người dùng nói "mua áo và quần")
             foreach ($filteredProducts as $productName) {
                 // Ưu tiên tìm sản phẩm chính xác theo tên trước
                 $exactProduct = searchExactProduct($productName);
-            
+
                 if ($exactProduct) {
                     $formattedPrice = number_format($exactProduct['p_current_price'], 0, ',', '.');
                     $productResult = [
                         'type' => 'exact',
                         'data' => $exactProduct,
-                       'formatted_price' => $formattedPrice
+                        'formatted_price' => $formattedPrice
                     ];
                     $allResults[$productName] = $productResult;
                 } else {
                     // Nếu không tìm thấy chính xác, tìm các sản phẩm tương tự bằng từ khóa
                     $keywords = extractKeywords($productName);
                     // searchProducts đã được thiết kế để ưu tiên các kết quả có tên sản phẩm trong p_name
-                    $products = searchProducts($keywords); 
-                
+                    $products = searchProducts($keywords);
+
                     if (count($products) > 0) {
                         $productResult = [
                             'type' => 'similar',
@@ -203,20 +227,20 @@ function processChatbotMessage($message) {
                     }
                 }
             }
-        
+
             // Xây dựng phản hồi dựa trên kết quả tìm kiếm
             if (count($allResults) > 0) {
                 $response = "Tôi đã tìm thấy thông tin về các sản phẩm bạn quan tâm:\n\n";
-            
+
                 foreach ($allResults as $productName => $result) {
-                    $response .= "## " . ucfirst($productName) . ":\n"; // Tiêu đề cho mỗi sản phẩm được tìm kiếm
-                
+                    $response .= "Sản phẩm " . ucfirst($productName) . ":\n"; // Tiêu đề cho mỗi sản phẩm được tìm kiếm
+
                     if ($result['type'] == 'exact') {
                         $product = $result['data'];
                         $formattedPrice = $result['formatted_price'];
-                    
+
                         $response .= "Sản phẩm \"{$product['p_name']}\" hiện có giá {$formattedPrice} VND.\n";
-                    
+
                         if (!empty($product['p_short_description'])) {
                             $shortDesc = $product['p_short_description'];
                             if (mb_strlen($shortDesc, 'UTF-8') > 150) {
@@ -224,7 +248,7 @@ function processChatbotMessage($message) {
                             }
                             $response .= "Mô tả: {$shortDesc}\n";
                         }
-                    
+
                         if (isset($product['p_qty'])) {
                             if ($product['p_qty'] > 0) {
                                 $response .= "Tình trạng: Còn hàng ({$product['p_qty']} sản phẩm)\n";
@@ -232,158 +256,165 @@ function processChatbotMessage($message) {
                                 $response .= "Tình trạng: Hết hàng\n";
                             }
                         }
-                    
+
                         $rating = getProductRating($product['p_id']);
                         if ($rating['count'] > 0) {
                             $response .= "Đánh giá: " . number_format($rating['avg'], 1) . "⭐ (" . $rating['count'] . " lượt đánh giá)\n";
                         }
-                    
+
                         $response .= "Xem chi tiết sản phẩm tại: <a href='product.php?id={$product['p_id']}'>Nhấn vào đây</a>\n";
-                    } 
-                    else if ($result['type'] == 'similar') {
+                    } else if ($result['type'] == 'similar') {
                         $products = $result['data'];
                         $response .= "Tìm thấy " . count($products) . " sản phẩm liên quan. Dưới đây là top 3:\n"; // Báo số lượng và chỉ hiển thị top 3
-                    
+
                         // Hiển thị tối đa 3 sản phẩm liên quan
                         for ($i = 0; $i < min(count($products), 3); $i++) {
                             $product = $products[$i];
                             $formattedPrice = number_format($product['p_current_price'], 0, ',', '.');
-                        
+
                             $rating = isset($product['avg_rating']) ? $product : getProductRating($product['p_id']);
-                            $ratingInfo = (isset($rating['avg_rating']) && $rating['rating_count'] > 0) ? 
-                                " - " . number_format($rating['avg_rating'], 1) . "⭐ (" . $rating['rating_count'] . " đánh giá)" : 
-                                (($rating['count'] > 0) ? " - " . number_format($rating['avg'], 1) . "⭐ (" . $rating['count'] . " đánh giá)" : "");
-                        
+                            $ratingInfo = (isset($rating['avg_rating']) && $rating['rating_count'] > 0) ?
+                                " - " . number_format($rating['avg_rating'], 1) . "⭐ (" . $rating['rating_count'] . " đánh giá)" : (($rating['count'] > 0) ? " - " . number_format($rating['avg'], 1) . "⭐ (" . $rating['count'] . " đánh giá)" : "");
+
                             $response .= "- <a href='product.php?id={$product['p_id']}'>{$product['p_name']}</a> - {$formattedPrice} VND{$ratingInfo}\n";
                         }
-                    
+
                         if (count($products) > 3) {
                             $response .= "... và " . (count($products) - 3) . " sản phẩm khác.\n";
                         }
-                    } 
-                    else {
+                    } else {
                         $response .= "Xin lỗi, tôi không tìm thấy sản phẩm này trong cửa hàng của chúng tôi.\n";
                     }
-                
+
                     $response .= "\n";
                 }
-            
+
                 $response .= "Bạn có muốn thêm sản phẩm nào vào giỏ hàng không?";
-            
+
                 return $response;
             }
         }
         // Nếu người dùng chỉ nói "Muốn mua đồ" hoặc tương tự mà không chỉ rõ sản phẩm
         // Đề xuất các sản phẩm có rating cao
         $topRatedProducts = getTopRatedProducts(5); // Lấy top 5 sản phẩm
-        
+
         if (count($topRatedProducts) > 0) {
             $response = "Dưới đây là một số sản phẩm được đánh giá cao trong cửa hàng của chúng tôi:\n\n";
-            
+
             foreach ($topRatedProducts as $product) {
                 $formattedPrice = number_format($product['p_current_price'], 0, ',', '.');
                 $ratingInfo = number_format($product['avg_rating'], 1) . "⭐ (" . $product['rating_count'] . " đánh giá)";
-                
+
                 $response .= "- <a href='product.php?id={$product['p_id']}'>{$product['p_name']}</a> - {$formattedPrice} VND - {$ratingInfo}\n";
             }
-            
+
             $response .= "\nBạn có thể nhấn vào tên sản phẩm để xem chi tiết. Bạn quan tâm đến sản phẩm nào?";
             return $response;
         } else {
             // Nếu không có sản phẩm nào có rating, đề xuất sản phẩm nổi bật
             $featuredProducts = getFeaturedProducts(5);
-            
+
             if (count($featuredProducts) > 0) {
                 $response = "Dưới đây là một số sản phẩm nổi bật trong cửa hàng của chúng tôi:\n\n";
-                
+
                 foreach ($featuredProducts as $product) {
                     $formattedPrice = number_format($product['p_current_price'], 0, ',', '.');
                     $response .= "- <a href='product.php?id={$product['p_id']}'>{$product['p_name']}</a> - {$formattedPrice} VND\n";
                 }
-                
+
                 $response .= "\nBạn có thể nhấn vào tên sản phẩm để xem chi tiết. Bạn quan tâm đến sản phẩm nào?";
                 return $response;
             }
         }
     }
-    
+
     // Kiểm tra câu hỏi về sản phẩm (nếu không khớp regex "mua")
-    if (strpos($lowerMessage, 'sản phẩm') !== false || 
-        strpos($lowerMessage, 'mua hàng') !== false || 
-        strpos($lowerMessage, 'giá') !== false) {
-        
+    if (
+        strpos($lowerMessage, 'sản phẩm') !== false ||
+        strpos($lowerMessage, 'mua hàng') !== false ||
+        strpos($lowerMessage, 'giá') !== false
+    ) {
+
         // Trích xuất từ khóa tiềm năng
         $keywords = extractKeywords($lowerMessage);
-        
+
         if (count($keywords) > 0) {
             // Tìm kiếm sản phẩm phù hợp với các từ khóa (hàm này đã ưu tiên p_name)
             $products = searchProducts($keywords);
-            
+
             if (count($products) > 0) {
                 $response = "Tôi tìm thấy một số sản phẩm có thể phù hợp với bạn:\n";
-                
+
                 // Hiển thị tối đa 3 sản phẩm
                 for ($i = 0; $i < min(count($products), 3); $i++) {
                     $product = $products[$i];
                     $formattedPrice = number_format($product['p_current_price'], 0, ',', '.');
-                    
+
                     $rating = getProductRating($product['p_id']);
                     $ratingInfo = ($rating['count'] > 0) ? " - " . number_format($rating['avg'], 1) . "⭐ (" . $rating['count'] . " đánh giá)" : "";
-                    
+
                     $response .= "- <a href='product.php?id={$product['p_id']}'>{$product['p_name']}</a> - {$formattedPrice} VND{$ratingInfo}\n";
                 }
-                
+
                 if (count($products) > 3) {
                     $response .= "... và " . (count($products) - 3) . " sản phẩm khác.";
                 }
-                
+
                 return $response;
             }
         }
-        
+
         return "Bạn có thể cho tôi biết thêm chi tiết về sản phẩm bạn đang tìm kiếm không?";
     }
-    
+
     // Kiểm tra câu hỏi về vận chuyển
-    if (strpos($lowerMessage, 'vận chuyển') !== false || 
-        strpos($lowerMessage, 'giao hàng') !== false || 
-        strpos($lowerMessage, 'ship') !== false) {
-        
+    if (
+        strpos($lowerMessage, 'vận chuyển') !== false ||
+        strpos($lowerMessage, 'giao hàng') !== false ||
+        strpos($lowerMessage, 'ship') !== false
+    ) {
+
         return "Chúng tôi hỗ trợ giao hàng toàn quốc. Phí vận chuyển phụ thuộc vào địa điểm và khối lượng đơn hàng. Bạn có thể xem chi tiết phí vận chuyển khi thanh toán.";
     }
-    
+
     // Kiểm tra câu hỏi về tình trạng đơn hàng
-    if (strpos($lowerMessage, 'đơn hàng') !== false || 
-        strpos($lowerMessage, 'tình trạng') !== false || 
-        strpos($lowerMessage, 'theo dõi') !== false) {
-        
+    if (
+        strpos($lowerMessage, 'đơn hàng') !== false ||
+        strpos($lowerMessage, 'tình trạng') !== false ||
+        strpos($lowerMessage, 'theo dõi') !== false
+    ) {
+
         // Kiểm tra xem người dùng đã đăng nhập chưa 
         $isLoggedIn = checkIfUserIsLoggedIn();
-        
+
         if ($isLoggedIn) {
             return "Bạn có thể kiểm tra tình trạng đơn hàng trong phần 'Đơn hàng của tôi' trong tài khoản của bạn.";
         } else {
             return "Bạn cần đăng nhập để kiểm tra tình trạng đơn hàng. Nếu bạn đã có tài khoản, vui lòng <a href='login-customer.php'>đăng nhập</a> để xem chi tiết.";
         }
     }
-    
+
     // Kiểm tra câu hỏi về liên hệ/hỗ trợ
-    if (strpos($lowerMessage, 'liên hệ') !== false || 
-        strpos($lowerMessage, 'hỗ trợ') !== false || 
-        strpos($lowerMessage, 'giúp đỡ') !== false) {
-        
+    if (
+        strpos($lowerMessage, 'liên hệ') !== false ||
+        strpos($lowerMessage, 'hỗ trợ') !== false ||
+        strpos($lowerMessage, 'giúp đỡ') !== false
+    ) {
+
         return "Bạn có thể liên hệ với chúng tôi qua email support@example.com hoặc số điện thoại 1900-xxxx. Hoặc truy cập trang <a href='contact.php'>Liên hệ</a> để biết thêm chi tiết.";
     }
-    
+
     // Kiểm tra lời chào
-    if (strpos($lowerMessage, 'xin chào') !== false || 
-        strpos($lowerMessage, 'chào') !== false || 
-        strpos($lowerMessage, 'hi') !== false || 
-        strpos($lowerMessage, 'hello') !== false) {
-        
+    if (
+        strpos($lowerMessage, 'xin chào') !== false ||
+        strpos($lowerMessage, 'chào') !== false ||
+        strpos($lowerMessage, 'hi') !== false ||
+        strpos($lowerMessage, 'hello') !== false
+    ) {
+
         return "Xin chào! Tôi là trợ lý ảo của cửa hàng. Tôi có thể giúp gì cho bạn?";
     }
-    
+
     // Phản hồi mặc định cho các truy vấn không nhận dạng được
     return "Cảm ơn bạn đã liên hệ. Tôi chưa hiểu rõ yêu cầu của bạn. Bạn có thể hỏi về sản phẩm, vận chuyển, đơn hàng hoặc cách liên hệ với chúng tôi.";
 }
@@ -393,29 +424,30 @@ function processChatbotMessage($message) {
  * @param string $productName Tên sản phẩm cần tìm.
  * @return array|null Thông tin sản phẩm nếu tìm thấy, ngược lại null.
  */
-function searchExactProduct($productName) {
+function searchExactProduct($productName)
+{
     global $pdo;
-    
+
     $productName = mb_strtolower($productName, 'UTF-8');
-    
+
     try {
         // Tìm kiếm chính xác
         $stmt = $pdo->prepare("SELECT * FROM table_product WHERE LOWER(p_name) = :name AND p_is_active = 1 LIMIT 1");
         $stmt->bindParam(':name', $productName, PDO::PARAM_STR);
         $stmt->execute();
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         if ($product) {
             return $product;
         }
-        
+
         // Tìm kiếm tương đối nếu không có kết quả chính xác
         $stmt = $pdo->prepare("SELECT * FROM table_product WHERE LOWER(p_name) LIKE :name AND p_is_active = 1 LIMIT 1");
         $searchName = '%' . $productName . '%';
         $stmt->bindParam(':name', $searchName, PDO::PARAM_STR);
         $stmt->execute();
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         return $product;
     } catch (PDOException $e) {
         error_log("Database error in searchExactProduct: " . $e->getMessage());
@@ -430,7 +462,8 @@ function searchExactProduct($productName) {
  * @param bool $searchInNameOnly Nếu true, chỉ tìm trong `p_name`. Ngược lại, tìm trong `p_name`, `p_short_description`, `p_description`.
  * @return array Mảng các sản phẩm tìm được.
  */
-function searchCategoryProducts($category, $limit = 5, $searchInNameOnly = false) {
+function searchCategoryProducts($category, $limit = 5, $searchInNameOnly = false)
+{
     global $pdo;
 
     try {
@@ -442,8 +475,8 @@ function searchCategoryProducts($category, $limit = 5, $searchInNameOnly = false
             $whereClause = "LOWER(p.p_name) LIKE :category1";
         } else {
             $whereClause = "LOWER(p.p_name) LIKE :category1 OR " .
-                           "LOWER(p.p_short_description) LIKE :category2 OR " .
-                           "LOWER(p.p_description) LIKE :category3";
+                "LOWER(p.p_short_description) LIKE :category2 OR " .
+                "LOWER(p.p_description) LIKE :category3";
         }
 
         $query = "SELECT p.*,
@@ -467,7 +500,6 @@ function searchCategoryProducts($category, $limit = 5, $searchInNameOnly = false
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
     } catch (PDOException $e) {
         error_log("Category products error: " . $e->getMessage());
         return [];
@@ -479,31 +511,68 @@ function searchCategoryProducts($category, $limit = 5, $searchInNameOnly = false
  * @param string $message Tin nhắn người dùng.
  * @return array Mảng các từ khóa.
  */
-function extractKeywords($message) {
+function extractKeywords($message)
+{
     // Loại bỏ ký tự đặc biệt và khoảng trắng thừa
     $message = preg_replace('/[^\w\s]/u', ' ', $message);
     $message = preg_replace('/\s+/', ' ', $message);
     $message = trim($message);
-    
+
     // Các từ thông dụng cần bỏ qua (tiếng Việt)
     $stopWords = [
-        'và', 'hoặc', 'nhưng', 'vì', 'của', 'từ', 'với', 'các', 'những', 'để',
-        'cho', 'trên', 'dưới', 'trong', 'ngoài', 'đã', 'sẽ', 'đang', 'bởi', 'về',
-        'tôi', 'bạn', 'anh', 'chị', 'họ', 'chúng', 'là', 'có', 'thể', 'sản',
-        'phẩm', 'mua', 'hàng', 'giá', 'muốn', 'cần', 'làm', 'thế', 'nào', 'như',
+        'và',
+        'hoặc',
+        'nhưng',
+        'vì',
+        'của',
+        'từ',
+        'với',
+        'các',
+        'những',
+        'để',
+        'cho',
+        'trên',
+        'dưới',
+        'trong',
+        'ngoài',
+        'đã',
+        'sẽ',
+        'đang',
+        'bởi',
+        'về',
+        'tôi',
+        'bạn',
+        'anh',
+        'chị',
+        'họ',
+        'chúng',
+        'là',
+        'có',
+        'thể',
+        'sản',
+        'phẩm',
+        'mua',
+        'hàng',
+        'giá',
+        'muốn',
+        'cần',
+        'làm',
+        'thế',
+        'nào',
+        'như',
         'đồ'
     ];
-    
+
     $words = explode(' ', mb_strtolower($message, 'UTF-8'));
     $keywords = [];
-    
+
     foreach ($words as $word) {
         $trimmedWord = trim($word);
         if (mb_strlen($trimmedWord, 'UTF-8') > 2 && !in_array($trimmedWord, $stopWords)) {
             $keywords[] = $trimmedWord;
         }
     }
-    
+
     return $keywords;
 }
 
@@ -512,25 +581,26 @@ function extractKeywords($message) {
  * @param array $keywords Mảng các từ khóa tìm kiếm.
  * @return array Mảng các sản phẩm phù hợp.
  */
-function searchProducts($keywords) {
+function searchProducts($keywords)
+{
     global $pdo;
-    
+
     if (empty($keywords)) {
         return [];
     }
-    
+
     try {
         $conditions = [];
         $params = [];
-        
+
         foreach ($keywords as $index => $keyword) {
             $keyParam = ':keyword' . $index;
             $conditions[] = "LOWER(p_name) LIKE {$keyParam} OR LOWER(p_description) LIKE {$keyParam} OR LOWER(p_short_description) LIKE {$keyParam}";
             $params[$keyParam] = '%' . mb_strtolower($keyword, 'UTF-8') . '%';
         }
-        
+
         $whereClause = implode(' OR ', $conditions);
-        
+
         // Tính toán điểm liên quan: Ưu tiên khớp trong p_name
         $query = "SELECT p.*, 
                  (CASE 
@@ -560,22 +630,21 @@ function searchProducts($keywords) {
         $combinedKeyword = implode(' ', $keywords);
         $exactName = mb_strtolower($combinedKeyword, 'UTF-8');
         $partialName = '%' . $exactName . '%';
-        
+
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':exactName', $exactName, PDO::PARAM_STR);
         $stmt->bindParam(':partialName', $partialName, PDO::PARAM_STR);
-        
+
         foreach ($params as $param => $value) {
             $stmt->bindValue($param, $value, PDO::PARAM_STR);
         }
-        
+
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+
         error_log("Search results: " . count($results) . " products found for keywords: " . implode(', ', $keywords));
-        
+
         return $results;
-        
     } catch (PDOException $e) {
         error_log("Database error in searchProducts: " . $e->getMessage());
         return [];
@@ -587,15 +656,16 @@ function searchProducts($keywords) {
  * @param int $productId ID của sản phẩm.
  * @return array Mảng chứa 'avg' (rating trung bình) và 'count' (số lượng đánh giá).
  */
-function getProductRating($productId) {
+function getProductRating($productId)
+{
     global $pdo;
-    
+
     try {
         $stmt = $pdo->prepare("SELECT AVG(rating) as avg_rating, COUNT(*) as count FROM table_rating WHERE p_id = :pid");
         $stmt->bindParam(':pid', $productId, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         return [
             'avg' => $result['avg_rating'] ? (float)$result['avg_rating'] : 0,
             'count' => (int)$result['count']
@@ -611,9 +681,10 @@ function getProductRating($productId) {
  * @param int $limit Số lượng sản phẩm tối đa.
  * @return array Mảng các sản phẩm.
  */
-function getTopRatedProducts($limit = 5) {
+function getTopRatedProducts($limit = 5)
+{
     global $pdo;
-    
+
     try {
         $query = "SELECT p.*, 
                   IFNULL(AVG(r.rating), 0) as avg_rating, 
@@ -625,11 +696,11 @@ function getTopRatedProducts($limit = 5) {
                   HAVING rating_count > 0
                   ORDER BY avg_rating DESC, rating_count DESC, p.p_total_order DESC
                   LIMIT :limit";
-                  
+
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         error_log("Top rated products error: " . $e->getMessage());
@@ -642,19 +713,20 @@ function getTopRatedProducts($limit = 5) {
  * @param int $limit Số lượng sản phẩm tối đa.
  * @return array Mảng các sản phẩm.
  */
-function getFeaturedProducts($limit = 5) {
+function getFeaturedProducts($limit = 5)
+{
     global $pdo;
-    
+
     try {
         $query = "SELECT p.* FROM table_product p
                   WHERE p.p_is_active = 1 AND p.p_is_featured = 1
                   ORDER BY p.p_total_order DESC
                   LIMIT :limit";
-                  
+
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         error_log("Featured products error: " . $e->getMessage());
@@ -666,10 +738,53 @@ function getFeaturedProducts($limit = 5) {
  * Kiểm tra xem người dùng đã đăng nhập chưa.
  * @return bool True nếu người dùng đã đăng nhập, ngược lại false.
  */
-function checkIfUserIsLoggedIn() {
+function checkIfUserIsLoggedIn()
+{
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
     return isset($_SESSION['customer']) && !empty($_SESSION['customer']);
 }
-?>
+
+/**
+ * Bảo vệ cụm từ ghép bằng cách thay thế khoảng trắng bằng token
+ * @param string $message Tin nhắn cần bảo vệ
+ * @return string Tin nhắn đã được bảo vệ
+ */
+function protectCompoundPhrases($message)
+{
+    $fixed_phrases = [
+        "máy tính",
+        "điện thoại",
+        "áo sơ mi",
+        "tai nghe",
+        "nón kết",
+        "bàn phím",
+        "thắt lưng",
+        "thiết bị định vị",
+        "mặt nạ",
+        "bộ chỉnh âm thanh",
+        "ti vi",
+        "giày thể thao",
+        "máy in"
+    ];
+
+    foreach ($fixed_phrases as $phrase) {
+        if (strpos($message, $phrase) !== false) {
+            $token = str_replace(" ", "_SPACE_", $phrase);
+            $message = str_replace($phrase, $token, $message);
+        }
+    }
+
+    return $message;
+}
+
+/**
+ * Khôi phục cụm từ ghép bằng cách thay thế token bằng khoảng trắng
+ * @param string $message Tin nhắn cần khôi phục
+ * @return string Tin nhắn đã được khôi phục
+ */
+function restoreCompoundPhrases($message)
+{
+    return str_replace("_SPACE_", " ", $message);
+}
